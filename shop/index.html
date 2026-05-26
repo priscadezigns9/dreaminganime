@@ -1,495 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop — Dreaming Anime | Anime Merch, Figures & Collectibles</title>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700;900&family=Syne:wght@800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --orange: #FF6B00;
-  --black: #0A0A0A;
-  --white: #FFFFFF;
-  --bg: #F9F9F9;
-  --text: #1A1A1A;
-  --border: #E5E5E5;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gallery — Dreaming Anime | The Signal Network 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #FF6B2B;
+            --bg: #0A0A0A;
+            --card-bg: #141414;
+            --text: #FFFFFF;
+            --muted: #888888;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+        }
 
-nav {
-  height: 70px;
-  background: var(--white);
-  border-bottom: 2px solid var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+        header {
+            padding: 100px 5% 50px;
+            border-bottom: 1px solid #222;
+            margin-bottom: 50px;
+        }
 
-.nav-brand {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+        .brand-label {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-.nav-brand img {
-  height: 40px;
-  width: 40px;
-  object-fit: contain;
-}
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
 
-.nav-brand span {
-  font-family: 'Bangers', cursive;
-  font-size: 1.6rem;
-  letter-spacing: 1px;
-}
+        .container { width: 90%; max-width: 1400px; margin: 0 auto; }
 
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 24px;
-  align-items: center;
-}
+        .category-section { margin-bottom: 80px; }
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--accent);
+            padding-left: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
 
-.nav-links a {
-  text-decoration: none;
-  color: var(--black);
-  font-weight: 700;
-  font-size: 0.85rem;
-  transition: color 0.2s;
-}
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-.nav-links a:hover { color: var(--orange); }
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
 
-.btn-nav-shop {
-  background: var(--black);
-  color: var(--white) !important;
-  padding: 8px 16px;
-  border-radius: 4px;
-}
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
 
-.shop-hero {
-  background: var(--black);
-  color: var(--white);
-  padding: 4rem 4%;
-  text-align: center;
-  border-bottom: 4px solid var(--orange);
-}
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #000;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.shop-hero-title {
-  font-family: 'Bangers', cursive;
-  font-size: 4rem;
-  line-height: 1;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
+        .product-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
 
-.shop-hero-sub {
-  font-size: 1.1rem;
-  opacity: 0.8;
-  letter-spacing: 1px;
-}
+        .brand-name {
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+        }
 
-.category-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 2rem 4%;
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-}
+        .name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
 
-.cat-link {
-  text-decoration: none;
-  font-family: 'Bangers', cursive;
-  font-size: 1.1rem;
-  padding: 8px 20px;
-  border: 2px solid var(--black);
-  color: var(--black);
-  border-radius: 4px;
-  transition: 0.2s;
-}
+        .buy-btn {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
 
-.cat-link:hover {
-  background: var(--black);
-  color: var(--white);
-}
+        .product-card:hover .buy-btn {
+            background: var(--accent);
+            color: #000;
+        }
 
-.product-section {
-  padding: 4rem 4%;
-}
-
-.section-header {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.section-title {
-  font-family: 'Bangers', cursive;
-  font-size: 2.5rem;
-  letter-spacing: 1px;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.product-card {
-  background: var(--white);
-  border: 2px solid var(--black);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s;
-}
-
-.product-card:hover { transform: translateY(-5px); }
-
-.product-img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: contain;
-  border-bottom: 2px solid var(--black);
-  padding: 15px;
-}
-
-.product-info {
-  padding: 20px;
-}
-
-.product-tag {
-  background: var(--orange);
-  color: var(--white);
-  font-size: 0.7rem;
-  font-weight: 900;
-  padding: 2px 8px;
-  border-radius: 2px;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.product-name {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 15px;
-  height: 3rem;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.btn-buy {
-  display: block;
-  text-align: center;
-  background: var(--black);
-  color: var(--white);
-  text-decoration: none;
-  font-family: 'Bangers', cursive;
-  font-size: 1.2rem;
-  padding: 10px;
-  border-radius: 4px;
-  transition: 0.2s;
-}
-
-.btn-buy:hover { background: var(--orange); }
-
-.footer {
-  background: var(--black);
-  color: var(--white);
-  padding: 4rem 4%;
-  text-align: center;
-}
-
-.footer-logo {
-  font-family: 'Bangers', cursive;
-  font-size: 2rem;
-  color: var(--orange);
-  margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .shop-hero-title { font-size: 2.5rem; }
-}
-</style>
+        footer {
+            padding: 50px 0;
+            border-top: 1px solid #222;
+            color: var(--muted);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 100px;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <span class="brand-label">Dreaming Anime</span>
+            <h1>The Gallery — Dreaming Anime</h1>
+        </div>
+    </header>
 
-<nav>
-  <a href="/dreaming-anime/" class="nav-brand">
-    <img src="https://raw.githubusercontent.com/priscadezigns9/priscadezignswebsite/main/logos/dreaming-anime-logo.png" alt="Dreaming Anime Logo">
-    <span style="color:var(--orange);">DREAMING</span><span style="color:var(--black); margin-left:5px;">ANIME</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/dreaming-anime/">HOME</a></li>
-    <li><a href="/dreaming-anime/shop/" class="btn-nav-shop">SHOP</a></li>
-    <li><a href="/dreaming-anime/blog/">BLOG</a></li>
-    <li><a href="/dreaming-anime/newsletter/">ABOUT</a></li>
-  </ul>
-</nav>
+    <div class="container">
+        
+        <section class="category-section">
+            <h2 class="category-title">Collectible Figures</h2>
+            <div class="product-grid">
+                
+                <a href="https://www.amazon.com/s?k=ANIME+HEROES+-+Jujutsu+Kaisen+-+Ryomen+Sukuna+Action+Figure&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61JYNyJrOdL.jpg" alt="ANIME HEROES - Jujutsu Kaisen - Ryomen Sukuna Action Figure">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">ANIME HEROES - Jujutsu Kaisen - Ryomen Sukuna Action Figure</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=QAHEART+Jujutsu+Kaisen+3D+Printed+Movable+Figures&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51atPbG00JL.jpg" alt="QAHEART Jujutsu Kaisen 3D Printed Movable Figures">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">QAHEART Jujutsu Kaisen 3D Printed Movable Figures</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Demon+Slayer+Anime+Figures+Set+(6PCS)&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/717QcZRmQ1L.jpg" alt="Demon Slayer Anime Figures Set (6PCS)">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Demon Slayer Anime Figures Set (6PCS)</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=EIMONEY+9PCS+Anime+Action+Figure+3D+Printed&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/71HPV0finFL.jpg" alt="EIMONEY 9PCS Anime Action Figure 3D Printed">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">EIMONEY 9PCS Anime Action Figure 3D Printed</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=MABAIUDE+JJK+Figure+Itadori+Yuji+Statue&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51BdsE1Qi7L.jpg" alt="MABAIUDE JJK Figure Itadori Yuji Statue">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">MABAIUDE JJK Figure Itadori Yuji Statue</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=One+Piece+-+Monkey+D.+Luffy+I+Maximatic+Plus&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51JbVb8Ha5L.jpg" alt="One Piece - Monkey D. Luffy I Maximatic Plus">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">One Piece - Monkey D. Luffy I Maximatic Plus</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=One+Piece+-+Monkey+D.+Luffy+Gear+5+III+King+of+Artist&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51dBPL+09FL.jpg" alt="One Piece - Monkey D. Luffy Gear 5 III King of Artist">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">One Piece - Monkey D. Luffy Gear 5 III King of Artist</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=One+Piece+-+Jewerly+Bonney+King+of+Artist&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51zg1dfg7oL.jpg" alt="One Piece - Jewerly Bonney King of Artist">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">One Piece - Jewerly Bonney King of Artist</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=One+Piece+-+Trafalgar+Law+Grandista+Figure&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/7190vYQZmWL.jpg" alt="One Piece - Trafalgar Law Grandista Figure">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">One Piece - Trafalgar Law Grandista Figure</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=One+Piece+-+Monkey+D.+Luffy+Gear+5+II+King+of+Artist&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/717usaR1ElL.jpg" alt="One Piece - Monkey D. Luffy Gear 5 II King of Artist">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">One Piece - Monkey D. Luffy Gear 5 II King of Artist</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+            </div>
+        </section>
+        <section class="category-section">
+            <h2 class="category-title">Apparel & Accessories</h2>
+            <div class="product-grid">
+                
+                <a href="https://www.amazon.com/s?k=YOU+WIZV+Cute+Kawaii+Anime+Keychain&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/71UDYkCZplL.jpg" alt="YOU WIZV Cute Kawaii Anime Keychain">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">YOU WIZV Cute Kawaii Anime Keychain</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=DYMSUP+Anime+Straw+Hat+Keychain&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61mp-0p7tPL.jpg" alt="DYMSUP Anime Straw Hat Keychain">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">DYMSUP Anime Straw Hat Keychain</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Generic+Anime+Paper+Bomb+and+Kunai+Keychain&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61DWkA26UdL.jpg" alt="Generic Anime Paper Bomb and Kunai Keychain">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Generic Anime Paper Bomb and Kunai Keychain</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Roffatide+Anime+School+Laptop+Backpack&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81BOXizetlL.jpg" alt="Roffatide Anime School Laptop Backpack">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Roffatide Anime School Laptop Backpack</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Flvkev+Cherry+Bag+Charms+Bubble+Initial+Accessory&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51SiIavGeeL.jpg" alt="Flvkev Cherry Bag Charms Bubble Initial Accessory">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Flvkev Cherry Bag Charms Bubble Initial Accessory</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=NoveltyShopFun+Cute+Cat+Anime+Keychain&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51SHKj4-sbL.jpg" alt="NoveltyShopFun Cute Cat Anime Keychain">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">NoveltyShopFun Cute Cat Anime Keychain</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Verycos+Unisex+Adult+Anime+Pullover+Hoodie&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61pli713n1L.jpg" alt="Verycos Unisex Adult Anime Pullover Hoodie">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Verycos Unisex Adult Anime Pullover Hoodie</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=CROWN+Thick+Cool+Designer+Graphic+Anime+Hoodie&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61HFcQZ2cgL.jpg" alt="CROWN Thick Cool Designer Graphic Anime Hoodie">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">CROWN Thick Cool Designer Graphic Anime Hoodie</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=EIysee+Graphic+Anime+Hoodie+for+Men/Women&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61g5FzQcwhL.jpg" alt="EIysee Graphic Anime Hoodie for Men/Women">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">EIysee Graphic Anime Hoodie for Men/Women</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Great+Eastern+Entertainment+Naruto+Keychain&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/51XbqOhDKaL.jpg" alt="Great Eastern Entertainment Naruto Keychain">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Great Eastern Entertainment Naruto Keychain</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+            </div>
+        </section>
+        <section class="category-section">
+            <h2 class="category-title">Home & Lifestyle</h2>
+            <div class="product-grid">
+                
+                <a href="https://www.amazon.com/s?k=Anime+Neon+Sign+Japanese+Demon+Sword+Katana&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81X5N8-Uu4L.jpg" alt="Anime Neon Sign Japanese Demon Sword Katana">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Anime Neon Sign Japanese Demon Sword Katana</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Japanese+Samurai+Wall+Art+Canvas&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/71uajT2JPiL.jpg" alt="Japanese Samurai Wall Art Canvas">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Japanese Samurai Wall Art Canvas</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Armor+Samurai+Canvas+Wall+Art+Prints&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81pa4n0eFiL.jpg" alt="Armor Samurai Canvas Wall Art Prints">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Armor Samurai Canvas Wall Art Prints</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=WOONKIT+Anime+Posters+Wall+Collage+Kit+(50PCS)&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81qPYJYdMWL.jpg" alt="WOONKIT Anime Posters Wall Collage Kit (50PCS)">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">WOONKIT Anime Posters Wall Collage Kit (50PCS)</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Retro+Japanese+Y2K+Vaporwave+Anime+Poster&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61oaz9Ed31L.jpg" alt="Retro Japanese Y2K Vaporwave Anime Poster">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Retro Japanese Y2K Vaporwave Anime Poster</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=YJYP+3D+Print+Anime+Bedding+Sheet+Sukuna/Satoru&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81M6if9u2CL.jpg" alt="YJYP 3D Print Anime Bedding Sheet Sukuna/Satoru">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">YJYP 3D Print Anime Bedding Sheet Sukuna/Satoru</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Franco+Collectibles+Naruto+Akatsuki+Bedding&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61CNOZQqyQL.jpg" alt="Franco Collectibles Naruto Akatsuki Bedding">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Franco Collectibles Naruto Akatsuki Bedding</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=Anime+Cloud+3D+Illusion+Night+Light+Lamp&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/61q7lGHEeVL.jpg" alt="Anime Cloud 3D Illusion Night Light Lamp">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">Anime Cloud 3D Illusion Night Light Lamp</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=COBIKU+16+Colors+Anime+Night+Light+3D+Lamp&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/71Xr-9H+5eL.jpg" alt="COBIKU 16 Colors Anime Night Light 3D Lamp">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">COBIKU 16 Colors Anime Night Light 3D Lamp</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+                <a href="https://www.amazon.com/s?k=HUIZHANG+Anime+Aesthetic+Tapestry+Wall+Hanging&tag=priscadezigns-20" class="product-card" target="_blank">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81Vv3n7XWFL.jpg" alt="HUIZHANG Anime Aesthetic Tapestry Wall Hanging">
+                    </div>
+                    <div class="brand-name">Dreaming Anime</div>
+                    <div class="name">HUIZHANG Anime Aesthetic Tapestry Wall Hanging</div>
+                    <div class="buy-btn">View on Amazon</div>
+                </a>
+            </div>
+        </section>
+    </div>
 
-<section class="shop-hero">
-  <span class="shop-hero-sfx">★ CURATED COLLECTION ★</span>
-  <h1 class="shop-hero-title">TOP 25 PICKS</h1>
-  <p class="shop-hero-sub">THE BEST OF ANIME FIGURES & COLLECTIBLES</p>
-</section>
-
-<div class="category-links">
-  <a href="https://www.amazon.com/s?k=anime+figures&tag=priscadezigns-20" class="cat-link" target="_blank">FIGURES</a>
-  <a href="https://www.amazon.com/s?k=anime+hoodies&tag=priscadezigns-20" class="cat-link" target="_blank">APPAREL</a>
-  <a href="https://www.amazon.com/s?k=manga&tag=priscadezigns-20" class="cat-link" target="_blank">MANGA</a>
-  <a href="https://www.amazon.com/s?k=anime+plushies&tag=priscadezigns-20" class="cat-link" target="_blank">PLUSHIES</a>
-  <a href="https://www.amazon.com/s?k=anime+posters&tag=priscadezigns-20" class="cat-link" target="_blank">POSTERS</a>
-  <a href="https://www.amazon.com/s?k=anime+cosplay&tag=priscadezigns-20" class="cat-link" target="_blank">COSPLAY</a>
-  <a href="https://www.amazon.com/s?k=anime+accessories&tag=priscadezigns-20" class="cat-link" target="_blank">ACCESSORIES</a>
-</div>
-
-<section class="product-section">
-  <div class="product-grid">
-    <!-- 1 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61rlfQvMb1L.jpg" class="product-img" alt="Tanjiro Action Figure">
-      <div class="product-info">
-        <span class="product-tag">DEMON SLAYER</span>
-        <h3 class="product-name">Bandai Namco Ultimate Legends — Tanjiro 5" Action Figure</h3>
-        <a href="https://www.amazon.com/s?k=demon+slayer+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 2 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61UQRiS2YVL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Tanjiro S.H.Figuarts">
-      <div class="product-info">
-        <span class="product-tag">DEMON SLAYER</span>
-        <h3 class="product-name">TAMASHII NATIONS Tanjiro Kamado S.H.Figuarts Action Figure</h3>
-        <a href="https://www.amazon.com/s?k=demon+slayer+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 3 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51OD+yCyLGL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Tanjiro Perching Figure">
-      <div class="product-info">
-        <span class="product-tag">DEMON SLAYER</span>
-        <h3 class="product-name">SEGA Demon Slayer PM Perching Figure — Tanjiro Kamado 5.9"</h3>
-        <a href="https://www.amazon.com/s?k=demon+slayer+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 4 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61zHwVonx9L._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Tanjiro Deluxe">
-      <div class="product-info">
-        <span class="product-tag">DEMON SLAYER</span>
-        <h3 class="product-name">Aniplex Demon Slayer Tanjiro Kamado Figure — Deluxe Version</h3>
-        <a href="https://www.amazon.com/s?k=demon+slayer+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 5 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51YOZq-Xq1L._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Gojo Maximatic">
-      <div class="product-info">
-        <span class="product-tag">JUJUTSU KAISEN</span>
-        <h3 class="product-name">Banpresto Jujutsu Kaisen — Satoru Gojo Maximatic Figure</h3>
-        <a href="https://www.amazon.com/s?k=jujutsu+kaisen+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 6 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51G-hEmvN-L.jpg" class="product-img" alt="Gojo SPM">
-      <div class="product-info">
-        <span class="product-tag">JUJUTSU KAISEN</span>
-        <h3 class="product-name">Jujutsu Kaisen — Satoru Gojo SPM Figure</h3>
-        <a href="https://www.amazon.com/s?k=jujutsu+kaisen+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 7 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/31C1CbLOd+L._AC_.jpg" class="product-img" alt="Gojo King of Artist">
-      <div class="product-info">
-        <span class="product-tag">JUJUTSU KAISEN</span>
-        <h3 class="product-name">Banpresto JJK — Satoru Gojo (ver. A) King of Artist Figure</h3>
-        <a href="https://www.amazon.com/s?k=jujutsu+kaisen+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 8 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/616d+rQmz2L._AC_UF1000,1000_QL80_.jpg" class="product-img" alt="Gojo DX">
-      <div class="product-info">
-        <span class="product-tag">JUJUTSU KAISEN</span>
-        <h3 class="product-name">Megahouse JJK — Satoru Gojo Kyoshiki Murasaki DX Figure</h3>
-        <a href="https://www.amazon.com/s?k=jujutsu+kaisen+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 9 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71zBNgDRFdL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Luffy Wano">
-      <div class="product-info">
-        <span class="product-tag">ONE PIECE</span>
-        <h3 class="product-name">Banpresto One Piece — Monkey D. Luffy Wanokuni King of Artist Figure</h3>
-        <a href="https://www.amazon.com/s?k=one+piece+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 10 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/617U1kpdiXS._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Luffy Maximatic">
-      <div class="product-info">
-        <span class="product-tag">ONE PIECE</span>
-        <h3 class="product-name">ONE PIECE MAXIMATIC — The Monkey D. Luffy I Figure</h3>
-        <a href="https://www.amazon.com/s?k=one+piece+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 11 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51h2J1Tq-eL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Luffy Fig Life">
-      <div class="product-info">
-        <span class="product-tag">ONE PIECE</span>
-        <h3 class="product-name">Banpresto One Piece — Monkey D. Luffy vol.1 Fig Life Figure</h3>
-        <a href="https://www.amazon.com/s?k=one+piece+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 12 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71UIrXXSeWL._AC_UF894,1000_QL80_DpWeblab_.jpg" class="product-img" alt="Luffy Heroes">
-      <div class="product-info">
-        <span class="product-tag">ONE PIECE</span>
-        <h3 class="product-name">BANDAI One Piece Anime Heroes — Monkey D. Luffy Dressrosa 17cm</h3>
-        <a href="https://www.amazon.com/s?k=one+piece+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 13 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71QZ4-iGwEL.jpg" class="product-img" alt="Naruto Final Battle">
-      <div class="product-info">
-        <span class="product-tag">NARUTO</span>
-        <h3 class="product-name">BANDAI Naruto Uzumaki Final Battle Action Figure 17cm</h3>
-        <a href="https://www.amazon.com/s?k=naruto+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 14 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/81ZIeTbg+5L._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Naruto Legends">
-      <div class="product-info">
-        <span class="product-tag">NARUTO</span>
-        <h3 class="product-name">BANDAI Ultimate Legends Naruto — Uzumaki Anime Figure 12cm</h3>
-        <a href="https://www.amazon.com/s?k=naruto+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 15 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61oQG9VU4LL.jpg" class="product-img" alt="Naruto Valley">
-      <div class="product-info">
-        <span class="product-tag">NARUTO</span>
-        <h3 class="product-name">Ultimate Legends — Naruto 5" Uzumaki (The Final Valley) Figure</h3>
-        <a href="https://www.amazon.com/s?k=naruto+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 16 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/719C6HKiSiL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Naruto Mega">
-      <div class="product-info">
-        <span class="product-tag">NARUTO</span>
-        <h3 class="product-name">Bandai Anime Heroes Mega Figure — Naruto Uzumaki 30cm</h3>
-        <a href="https://www.amazon.com/s?k=naruto+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 17 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71xBKZjhGeL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Goku Showcase">
-      <div class="product-info">
-        <span class="product-tag">DRAGON BALL Z</span>
-        <h3 class="product-name">Banpresto DBZ — Super Saiyan Goku 5.1" Dramatic Showcase Figure</h3>
-        <a href="https://www.amazon.com/s?k=dragon+ball+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 18 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61QPcGdyl1L._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Goku Dragon Stars">
-      <div class="product-info">
-        <span class="product-tag">DRAGON BALL Z</span>
-        <h3 class="product-name">Dragon Stars Series DBZ Super Hero — Goku 6.5" Action Figure</h3>
-        <a href="https://www.amazon.com/s?k=dragon+ball+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 19 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71HcaZRWEYL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Goku Evolve">
-      <div class="product-info">
-        <span class="product-tag">DRAGON BALL Z</span>
-        <h3 class="product-name">Bandai Dragon Ball Super — Evolve 5" Son Goku Figure</h3>
-        <a href="https://www.amazon.com/s?k=dragon+ball+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 20 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51uVIqm8qRL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Goku DXF">
-      <div class="product-info">
-        <span class="product-tag">DRAGON BALL Z</span>
-        <h3 class="product-name">Banpresto Dragon Ball Z — Goku Movie DXF Figure Volume 1</h3>
-        <a href="https://www.amazon.com/s?k=dragon+ball+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 21 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71y+DkoteyL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Eren Judgement">
-      <div class="product-info">
-        <span class="product-tag">ATTACK ON TITAN</span>
-        <h3 class="product-name">Attack on Titan — Eren Jaeger "Judgement" Figure</h3>
-        <a href="https://www.amazon.com/s?k=attack+on+titan+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 22 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/41Q-wDBA9IL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Eren Final Season">
-      <div class="product-info">
-        <span class="product-tag">ATTACK ON TITAN</span>
-        <h3 class="product-name">Banpresto Attack On Titan Final Season — Eren Yeager Figure</h3>
-        <a href="https://www.amazon.com/s?k=attack+on+titan+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 23 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/510yEPf0mEL._AC_UF894,1000_QL80_DpWeblab_.jpg" class="product-img" alt="Eren Amazing Yamaguchi">
-      <div class="product-info">
-        <span class="product-tag">ATTACK ON TITAN</span>
-        <h3 class="product-name">Revoltech Amazing Yamaguchi — Eren Yeager Action Figure</h3>
-        <a href="https://www.amazon.com/s?k=attack+on+titan+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 24 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71wABVbp+mL._AC_UF894,1000_QL80_.jpg" class="product-img" alt="Eren YouTooz">
-      <div class="product-info">
-        <span class="product-tag">ATTACK ON TITAN</span>
-        <h3 class="product-name">You Tooz Eren Vinyl Figure 4.5" — Attack on Titan Collection</h3>
-        <a href="https://www.amazon.com/s?k=attack+on+titan+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-    <!-- 25 -->
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71r6CRLEELL.jpg" class="product-img" alt="Pikachu Plush">
-      <div class="product-info">
-        <span class="product-tag">POKEMON</span>
-        <h3 class="product-name">Pokemon Pikachu 8-inch Stuffed Plush Toy — Officially Licensed</h3>
-        <a href="https://www.amazon.com/s?k=pokemon+merch&tag=priscadezigns-20" class="btn-buy" target="_blank">BUY ON AMAZON</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="footer-logo">DREAMING ANIME</div>
-  <p>&copy; 2026 Dreaming Anime. All Rights Reserved.</p>
-  <p style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.6;">As an Amazon Associate I earn from qualifying purchases.</p>
-</footer>
-
+    <footer>
+        &copy; 2026 THE SIGNAL NETWORK · PRISCA DEZIGNS
+    </footer>
 </body>
 </html>
