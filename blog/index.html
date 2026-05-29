@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Dreaming Anime Blog</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap">
+    <style>
+        :root { --brand-color: #FF8C00; --bg: #000; --text: #fff; --border: rgba(255,255,255,0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: #0a0a0a; border-bottom: 1px solid var(--border); padding: 60px 6%; text-align: center; }
+        .header h1 { font-size: 3rem; text-transform: uppercase; }
+        .header p { font-size: 0.9rem; color: var(--brand-color); text-transform: uppercase; letter-spacing: 2px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 6%; }
+        .article-item { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; }
+        .article-date { font-size: 0.8rem; color: var(--brand-color); text-transform: uppercase; margin-bottom: 10px; }
+        .article-title { font-size: 1.8rem; margin-bottom: 15px; color: var(--text); text-decoration: none; display: block; }
+        .article-title:hover { color: var(--brand-color); }
+        .article-excerpt { color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+        .article-link { display: inline-block; padding: 10px 20px; border: 1px solid var(--brand-color); color: var(--brand-color); text-decoration: none; font-size: 0.9rem; text-transform: uppercase; }
+        footer { padding: 60px 6%; text-align: center; border-top: 1px solid var(--border); color: rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a href="../" style="text-decoration:none; color:inherit;"><h1>Dreaming Anime</h1></a>
+    <p>Blog & Articles</p>
+</div>
+<div class="container" id="blog-feed"></div>
+<script>
+fetch('articles.json').then(r => r.json()).then(articles => {
+    const feed = document.getElementById('blog-feed');
+    articles.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'article-item';
+        div.innerHTML = `<div class="article-date">${a.date}</div><a href="${a.url}" class="article-title">${a.title}</a><p class="article-excerpt">${a.excerpt}</p><a href="${a.url}" class="article-link">Read Article</a>`;
+        feed.appendChild(div);
+    });
+});
+</script>
+</body>
+</html>
