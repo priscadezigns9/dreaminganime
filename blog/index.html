@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Dreaming Anime Blog</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreaming Anime Blog — High-Fidelity Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root { --brand-color: #FF8C00; --bg: #000; --text: #fff; --border: rgba(255,255,255,0.1); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .header { background: #0a0a0a; border-bottom: 1px solid var(--border); padding: 60px 6%; text-align: center; }
-        .header h1 { font-size: 3rem; text-transform: uppercase; }
-        .header p { font-size: 0.9rem; color: var(--brand-color); text-transform: uppercase; letter-spacing: 2px; }
-        .container { max-width: 900px; margin: 0 auto; padding: 60px 6%; }
-        .article-item { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; }
-        .article-date { font-size: 0.8rem; color: var(--brand-color); text-transform: uppercase; margin-bottom: 10px; }
-        .article-title { font-size: 1.8rem; margin-bottom: 15px; color: var(--text); text-decoration: none; display: block; }
-        .article-title:hover { color: var(--brand-color); }
-        .article-excerpt { color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-        .article-link { display: inline-block; padding: 10px 20px; border: 1px solid var(--brand-color); color: var(--brand-color); text-decoration: none; font-size: 0.9rem; text-transform: uppercase; }
-        footer { padding: 60px 6%; text-align: center; border-top: 1px solid var(--border); color: rgba(255,255,255,0.3); }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 80px 6%; }
+        header { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 60px; }
+        h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: -1px; }
+        .article-card { border-bottom: 1px solid var(--border); padding: 40px 0; transition: 0.3s; }
+        .article-card:hover { border-color: var(--brand-color); }
+        .article-card span { color: var(--brand-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        .article-card h2 { margin: 15px 0; font-size: 1.8rem; }
+        .article-card h2 a { color: #fff; text-decoration: none; }
+        .article-card p { color: rgba(255,255,255,0.6); font-size: 1.1rem; }
+        footer { margin-top: 100px; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
     </style>
 </head>
 <body>
-<div class="header">
-    <a href="../" style="text-decoration:none; color:inherit;"><h1>Dreaming Anime</h1></a>
-    <p>Blog & Articles</p>
-</div>
-<div class="container" id="blog-feed"></div>
-<script>
-fetch('articles.json').then(r => r.json()).then(articles => {
-    const feed = document.getElementById('blog-feed');
-    articles.forEach(a => {
-        const div = document.createElement('div');
-        div.className = 'article-item';
-        div.innerHTML = `<div class="article-date">${a.date}</div><a href="${a.url}" class="article-title">${a.title}</a><p class="article-excerpt">${a.excerpt}</p><a href="${a.url}" class="article-link">Read Article</a>`;
-        feed.appendChild(div);
-    });
-});
-</script>
+    <div class="container">
+        <header>
+            <h1>Dreaming Anime Blog</h1>
+            <p>Strategic Intelligence for the High-Fidelity Era</p>
+        </header>
+
+        <div class="article-card">
+            <span>2026.05.30</span>
+            <h2><a href="manga-to-metaverse-xr-dive-2026/">Manga to Metaverse: The 2026 Neural Bridge</a></h2>
+            <p>Intelligence Report: Shueisha XR’s "MANGA DIVE" evolves into a full spatial hub. Inhabit the panel through neural rendering.</p>
+        </div>
+
+        <div class="article-card">
+            <span>2026.05.30</span>
+            <h2><a href="ani-may-2026-week-5-tybw-analysis/">Bleach: TYBW Part 4 'The Calamity' — The Final High-Fidelity Signal</a></h2>
+            <p>Strategic Signal: Chapters 664-686 production intel. Studio Pierrot’s "Cinematic Fluidity" reaches 40% higher frame density.</p>
+        </div>
+
+        <div class="article-card">
+            <span>2026.05.30</span>
+            <h2><a href="fanimecon-2026-day-2-intelligence-report/">FanimeCon 2026 Day 2 Intelligence: Stage Zero & Masquerade Prep</a></h2>
+            <p>Live Intel: T~SKY performance crowds, SanFlare masquerade confirmation, and the high-fidelity Dealers Hall surge.</p>
+        </div>
+
+        <footer>
+            <p>© 2026 DREAMING ANIME | EMPIRE EDITORIAL</p>
+        </footer>
+    </div>
 </body>
 </html>
