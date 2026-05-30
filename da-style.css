@@ -499,13 +499,13 @@ nav {
 /* ===== BLOG — PANEL 4 ===== */
 #blog {
   background: #FFFFFF;
-  padding: 80px 0;
+  padding: 40px 0;
   overflow: hidden;
 }
 .blog-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px;
+  padding: 40px 60px;
   border: var(--border);
   transform: rotate(0.4deg);
   background: #FFFFFF;
@@ -567,7 +567,7 @@ nav {
 /* ===== QUIZ CTA — PANEL 5 ===== */
 #quiz-cta {
   background: #0A0A0A;
-  padding: 120px 40px;
+  padding: 60px 40px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -634,13 +634,13 @@ nav {
 /* ===== NEWSLETTER — PANEL 6 ===== */
 #newsletter {
   background: #FFFFFF;
-  padding: 80px 0;
+  padding: 40px 0;
   overflow: hidden;
 }
 .newsletter-inner {
   max-width: 800px;
   margin: 0 auto;
-  padding: 60px;
+  padding: 40px 60px;
   border: var(--border);
   transform: rotate(-0.3deg);
   background: #FFFFFF;
@@ -1044,4 +1044,5 @@ body.dark-mode .product-cta { color: #eee; }
 @media (max-width: 420px) {
   .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
 }
+
 
