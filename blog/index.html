@@ -20,7 +20,7 @@
         .article-card h2 a { color: #fff; text-decoration: none; }
         .article-card p { color: rgba(255,255,255,0.6); font-size: 1.1rem; }
         .mimi-note { background: rgba(255,140,0,0.03); border: 1px solid rgba(255,140,0,0.1); padding: 0; margin: 80px 0; border-radius: 12px; display: flex; align-items: stretch; min-height: 350px; position: relative; overflow: visible; }
-        .mimi-note img { width: 40%; height: auto; object-fit: contain; border-radius: 0; border: none; flex-shrink: 0; filter: drop-shadow(0 0 30px rgba(255,140,0,0.4)); margin-top: -40px; margin-bottom: -40px; margin-left: -15px; z-index: 2; }
+        .mimi-note img { width: 40%; height: auto; object-fit: contain; border-radius: 0; border: none; flex-shrink: 0; filter: drop-shadow(0 10px 20px rgba(255,107,0,0.2)); margin-top: -40px; margin-bottom: -40px; margin-left: -15px; z-index: 2; }
         .mimi-content { padding: 30px; display: flex; flex-direction: column; justify-content: center; z-index: 1; }
         .mimi-note p { margin: 0; font-size: 1.3rem; color: #fff; font-style: italic; }
         .mimi-note-title { font-weight: 700; color: var(--brand-color); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 12px; display: block; }
@@ -32,10 +32,10 @@
   pointer-events: none;
   z-index: 10;
   object-fit: contain;
-  filter: drop-shadow(0 15px 30px rgba(255,107,0,0.3));
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 10px 20px rgba(255,107,0,0.2));
+  transition: all 0.5s ease;
 }
-@media (max-width: 1200px) { .mimi-mascot { width: 15% !important; height: auto !important; } }
 @media (max-width: 900px) { .mimi-mascot { display: none !important; } }
   </style>
  </head>
@@ -103,7 +103,7 @@
      © 2026 DREAMING ANIME | EMPIRE EDITORIAL
     </p>
    </footer>
-   <img alt="Mimi Mascot" class="mimi-mascot" src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_5.webp" style="position: absolute; bottom: 0; right: -150px; width: 250px; pointer-events: none; opacity: 0.8;"/>
+   <img alt="Mimi Mascot" class="mimi-mascot" src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_5.webp?v=hf3" style="position: absolute; bottom: 0; right: -150px; width: 400px; pointer-events: none; "/>
   </div>
  </body>
 </html>
