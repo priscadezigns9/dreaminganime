@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORROR | Dreaming Anime — Live the Anime Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #050505; --accent: #FF6B00; --text: #FFFFFF; --muted: rgba(255,255,255,0.6); --card-bg: rgba(255,255,255,0.03); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        
+        .hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(5,5,5,1)), url('https://priscadezigns.org/ateliagaming/assets/mimi/mimi_2d_hf_1.webp'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 1px solid rgba(255,107,0,0.2); }
+        .hero-content h1 { font-family: 'Bangers', cursive; font-size: 5rem; color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; }
+        .hero-content p { font-family: 'Space Mono', monospace; font-size: 1.2rem; letter-spacing: 2px; }
+
+        .section { padding: 80px 6%; }
+        .section-title { font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: -1px; border-left: 4px solid var(--accent); padding-left: 20px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 30px; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 20px; }
+        
+        .btn { display: inline-block; padding: 12px 24px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn:hover { background: #e56000; }
+        .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+        
+        .watch-grid .card { display: flex; align-items: center; gap: 20px; }
+        .watch-grid .card img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+        
+        footer { padding: 60px 6%; text-align: center; border-top: 1px solid rgba(255,107,0,0.1); font-size: 0.8rem; color: var(--muted); }
+        .back-link { position: absolute; top: 40px; left: 40px; color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; }
+        .back-link:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <a href="https://dreaminganime.com" class="back-link">← BACK TO HOME</a>
+    <div style="background: #000; color: #FF6B00; padding: 10px; text-align: center; font-size: 11px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,107,0,0.3);">
+        EMPIRE MANDATE: 10% OF EVERY PURCHASE SUPPORTS <a href="https://priscadezigns.org/thewaymadeknown/" style="color:#fff; text-decoration:underline;">THE WAY MADE KNOWN</a> MISSION.
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>HORROR</h1>
+            <p>FACE YOUR FEARS.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">COLLECT THE LEGEND.</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Action Figures</h3>
+                <p>Limited edition HORROR figures and collectibles. High-fidelity craftsmanship.</p>
+                <a href="https://www.amazon.com/s?k=horror+anime+figures&tag=priscadezigns-20" target="_blank" class="btn">Shop Figures</a>
+            </div>
+            <div class="card">
+                <h3>Manga & Collectibles</h3>
+                <p>Build your library with the best HORROR manga and exclusive items.</p>
+                <a href="https://www.amazon.com/s?k=horror+anime+manga&tag=priscadezigns-20" target="_blank" class="btn">Shop Manga</a>
+            </div>
+            <div class="card">
+                <h3>Empire Merch</h3>
+                <p>Exclusive Dreaming Anime designs and lifestyle apparel.</p>
+                <a href="https://www.amazon.com/s?k=horror+anime+merch&tag=priscadezigns-20" target="_blank" class="btn">Shop Merch</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: rgba(255,107,0,0.02);">
+        <h2 class="section-title">THE WATCHLIST.</h2>
+        <div class="grid watch-grid">
+                        <div class="card">
+                <div style="background:var(--accent); width:80px; height:80px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Bangers'; font-size:1.5rem;">DN</div>
+                <div>
+                    <h3>Death Note</h3>
+                    <p>The human whose name is written...</p>
+                    <a href="https://www.netflix.com/title/70204970" target="_blank" class="btn-outline btn" style="padding: 6px 12px; font-size: 0.7rem;">Watch Now</a>
+                </div>
+            </div>
+            <div class="card">
+                <div style="background:var(--accent); width:80px; height:80px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Bangers'; font-size:1.5rem;">A</div>
+                <div>
+                    <h3>Another</h3>
+                    <p>The curse of Class 3.</p>
+                    <a href="https://www.crunchyroll.com/series/GR9PJ294R/another" target="_blank" class="btn-outline btn" style="padding: 6px 12px; font-size: 0.7rem;">Watch Now</a>
+                </div>
+            </div>
+            <div class="card">
+                <div style="background:var(--accent); width:80px; height:80px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Bangers'; font-size:1.5rem;">TG</div>
+                <div>
+                    <h3>Tokyo Ghoul</h3>
+                    <p>Tragedy in Tokyo.</p>
+                    <a href="https://www.crunchyroll.com/series/G69P1E6NR/tokyo-ghoul" target="_blank" class="btn-outline btn" style="padding: 6px 12px; font-size: 0.7rem;">Watch Now</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 DREAMING ANIME · A PRISCA DEZIGNS AFFILIATE</p>
+    </footer>
+</body>
+</html>
