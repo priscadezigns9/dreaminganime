@@ -105,15 +105,19 @@
             try {
                 const { data, error } = await sb.from('da_products').select('*').order('created_at', { ascending: false });
                 
-                if (error || !data || data.length === 0) {
-                    console.log('Using backup static items...');
-                    allProducts = [
-                        { title: 'Made in Abyss: Nanachi 1/7 Figure', category: 'Statues', price: '$189.99', image_url: 'https://images.unsplash.com/photo-1559535332-db997109045e?w=800', affiliate_link: 'https://amazon.com/s?k=Made+in+Abyss+Figure&tag=priscadezigns-20' },
-                        { title: 'Demon Slayer: Tanjiro Hinokami Kagura', category: 'Demon Slayer', price: '$245.99', image_url: 'https://images.unsplash.com/photo-1560972550-aba3456b5564?w=800', affiliate_link: 'https://amazon.com/s?k=Demon+Slayer+Figure&tag=priscadezigns-20' }
-                    ];
-                } else {
-                    allProducts = data;
+                if (error) {
+                    console.error('Supabase Error:', error);
+                    document.getElementById('loading-state').innerHTML = `SYNC ERROR: ${error.message}`;
+                    return;
                 }
+                
+                if (!data || data.length === 0) {
+                    console.log('No data found in Supabase.');
+                    document.getElementById('loading-state').innerHTML = 'NO GEAR FOUND IN NEURAL ARCHIVE.';
+                    return;
+                }
+                
+                allProducts = data;
                 
                 renderProducts(allProducts);
                 document.getElementById('loading-state').style.display = 'none';
