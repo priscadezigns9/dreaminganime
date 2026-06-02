@@ -1,1 +1,60 @@
-Hello World Keychain Expansion Test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP | DREAMING ANIME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --orange: #FF6B00; --black: #0A0A0A; --white: #FFFFFF; --border: 3px solid #0A0A0A; } 
+        * { margin: 0; padding: 0; box-sizing: border-box; } 
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); padding-top: 100px; } 
+        .empire-bar { background: #000; color: #FF6B00; padding: 10px; text-align: center; font-size: 11px; z-index: 10001; position: fixed; top: 0; left: 0; width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; } 
+        nav { position: fixed; top: 32px; left: 0; right: 0; z-index: 1000; background: #FFFFFF; border-bottom: 2px solid #0A0A0A; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; } 
+        .nav-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; } 
+        .brand-da { font-family: 'Bangers', cursive; font-size: 1.7rem; color: #FF6B00; } 
+        .brand-anime { font-family: 'Bangers', cursive; font-size: 1.7rem; color: #0A0A0A; } 
+        .filter-wrap { position: sticky; top: 96px; z-index: 999; background: #fff; border-bottom: var(--border); padding: 15px 6%; display: flex; gap: 10px; overflow-x: auto; } 
+        .filter-btn { font-family: 'Bangers', cursive; font-size: 1.1rem; background: #fff; border: 2px solid #000; padding: 6px 15px; cursor: pointer; } 
+        .filter-btn.active { background: var(--orange); color: #fff; } 
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); background: #000; } 
+        .card { background: #fff; border: 0.5px solid #000; padding: 20px; display: flex; flex-direction: column; } 
+        .card-image img { max-width: 100%; height: 250px; object-fit: contain; } 
+        .card-title { font-weight: 900; margin: 10px 0; height: 2.4em; overflow: hidden; } 
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 10px; } 
+        .shop-btn { font-family: 'Bangers', cursive; background: #000; color: #fff; padding: 8px 15px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="empire-bar">EMPIRE MANDATE: 10% SUPPORT <a href="https://priscadezigns.org/thewaymadeknown/" style="color:#fff">THE WAY MADE KNOWN</a></div>
+    <nav><a class="nav-brand" href="#"><span class="brand-da">DREAMING</span><span class="brand-anime">ANIME</span></a></nav>
+    <div class="filter-wrap">
+        <button onclick="f('all', this)" class="filter-btn active">ALL DROPS</button>
+        <button onclick="f('keychains', this)" class="filter-btn">KEYCHAINS</button>
+        <button onclick="f('shonen', this)" class="filter-btn">SHONEN</button>
+    </div>
+    <section class="shop-grid" id="grid"></section>
+    <script>
+        const data = [{"title": "Frieren Sitting Pose Statue (Vault Edition #8)", "category": "Figures", "price": "$22.50", "image_url": "https://m.media-amazon.com/images/I/71fB4F3PTxL.jpg", "affiliate_link": "https://www.amazon.com/s?k=Frieren+Sitting+Pose+Statue+(Vault+Edition+#8)&tag=priscadezigns-20"}, {"title": "S.H.Figuarts Tanjiro Kamado", "category": "Figures", "price": "$19.99", "image_url": "https://m.media-amazon.com/images/I/61UQRiS2YVL.jpg", "affiliate_link": "https://www.amazon.com/s?k=S.H.Figuarts+Tanjiro+Kamado&tag=priscadezigns-20"}, {"title": "Frieren Sitting Pose Statue", "category": "Figures", "price": "$22.50", "image_url": "https://m.media-amazon.com/images/I/71fB4F3PTxL.jpg", "affiliate_link": "https://www.amazon.com/s?k=Frieren+Sitting+Pose+Statue&tag=priscadezigns-20"}, {"title": "S.H.Figuarts Tanjiro Kamado (Vault Edition #6)", "category": "Figures", "price": "$19.99", "image_url": "https://m.media-amazon.com/images/I/61UQRiS2YVL.jpg", "affiliate_link": "https://www.amazon.com/s?k=S.H.Figuarts+Tanjiro+Kamado+(Vault+Edition+#6)&tag=priscadezigns-20"}, {"title": "Honkai Star Rail Kafka", "category": "Figures", "price": "$21.00", "image_url": "https://m.media-amazon.com/images/I/61ie-Wupd1L.jpg", "affiliate_link": "https://www.amazon.com/s?k=Honkai+Star+Rail+Kafka&tag=priscadezigns-20"}, {"title": "Link Click Chibi Figures (Vault Edition #9)", "category": "Figures", "price": "$18.99", "image_url": "https://m.media-amazon.com/images/I/51FoTESpqFL.jpg", "affiliate_link": "https://www.amazon.com/s?k=Link+Click+Chibi+Figures+(Vault+Edition+#9)&tag=priscadezigns-20"}, {"title": "Nezuko Kamado Xross Link (Vault Edition #7)", "category": "Figures", "price": "$24.99", "image_url": "https://m.media-amazon.com/images/I/81uvu7KiLyL.jpg", "affiliate_link": "https://www.amazon.com/s?k=Nezuko+Kamado+Xross+Link+(Vault+Edition+#7)&tag=priscadezigns-20"}, {"title": "Link Click Chibi Figures", "category": "Figures", "price": "$18.99", "image_url": "https://m.media-amazon.com/images/I/51FoTESpqFL.jpg", "affiliate_link": "https://www.amazon.com/s?k=Link+Click+Chibi+Figures&tag=priscadezigns-20"}, {"title": "Honkai Star Rail Kafka (Vault Edition #10)", "category": "Figures", "price": "$21.00", "image_url": "https://m.media-amazon.com/images/I/61ie-Wupd1L.jpg", "affiliate_link": "https://www.amazon.com/s?k=Honkai+Star+Rail+Kafka+(Vault+Edition+#10)&tag=priscadezigns-20"}, {"title": "Nezuko Kamado Xross Link", "category": "Figures", "price": "$24.99", "image_url": "https://m.media-amazon.com/images/I/81uvu7KiLyL.jpg", "affiliate_link": "https://www.amazon.com/s?k=Nezuko+Kamado+Xross+Link&tag=priscadezigns-20"}];
+        function render(cat) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            data.forEach(p => {
+                if (cat === 'all' || p.category.toLowerCase().includes(cat)) {
+                    grid.innerHTML += `<div class="card">
+                        <div class="card-image"><img src="${p.image_url}"></div>
+                        <h3 class="card-title">${p.title}</h3>
+                        <div class="card-footer"><span>${p.price}</span><a href="${p.affiliate_link}" class="shop-btn">SHOP</a></div>
+                    </div>`;
+                }
+            });
+        }
+        function f(c, b) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            b.classList.add('active');
+            render(c);
+        }
+        render('all');
+    </script>
+</body>
+</html>
