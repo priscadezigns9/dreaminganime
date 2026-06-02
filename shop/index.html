@@ -36,7 +36,6 @@
         h1 { font-family: var(--font-heading); font-size: clamp(2.5rem, 8vw, 4rem); text-transform: uppercase; margin-bottom: 10px; color: var(--primary); letter-spacing: 3px; }
         .sub { font-size: 1rem; color: #888; font-weight: 700; letter-spacing: 2px; }
 
-        /* Optimized Category Layout */
         .filters { 
             display: flex; 
             gap: 10px; 
@@ -132,7 +131,7 @@
             <div class="filter-pill" onclick="filterBy('Cosplay & Wigs', event)">COSPLAY</div>
             <div class="filter-pill" onclick="filterBy('Jewelry & Hats', event)">JEWELRY & HATS</div>
             <div class="filter-pill" onclick="filterBy('Manga & Books', event)">MANGA</div>
-        </header>
+        </div>
 
         <div id="loading-state">SYNCHRONIZING WITH VAULT...</div>
         <div class="product-grid" id="product-grid" style="display:none;"></div>
@@ -141,39 +140,39 @@
     <script>
         const supabaseUrl = 'https://sazhdnqzaqpqcralmthh.supabase.co';
         const supabaseKey = 'sb_publishable_UicuMabi1dRKAvQ4YGiakg_NCMnftfS';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // Correct Supabase Client Initialization
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         let allProducts = [];
-        let currentFilter = 'All';
 
         async function loadShop() {
             try {
                 // High-Speed First Paint: Fetch initial 24 items
-                const { data: initial, error } = await supabase
+                const { data, error } = await _supabase
                     .from('da_inventory')
                     .select('*')
                     .range(0, 23);
 
                 if (error) throw error;
-                allProducts = initial;
+                allProducts = data;
                 renderProducts(allProducts);
                 
                 document.getElementById('loading-state').style.display = 'none';
                 document.getElementById('product-grid').style.display = 'grid';
 
                 // Background Sync: Fetch the remaining 376 items silently
-                const { data: remaining } = await supabase
+                const { data: remaining } = await _supabase
                     .from('da_inventory')
                     .select('*')
                     .range(24, 399);
                 
                 if (remaining) {
                     allProducts = [...allProducts, ...remaining];
-                    // If user is still on 'All', we don't force a re-render to avoid jumping
-                    // but they are now in memory for filtering.
                 }
             } catch (e) {
                 console.error('Vault sync error:', e);
+                document.getElementById('loading-state').innerText = 'VAULT SYNC ERROR - CHECK CONSOLE';
             }
         }
 
@@ -198,7 +197,6 @@
         }
 
         function filterBy(cat, event) {
-            currentFilter = cat;
             document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             event.target.classList.add('active');
             
@@ -210,7 +208,7 @@
             }
         }
 
-        loadShop();
+        window.onload = loadShop;
     </script>
 </body>
 </html>
