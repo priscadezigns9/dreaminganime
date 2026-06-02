@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHOP | DREAMING ANIME</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/priscadezigns9/priscadezignswebsite/main/logos/dreaming-anime-logo.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/priscadezigns9/priscadezigns9/priscadezignswebsite/main/logos/dreaming-anime-logo.png">
     
     <!-- High-Fidelity Infrastructure -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -24,101 +24,98 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-main); background: var(--bg); color: var(--text); overflow-x: hidden; }
+        body { font-family: var(--font-main); background: var(--bg); color: var(--text); line-height: 1.6; }
 
-        /* Navigation */
         nav { background: rgba(10, 10, 10, 0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
-        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .nav-brand span { font-family: var(--font-heading); font-size: 2rem; color: var(--primary); letter-spacing: 1px; }
+        .logo { font-family: var(--font-heading); font-size: 2rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Shop Container */
-        .shop-container { max-width: 1400px; margin: 0 auto; padding: 40px 5%; }
-        .shop-header { margin-bottom: 40px; text-align: center; }
-        .shop-header h1 { font-family: var(--font-heading); font-size: 4rem; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; }
-        .shop-header p { font-size: 1.1rem; opacity: 0.8; letter-spacing: 1px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 5%; }
 
-        /* Filter Pills */
+        header { text-align: center; margin-bottom: 60px; }
+        .mimi-banner { margin-bottom: 30px; }
+        h1 { font-family: var(--font-heading); font-size: 4rem; text-transform: uppercase; margin-bottom: 10px; color: var(--primary); letter-spacing: 3px; }
+        .sub { font-size: 1.2rem; color: #888; font-weight: 700; letter-spacing: 2px; }
+
         .filters { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 20px; margin-bottom: 30px; scrollbar-width: none; }
+        .filters::-webkit-scrollbar { display: none; }
         .filter-pill { padding: 10px 25px; background: var(--card-bg); border: 1px solid rgba(255,107,0,0.3); border-radius: 50px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: 0.3s; }
-        .filter-pill.active, .filter-pill:hover { background: var(--primary); border-color: var(--primary); }
+        .filter-pill.active, .filter-pill:hover { background: var(--primary); border-color: var(--primary); color: #000; }
 
-        /* Product Grid */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        
-        .product-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; }
+        .product-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; position: relative; }
         .product-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(255,107,0,0.2); }
-        
-        .img-container { width: 100%; aspect-ratio: 1/1; background: #000; overflow: hidden; position: relative; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-cat { font-size: 0.75rem; color: var(--primary); font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
-        .product-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 3.1rem; }
-        
-        .price-buy { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .price { font-size: 1.5rem; font-weight: 900; color: var(--accent); }
-        .buy-btn { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 0.9rem; transition: 0.3s; }
-        .buy-btn:hover { background: white; color: var(--primary); }
 
-        /* Empty State */
-        #loading-state { text-align: center; padding: 100px 0; font-family: var(--font-heading); font-size: 2rem; color: var(--primary); }
+        .img-container { height: 350px; background: #222; overflow: hidden; position: relative; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover .img-container img { transform: scale(1.1); }
+
+        .card-content { padding: 25px; }
+        .product-cat { color: var(--primary); font-size: 0.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .product-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; height: 50px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+        .price-buy { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
+        .price { font-size: 1.4rem; font-weight: 900; color: var(--accent); }
+        .buy-btn { background: var(--primary); color: #000; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+        .buy-btn:hover { background: var(--accent); transform: scale(1.05); }
+
+        #loading-state { text-align: center; padding: 100px; font-size: 2rem; font-family: var(--font-heading); color: var(--primary); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+        }
     </style>
 </head>
 <body>
     <nav>
-        <a href="/" class="nav-brand">
-            <img src="https://raw.githubusercontent.com/priscadezigns9/priscadezignswebsite/main/logos/dreaming-anime-logo.png" style="height:40px;">
-            <span>DREAMING ANIME</span>
-        </a>
+        <div class="logo">DREAMING ANIME</div>
+        <div class="nav-links">
+            <i data-lucide="shopping-cart" style="color:var(--primary); cursor:pointer;"></i>
+        </div>
     </nav>
 
-    <div class="shop-container">
-        <!-- Mimi High-Fidelity Presence -->
-        <div style="display:flex; justify-content:center; margin-bottom: 20px;">
-            <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_shop_header.webp" alt="Mimi Official" style="width:100%; max-width:400px; height:auto; filter:drop-shadow(0 0 20px rgba(255,107,0,0.4));">
-        </div>
-
-        <div class="shop-header">
-            <h1>LEGENDARY GEAR</h1>
-            <p>HIGH-FIDELITY ANIME COLLECTIBLES & FIGURES</p>
-        </div>
+    <div class="container">
+        <header>
+            <div class="mimi-banner">
+                <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_shop_header.webp" alt="Mimi Official" style="width:100%; max-width:400px; height:auto; filter:drop-shadow(0 0 20px rgba(255,107,0,0.4));">
+            </div>
+            <h1>The Otaku Vault</h1>
+            <div class="sub">CURATED HIGH-FIDELITY ESSENTIALS</div>
+        </header>
 
         <div class="filters" id="filters">
             <div class="filter-pill active" onclick="filterBy('All')">ALL ITEMS</div>
-            <div class="filter-pill" onclick="filterBy('Demon Slayer')">DEMON SLAYER</div>
-            <div class="filter-pill" onclick="filterBy('Jujutsu Kaisen')">JUJUTSU KAISEN</div>
-            <div class="filter-pill" onclick="filterBy('One Piece')">ONE PIECE</div>
-            <div class="filter-pill" onclick="filterBy('Statues')">STATUES</div>
+            <div class="filter-pill" onclick="filterBy('Figures')">FIGURES</div>
+            <div class="filter-pill" onclick="filterBy('Cups & Mugs')">CUPS & MUGS</div>
+            <div class="filter-pill" onclick="filterBy('Hoodies & Apparel')">HOODIES</div>
+            <div class="filter-pill" onclick="filterBy('Stickers')">STICKERS</div>
+            <div class="filter-pill" onclick="filterBy('Keychains')">KEYCHAINS</div>
+            <div class="filter-pill" onclick="filterBy('Bags & Wallets')">BAGS</div>
+            <div class="filter-pill" onclick="filterBy('Rugs & Mats')">RUGS & MATS</div>
+            <div class="filter-pill" onclick="filterBy('Cosplay & Wigs')">COSPLAY</div>
+            <div class="filter-pill" onclick="filterBy('Jewelry & Hats')">JEWELRY & HATS</div>
+            <div class="filter-pill" onclick="filterBy('Manga & Books')">MANGA</div>
         </div>
 
-        <div id="loading-state">SYNCHRONIZING NEURAL INVENTORY...</div>
-        <div class="product-grid" id="product-grid" style="display:none;">
-            <!-- Dynamic Products -->
-        </div>
+        <div id="loading-state">SYNCHRONIZING WITH VAULT...</div>
+        <div class="product-grid" id="product-grid" style="display:none;"></div>
     </div>
 
     <script>
-        const sb = supabase.createClient('https://sazhdnqzaqpqcralmthh.supabase.co', 'sb_publishable_UicuMabi1dRKAvQ4YGiakg_NCMnftfS');
+        const supabaseUrl = 'https://sazhdnqzaqpqcralmthh.supabase.co';
+        const supabaseKey = 'sb_publishable_UicuMabi1dRKAvQ4YGiakg_NCMnftfS';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
         let allProducts = [];
 
         async function loadShop() {
             try {
-                const { data, error } = await sb.from('da_inventory').select('*').order('created_at', { ascending: false });
-                
-                if (error) {
-                    console.error('Supabase Error:', error);
-                    document.getElementById('loading-state').innerHTML = `SYNC ERROR: ${error.message}`;
-                    return;
-                }
-                
-                if (!data || data.length === 0) {
-                    console.log('No data found in Supabase.');
-                    document.getElementById('loading-state').innerHTML = 'NO GEAR FOUND IN NEURAL ARCHIVE.';
-                    return;
-                }
-                
+                const { data, error } = await supabase
+                    .from('da_inventory')
+                    .select('*');
+
+                if (error) throw error;
                 allProducts = data;
-                
                 renderProducts(allProducts);
                 document.getElementById('loading-state').style.display = 'none';
                 document.getElementById('product-grid').style.display = 'grid';
@@ -132,7 +129,7 @@
             grid.innerHTML = list.map(p => `
                 <div class="product-card" data-category="${p.category}">
                     <div class="img-container">
-                        <img src="${p.image_url}" alt="${p.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400?text=Image+Loading...'">
+                        <img src="${p.image_url}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='https://via.placeholder.com/400?text=Image+Loading...'">
                     </div>
                     <div class="card-content">
                         <div class="product-cat">${p.category}</div>
