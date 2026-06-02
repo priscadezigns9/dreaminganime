@@ -103,7 +103,7 @@
 
         async function loadShop() {
             try {
-                const { data, error } = await sb.from('da_products').select('*').order('created_at', { ascending: false });
+                const { data, error } = await sb.from('da_inventory').select('*').order('created_at', { ascending: false });
                 
                 if (error) {
                     console.error('Supabase Error:', error);
