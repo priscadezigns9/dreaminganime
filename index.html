@@ -242,7 +242,7 @@
     </div>
     
     <div style="flex:1; min-width:300px; position:relative; display: flex; align-items: center; justify-content: center;">
-        <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_3.png" alt="Mimi Cinema" style="height: 380px; z-index: 5; filter: drop-shadow(0 0 40px rgba(255,107,0,0.6)); pointer-events: none;">
+        <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_3d_clean.webp" alt="Mimi Cinema" style="height: 380px; z-index: 5; filter: drop-shadow(0 0 40px rgba(255,107,0,0.6)); pointer-events: none;">
     </div>
 
     </div>
@@ -262,90 +262,8 @@
     </div>
   </section>
 
-<!-- ============================= AI RECOMMENDER ============================= -->
-  </section>
-<section id="ai-recommender" style="background:#0A0A0A;padding:80px 20px;">
-    <div style="max-width:860px;margin:0 auto;text-align:center;">
-      <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">AI Powered</p>
-      <h2 style="font-family:'Bangers',cursive;font-size:3.5rem;color:#fff;margin-bottom:12px;">&#127884; Find Your Next Obsession</h2>
-      <p style="color:#aaa;font-family:'Inter',sans-serif;margin-bottom:40px;font-size:1rem;">Answer 3 quick questions and we'll match you with your perfect anime.</p>
 
-      <!-- Progress Bar -->
-      <div id="ar-progress" style="display:flex;justify-content:center;gap:12px;margin-bottom:16px;position:relative;">
-        <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_1.png" alt="Mimi Quiz" style="position: absolute; right: -80px; top: -60px; height: 120px; z-index: 5; filter: drop-shadow(0 0 15px rgba(255,107,0,0.5)); pointer-events: none;">
-        <div id="ar-dot-1" style="width:36px;height:6px;border-radius:3px;background:#E85D04;transition:background 0.3s;"></div>
-        <div id="ar-dot-2" style="width:36px;height:6px;border-radius:3px;background:#333;transition:background 0.3s;"></div>
-        <div id="ar-dot-3" style="width:36px;height:6px;border-radius:3px;background:#333;transition:background 0.3s;"></div>
-      </div>
-      <div id="ar-step-label" style="color:#aaa;font-family:'Inter',sans-serif;font-size:0.85rem;margin-bottom:32px;letter-spacing:1px;">Step 1 of 3</div>
 
-      <!-- STEP 1: Mood -->
-      <div id="ar-step1">
-        <h3 style="font-family:'Bangers',cursive;font-size:2rem;color:#fff;margin-bottom:28px;">How are you feeling right now?</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left;">
-          <button class="ar-mood-btn" data-mood="action" onclick="arSelectMood(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#9889; Pumped &amp; Ready for Action</button>
-          <button class="ar-mood-btn" data-mood="emotional" onclick="arSelectMood(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#128546; Emotional, want to feel something</button>
-          <button class="ar-mood-btn" data-mood="laugh" onclick="arSelectMood(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#128514; Just want to laugh</button>
-          <button class="ar-mood-btn" data-mood="deep" onclick="arSelectMood(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#129300; Want something deep &amp; psychological</button>
-          <button class="ar-mood-btn" data-mood="cosy" onclick="arSelectMood(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#127800; Cosy &amp; wholesome vibes</button>
-          <button class="ar-mood-btn" data-mood="dark" onclick="arSelectMood(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#128123; Dark &amp; unsettling</button>
-        </div>
-        <button onclick="arGoStep2()" id="ar-next1" style="margin-top:32px;background:#E85D04;color:#fff;border:none;padding:14px 40px;border-radius:8px;font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:1px;cursor:pointer;opacity:0.4;pointer-events:none;transition:opacity 0.3s;">Next &rarr;</button>
-      </div>
-
-      <!-- STEP 2: Length -->
-      <div id="ar-step2" style="display:none;">
-        <h3 style="font-family:'Bangers',cursive;font-size:2rem;color:#fff;margin-bottom:28px;">How much time do you have?</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left;">
-          <button class="ar-len-btn" data-len="short" onclick="arSelectLen(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#127916; Short &amp; punchy (under 26 eps)</button>
-          <button class="ar-len-btn" data-len="mid" onclick="arSelectLen(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#128250; Mid-length (26&ndash;60 eps)</button>
-          <button class="ar-len-btn" data-len="epic" onclick="arSelectLen(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#127983; Epic saga (60+ eps)</button>
-          <button class="ar-len-btn" data-len="movie" onclick="arSelectLen(this)" style="background:#111;border:2px solid #222;border-radius:12px;padding:20px 24px;cursor:pointer;transition:all 0.2s;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;text-align:left;">&#127902; Movie / OVA</button>
-        </div>
-        <div style="display:flex;gap:16px;justify-content:center;margin-top:32px;">
-          <button onclick="arGoStep1()" style="background:transparent;color:#aaa;border:2px solid #333;padding:12px 28px;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.95rem;cursor:pointer;">&larr; Back</button>
-          <button onclick="arGoStep3()" id="ar-next2" style="background:#E85D04;color:#fff;border:none;padding:14px 40px;border-radius:8px;font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:1px;cursor:pointer;opacity:0.4;pointer-events:none;transition:opacity 0.3s;">Next &rarr;</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: Already Watched -->
-      <div id="ar-step3" style="display:none;">
-        <h3 style="font-family:'Bangers',cursive;font-size:2rem;color:#fff;margin-bottom:12px;">Already watched any of these?</h3>
-        <p style="color:#aaa;font-family:'Inter',sans-serif;margin-bottom:28px;font-size:0.9rem;">Check all that apply &mdash; we won't recommend what you've seen.</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;text-align:left;max-width:680px;margin:0 auto 32px;">
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="Demon Slayer" style="accent-color:#E85D04;width:18px;height:18px;"> Demon Slayer</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="Attack on Titan" style="accent-color:#E85D04;width:18px;height:18px;"> Attack on Titan</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="Naruto" style="accent-color:#E85D04;width:18px;height:18px;"> Naruto</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="One Piece" style="accent-color:#E85D04;width:18px;height:18px;"> One Piece</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="Death Note" style="accent-color:#E85D04;width:18px;height:18px;"> Death Note</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="Fullmetal Alchemist" style="accent-color:#E85D04;width:18px;height:18px;"> Fullmetal Alchemist</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="Jujutsu Kaisen" style="accent-color:#E85D04;width:18px;height:18px;"> Jujutsu Kaisen</label>
-          <label style="display:flex;align-items:center;gap:12px;background:#111;border:2px solid #222;border-radius:10px;padding:16px 20px;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;"><input type="checkbox" name="ar-watched" value="My Hero Academia" style="accent-color:#E85D04;width:18px;height:18px;"> My Hero Academia</label>
-        </div>
-        <div style="display:flex;gap:16px;justify-content:center;">
-          <button onclick="arGoStep2Back()" style="background:transparent;color:#aaa;border:2px solid #333;padding:12px 28px;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.95rem;cursor:pointer;">&larr; Back</button>
-          <button onclick="arGetResults()" style="background:#E85D04;color:#fff;border:none;padding:14px 40px;border-radius:8px;font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:1px;cursor:pointer;">&#127884; Find My Anime</button>
-        </div>
-      </div>
-
-      <!-- RESULTS -->
-      <div id="ar-results" style="display:none;">
-        <h3 style="font-family:'Bangers',cursive;font-size:2.2rem;color:#fff;margin-bottom:8px;">Your Perfect Matches &#127919;</h3>
-        <p style="color:#aaa;font-family:'Inter',sans-serif;margin-bottom:36px;font-size:0.9rem;">Picked just for you based on your vibe.</p>
-        <div id="ar-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;text-align:left;margin-bottom:36px;"></div>
-        <button onclick="arRestart()" style="background:transparent;color:#E85D04;border:2px solid #E85D04;padding:12px 32px;border-radius:8px;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:1px;cursor:pointer;">&#8617; Start Over</button>
-      </div>
-    </div>
-
-    <style>
-      @keyframes arFadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-      #ar-step1, #ar-step2, #ar-step3, #ar-results { animation: arFadeIn 0.4s ease; }
-      .ar-mood-btn:hover, .ar-len-btn:hover { border-color:#E85D04 !important; color:#E85D04 !important; transform:translateY(-2px); }
-      .ar-mood-btn.selected, .ar-len-btn.selected { border-color:#E85D04 !important; background:#1a0d00 !important; color:#E85D04 !important; }
-    </style>
-
-    <script src="da-ar.js"></script>
-  </section>
 <section style="padding:5rem 2rem;text-align:center;background:linear-gradient(135deg,#E85D04 0%,#FF6B00 100%);color:#ffffff;">
   <p style="font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.9;margin-bottom:1rem;color:#ffffff;">ANIME UNIVERSE</p>
   <h2 style="font-size:2.5rem;font-weight:300;letter-spacing:0.15em;margin-bottom:0.5rem;color:#ffffff;">Dreaming Anime</h2>
@@ -401,15 +319,7 @@
     </div>
   </div>
 </section>
-<section id="quiz-cta" class="panel-slam from-right" style="padding: 0; margin: 0; background: #0A0A0A;">
-  <div class="quiz-speedlines"></div>
-  <div class="quiz-content">
-    <span class="quiz-line1">WHICH</span>
-    <span class="quiz-line2">ANIME</span>
-    <span class="quiz-line3">ARE YOU?</span>
-    <a href="#ai-recommender" class="btn-quiz-cta" >TAKE THE QUIZ →</a>
-  </div>
-</section>
+
 <section id="newsletter" style="padding: 0 5% 60px;">
   <div class="newsletter-inner panel-slam">
     <h2 class="newsletter-headline">JOIN THE CREW.</h2>
@@ -722,7 +632,7 @@
       <ul class="footer-links">
         <li><a href="https://www.amazon.com/s?k=anime+merch&tag=priscadezigns-20" >Merch</a></li>
         <li><a href="/dreaming-anime/blog/">Blog</a></li>
-        <li><a href="#ai-recommender">Quiz</a></li>
+        
         <li><a href="#newsletter">About</a></li>
         <li><a href="https://priscadezigns.org/" >Dreaming Anime</a></li>
       </ul>
