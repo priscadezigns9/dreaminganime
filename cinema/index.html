@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEMA | DREAMING ANIME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #FF6B00; --bg: #000; --card-bg: #111; }
+        body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; overflow-x: hidden; }
+        nav { padding: 15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position: sticky; top: 0; background: rgba(0,0,0,0.95); z-index: 1000; backdrop-filter: blur(15px); }
+        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--primary); font-family:'Bangers', cursive; font-size:1.8rem; }
+        .logo img { height:40px; border-radius:50%; border:2px solid var(--primary); }
+        .search-container { position: relative; width: 300px; }
+        .search-container input { width: 100%; background: #111; border: 1px solid #333; padding: 10px 40px 10px 15px; border-radius: 20px; color: #fff; outline: none; transition: 0.3s; }
+        .section-header { padding: 30px 5% 10px; font-family:'Bangers'; color:var(--primary); letter-spacing:1px; }
+        .anime-grid { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5% 40px; scrollbar-width: none; }
+        .anime-grid::-webkit-scrollbar { display: none; }
+        .anime-card { flex: 0 0 200px; height: 300px; border-radius: 4px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; position: relative; }
+        .anime-card:hover { transform: scale(1.1); z-index: 10; border: 2px solid var(--primary); }
+        .anime-card img { width: 100%; height: 100%; object-fit: cover; }
+        .studio-tag { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: var(--primary); font-weight: 700; }
+        .hero { height: 60vh; width: 100%; position: relative; display: flex; align-items: center; padding: 0 5%; box-sizing: border-box; border-bottom: 1px solid #222; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); z-index: -1; }
+        .hero-title { font-family: 'Bangers'; font-size: 5rem; color: #fff; margin: 0 0 10px; line-height: 1; }
+        .watch-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; display: none; flex-direction: column; }
+        .watch-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+        .player-container { flex: 1; display: flex; align-items: center; justify-content: center; background: #000; }
+        .player-container iframe { width: 100%; height: 100%; border: none; }
+        .server-btn { background: #222; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 10px; font-family:'Space Mono'; font-weight:700; }
+        .server-btn.active { background: var(--primary); color: #000; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo"><img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_1.webp" alt="Mimi"> DREAMING CINEMA</a>
+        <div class="search-container"><input type="text" id="q" placeholder="Search Anime, Studio, Genre..." onkeypress="if(event.key==='Enter')search()"></div>
+        <a href="/index.html" style="color:#fff; text-decoration:none; font-weight:700;">HOME</a>
+    </nav>
+    <div id="landing">
+        <div class="hero" id="hero"></div>
+        <div id="cats"></div>
+    </div>
+    <div class="watch-overlay" id="watch">
+        <div class="watch-header">
+            <h2 id="pt" style="margin:0;">WATCHING...</h2>
+            <div>
+                <button class="server-btn active" onclick="loadP('vidsrc',this)">SERVER 1</button>
+                <button class="server-btn" onclick="loadP('vidsrc.to',this)">SERVER 2</button>
+            </div>
+            <i class="fas fa-times" style="font-size:2rem; cursor:pointer;" onclick="closeP()"></i>
+        </div>
+        <div class="player-container" id="pf"></div>
+    </div>
+    <script>
+        const API = "https://api.jikan.moe/v4";
+        let curId, curEp=1;
+        const CATS = [
+            {n:"Trending Now", q:"/top/anime?filter=airing"},
+            {n:"Studio MAPPA", q:"/anime?producers=569&order_by=score&sort=desc"},
+            {n:"Ufotable Collection", q:"/anime?producers=43&order_by=score&sort=desc"},
+            {n:"Action & Adventure", q:"/anime?genres=1&order_by=score&sort=desc"}
+        ];
+        async function fetchJ(u){const r=await fetch(u);return await r.json()}
+        async function init(){
+            const c=document.getElementById('cats');
+            for(let i=0;i<CATS.length;i++){
+                const d=await fetchJ(API+CATS[i].q+"&limit=15");
+                if(!d || !d.data) continue;
+                if(i===0)renderHero(d.data[0]);
+                const s=document.createElement('div');
+                s.innerHTML=`<div class="section-header"><h2>${CATS[i].n}</h2></div><div class="anime-grid">${d.data.map(a=>`<div class="anime-card" onclick="watch(${a.mal_id},'${a.title.replace(/'/g,"")}')"><img src="${a.images.jpg.large_image_url}"><div class="studio-tag">${a.studios[0]?a.studios[0].name:''}</div></div>`).join('')}</div>`;
+                c.appendChild(s);
+                await new Promise(r => setTimeout(r, 400));
+            }
+        }
+        function renderHero(a){document.getElementById('hero').innerHTML=`<img src="${a.images.jpg.large_image_url}" class="hero-bg"><div style="max-width:600px; position:relative;"><h1>${a.title}</h1><p style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${a.synopsis}</p><button class="server-btn active" style="background:#FF6B00; color:#000;" onclick="watch(${a.mal_id},'${a.title.replace(/'/g,"")}')">WATCH NOW</button></div>`}
+        function watch(id,t){curId=id;document.getElementById('watch').style.display='flex';document.getElementById('pt').innerText=t;loadP('vidsrc')}
+        function loadP(s,btn){
+            if(btn){document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+            const u=s==='vidsrc'?`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`:`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
+            document.getElementById('pf').innerHTML=`<iframe src="${u}" allowfullscreen></iframe>`
+        }
+        function closeP(){document.getElementById('watch').style.display='none';document.getElementById('pf').innerHTML=''}
+        async function search(){
+            const q=document.getElementById('q').value; if(!q)return;
+            const d=await fetchJ(API+"/anime?q="+q+"&limit=20");
+            document.getElementById('hero').style.display='none';
+            document.getElementById('cats').innerHTML=`<div class="section-header"><h2>Results for ${q}</h2></div><div class="anime-grid" style="flex-wrap:wrap; overflow:visible;">${d.data.map(a=>`<div class="anime-card" onclick="watch(${a.mal_id},'${a.title.replace(/'/g,"")}')"><img src="${a.images.jpg.large_image_url}"><div class="studio-tag">${a.studios[0]?a.studios[0].name:''}</div></div>`).join('')}</div>`;
+        }
+        init();
+    </script>
+</body>
+</html>
