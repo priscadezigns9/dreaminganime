@@ -1,53 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Open Graph / SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dreaminganime.com">
+    <meta property="og:title" content="Dreaming Anime | Elite Anime News & Trends">
+    <meta property="og:description" content="The definitive source for anime leaks, season reveals, and news.">
+    <meta property="og:image" content="https://priscadezigns.org/assets/dreaming_anime_og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dreaming Anime — Live the Anime Life</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="/logos/dreaming-anime-logo-round.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary: #FF6B00; --bg: #000; --card-bg: #111; }
+        :root { --primary: #FF6B00; --bg: #000; --card-bg: #050505; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
-        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; position: relative; z-index: 100; }
-        .logo { font-family: 'Bangers', cursive; font-size: 2rem; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 1000; backdrop-filter: blur(10px); }
+        .logo { font-family: 'Bangers', cursive; font-size: 2rem; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 12px; }
         .logo img { height: 45px; border-radius: 50%; border: 2px solid var(--primary); }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; transition: 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
 
-        .hero { height: 90vh; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; background: #000; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; z-index: 1; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #000 30%, transparent 100%); z-index: 2; }
+        .hero { height: 95vh; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; background: #000; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #000 35%, transparent 100%); z-index: 2; }
         
-        .hero-content { position: relative; z-index: 10; max-width: 600px; }
-        .hero-content h1 { font-family: 'Bangers', cursive; font-size: 5rem; line-height: 0.9; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; font-weight: 400; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        .hero-content { position: relative; z-index: 10; max-width: 650px; }
+        .hero-content h1 { font-family: 'Bangers', cursive; font-size: 6rem; line-height: 0.85; margin-bottom: 25px; color: #fff; letter-spacing: -2px; }
+        .hero-content p { font-size: 1.3rem; color: #ccc; margin-bottom: 35px; font-weight: 400; line-height: 1.4; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         
-        .mimi-hero { position: absolute; right: -5%; bottom: -5%; height: 100%; z-index: 5; pointer-events: none; }
+        .mimi-hero { position: absolute; right: 0; bottom: 0; height: 100%; z-index: 5; pointer-events: none; filter: drop-shadow(0 0 40px rgba(255,107,0,0.3)); }
 
-        .section { padding: 80px 5%; }
-        .section-header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .section-header h2 { font-family: 'Bangers', cursive; font-size: 3rem; color: var(--primary); }
+        .section { padding: 100px 5%; position: relative; }
+        .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; display: block; font-weight: 700; }
+        .section-title { font-family: 'Bangers', cursive; font-size: 4rem; line-height: 1; margin-bottom: 50px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #222; transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-body { padding: 20px; }
-        .card-body h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card { background: var(--card-bg); border-radius: 16px; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .card-img-wrap { width: 100%; height: 240px; overflow: hidden; position: relative; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .card:hover .card-img-wrap img { transform: scale(1.1); }
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 1.5rem; margin-bottom: 12px; font-family: 'Bangers', cursive; letter-spacing: 1px; }
+        .card-body p { color: #888; font-size: 0.95rem; line-height: 1.5; }
 
-        .btn { display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; text-decoration: none; font-weight: 900; border-radius: 4px; text-transform: uppercase; font-size: 0.9rem; transition: 0.2s; }
+        .btn { display: inline-block; padding: 16px 40px; background: var(--primary); color: #000; text-decoration: none; font-weight: 900; border-radius: 4px; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
         .btn:hover { background: #fff; transform: scale(1.05); }
 
-        footer { padding: 60px 5%; border-top: 1px solid #222; text-align: center; }
-        .footer-logo { font-family: 'Bangers', cursive; font-size: 2rem; color: var(--primary); margin-bottom: 20px; display: block; }
-        .copyright { color: #444; font-size: 0.8rem; letter-spacing: 2px; }
+        footer { padding: 80px 5%; border-top: 1px solid #111; text-align: center; background: #000; }
+        .footer-logo { font-family: 'Bangers', cursive; font-size: 2.5rem; color: var(--primary); margin-bottom: 25px; display: block; text-decoration: none; }
+        .copyright { color: #333; font-size: 0.75rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
 
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #111; border: 1px solid #222; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 4rem; }
+            .mimi-hero { right: -15%; opacity: 0.8; }
+        }
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 3.5rem; }
-            .mimi-hero { right: -20%; height: 70%; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -76,33 +99,70 @@
         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_pose.webp" class="mimi-hero" alt="Mimi Official">
     </section>
 
-    <section class="section">
-        <div class="section-header">
-            <h2>LATEST PANELS</h2>
-            <a href="/cinema/" style="color:var(--primary); font-weight:700; text-decoration:none;">VIEW CINEMA &rarr;</a>
+    <!-- CHAPTER 01: THE NEWS -->
+    <section class="section" style="background: #000;">
+        <span class="chapter-label">Chapter 01 &mdash; The News</span>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:50px;">
+            <h2 class="section-title">LATEST PANELS</h2>
+            <a href="/cinema/" style="color:var(--primary); font-weight:700; text-decoration:none; margin-bottom:60px;">VIEW FULL FEED &rarr;</a>
         </div>
         <div class="grid">
             <div class="card">
-                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
-                    <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="https://www.youtube.com/embed/z6_N62B6oXg" allowfullscreen></iframe>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/z6_N62B6oXg" allowfullscreen></iframe>
                 </div>
                 <div class="card-body">
-                    <h3>Re:Zero Season 3 Final Leak</h3>
-                    <p style="color:#666;">The white whale signal is back.</p>
+                    <h3>Demon Slayer: Infinity Castle</h3>
+                    <p>The final arc signal has been intercepted. Ufotable 2026.</p>
                 </div>
             </div>
             <div class="card">
-                <img src="https://priscadezigns.org/assets/manga_panel_01.jpg" alt="Manga Panel">
+                <div class="card-img-wrap">
+                    <img src="https://priscadezigns.org/assets/manga_panel_01.jpg" alt="Manga Panel">
+                </div>
                 <div class="card-body">
                     <h3>The Vault: Chapter 88</h3>
-                    <p style="color:#666;">New archival releases from the underground.</p>
+                    <p>Exclusive early scans for the underground archives.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ByXuk9QqQmc" allowfullscreen></iframe>
+                </div>
+                <div class="card-body">
+                    <h3>Solo Leveling S2</h3>
+                    <p>Jinwoo's return confirmed for the Spring season.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 02: THE THEATER -->
+    <section class="section" style="background: #050505;">
+        <span class="chapter-label">Chapter 02 &mdash; The Theater</span>
+        <h2 class="section-title">CINEMA SESSIONS</h2>
+        <div class="grid">
+            <div class="card" style="border-radius:24px;">
+                <div class="card-img-wrap" style="height:400px;">
+                    <img src="https://priscadezigns.org/assets/cinema_card_bg.jpg" alt="Cinema">
+                    <div style="position:absolute; inset:0; background:linear-gradient(transparent, #000); display:flex; flex-direction:column; justify-content:flex-end; padding:40px;">
+                        <h3 style="font-size:2.5rem; margin-bottom:10px;">RE:ZERO S3</h3>
+                        <p style="color:var(--primary); font-family:'Space Mono';">WATCH NOW &rarr;</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="border-radius:24px; display:flex; align-items:center; justify-content:center; background:var(--primary);">
+                <div class="card-body" style="text-align:center;">
+                    <i class="fas fa-play-circle" style="font-size:5rem; color:#000; margin-bottom:20px;"></i>
+                    <h3 style="color:#000; font-size:2.5rem;">ENTER THE CINEMA</h3>
+                    <a href="/cinema/" class="btn" style="background:#000; color:var(--primary); margin-top:20px;">VIEW ALL TRAILERS</a>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <span class="footer-logo">DREAMING ANIME</span>
+        <a href="/" class="footer-logo">DREAMING ANIME</a>
         <p class="copyright">© 2026 DREAMING ANIME · ALL RIGHTS RESERVED</p>
     </footer>
 
