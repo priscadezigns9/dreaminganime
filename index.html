@@ -3,143 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dreaming Anime — Live the Anime Life</title>
-    <link rel="icon" type="image/png" href="https://priscadezigns.org/logos/dreaming-anime-logo.png">
-    
-    <!-- FONTAWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/da-style.css?v=2.1">
-
+    <title>DREAMING ANIME | Seasonal Sanctuary</title>
     <style>
-        :root { --accent: #FF6B00; --bg: #0A0A0A; }
-        body { background: var(--bg); color: #fff; margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        
-        /* Fixed Nav */
-        nav { background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,107,0,0.2); padding: 12px 24px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-family: 'Bangers', cursive; font-size: 1.5rem; letter-spacing: 1px; }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-link { font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: 0.3s; }
-        .nav-link:hover { color: var(--accent); }
-
-        /* Hero */
-        #hero { position: relative; height: 90vh; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .hero-content { position: relative; z-index: 10; text-align: center; max-width: 800px; }
-        .hero-title { font-family: 'Bangers', cursive; font-size: 7rem; line-height: 0.85; margin: 0; text-transform: uppercase; }
-        .hero-subtitle { color: var(--accent); font-size: 1.2rem; font-weight: 700; letter-spacing: 4px; margin-top: 20px; }
-        .mimi-hero { position: absolute; right: 0; bottom: 0; height: 95%; pointer-events: none; filter: drop-shadow(0 0 30px rgba(255,107,0,0.4)); }
-
-        /* Ticker */
-        .ticker { background: #000; padding: 4px 0; border-bottom: 1px solid #111; overflow: hidden; }
-        .ticker-track { display: flex; white-space: nowrap; animation: ticker-scroll 30s linear infinite; }
-        .ticker-track span { font-family: 'Space Mono', monospace; font-size: 11px; padding: 0 30px; letter-spacing: 2px; color: #444; font-weight: 700; }
-        @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* Sections */
-        .section-padded { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-label { color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px; font-weight: 700; display: block; margin-bottom: 20px; }
-        .section-title { font-family: 'Bangers', cursive; font-size: 4rem; margin: 0 0 40px; }
-
-        /* Genres */
-        #genres { background: #fff; color: #000; padding: 100px 0; }
-        .genres-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .genre-card { background: #000; padding: 50px; text-align: center; border: 4px solid #000; transition: 0.3s; cursor: pointer; text-decoration: none; display: block; }
-        .genre-card span { font-family: 'Bangers', cursive; font-size: 2.5rem; color: #fff; }
-        .genre-card:hover { background: var(--accent); border-color: var(--accent); }
-
-        .btn-primary { background: var(--accent); color: #fff; padding: 15px 40px; text-decoration: none; font-family: 'Bangers', cursive; border-radius: 4px; font-size: 1.2rem; transition: 0.3s; border: none; cursor: pointer; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,107,0,0.3); }
-
-        footer { background: #000; border-top: 1px solid #111; padding: 80px 20px; text-align: center; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; max-width: 1200px; margin: 0 auto 60px; }
-        .footer-link { color: #666; text-decoration: none; font-size: 0.9rem; line-height: 2.5; transition: 0.3s; }
-        .footer-link:hover { color: var(--accent); }
+        :root { --accent: #f56565; --bg: #0b0e14; --panel: #161b22; }
+        body { background: var(--bg); color: #fff; font-family: sans-serif; margin: 0; text-align: center; }
+        header { padding: 60px; background: var(--panel); border-bottom: 5px solid var(--accent); }
+        h1 { margin: 0; font-size: 3rem; font-weight: 900; }
+        .hero { padding: 80px 20px; background: linear-gradient(180deg, var(--panel), var(--bg)); }
+        .main-video { max-width: 1000px; margin: 0 auto; aspect-ratio: 16/9; background: #000; border-radius: 30px; overflow: hidden; border: 4px solid #333; }
+        .section-title { color: var(--accent); margin: 60px 0 40px; font-size: 2rem; font-weight: 800; text-transform: uppercase; }
+        .trending-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 0 5%; max-width: 1400px; margin: 0 auto; }
+        .video-card { background: var(--panel); border-radius: 20px; overflow: hidden; border: 1px solid #333; }
+        .video-card iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+        .video-card h3 { padding: 20px; margin: 0; }
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 0 5%; max-width: 1400px; margin: 0 auto; }
+        .anime-card { background: var(--panel); border-radius: 20px; overflow: hidden; border: 1px solid #444; }
+        .anime-card img { width: 100%; height: 400px; object-fit: cover; }
+        .anime-card h4 { padding: 20px; margin: 0; color: var(--accent); }
+        footer { padding: 80px; background: #080a0f; border-top: 1px solid #333; margin-top: 100px; }
+        footer a { color: #888; margin: 0 20px; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
-
-<nav>
-  <a href="/" class="logo">DREAMING <span>ANIME</span></a>
-  <div class="nav-links">
-    <a href="/cinema/" class="nav-link">Cinema</a>
-    <a href="/manga/" class="nav-link">The Vault</a>
-    <a href="/hub/" class="nav-link">Live Hub</a>
-    <a href="/shop/" class="nav-link">Shop</a>
-  </div>
-</nav>
-
-<section id="hero">
-    <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_1.webp" class="mimi-hero" alt="Mimi">
-    <div class="hero-content">
-        <h1 class="hero-title">LIVE THE<br><span style="color:var(--accent)">ANIME</span><br>LIFE.</h1>
-        <p class="hero-subtitle">THE DEFINITIVE SOURCE FOR OTAKU CULTURE</p>
-        <div style="margin-top:40px; display:flex; gap:20px; justify-content:center;">
-            <a href="/shop/" class="btn-primary">SHOP MERCH</a>
-            <a href="/hub/" class="btn-primary" style="background:transparent; border:2px solid var(--accent); color:var(--accent);">ENTER HUB</a>
+    <header>
+        <h1>DREAMING ANIME</h1>
+        <p style="color:var(--accent); font-weight:bold;">Empire Sanctuary v8.1 (Global Reset)</p>
+    </header>
+    
+    <div class="hero">
+        <h2 class="section-title">Main Feature: Frieren Season 2</h2>
+        <div class="main-video">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/EOMVXqH9DSg" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-</section>
 
-<div class="ticker">
-    <div class="ticker-track">
-        <span>★ SOLO LEVELING</span><span>★ DEMON SLAYER</span><span>★ ONE PIECE</span><span>★ JUJUTSU KAISEN</span><span>★ WIND BREAKER</span><span>★ KAIJU NO. 8</span>
-        <span>★ SOLO LEVELING</span><span>★ DEMON SLAYER</span><span>★ ONE PIECE</span><span>★ JUJUTSU KAISEN</span><span>★ WIND BREAKER</span><span>★ KAIJU NO. 8</span>
-    </div>
-</div>
-
-<!-- CHAPTER 02 (THEATER) SECTION REMOVED FROM HOME PAGE -->
-
-<section id="genres">
-    <div class="section-padded">
-        <span class="section-label">CHAPTER 02 — EXPLORE</span>
-        <h2 class="section-title">PICK YOUR GENRE.</h2>
-        <div class="genres-grid">
-            <a href="/genres/action.html" class="genre-card"><span>ACTION</span></a>
-            <a href="/genres/romance.html" class="genre-card"><span>ROMANCE</span></a>
-            <a href="/genres/thriller.html" class="genre-card"><span>THRILLER</span></a>
+    <h2 class="section-title">Trending Videos</h2>
+    <div class="trending-grid">
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/byJ7pxxhaDY"></iframe>
+            <h3>Solo Leveling S2</h3>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/OAcohp3MMYI"></iframe>
+            <h3>Oshi no Ko S2</h3>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/V8mRlsL043k"></iframe>
+            <h3>Kaiju No. 8</h3>
         </div>
     </div>
-</section>
 
-<section id="vault-preview" class="section-padded">
-    <span class="section-label">CHAPTER 03 — THE VAULT</span>
-    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:60px;">
-        <div style="flex:1; min-width:300px; text-align:center;">
-             <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_2.webp" style="width:100%; max-width:400px; filter:drop-shadow(0 0 30px rgba(255,107,0,0.2));">
-        </div>
-        <div style="flex:1.2; min-width:300px;">
-            <h2 class="section-title">THE ARCHIVE.</h2>
-            <p style="color:#888; font-size:1.1rem; line-height:1.7; margin-bottom:40px;">Curated manga, manhwa, and exclusive high-fidelity panels.</p>
-            <a href="/manga/" class="btn-primary">ENTER THE VAULT</a>
-        </div>
+    <h2 class="section-title">Seasonal Highlights</h2>
+    <div class="anime-grid">
+        <div class="anime-card"><img src="https://i0.wp.com/upload.wikimedia.org/wikipedia/en/thumb/d/d6/Oshi_no_Ko_key_visual.jpg/800px-Oshi_no_Ko_key_visual.jpg"><h4>Oshi no Ko</h4></div>
+        <div class="anime-card"><img src="https://i0.wp.com/img.youtube.com/vi/byJ7pxxhaDY/maxresdefault.jpg"><h4>Solo Leveling</h4></div>
+        <div class="anime-card"><img src="https://i0.wp.com/img.youtube.com/vi/n6HZo_33YaQ/maxresdefault.jpg"><h4>Frieren S2</h4></div>
+        <div class="anime-card"><img src="https://i0.wp.com/img.youtube.com/vi/V8mRlsL043k/maxresdefault.jpg"><h4>Kaiju No. 8</h4></div>
     </div>
-</section>
 
-<footer>
-    <div class="footer-grid">
-        <div>
-            <h4 style="font-family:'Bangers',cursive; font-size:1.5rem; color:var(--accent); margin-bottom:20px;">DREAMING ANIME</h4>
-            <p style="color:#444; font-size:0.9rem; line-height:1.6;">The definitive source for anime dreamers. A Prisca Dezigns Affiliate.</p>
-        </div>
-        <div>
-            <h4 style="color:#fff; font-family:'Space Mono',monospace; font-size:0.8rem; letter-spacing:2px; margin-bottom:20px;">EXPLORE</h4>
-            <a href="/cinema/" class="footer-link">Cinema</a><br>
-            <a href="/manga/" class="footer-link">Vault</a><br>
-            <a href="/shop/" class="footer-link">Shop</a><br>
-            <a href="/hub/" class="footer-link">Live Hub</a>
-        </div>
-        <div>
-            <h4 style="color:#fff; font-family:'Space Mono',monospace; font-size:0.8rem; letter-spacing:2px; margin-bottom:20px;">FOLLOW</h4>
-            <a href="#" class="footer-link">Instagram</a><br>
-            <a href="#" class="footer-link">Facebook</a><br>
-            <a href="#" class="footer-link">Threads</a>
-        </div>
-    </div>
-    <p style="color:#222; font-size:0.7rem; letter-spacing:2px;">© 2026 DREAMING ANIME | THE ONE EMPIRE</p>
-</footer>
-
+    <footer>
+        <p>&copy; 2026 Prisca Dezigns</p>
+        <a href="/legal/privacy/">Privacy Policy</a>
+        <a href="/legal/terms/">Terms of Use</a>
+        <a href="/legal/affiliate-disclosure/">Affiliate Disclosure</a>
+    </footer>
 </body>
 </html>
