@@ -1,218 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Open Graph / SEO -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dreaminganime.com/manga/">
-    <meta property="og:title" content="The Vault | Dreaming Anime Manga Archive">
-    <meta property="og:description" content="Enter the Vault. The ultimate archive of manga, manhwa, and exclusive collectibles.">
-    
-    <!-- FONTAWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Vault — Dreaming Anime | Manga & Merch Archive</title>
     <link rel="icon" type="image/png" href="https://priscadezigns.org/logos/dreaming-anime-logo.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/da-style.css">
-
+    <link rel="stylesheet" href="/da-style.css?v=1.2">
     <style>
-        .nav-logo img, .footer-logo img, img[src*="logo"], .logo img { border-radius: 50% !important; object-fit: cover; }
-        
-        .vault-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-        .manga-card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-        .manga-card:hover {
-            transform: translateY(-5px);
-            border-color: #FF6B00;
-        }
-        .manga-cover {
-            width: 100%;
-            aspect-ratio: 2/3;
-            background-size: cover;
-            background-position: center;
-        }
-        .manga-info {
-            padding: 15px;
-        }
-        .manga-title {
-            color: #fff;
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-        .manga-status {
-            color: #FF6B00;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-        }
+        body { background: #0A0A0A; color: #fff; }
+        .vault-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; max-width: 1200px; margin: 40px auto; padding: 20px; }
+        .manga-card { background: #111; border: 1px solid #222; border-radius: 16px; overflow: hidden; transition: 0.3s; text-decoration: none; display: block; }
+        .manga-card:hover { border-color: #FF6B00; transform: translateY(-5px); }
+        .manga-cover { width: 100%; height: 320px; object-fit: cover; }
+        .manga-info { padding: 15px; }
     </style>
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
-<nav>
-  <a href="/" class="nav-brand" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-    <img src="https://priscadezigns.org/logos/dreaming-anime-logo.png" alt="Dreaming Anime Logo" style="height: 45px; width: 45px; object-fit: cover; border-radius: 50%;">
-    <div>
-      <span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#FF6B00;">DREAMING</span><span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#0A0A0A;margin-left:6px;">ANIME</span>
-    </div>
+<nav class="empire-nav" style="background: rgba(0,0,0,0.9); border-bottom: 1px solid #222; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;">
+  <a href="/" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration:none; color:#fff;">
+    <img src="https://priscadezigns.org/logos/dreaming-anime-logo.png" alt="Logo" style="height: 32px; width: 32px; border-radius: 50%;">
+    PRISCA <span style="color:#FF6B00;">DEZIGNS</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="/#genres">GENRES</a></li>
-    <li><a href="/cinema/">🎬 CINEMA</a></li>
-    <li><a href="/manga/" class="active">THE VAULT</a></li>
-    <li><a href="/#events">EVENTS</a></li>
-    <li><a href="/shop/">SHOP</a></li>
-    <li><a href="/#newsletter">NEWSLETTER</a></li>
-  </ul>
+  <div class="nav-links">
+    <a href="/" style="color:#fff; text-decoration:none; margin-left:20px; font-size:0.8rem;">HOME</a>
+    <a href="/cinema/" style="color:#fff; text-decoration:none; margin-left:20px; font-size:0.8rem;">CINEMA</a>
+  </div>
 </nav>
 
-<!-- ===== VAULT HERO ===== -->
-<section id="merch" style="background:#0F0F16; padding:120px 6% 60px; text-align:center;">
-    <span style="font-family:'Space Mono', monospace; color:#FF6B00; font-size:12px; letter-spacing:0.3em; text-transform:uppercase; display:block; margin-bottom:20px;">Chapter 06 — The Vault</span>
-    <h2 style="font-family:'Space Grotesk', sans-serif; font-size:3.5rem; font-weight:800; color:#fff; margin-bottom:10px; letter-spacing:-0.02em;">THE <span style="color:#FF6B00;">VAULT.</span></h2>
-    <p style="color:#888; font-family:'Inter', sans-serif; max-width:600px; margin:0 auto 40px;">The sovereign collection of Dreaming Anime. High-fidelity manga archives, exclusive merch drops, and digital collectibles.</p>
-    
-    <div style="max-width:1100px; margin:0 auto; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:24px; padding:40px; display:flex; flex-wrap:wrap; align-items:center; gap:50px; text-align:left; margin-bottom:80px;">
-        <div style="flex:1; min-width:300px;">
-            <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_v2.jpg" alt="Mimi Vault" style="width:100%; max-width:400px; height:auto; filter:drop-shadow(0 0 30px rgba(255,107,0,0.3));">
+<section style="padding: 100px 20px; text-align:center; background: radial-gradient(circle at center, #1a0f00 0%, #000 70%);">
+    <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:50px; text-align:left;">
+        <div style="flex:1; min-width:300px; text-align:center;">
+             <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_1.webp" alt="Mimi Vault" style="width:100%; max-width:400px; height:auto; filter:drop-shadow(0 0 30px rgba(255,107,0,0.3));">
         </div>
         <div style="flex:1.2; min-width:300px;">
-            <h3 style="color:#fff; font-family:'Space Grotesk', sans-serif; font-size:2.2rem; font-weight:800; margin-bottom:20px;">The Collector's Archive.</h3>
-            <p style="color:rgba(255,255,255,0.6); font-size:1.1rem; line-height:1.7; margin-bottom:35px;">Welcome to the Vault. I've curated the finest manga releases and exclusive apparel for the true dreamers. Everything here is high-fidelity and community-vetted.</p>
-            <a href="https://www.redbubble.com/people/dreaminganime9/shop" target="_blank" style="display:inline-block; padding:18px 40px; background:#FF6B00; color:#fff; text-decoration:none; border-radius:8px; font-weight:800; font-size:1rem; letter-spacing:1px; text-transform:uppercase;">Shop Exclusive Merch &rarr;</a>
-        </div>
-    </div>
-
-    <!-- MANGA ARCHIVE SECTION -->
-    <div style="text-align:left; max-width:1200px; margin:0 auto;">
-        <h3 style="color:#fff; font-family:'Bangers', cursive; font-size:2rem; letter-spacing:2px; margin-bottom:20px; border-left:4px solid #FF6B00; padding-left:15px;">MANGA ARCHIVE</h3>
-        <div class="vault-grid">
-            
-            <a href="#" class="manga-card">
-                <div class="manga-cover" style="background-image: url('https://mangadex.org/covers/32d76d19-8a0d-4d31-891f-230afab4691e/8f0923e1-7e87-436f-8700-d2698710f92f.jpg');"></div>
-                <div class="manga-info">
-                    <p class="manga-status">NEW RELEASE</p>
-                    <h4 class="manga-title">SOLO LEVELING</h4>
-                </div>
-            </a>
-
-            <a href="#" class="manga-card">
-                <div class="manga-cover" style="background-image: url('https://mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e835fe/78119e83-7764-44b2-a423-f2229b350f58.jpg');"></div>
-                <div class="manga-info">
-                    <p class="manga-status">LEGENDARY</p>
-                    <h4 class="manga-title">DEMON SLAYER</h4>
-                </div>
-            </a>
-
-            <a href="#" class="manga-card">
-                <div class="manga-cover" style="background-image: url('https://mangadex.org/covers/af2b03ca-fe6d-463d-af7c-f38f4d9991ca/746d421d-79e0-4786-9a25-c603b70868a2.jpg');"></div>
-                <div class="manga-info">
-                    <p class="manga-status">ONGOING</p>
-                    <h4 class="manga-title">ONE PIECE</h4>
-                </div>
-            </a>
-
-            <a href="#" class="manga-card">
-                <div class="manga-cover" style="background-image: url('https://mangadex.org/covers/a77742b1-0ae9-4f38-82aa-01db92c30f14/66a6a2a5-48b6-455b-8025-a131b7875955.jpg');"></div>
-                <div class="manga-info">
-                    <p class="manga-status">TRENDING</p>
-                    <h4 class="manga-title">JUJUTSU KAISEN</h4>
-                </div>
-            </a>
-
-            <a href="#" class="manga-card">
-                <div class="manga-cover" style="background-image: url('https://mangadex.org/covers/b25ef359-0302-4213-91ae-f590123512b2/1e3097c0-2f9a-4122-835f-30c1e6c38258.jpg');"></div>
-                <div class="manga-info">
-                    <p class="manga-status">NEW</p>
-                    <h4 class="manga-title">KAIJU NO. 8</h4>
-                </div>
-            </a>
-
-            <a href="#" class="manga-card">
-                <div class="manga-cover" style="background-image: url('https://mangadex.org/covers/76a666e8-23f2-45e0-b6f7-3c582df58461/c6c221e6-630f-48d8-9c17-101a07010531.jpg');"></div>
-                <div class="manga-info">
-                    <p class="manga-status">SENSATIONAL</p>
-                    <h4 class="manga-title">DANDADAN</h4>
-                </div>
-            </a>
-
+            <span style="color:#FF6B00; font-family:'Space Mono', monospace; font-size:0.9rem; font-weight:700; letter-spacing:3px; display:block; margin-bottom:15px;">THE ARCHIVE</span>
+            <h1 style="font-family:'Bangers', cursive; font-size:5rem; color:#fff; margin-bottom:10px; line-height:1;">THE VAULT.</h1>
+            <p style="color:#888; font-size:1.2rem; line-height:1.7;">Curated high-fidelity manga and exclusive apparel. Welcome to the sanctuary.</p>
         </div>
     </div>
 </section>
 
-<!-- ===== MANGA READER SECTION ===== -->
-<section id="manga-reader" class="section-padded" style="background:#0A0A0A; padding:80px 20px; border-top:1px solid #111;">
-    <div style="max-width:1200px; margin:0 auto; text-align:center;">
-        <h2 style="font-family:'Bangers', cursive; color:#fff; font-size:3rem; margin-bottom:20px;">READ THE ARCHIVE.</h2>
-        <p style="color:#888; margin-bottom:40px;">Integrated on-site reading experience. Powered by MangaDex API.</p>
-        
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:25px;">
-            <div style="background:#111; border:1px solid #222; border-radius:16px; padding:20px; cursor:pointer;" onclick="alert('Reader loading... Synchronizing with MangaDex satellites.')">
-                <img src="https://mangadex.org/covers/32d76d19-8a0d-4d31-891f-230afab4691e/8f0923e1-7e87-436f-8700-d2698710f92f.jpg" style="width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
-                <h3 style="color:#fff; font-family:'Space Grotesk', sans-serif;">Solo Leveling</h3>
-                <p style="color:#FF6B00; font-size:0.85rem; font-weight:700;">VOL. 01 | CH. 001</p>
-            </div>
-            <div style="background:#111; border:1px solid #222; border-radius:16px; padding:20px; cursor:pointer;" onclick="alert('Reader loading...')">
-                <img src="https://mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e835fe/78119e83-7764-44b2-a423-f2229b350f58.jpg" style="width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
-                <h3 style="color:#fff; font-family:'Space Grotesk', sans-serif;">Demon Slayer</h3>
-                <p style="color:#FF6B00; font-size:0.85rem; font-weight:700;">CH. 001 — CRUELTY</p>
-            </div>
-            <div style="background:#111; border:1px solid #222; border-radius:16px; padding:20px; cursor:pointer;" onclick="alert('Reader loading...')">
-                <img src="https://mangadex.org/covers/a77742b1-0ae9-4f38-82aa-01db92c30f14/66a6a2a5-48b6-455b-8025-a131b7875955.jpg" style="width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
-                <h3 style="color:#fff; font-family:'Space Grotesk', sans-serif;">Jujutsu Kaisen</h3>
-                <p style="color:#FF6B00; font-size:0.85rem; font-weight:700;">CH. 001 — RYOMEN SUKUNA</p>
-            </div>
+<div class="vault-grid">
+    <a href="#" class="manga-card">
+        <img src="https://mangadex.org/covers/32d76d19-8a0d-4d31-891f-230afab4691e/8f0923e1-7e87-436f-8700-d2698710f92f.jpg" class="manga-cover">
+        <div class="manga-info">
+            <h4 style="color:#fff; font-family:'Space Grotesk',sans-serif;">SOLO LEVELING</h4>
+            <p style="color:#FF6B00; font-size:0.75rem; font-weight:700; margin-top:5px;">CHAPTER 001</p>
         </div>
-    </div>
-</section>
+    </a>
+    <a href="#" class="manga-card">
+        <img src="https://mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e835fe/78119e83-7764-44b2-a423-f2229b350f58.jpg" class="manga-cover">
+        <div class="manga-info">
+            <h4 style="color:#fff; font-family:'Space Grotesk',sans-serif;">DEMON SLAYER</h4>
+            <p style="color:#FF6B00; font-size:0.75rem; font-weight:700; margin-top:5px;">CHAPTER 001</p>
+        </div>
+    </a>
+    <a href="#" class="manga-card">
+        <img src="https://mangadex.org/covers/af2b03ca-fe6d-463d-af7c-f38f4d9991ca/746d421d-79e0-4786-9a25-c603b70868a2.jpg" class="manga-cover">
+        <div class="manga-info">
+            <h4 style="color:#fff; font-family:'Space Grotesk',sans-serif;">ONE PIECE</h4>
+            <p style="color:#FF6B00; font-size:0.75rem; font-weight:700; margin-top:5px;">VOL. 01</p>
+        </div>
+    </a>
+</div>
 
-<!-- ===== FOOTER ===== -->
-<footer style="background:#050505; padding:80px 6%; border-top:1px solid #111;">
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:40px; max-width:1200px; margin:0 auto;">
-        <div>
-            <img src="https://priscadezigns.org/logos/dreaming-anime-logo.png" alt="Logo" style="height:60px; width:60px; border-radius:50%; margin-bottom:20px;">
-            <p style="color:#555; font-size:0.9rem; line-height:1.6;">The definitive source for anime news, trends, and exclusive drops. Part of the Prisca Dezigns Empire.</p>
-        </div>
-        <div>
-            <h4 style="color:#fff; font-family:'Space Mono', monospace; margin-bottom:20px; font-size:0.8rem; letter-spacing:2px;">DESTINATIONS</h4>
-            <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:12px;">
-                <li><a href="/" style="color:#888; text-decoration:none; font-size:0.9rem;">Home</a></li>
-                <li><a href="/cinema/" style="color:#888; text-decoration:none; font-size:0.9rem;">Cinema</a></li>
-                <li><a href="/manga/" style="color:#FF6B00; text-decoration:none; font-size:0.9rem;">The Vault</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 style="color:#fff; font-family:'Space Mono', monospace; margin-bottom:20px; font-size:0.8rem; letter-spacing:2px;">EMPIRE</h4>
-            <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:12px;">
-                <li><a href="https://priscadezigns.org" style="color:#888; text-decoration:none; font-size:0.9rem;">Prisca Dezigns</a></li>
-                <li><a href="/shop/" style="color:#888; text-decoration:none; font-size:0.9rem;">Shop</a></li>
-            </ul>
-        </div>
-    </div>
-    <div style="text-align:center; margin-top:60px; padding-top:40px; border-top:1px solid #111;">
-        <p style="color:#333; font-size:0.75rem; letter-spacing:1px;">&copy; 2026 DREAMING ANIME. ALL RIGHTS RESERVED. POWERED BY PRISCA DEZIGNS.</p>
-    </div>
+<footer style="background:#000; padding:60px 20px; border-top:1px solid #111; text-align:center;">
+    <p style="color:#444; font-size:0.8rem;">&copy; 2026 DREAMING ANIME | THE ONE EMPIRE</p>
 </footer>
 
 </body>
