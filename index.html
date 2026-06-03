@@ -5,11 +5,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dreaminganime.com">
     <meta property="og:title" content="Dreaming Anime | Elite Anime News & Trends">
-    <meta property="og:description" content="The definitive source for anime leaks, season reveals, and news. Part of the Prisca Dezigns Empire.">
+    <meta property="og:description" content="The definitive source for anime leaks, season reveals, and news. ALL RIGHTS RESERVED.">
     <meta property="og:image" content="https://priscadezigns.org/assets/dreaming_anime_og.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dreaming Anime | Elite Anime News & Trends">
-    <meta name="twitter:description" content="The definitive source for anime leaks, season reveals, and news. Part of the Prisca Dezigns Empire.">
+    <meta name="twitter:description" content="The definitive source for anime leaks, season reveals, and news. ALL RIGHTS RESERVED.">
     <meta name="twitter:image" content="https://priscadezigns.org/assets/dreaming_anime_og.jpg">
     
     <!-- FONTAWESOME -->
@@ -95,24 +95,47 @@
 }
 </style>
 
+
 <style id="gold-standard-override">
-  #cinema {
+  /* Force all major sections to be full screen height */
+  #hero, #cinema, #todays-pick, #genres, #blog, #quiz-cta, #newsletter, #events, #watch-anime, #read-manga, #ai-recommender {
     min-height: 100vh !important;
     display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    background: #000 !important;
+    padding: 80px 20px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
-  #cinema h2 {
+
+  /* Specific Hero adjustments */
+  #hero { padding: 0 !important; position: relative !important; }
+  .hero-panel-wrap { min-height: 100vh !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 100% !important; }
+
+  /* Section Headings - Orange Force */
+  h1, h2, .section-headline, .newsletter-headline, .nav-brand span:first-child {
     color: #FF6B00 !important;
     font-family: 'Bangers', cursive !important;
     text-transform: uppercase !important;
+    text-align: center !important;
   }
-  /* Remove any remaining Empire distractions */
-  .empire-mandate-banner, .magazine-link, .empire-nav .mag-btn {
+  
+  /* Force White for the second part of the logo if needed */
+  .nav-brand span:last-child { color: #fff !important; }
+
+  /* Specific Heading Sizes for consistency */
+  h2, .section-headline { font-size: clamp(3rem, 10vw, 5.5rem) !important; line-height: 1 !important; margin-bottom: 30px !important; }
+
+  /* Remove all Empire Branding / Banners / Duplicate Navs */
+  .empire-nav, .empire-mandate-banner, .magazine-link, .empire-nav .mag-btn, #empire-footer-banner, footer:nth-of-type(2) {
     display: none !important;
   }
+
+  /* Ensure background integrity */
+  section, body { background: #000 !important; }
 </style>
+
 
 </head>
 <body>
@@ -173,7 +196,7 @@
     <div class="hero-content">
       <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_1.webp" alt="Mimi Hero" style="position: absolute; right: 2%; bottom: 0; height: 95%; z-index: 5; filter: drop-shadow(0 0 30px rgba(255,107,0,0.5)); pointer-events: none;">
       <span class="hero-sfx">WHOOSH!!</span>
-      <h1 style="font-family:'Bangers', cursive; font-size: clamp(3.5rem, 10vw, 6rem); line-height: 0.85; margin-bottom: 25px; color: #fff; text-shadow: 4px 4px 0px rgba(0,0,0,0.8);">LIVE THE ANIME LIFE.</h1>
+      <h1 style="font-family:'Bangers', cursive; font-size: clamp(4rem, 12vw, 7.5rem); line-height: 0.85; margin-bottom: 25px; color: #FF6B00 !important; text-shadow: 8px 8px 0px rgba(0,0,0,0.9);">LIVE THE ANIME LIFE.</h1>
       <p class="hero-global-tagline" style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 1.5rem;line-height:1.7;letter-spacing:0.03em;">For anime dreamers everywhere. Tokyo to . London to Lagos. Wherever you are &mdash; the dream is the same.</p>
       <div class="hero-ctas">
         <a href="https://www.amazon.com/s?k=anime+merch&tag=priscadezigns-20"  class="btn-primary">SHOP MERCH</a>
@@ -218,7 +241,7 @@
   <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:60px; width: 100%;">
     <div style="flex:1; min-width:300px;">
         <span style="color:#FF6B00; font-family:'Space Mono', monospace; font-size:0.9rem; font-weight:700; letter-spacing:3px; display:block; margin-bottom:15px;">CHAPTER 02 &mdash; THE THEATER</span>
-        <h2 style="font-family:'Bangers', cursive; font-size:4rem; color:#FF6B00 !important; margin-bottom:25px; line-height:1;">DREAMING CINEMA HUB.</h2>
+        <h2 style="font-family:'Bangers', cursive; font-size:4rem; color:#FF6B00 !important; margin-bottom:25px; line-height:1;">DREAMING CINEMA.</h2>
         <p style="color:#888; font-size:1.1rem; line-height:1.7; margin-bottom:35px;">Experience the sanctuary of high-fidelity trailers. Curated for the ultimate otaku experience.</p>
         <a href="/cinema/" class="btn-primary" style="background:#FF6B00; color:#fff; padding:15px 40px; text-decoration:none; font-family:'Bangers',cursive; border-radius:4px;">ENTER THEATER</a>
     </div>
@@ -764,7 +787,7 @@
         <li><a href="/dreaming-anime/blog/">Blog</a></li>
         <li><a href="#ai-recommender">Quiz</a></li>
         <li><a href="#newsletter">About</a></li>
-        <li><a href="https://priscadezigns.org/" >Prisca Dezigns</a></li>
+        <li><a href="https://priscadezigns.org/" >Dreaming Anime</a></li>
       </ul>
     </div>
     <div>
