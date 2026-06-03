@@ -4,58 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CINEMA | DREAMING ANIME</title>
-    <link rel="icon" type="image/png" href="/logos/dreaming-anime-logo-round.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #FF6B00; --bg: #000; }
         body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; }
         nav { padding: 20px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; }
-        .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; font-family:'Bangers', cursive; font-size:1.5rem; }
-        .logo img { height:35px; border-radius:50%; }
-        .hero { height:60vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
-        .hero-img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.4; }
-        .hero-content { position:relative; z-index:10; }
-        .theater-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:30px; padding:80px 5%; }
-        .trailer-card { background:#111; border-radius:12px; overflow:hidden; border:1px solid #222; transition:0.3s; cursor:pointer; }
-        .trailer-card:hover { transform:scale(1.02); border-color:var(--primary); }
-        .thumb { width:100%; height:200px; object-fit:cover; }
+        .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--primary); font-family:'Bangers', cursive; font-size:1.5rem; }
+        .logo img { height:35px; border-radius:50%; border:1px solid var(--primary); }
+        .hero { height:40vh; display:flex; align-items:center; justify-content:center; text-align:center; background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://priscadezigns.org/assets/cinema_bg.jpg'); background-size:cover; }
+        .theater-grid { padding: 50px 5%; display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:30px; }
+        .video-card { background:#111; border-radius:12px; overflow:hidden; border:1px solid #222; }
+        .video-container { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; }
+        .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
         .card-body { padding:20px; }
-        .card-body h3 { font-family:'Bangers', cursive; font-size:1.5rem; margin-bottom:10px; }
+        .card-body h3 { font-family:'Bangers', cursive; color:var(--primary); font-size:1.5rem; margin-bottom:5px; }
     </style>
 </head>
 <body>
     <nav>
-        <a href="/" class="logo"><img src="/logos/dreaming-anime-logo-round.png"> DREAMING ANIME</a>
-        <a href="/" style="color:#888; text-decoration:none; font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px;">&larr; BACK TO HUB</a>
+        <a href="/" class="logo">
+            <img src="/logos/dreaming-anime-logo-round.png" alt="Logo">
+            DREAMING ANIME
+        </a>
+        <a href="/shop/" style="color:#fff; text-decoration:none; font-weight:700; text-transform:uppercase;">Shop</a>
     </nav>
     <section class="hero">
-        <img src="https://img.youtube.com/vi/z6_N62B6oXg/maxresdefault.jpg" class="hero-img">
-        <div class="hero-content">
-            <h1 style="font-family:'Bangers',cursive; font-size:6rem;">DREAMING CINEMA</h1>
-            <p style="font-family:'Space Mono'; color:var(--primary);">CHAPTER 02 &mdash; THE THEATER</p>
-        </div>
+        <h1 style="font-family:'Bangers',cursive; font-size:4rem;">THE THEATER</h1>
     </section>
     <div class="theater-grid">
-        <div class="trailer-card">
-            <img src="https://img.youtube.com/vi/z6_N62B6oXg/maxresdefault.jpg" class="thumb">
+        <div class="video-card">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/z6_N62B6oXg" allowfullscreen></iframe>
+            </div>
             <div class="card-body">
-                <h3>DEMON SLAYER: INFINITY CASTLE</h3>
-                <p style="color:#666; font-size:0.9rem;">Official 2026 Movie Trailer &mdash; Ufotable</p>
+                <h3>Demon Slayer: Infinity Castle</h3>
+                <p style="color:#666;">2026 Movie Leak</p>
             </div>
         </div>
-        <div class="trailer-card">
-            <img src="https://img.youtube.com/vi/z6_N62B6oXg/maxresdefault.jpg" class="thumb">
-            <div class="card-body">
-                <h3>SOLO LEVELING SEASON 2</h3>
-                <p style="color:#666; font-size:0.9rem;">Official Teaser &mdash; A-1 Pictures</p>
+        <div class="video-card">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/ByXuk9QqQmc" allowfullscreen></iframe>
             </div>
-        </div>
-        <div class="trailer-card">
-            <img src="https://img.youtube.com/vi/z6_N62B6oXg/maxresdefault.jpg" class="thumb">
             <div class="card-body">
-                <h3>BLUE LOCK: EPISODE NAGI</h3>
-                <p style="color:#666; font-size:0.9rem;">The EGOIST reveal.</p>
+                <h3>Solo Leveling Season 2</h3>
+                <p style="color:#666;">Official Teaser</p>
             </div>
         </div>
     </div>
