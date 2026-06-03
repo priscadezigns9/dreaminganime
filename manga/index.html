@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE VAULT | DREAMING ANIME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #FF6B00; --bg: #000; }
+        body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; }
+        nav { padding: 15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 1000; }
+        .logo { font-family:'Bangers'; font-size:1.8rem; color:var(--primary); text-decoration:none; }
+        .section-header { padding: 30px 5% 10px; font-family:'Bangers'; color:var(--primary); }
+        .grid { display:flex; overflow-x: auto; gap:15px; padding:20px 5% 40px; scrollbar-width: none; }
+        .grid::-webkit-scrollbar { display: none; }
+        .card { flex:0 0 180px; height:260px; background:#111; border-radius:4px; overflow:hidden; border:1px solid #222; transition:0.3s; cursor:pointer; position:relative; }
+        .card:hover { transform:translateY(-5px); border-color:var(--primary); }
+        .card img { width:100%; height:100%; object-fit:cover; }
+        .tag { position:absolute; bottom:10px; right:10px; background:var(--primary); color:#000; padding:2px 6px; border-radius:4px; font-size:.6rem; font-weight:900; }
+    </style>
+</head>
+<body>
+    <nav><a href="/" class="logo">THE MANGA VAULT</a><a href="/index.html" style="color:#fff; text-decoration:none; font-weight:700;">HOME</a></nav>
+    <div style="text-align:center; padding:60px 0; border-bottom: 1px solid #222;">
+        <h1 style="font-family:'Bangers'; font-size:4.5rem; margin:0;">Mimi's Collection</h1>
+        <p style="color:var(--primary); font-family:'Space Mono'; letter-spacing:2px;">INTERNAL MANGA REPOSITORY</p>
+    </div>
+    <div id="l"></div>
+    <script>
+        const API = "https://api.jikan.moe/v4";
+        const CATS = [
+            {n:"Trending Manga", q:"/top/manga?filter=bypopularity"},
+            {n:"Top Rated", q:"/top/manga?filter=favorite"},
+            {n:"Shonen Jump Hits", q:"/manga?producers=434"}
+        ];
+        async function init(){
+            const l=document.getElementById('l');
+            for(let c of CATS){
+                const r=await fetch(API+c.q+"&limit=15");
+                const d=await r.json();
+                if(!d || !d.data) continue;
+                const s=document.createElement('div');
+                s.innerHTML=`<div class="section-header"><h2>${c.n}</h2></div><div class="grid">${d.data.map(m=>`<div class="card" onclick="window.open('${m.url}','_blank')"><img src="${m.images.jpg.large_image_url}"><div class="tag">READ</div></div>`).join('')}</div>`;
+                l.appendChild(s);
+                await new Promise(r => setTimeout(r, 400));
+            }
+        }
+        init();
+    </script>
+</body>
+</html>
