@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DREAMING ANIME | Manga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root { 
+            --accent: #F56565; 
+            --bg: #0f1218; 
+            --panel: #1A202C; 
+            --text: #ffffff; 
+            --border: rgba(255,255,255,0.1); 
+        }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+        
+        .reader-nav { 
+            position: fixed; top: 0; width: 100%; height: 70px; 
+            background: rgba(15, 18, 24, 0.95); backdrop-filter: blur(10px); 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 0 4%; z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .brand { font-family: 'Poppins', sans-serif; font-weight: 900; color: var(--accent); text-transform: uppercase; text-decoration: none; font-size: 1.2rem; }
+        .controls { display: flex; gap: 20px; align-items: center; }
+        .btn { background: var(--panel); border: 1px solid var(--border); color: #fff; padding: 8px 15px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: var(--accent); }
+
+        .manga-container { 
+            max-width: 850px; margin: 90px auto 40px; 
+            display: flex; flex-direction: column;
+            box-shadow: 0 0 100px rgba(0,0,0,0.8);
+        }
+        .manga-page { width: 100%; display: block; border-bottom: 1px solid var(--border); }
+        
+        .chapter-list {
+            position: fixed; right: -320px; top: 0; width: 320px; height: 100vh;
+            background: var(--panel); border-left: 1px solid var(--border);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 40px 20px; z-index: 1001;
+        }
+        .chapter-list.open { right: 0; }
+        .chapter-item { padding: 15px; border-bottom: 1px solid var(--border); cursor: pointer; transition: 0.2s; border-radius: 8px; }
+        .chapter-item:hover { background: rgba(245, 101, 101, 0.1); color: var(--accent); }
+
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; z-index: 1000; }
+        .overlay.active { display: block; }
+    </style>
+
+<style>
+    .nav-logo img, .footer-logo img, img[src*="logo"], .logo img { border-radius: 50% !important; object-fit: cover; }
+</style>
+</head>
+<body>
+    <div class="reader-nav">
+        <a href="../index.html" class="brand">Dreaming Anime</a>
+        <div class="controls">
+            <span id="page-count">Ch. 1 / The Path</span>
+            <button class="btn" onclick="toggleChapters()"><i class="fas fa-bars"></i> Chapters</button>
+            <button class="btn" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleChapters()"></div>
+    
+    <div class="chapter-list" id="chapters">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+            <h2 style="font-family:'Poppins';">Library</h2>
+            <i class="fas fa-times" onclick="toggleChapters()" style="cursor:pointer;"></i>
+        </div>
+        <div class="chapter-item">Chapter 01: The Path of Gold</div>
+        <div class="chapter-item" style="opacity:0.4;">Chapter 02: (Coming Soon)</div>
+        <div class="chapter-item" style="opacity:0.4;">Chapter 03: (Coming Soon)</div>
+    </div>
+
+    <main class="manga-container">
+        <img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?w=1200&q=90" class="manga-page" alt="Manga Page 1">
+        <img src="https://images.unsplash.com/photo-1541562232579-512a21360020?w=1200&q=90" class="manga-page" alt="Manga Page 2">
+        <img src="https://images.unsplash.com/photo-1560972550-aba3456b5564?w=1200&q=90" class="manga-page" alt="Manga Page 3">
+    </main>
+
+    <footer style="text-align:center; padding:60px 20px; color:rgba(255,255,255,0.2); font-size:0.75rem; text-transform:uppercase; letter-spacing:3px;">
+        Dreaming Anime • Sovereign Reader v1.0
+    </footer>
+
+    <script>
+        function toggleChapters() {
+            document.getElementById('chapters').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
+<img src="https://priscadezigns.org/ateliagaming/assets/mimi/mimi_reading_manga.webp" style="position:fixed; bottom:20px; right:20px; width:150px; z-index:10000; pointer-events:none;" alt="Mimi"></body>
+</html>
