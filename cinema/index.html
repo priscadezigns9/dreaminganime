@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CINEMA | DREAMING ANIME</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #FF6B00; --bg: #000; }
-        body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; }
-        nav { padding: 20px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; }
+        body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; overflow-x: hidden; }
+        nav { padding: 20px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 100; backdrop-filter: blur(10px); }
         .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--primary); font-family:'Bangers', cursive; font-size:1.5rem; }
         .logo img { height:35px; border-radius:50%; border:1px solid var(--primary); }
         .hero { height:40vh; display:flex; align-items:center; justify-content:center; text-align:center; background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://priscadezigns.org/assets/cinema_bg.jpg'); background-size:cover; }
         .theater-grid { padding: 50px 5%; display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:30px; }
-        .video-card { background:#111; border-radius:12px; overflow:hidden; border:1px solid #222; }
+        .video-card { background:#111; border-radius:12px; overflow:hidden; border:1px solid #222; transition: 0.3s; }
+        .video-card:hover { transform: translateY(-5px); border-color: var(--primary); }
         .video-container { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; }
         .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
         .card-body { padding:20px; }
         .card-body h3 { font-family:'Bangers', cursive; color:var(--primary); font-size:1.5rem; margin-bottom:5px; }
+        .live-tag { font-family: 'Space Mono'; font-size: 0.7rem; background: var(--primary); color: #000; padding: 2px 8px; border-radius: 4px; font-weight: 700; margin-bottom: 10px; display: inline-block; }
     </style>
 </head>
 <body>
@@ -32,25 +34,53 @@
     <section class="hero">
         <h1 style="font-family:'Bangers',cursive; font-size:4rem;">THE THEATER</h1>
     </section>
-    <div class="theater-grid">
+    
+    <div id="live-cinema" class="theater-grid">
+        <!-- Manual Featured Trailers -->
         <div class="video-card">
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/z6_N62B6oXg" allowfullscreen></iframe>
             </div>
             <div class="card-body">
+                <span class="live-tag">FEATURED</span>
                 <h3>Demon Slayer: Infinity Castle</h3>
                 <p style="color:#666;">2026 Movie Leak</p>
             </div>
         </div>
-        <div class="video-card">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/ByXuk9QqQmc" allowfullscreen></iframe>
-            </div>
-            <div class="card-body">
-                <h3>Solo Leveling Season 2</h3>
-                <p style="color:#666;">Official Teaser</p>
-            </div>
-        </div>
+        
+        <!-- API Data will load here -->
     </div>
+
+    <script>
+        async function loadLiveCinema() {
+            const grid = document.getElementById('live-cinema');
+            try {
+                // Fetching latest anime with trailers from Jikan API
+                const res = await fetch('https://api.jikan.moe/v4/seasons/now?limit=12');
+                const data = await res.json();
+                
+                data.data.forEach(anime => {
+                    if (anime.trailer && anime.trailer.youtube_id) {
+                        const card = document.createElement('div');
+                        card.className = 'video-card';
+                        card.innerHTML = `
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/${anime.trailer.youtube_id}" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <span class="live-tag">LIVE FEED</span>
+                                <h3>${anime.title}</h3>
+                                <p style="color:#666;">${anime.type} &mdash; ${anime.status}</p>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    }
+                });
+            } catch (e) {
+                console.error("Cinema API Sync Error:", e);
+            }
+        }
+        window.onload = loadLiveCinema;
+    </script>
 </body>
 </html>
