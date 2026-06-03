@@ -41,10 +41,15 @@
                 const d=await r.json();
                 if(!d || !d.data) continue;
                 const s=document.createElement('div');
-                s.innerHTML=`<div class="section-header"><h2>${c.n}</h2></div><div class="grid">${d.data.map(m=>`<div class="card" onclick="window.open('${m.url}','_blank')"><img src="${m.images.jpg.large_image_url}"><div class="tag">READ</div></div>`).join('')}</div>`;
+                s.innerHTML=`<div class="section-header"><h2>${c.n}</h2></div><div class="grid">${d.data.map(m=>`<div class="card" onclick="read('${m.title.replace(/'/g,"")}')"><img src="${m.images.jpg.large_image_url}"><div class="tag">READ</div></div>`).join('')}</div>`;
                 l.appendChild(s);
                 await new Promise(r => setTimeout(r, 400));
             }
+        }
+        function read(t){
+            // Use MangaDex search as a direct reading portal
+            const url = `https://mangadex.org/search?q=${encodeURIComponent(t)}`;
+            window.open(url, '_blank');
         }
         init();
     </script>
