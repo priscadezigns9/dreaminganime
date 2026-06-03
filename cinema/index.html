@@ -160,21 +160,8 @@
             loadP('vidsrc_to');
         }
 
-        
         function loadP(s,btn){
             if(btn){document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-            let u;
-            // Best available anime embed servers
-            if(s==='vidsrc_to') u = `https://vidsrc.to/embed/anime/${curId}/${curEp}`;
-            else if(s==='vidsrc_me') u = `https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
-            else if(s==='embed_su') u = `https://embed.su/embed/anime/${curId}/${curEp}`;
-            else u = `https://vidsrc.xyz/embed/anime?malid=${curId}&episode=${curEp}`;
-            
-            document.getElementById('pf').innerHTML=`
-                <div class="loader" id="player-loader" style="position:absolute; z-index: 1;"></div>
-                <iframe src="${u}" allowfullscreen referrerpolicy="no-referrer" style="z-index: 2;" onload="document.getElementById('player-loader').style.display='none'"></iframe>`;
-        }
-
             let u;
             // Best available anime embed servers using MAL ID
             if(s==='vidsrc_to') u = `https://vidsrc.to/embed/anime/${curId}/${curEp}`;
@@ -212,3 +199,4 @@
     </script>
 </body>
 </html>
+
