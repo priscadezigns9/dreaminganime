@@ -326,24 +326,26 @@ nav {
 /* ===== TICKER ===== */
 .ticker {
   background: #0A0A0A;
-  padding: 6px 0;
+  padding: 3px 0;
   overflow: hidden;
   width: 100%;
   position: relative;
+  border-bottom: 1px solid rgba(255,107,0,0.3);
 }
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  animation: ticker-scroll 20s linear infinite;
+  animation: ticker-scroll 35s linear infinite;
   width: max-content;
 }
 .ticker-track span {
   font-family: 'Space Mono', monospace;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 700;
   color: #FFFFFF;
-  letter-spacing: 0.08em;
-  padding: 0 12px;
+  letter-spacing: 0.1em;
+  padding: 0 20px;
+  opacity: 0.8;
 }
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
@@ -443,7 +445,7 @@ nav {
 
 /* ===== GENRES — PANEL 3 ===== */
 #genres {
-  background: #f5f5f5;
+  background: #FFFFFF;
   padding: 80px 0;
   overflow: hidden;
 }
@@ -451,9 +453,9 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px;
-  border: var(--border);
+  border: 1px solid #EEEEEE;
   transform: rotate(-0.5deg);
-  background: #f5f5f5;
+  background: #FFFFFF;
 }
 .genres-grid {
   display: grid;
@@ -462,7 +464,7 @@ nav {
 }
 .genre-card {
   background: #0A0A0A;
-  border: 3px solid #0A0A0A;
+  border: 4px solid #0A0A0A;
   padding: 48px 24px;
   display: flex;
   align-items: center;
@@ -471,6 +473,11 @@ nav {
   position: relative;
   overflow: hidden;
   min-height: 160px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.genre-card:hover {
+  transform: scale(1.02) rotate(1deg);
 }
 .genre-card::after {
   content: '';
