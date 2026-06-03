@@ -143,7 +143,7 @@
 <section id="hero">
   <div class="hero-panel-wrap panel-slam visible">
     <div class="hero-speedlines"></div>
-    <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_v2.jpg" alt="Mimi" style="position: absolute; right: 2%; bottom: 0; height: 95%; z-index: 5; filter: drop-shadow(0 0 30px rgba(255,107,0,0.5)); pointer-events: none;">
+    <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_v3.jpg" alt="Mimi" style="position: absolute; right: 2%; bottom: 0; height: 95%; z-index: 5; filter: drop-shadow(0 0 30px rgba(255,107,0,0.5)); pointer-events: none;">
     <div class="hero-content" style="position: relative; z-index: 10;">
       <span class="hero-sfx">WHOOSH!!</span>
       <h1 style="margin:0;padding:0;display:contents;"><span class="hero-headline-line1">LIVE THE</span>
@@ -221,10 +221,60 @@
   </div>
 </section>
 
-<!-- ===== GENRES — PANEL 3 ===== -->
+<!-- ===== LIVE HUB — CHAPTER 03 ===== -->
+<section id="live-hub" class="section-padded" style="background:#000; border-top:1px solid #111; padding: 40px 20px;">
+  <div class="live-hub-inner panel-slam" style="max-width:1200px; margin:0 auto;">
+    <div style="display:flex; align-items:center; gap:15px; margin-bottom:30px;">
+      <div style="width:12px; height:12px; background:#FF0000; border-radius:50%; animation: pulse 1.5s infinite;"></div>
+      <span style="color:#fff; font-family:'Space Mono', monospace; font-size:1rem; font-weight:700; letter-spacing:2px;">CHAPTER 03 &mdash; LIVE HUB</span>
+    </div>
+    <h2 style="font-family:'Bangers', cursive; font-size:3rem; color:#fff; margin-bottom:40px;">THE REAL-TIME SIGNAL.</h2>
+    <div id="live-hub-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+      <!-- Populated by JS -->
+      <p style="color:#444;">Connecting to Tokyo satellites...</p>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+</style>
+
+<script>
+async function fetchAnimeNews() {
+  const hubContainer = document.getElementById('live-hub-grid');
+  try {
+    const response = await fetch('https://api.jikan.moe/v4/seasons/now?limit=6');
+    const data = await response.json();
+    hubContainer.innerHTML = '';
+    data.data.forEach(anime => {
+      const card = `
+        <div class="news-card" style="background:#111; border:1px solid #222; border-radius:12px; padding:15px; position:relative; overflow:hidden; transition: 0.3s;" onmouseover="this.style.borderColor='#FF6B00'" onmouseout="this.style.borderColor='#222'">
+          <img src="${anime.images.jpg.image_url}" style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
+          <h4 style="color:#fff; font-size:1rem; margin-bottom:5px; font-family:'Space Grotesk', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${anime.title}</h4>
+          <p style="color:#FF6B00; font-size:0.75rem; font-weight:700; letter-spacing:1px;">ON AIR</p>
+          <p style="color:#888; font-size:0.7rem; line-height:1.4;">Score: ${anime.score || 'N/A'} | ${anime.episodes || '?'} EPS</p>
+        </div>
+      `;
+      hubContainer.innerHTML += card;
+    });
+  } catch (e) {
+    hubContainer.innerHTML = '<p style="color:#888;">Live hub currently syncing...</p>';
+  }
+}
+// Run on load and every 5 minutes
+window.addEventListener('DOMContentLoaded', fetchAnimeNews);
+setInterval(fetchAnimeNews, 300000);
+</script>
+
+<!-- ===== EXPLORE — CHAPTER 04 ===== -->
 <section id="genres" class="section-padded">
   <div class="genres-inner panel-slam from-right">
-    <span class="section-label">CHAPTER 03 — EXPLORE</span>
+    <span class="section-label">CHAPTER 04 — EXPLORE</span>
     <h2 class="section-headline">PICK YOUR GENRE.</h2>
     <div class="genres-grid">
       <a href="/genres/action.html"  style="text-decoration:none;"><div class="genre-card"><span class="genre-name">ACTION</span></div></a>
@@ -372,7 +422,7 @@
 <!-- ===== BLOG — PANEL 4 ===== -->
 <section id="blog" class="section-padded" style="padding: 2.5rem 2rem;">
   <div class="blog-inner panel-slam">
-    <span class="section-label">CHAPTER 04 — READ</span>
+    <span class="section-label">CHAPTER 05 — READ</span>
     <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_1.webp" alt="Mimi" style="height: 120px; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(255,107,0,0.5));">
     <h2 class="section-headline">THE LATEST PANELS.</h2>
     <div class="blog-spread">
@@ -401,8 +451,8 @@
   </div>
 </section>
 
-<!-- ===== QUIZ CTA — PANEL 5 ===== -->
-<section id="quiz-cta" class="panel-slam from-right">
+<!-- ===== QUIZ CTA — PANEL 6 ===== -->
+<section id="quiz-cta" class="panel-slam from-right" style="margin-top: -40px; margin-bottom: -40px;">
   <div class="quiz-speedlines"></div>
   <div class="quiz-content">
     <span class="quiz-line1">WHICH</span>
@@ -412,8 +462,8 @@
   </div>
 </section>
 
-<!-- ===== NEWSLETTER — PANEL 6 ===== -->
-<section id="newsletter" class="section-padded" style="padding: 2.5rem 2rem;">
+<!-- ===== NEWSLETTER — PANEL 7 ===== -->
+<section id="newsletter" class="section-padded" style="padding: 1.5rem 2rem;">
   <div class="newsletter-inner panel-slam">
     <h2 class="newsletter-headline">JOIN THE CREW.</h2>
     <p class="newsletter-sub">Weekly drops. New series. Exclusive deals.<br>No spam — just anime.</p>
@@ -516,7 +566,7 @@
   <div class="theater-background-glow" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;background:radial-gradient(circle at center, rgba(255,107,0,0.05) 0%, transparent 70%);pointer-events:none;"></div>
   
   <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2;">
-    <p style="color:#E85D04;font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 06 &mdash; THE THEATER</p>
+    <p style="color:#E85D04;font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 07 &mdash; THE THEATER</p>
     <h2 style="font-family:'Bangers',cursive;font-size:3.5rem;color:#fff;text-align:center;margin-bottom:0.5rem;">DREAMING <span style="color:#FF6B00;">CINEMA.</span></h2>
     <p style="color:#aaa;font-family:'Inter',sans-serif;text-align:center;margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto;">Experience the dream. High-fidelity trailers, exclusive clips, and trending arcs &mdash; all in one immersive theater.</p>
     
@@ -614,7 +664,7 @@ function updateTheater(id, title, desc, element) {
 <!-- ===== READ MANGA ===== -->
 <section id="read-manga" style="background:#111;padding:5rem 2rem;border-top:1px solid #222;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 07 &mdash; ARCHIVE</p>
+    <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 08 &mdash; ARCHIVE</p>
     <h2 style="font-family:'Bangers',cursive;font-size:3rem;color:#fff;text-align:center;margin-bottom:0.5rem;">THE VAULT.</h2>
     <p style="color:#aaa;font-family:'Inter',sans-serif;text-align:center;margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto;">High-fidelity manga archival system. Synced via Supabase for the ultimate dreaming experience.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
@@ -655,7 +705,7 @@ function updateTheater(id, title, desc, element) {
 <!-- ===== ANIME DREAMERS COMMUNITY ===== -->
 <section id="community" style="background:#0A0A0A;padding:5rem 2rem;border-top:1px solid #222;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 08 &mdash; BELONG</p>
+    <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 09 &mdash; BELONG</p>
     <h2 style="font-family:'Bangers',cursive;font-size:3rem;color:#fff;text-align:center;margin-bottom:0.5rem;">YOU'RE NOT ALONE.</h2>
     <p style="color:#aaa;font-family:'Inter',sans-serif;text-align:center;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;">Anime is not just content. It's a language. A way of seeing the world. This is where Anime Dreamers find each other.</p>
     <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
@@ -686,7 +736,7 @@ function updateTheater(id, title, desc, element) {
 <!-- ===== FEATURED YOUTUBE CHANNELS ===== -->
 <section id="youtube-anime" style="background:#111;padding:5rem 2rem;border-top:1px solid #222;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 09 &mdash; DISCOVER</p>
+    <p style="color:#E85D04;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem;text-align:center;">CHAPTER 10 &mdash; DISCOVER</p>
     <h2 style="font-family:'Bangers',cursive;font-size:3rem;color:#fff;text-align:center;margin-bottom:0.5rem;">THE CHANNELS ANIME DREAMERS WATCH.</h2>
     <p style="color:#aaa;font-family:'Inter',sans-serif;text-align:center;margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto;">Reviews, theories, rankings, and news from the top anime content creators on YouTube.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
