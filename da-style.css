@@ -896,160 +896,144 @@ footer {
 .kanji-5 { top: 40%; left: 1%; font-size: 6rem; animation: floatKanji2 10s ease-in-out infinite; animation-delay: -1s; }
 .kanji-6 { top: 30%; right: 2%; font-size: 9rem; animation: floatKanji3 12s ease-in-out infinite; animation-delay: -3s; }
 
-/* Dark mode override */
+
+/* ===== COMPREHENSIVE DARK MODE (GOLD STANDARD) ===== */
 body.dark-mode {
-  background: #0A0A0A !important;
+  background: #000000 !important;
   color: #FFFFFF !important;
 }
-body.dark-mode nav { background: rgba(10,10,10,0.97) !important; }
-body.dark-mode .card, body.dark-mode .product-card, body.dark-mode section { background: #111 !important; color: #fff !important; }
 
-/* ===== PRODUCT SHOP SECTION ===== */
-#product-shop {
-  background: #FFFFFF;
-  padding: 80px 0;
-}
-body.dark-mode #product-shop { background: #0A0A0A !important; }
-
-.shop-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 60px;
-  border: var(--border);
-  background: #FFFFFF;
-  transform: rotate(-0.2deg);
-}
-body.dark-mode .shop-inner { background: #111 !important; border-color: #333 !important; }
-
-/* filter tabs */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-.filter-btn {
-  font-family: 'Bangers', cursive;
-  font-size: 16px;
-  letter-spacing: 0.06em;
-  border: 2px solid #0A0A0A;
-  background: transparent;
-  color: #0A0A0A;
-  padding: 8px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-body.dark-mode .filter-btn { border-color: #555; color: #eee; }
-.filter-btn:hover,
-.filter-btn.active {
-  background: #FF6B00;
-  color: #fff;
-  border-color: #FF6B00;
+body.dark-mode nav {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-bottom: 1px solid #222 !important;
 }
 
-/* product grid */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 24px;
+body.dark-mode .nav-brand,
+body.dark-mode .nav-title,
+body.dark-mode .nav-links a {
+  color: #FFFFFF !important;
 }
 
-/* product card */
-.product-card {
-  border: 2px solid #0A0A0A;
-  background: #fff;
-  overflow: hidden;
-  border-radius: 4px;
-  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.3s;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-}
-body.dark-mode .product-card { background: #1a1a1a !important; border-color: #333 !important; }
-.product-card:hover {
-  transform: translateY(-6px);
-  border-color: #FF6B00;
-  box-shadow: 0 10px 30px rgba(255,107,0,0.25), 3px 3px 0 #0A0A0A;
-}
-body.dark-mode .product-card:hover { box-shadow: 0 10px 30px rgba(255,107,0,0.25), 3px 3px 0 #FF6B00; }
-
-/* image wrapper */
-.product-img-wrap {
-  width: 100%;
-  aspect-ratio: 1;
-  position: relative;
-  overflow: hidden;
-  background: #f0f0f0;
-}
-body.dark-mode .product-img-wrap { background: #222; }
-.product-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.product-card:hover .product-img-wrap img { transform: scale(1.05); }
-.img-fallback {
-  display: none;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #1A1A1A, #FF8C42);
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
+body.dark-mode .hamburger span {
+  background: #FFFFFF !important;
 }
 
-/* info */
-.product-info {
-  padding: 14px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
-.product-name {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: #0A0A0A;
-  line-height: 1.3;
-}
-body.dark-mode .product-name { color: #eee; }
-.product-price {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #FF6B00;
-}
-.product-cta {
-  margin-top: auto;
-  padding-top: 10px;
-  font-family: 'Bangers', cursive;
-  font-size: 14px;
-  letter-spacing: 0.05em;
-  color: #0A0A0A;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
-  display: inline-block;
-}
-body.dark-mode .product-cta { color: #eee; }
-.product-cta:hover { color: #FF6B00; border-bottom-color: #FF6B00; }
-
-/* hidden cards */
-.product-card[style*="display: none"],
-.product-card.hidden { display: none !important; }
-
-@media (max-width: 768px) {
-  .shop-inner { padding: 28px 16px; }
-  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .filter-bar { gap: 8px; }
-  .filter-btn { font-size: 13px; padding: 6px 14px; }
-}
-@media (max-width: 420px) {
-  .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+/* Sections & Panels */
+body.dark-mode section,
+body.dark-mode #hero,
+body.dark-mode #merch,
+body.dark-mode #genres,
+body.dark-mode #blog,
+body.dark-mode #newsletter,
+body.dark-mode #community,
+body.dark-mode #youtube-anime,
+body.dark-mode #clip-of-the-week,
+body.dark-mode #latest-videos {
+  background: #000000 !important;
+  border-color: #222 !important;
 }
 
+body.dark-mode .hero-panel-wrap,
+body.dark-mode .merch-inner,
+body.dark-mode .genres-inner,
+body.dark-mode .blog-inner,
+body.dark-mode .newsletter-inner,
+body.dark-mode .shop-inner {
+  background: #0A0A0A !important;
+  border-color: #222 !important;
+}
 
+body.dark-mode .section-headline,
+body.dark-mode .hero-headline-line1,
+body.dark-mode .hero-headline-line3,
+body.dark-mode .newsletter-headline,
+body.dark-mode .blog-card-title,
+body.dark-mode .merch-card-series,
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+  color: #FFFFFF !important;
+}
+
+body.dark-mode .hero-global-tagline,
+body.dark-mode .blog-card-excerpt,
+body.dark-mode .newsletter-sub,
+body.dark-mode .footer-tagline,
+body.dark-mode p,
+body.dark-mode .blog-card-excerpt {
+  color: #AAAAAA !important;
+}
+
+/* Cards & Interactables */
+body.dark-mode .merch-card,
+body.dark-mode .blog-card,
+body.dark-mode .product-card,
+body.dark-mode .card,
+body.dark-mode .manga-card {
+  background: #111111 !important;
+  border-color: #222 !important;
+}
+
+body.dark-mode .merch-card:hover,
+body.dark-mode .blog-card:hover,
+body.dark-mode .product-card:hover,
+body.dark-mode .manga-card:hover {
+  border-color: #FF6B00 !important;
+  box-shadow: 0 10px 30px rgba(255,107,0,0.2) !important;
+}
+
+/* Form Inputs */
+body.dark-mode .newsletter-input {
+  background: #111111 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #222 !important;
+}
+
+body.dark-mode .newsletter-form {
+  border-color: #222 !important;
+}
+
+/* Buttons */
+body.dark-mode .btn-secondary {
+  background: #111111 !important;
+  color: #FFFFFF !important;
+  border-color: #222 !important;
+}
+
+body.dark-mode .btn-secondary:hover {
+  background: #FF6B00 !important;
+  border-color: #FF6B00 !important;
+}
+
+/* Footer */
+body.dark-mode footer {
+  background: #000000 !important;
+  border-top: 1px solid #222 !important;
+}
+
+/* Float Stack */
+body.dark-mode .float-translate {
+  background: #111111 !important;
+  color: #FFFFFF !important;
+  border-color: #222 !important;
+}
+
+/* Kanji visibility */
+body.dark-mode .kanji {
+  opacity: 0.1 !important;
+}
+
+/* Specific Fixes for "everything visible" */
+body.dark-mode .nav-logo {
+  border-color: #222 !important;
+}
+
+body.dark-mode .hero-speedlines {
+  opacity: 0.5;
+}
+
+body.dark-mode .hero-content span {
+    color: #fff !important;
+}
+
+body.dark-mode .hero-content .hero-headline-anime {
+    color: #FF6B00 !important;
+}
