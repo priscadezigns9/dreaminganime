@@ -1,183 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Open Graph / SEO -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dreaminganime.com/cinema/">
-    <meta property="og:title" content="Dreaming Cinema | The Seasonal Sanctuary">
-    <meta property="og:description" content="Experience the dream. High-fidelity trailers, exclusive clips, and trending arcs in one immersive theater.">
-    
-    <!-- FONTAWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dreaming Cinema — High-Fidelity Theater Experience</title>
     <link rel="icon" type="image/png" href="https://priscadezigns.org/logos/dreaming-anime-logo.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/da-style.css">
-
+    <link rel="stylesheet" href="/da-style.css?v=1.2">
     <style>
-        .nav-logo img, .footer-logo img, img[src*="logo"], .logo img { border-radius: 50% !important; object-fit: cover; }
-        
-        .theater-item {
-            display: flex;
-            gap: 12px;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #222;
-            transition: 0.3s;
-            margin-bottom: 15px;
-        }
-        .theater-item:hover {
-            border-color: #FF6B00;
-            background: rgba(255, 107, 0, 0.05);
-        }
-        .theater-item.active {
-            background: rgba(255, 107, 0, 0.1);
-            border-color: #FF6B00;
-        }
-        .theater-thumb {
-            width: 100px;
-            height: 60px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 4px;
-            flex-shrink: 0;
-        }
+        body { background: #000; color: #fff; }
+        .theater-main { max-width: 1200px; margin: 40px auto; padding: 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        .theater-player { background: #111; border-radius: 20px; overflow: hidden; position: relative; padding-top: 56.25%; border: 1px solid #222; }
+        .theater-playlist { background: #0A0A0A; border: 1px solid #222; border-radius: 20px; padding: 20px; height: 600px; overflow-y: auto; }
+        .playlist-item { display: flex; gap: 12px; padding: 10px; border-radius: 10px; cursor: pointer; transition: 0.3s; margin-bottom: 10px; border: 1px solid transparent; }
+        .playlist-item:hover { background: #111; border-color: #FF6B00; }
+        .playlist-item img { width: 100px; height: 60px; object-fit: cover; border-radius: 6px; }
     </style>
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
-<nav>
-  <a href="/" class="nav-brand" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-    <img src="https://priscadezigns.org/logos/dreaming-anime-logo.png" alt="Dreaming Anime Logo" style="height: 45px; width: 45px; object-fit: cover; border-radius: 50%;">
-    <div>
-      <span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#FF6B00;">DREAMING</span><span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#0A0A0A;margin-left:6px;">ANIME</span>
-    </div>
+<nav class="empire-nav" style="background: rgba(0,0,0,0.9); border-bottom: 1px solid #222; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;">
+  <a href="/" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration:none; color:#fff;">
+    <img src="https://priscadezigns.org/logos/dreaming-anime-logo.png" alt="Logo" style="height: 32px; width: 32px; border-radius: 50%;">
+    PRISCA <span style="color:#FF6B00;">DEZIGNS</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="/#genres">GENRES</a></li>
-    <li><a href="/cinema/" class="active">🎬 CINEMA</a></li>
-    <li><a href="/manga/">THE VAULT</a></li>
-    <li><a href="/#events">EVENTS</a></li>
-    <li><a href="/shop/">SHOP</a></li>
-    <li><a href="/#newsletter">NEWSLETTER</a></li>
-  </ul>
+  <div class="nav-links">
+    <a href="/" style="color:#fff; text-decoration:none; margin-left:20px; font-size:0.8rem;">HOME</a>
+    <a href="/manga/" style="color:#fff; text-decoration:none; margin-left:20px; font-size:0.8rem;">THE VAULT</a>
+  </div>
 </nav>
 
-<!-- ===== CINEMA HERO ===== -->
-<section id="watch-anime" style="background:#050505; padding:120px 6% 80px; position:relative; overflow:hidden;">
-  <div class="theater-background-glow" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; height:100%; background:radial-gradient(circle at center, rgba(255,107,0,0.05) 0%, transparent 70%); pointer-events:none;"></div>
-  
-  <div style="max-width:1200px; margin:0 auto; position:relative; z-index:2;">
-    <p style="color:#E85D04; font-family:'Space Mono',monospace; font-size:0.8rem; letter-spacing:4px; text-transform:uppercase; margin-bottom:0.5rem; text-align:center;">CHAPTER 06 &mdash; THE THEATER</p>
-    <h2 style="font-family:'Bangers',cursive; font-size:3.5rem; color:#fff; text-align:center; margin-bottom:0.5rem;">DREAMING <span style="color:#FF6B00;">CINEMA.</span></h2>
-    <p style="color:#aaa; font-family:'Inter',sans-serif; text-align:center; margin-bottom:4rem; max-width:600px; margin-left:auto; margin-right:auto;">Experience the dream. High-fidelity trailers, exclusive clips, and trending arcs &mdash; all in one immersive theater.</p>
-    <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_v2.jpg" alt="Mimi Cinema" style="width:100px; height:auto; display:block; margin: -20px auto 40px; filter: drop-shadow(0 0 20px rgba(255,107,0,0.4));">
-    
-    <div class="theater-main-container" style="display:grid; grid-template-columns: 1fr 350px; gap:30px; background:#000; border:1px solid #111; border-radius:24px; padding:20px; box-shadow:0 20px 50px rgba(0,0,0,0.8);">
-      
-      <!-- Main Screen -->
-      <div class="theater-screen-area">
-        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#111;">
-          <iframe id="theater-player" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/z6_N62B6oXg?autoplay=0&rel=0&modestbranding=1" title="Dreaming Anime Theater" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div style="margin-top:20px; padding:0 10px;">
-          <h3 id="theater-title" style="color:#fff; font-family:'Bangers',cursive; font-size:1.8rem; margin-bottom:10px; letter-spacing:1px;">SOLO LEVELING: ARISE &mdash; SEASON 2 OFFICIAL TRAILER</h3>
-          <p id="theater-desc" style="color:#888; font-family:'Inter',sans-serif; line-height:1.6; font-size:0.95rem;">Witness the next chapter of Sung Jinwoo's evolution. High-fidelity combat, breathtaking animation, and the shadows that follow.</p>
-        </div>
-      </div>
-
-      <!-- Lobby (Playlist) -->
-      <div class="theater-lobby" style="border-left:1px solid #222; padding-left:20px;">
-        <h4 style="color:#FF6B00; font-family:'Space Mono',monospace; font-size:0.9rem; margin-bottom:20px; letter-spacing:2px; border-bottom:1px solid #222; padding-bottom:10px;">NOW SHOWING</h4>
-        
-        <div class="lobby-track" style="display:flex; flex-direction:column; gap:0px; max-height:500px; overflow-y:auto; padding-right:10px;">
-          
-          <div class="theater-item active" onclick="updateTheater('z6_N62B6oXg', 'SOLO LEVELING: SEASON 2', 'Witness the next chapter of Sung Jinwoo\'s evolution. High-fidelity combat and the rise of the Shadow Monarch.', this)">
-            <div class="theater-thumb" style="background-image:url('https://img.youtube.com/vi/z6_N62B6oXg/0.jpg')"></div>
-            <div>
-              <p style="color:#fff; font-weight:700; font-size:0.85rem; margin-bottom:4px; line-height:1.2;">Solo Leveling S2</p>
-              <p style="color:#888; font-size:0.75rem;">Official Trailer</p>
-            </div>
-          </div>
-
-          <div class="theater-item" onclick="updateTheater('D8ZRE_6mU8s', 'DEMON SLAYER: INFINITY CASTLE', 'The final battle begins. The Hashira vs. The Upper Moons in the Infinity Castle.', this)">
-            <div class="theater-thumb" style="background-image:url('https://img.youtube.com/vi/D8ZRE_6mU8s/0.jpg')"></div>
-            <div>
-              <p style="color:#fff; font-weight:700; font-size:0.85rem; margin-bottom:4px; line-height:1.2;">Infinity Castle Arc</p>
-              <p style="color:#888; font-size:0.75rem;">Teaser Trailer</p>
-            </div>
-          </div>
-
-          <div class="theater-item" onclick="updateTheater('8YpZ3r5-Dcw', 'ONE PIECE: EGGHEAD ARC', 'The Future Island. The Straw Hats encounter the genius Dr. Vegapunk and the dark secrets of the World Government.', this)">
-            <div class="theater-thumb" style="background-image:url('https://img.youtube.com/vi/8YpZ3r5-Dcw/0.jpg')"></div>
-            <div>
-              <p style="color:#fff; font-weight:700; font-size:0.85rem; margin-bottom:4px; line-height:1.2;">One Piece: Egghead</p>
-              <p style="color:#888; font-size:0.75rem;">New Arc Reveal</p>
-            </div>
-          </div>
-
-          <div class="theater-item" onclick="updateTheater('m_XpI2H7t0k', 'KAIJU NO. 8', 'In a world plagued by monsters, Kafka Hibino discovers the power to fight back from the inside.', this)">
-            <div class="theater-thumb" style="background-image:url('https://img.youtube.com/vi/m_XpI2H7t0k/0.jpg')"></div>
-            <div>
-              <p style="color:#fff; font-weight:700; font-size:0.85rem; margin-bottom:4px; line-height:1.2;">Kaiju No. 8</p>
-              <p style="color:#888; font-size:0.75rem;">Season 1 Highlight</p>
-            </div>
-          </div>
-
-          <div class="theater-item" onclick="updateTheater('gAAs863B2_Q', 'WIND BREAKER', 'Haruka Sakura wants nothing to do with weaklings—he\'s only interested in the strongest of the strong.', this)">
-            <div class="theater-thumb" style="background-image:url('https://img.youtube.com/vi/gAAs863B2_Q/0.jpg')"></div>
-            <div>
-              <p style="color:#fff; font-weight:700; font-size:0.85rem; margin-bottom:4px; line-height:1.2;">Wind Breaker</p>
-              <p style="color:#888; font-size:0.75rem;">Official PV</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
+<section style="padding: 60px 20px; text-align:center;">
+    <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_1.webp" alt="Mimi Cinema" style="width:100px; height:auto; margin-bottom:20px; filter: drop-shadow(0 0 20px rgba(255,107,0,0.4));">
+    <h1 style="font-family:'Bangers', cursive; font-size:4rem; color:#fff; margin-bottom:10px;">DREAMING CINEMA.</h1>
+    <p style="color:#888;">The high-fidelity theater sanctuary.</p>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<footer style="background:#050505; padding:80px 6%; border-top:1px solid #111;">
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:40px; max-width:1200px; margin:0 auto;">
-        <div>
-            <img src="https://priscadezigns.org/logos/dreaming-anime-logo.png" alt="Logo" style="height:60px; width:60px; border-radius:50%; margin-bottom:20px;">
-            <p style="color:#555; font-size:0.9rem; line-height:1.6;">The definitive source for anime news, trends, and exclusive drops. Part of the Prisca Dezigns Empire.</p>
+<div class="theater-main">
+    <div class="theater-player">
+        <iframe id="main-player" style="position:absolute; top:0; left:0; width:100%; height:100%;" src="https://www.youtube.com/embed/z6_N62B6oXg" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="theater-playlist">
+        <div class="playlist-item" onclick="document.getElementById('main-player').src='https://www.youtube.com/embed/z6_N62B6oXg'">
+            <img src="https://img.youtube.com/vi/z6_N62B6oXg/0.jpg">
+            <div><p style="font-size:0.85rem; font-weight:700;">SOLO LEVELING S2</p><p style="font-size:0.7rem; color:#666;">Official Trailer</p></div>
         </div>
-        <div>
-            <h4 style="color:#fff; font-family:'Space Mono', monospace; margin-bottom:20px; font-size:0.8rem; letter-spacing:2px;">DESTINATIONS</h4>
-            <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:12px;">
-                <li><a href="/" style="color:#888; text-decoration:none; font-size:0.9rem;">Home</a></li>
-                <li><a href="/cinema/" style="color:#FF6B00; text-decoration:none; font-size:0.9rem;">Cinema</a></li>
-                <li><a href="/manga/" style="color:#888; text-decoration:none; font-size:0.9rem;">The Vault</a></li>
-            </ul>
+        <div class="playlist-item" onclick="document.getElementById('main-player').src='https://www.youtube.com/embed/D8ZRE_6mU8s'">
+            <img src="https://img.youtube.com/vi/D8ZRE_6mU8s/0.jpg">
+            <div><p style="font-size:0.85rem; font-weight:700;">DEMON SLAYER</p><p style="font-size:0.7rem; color:#666;">Infinity Castle</p></div>
+        </div>
+        <div class="playlist-item" onclick="document.getElementById('main-player').src='https://www.youtube.com/embed/8YpZ3r5-Dcw'">
+            <img src="https://img.youtube.com/vi/8YpZ3r5-Dcw/0.jpg">
+            <div><p style="font-size:0.85rem; font-weight:700;">ONE PIECE</p><p style="font-size:0.7rem; color:#666;">Egghead Arc</p></div>
         </div>
     </div>
-    <div style="text-align:center; margin-top:60px; padding-top:40px; border-top:1px solid #111;">
-        <p style="color:#333; font-size:0.75rem; letter-spacing:1px;">&copy; 2026 DREAMING ANIME. ALL RIGHTS RESERVED.</p>
-    </div>
-</footer>
+</div>
 
-<script>
-    function updateTheater(id, title, desc, el) {
-        document.getElementById('theater-player').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
-        document.getElementById('theater-title').innerText = title;
-        document.getElementById('theater-desc').innerText = desc;
-        
-        const items = document.querySelectorAll('.theater-item');
-        items.forEach(item => item.classList.remove('active'));
-        el.classList.add('active');
-    }
-</script>
+<footer style="background:#000; padding:60px 20px; border-top:1px solid #111; text-align:center;">
+    <p style="color:#444; font-size:0.8rem;">&copy; 2026 DREAMING ANIME | THE ONE EMPIRE</p>
+</footer>
 
 </body>
 </html>
