@@ -9,9 +9,10 @@
     <style>
         :root { 
             --primary: #FF6B00; 
-            --bg: #050505; 
-            --panel: #0F0F0F;
-            --border: #1F1F1F;
+            --bg: #030303; 
+            --panel: #0A0A0A;
+            --border: #1A1A1A;
+            --text-dim: #888;
         }
         
         body, html { margin:0; padding:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; overflow-x:hidden; }
@@ -19,51 +20,59 @@
         /* Navigation */
         nav { background:#000; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
         .logo { font-family:'Bangers'; font-size:2.2rem; color:var(--primary); text-decoration:none; letter-spacing:1px; }
-        .search-bar { background:#111; border:1px solid #333; padding:12px 25px; color:#fff; border-radius:8px; width:300px; font-family:inherit; outline: none; }
+        .search-bar { background:#080808; border:1px solid #222; padding:12px 25px; color:#fff; border-radius:8px; width:280px; font-family:inherit; outline: none; }
         .search-bar:focus { border-color: var(--primary); }
 
         /* Grid */
         .anime-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:25px; padding:40px 5%; }
-        .card { aspect-ratio:2/3; background:#111; border-radius:8px; overflow:hidden; cursor:pointer; position:relative; transition: 0.3s; border:1px solid #1a1a1a; }
-        .card:hover { transform: translateY(-5px); border-color:var(--primary); }
-        .card img { width:100%; height:100%; object-fit:cover; }
-        .card-title { position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(transparent, rgba(0,0,0,0.9)); font-size:0.85rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .card { aspect-ratio:2/3; background:#080808; border-radius:10px; overflow:hidden; cursor:pointer; position:relative; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); border:1px solid #111; }
+        .card:hover { transform: translateY(-8px); border-color:var(--primary); box-shadow: 0 10px 30px rgba(255,107,0,0.15); }
+        .card img { width:100%; height:100%; object-fit:cover; transition: 0.5s; }
+        .card:hover img { transform: scale(1.05); }
+        .card-title { position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(transparent, rgba(0,0,0,0.95)); font-size:0.8rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-        /* Full Page Cinema (V9) */
+        /* Full Page Cinema (V10 - Stability Core) */
         #cinema-view { display:none; min-height:100vh; background:var(--bg); position:absolute; top:0; left:0; width:100%; z-index:1000; padding-bottom:100px; }
         
-        .cinema-header { padding:20px 5%; background:#000; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:20px; position:sticky; top:0; z-index:1001; }
-        .back-btn { background:transparent; color:#fff; border:1px solid #333; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:10px; font-size:0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .back-btn:hover { background:#1a1a1a; border-color:var(--primary); }
+        .cinema-header { padding:15px 5%; background:#000; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:20px; position:sticky; top:0; z-index:1001; }
+        .back-btn { background:#111; color:#fff; border:1px solid #222; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:10px; font-size:0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .back-btn:hover { background:var(--primary); border-color:var(--primary); }
 
-        .cinema-main { max-width:1400px; margin:40px auto; padding:0 5%; display:grid; grid-template-columns: 1fr 350px; gap:30px; }
-        @media (max-width: 1100px) { .cinema-main { grid-template-columns: 1fr; } }
+        .cinema-main { max-width:1500px; margin:40px auto; padding:0 4%; display:grid; grid-template-columns: 1fr 380px; gap:35px; }
+        @media (max-width: 1200px) { .cinema-main { grid-template-columns: 1fr; } }
 
-        .player-wrapper { width:100%; background:#000; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position:relative; }
-        .aspect-ratio { width:100%; aspect-ratio:16/9; position:relative; }
-        iframe { width:100%; height:100%; border:none; position:absolute; top:0; left:0; }
+        .player-wrapper { width:100%; background:#000; border-radius:15px; overflow:hidden; border:1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.7); position:relative; }
+        .aspect-ratio { width:100%; aspect-ratio:16/9; position:relative; background:#000; }
+        iframe { width:100%; height:100%; border:none; position:absolute; top:0; left:0; z-index: 5; }
 
-        .player-controls { background:var(--panel); padding:20px; display:flex; flex-wrap:wrap; gap:15px; border-top:1px solid var(--border); align-items:center; }
-        .serv-list { display:flex; gap:10px; flex-wrap:wrap; }
-        .serv-btn { background:#1a1a1a; border:1px solid #333; color:#aaa; padding:8px 15px; border-radius:4px; cursor:pointer; font-size:0.75rem; font-weight:700; }
-        .serv-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .player-footer { background:var(--panel); padding:20px 30px; display:flex; flex-wrap:wrap; gap:20px; border-top:1px solid var(--border); align-items:center; }
+        .server-group { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+        .serv-btn { background:#151515; border:1px solid #222; color:#777; padding:10px 18px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700; transition: 0.3s; }
+        .serv-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); box-shadow: 0 0 20px rgba(255,107,0,0.3); }
+        .serv-btn:hover:not(.active) { border-color: #444; color: #fff; }
 
-        .episode-panel { background:var(--panel); border-radius:12px; border:1px solid var(--border); padding:25px; height:fit-content; }
-        .ep-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap:10px; margin-top:20px; max-height:500px; overflow-y:auto; padding-right:10px; }
-        .ep-item { background:#1a1a1a; border: 1px solid #333; color:#fff; padding:12px 5px; border-radius:4px; text-align:center; cursor:pointer; font-size:0.85rem; font-weight:700; }
-        .ep-item:hover, .ep-item.active { background:var(--primary); border-color:var(--primary); }
+        .episode-panel { background:var(--panel); border-radius:15px; border:1px solid var(--border); padding:30px; height:fit-content; position: sticky; top: 100px; }
+        .ep-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); gap:12px; margin-top:20px; max-height:600px; overflow-y:auto; padding-right:10px; }
+        .ep-item { background:#151515; border:1px solid #222; color:#fff; padding:14px 5px; border-radius:6px; text-align:center; cursor:pointer; font-size:0.85rem; font-weight:700; transition: 0.2s; }
+        .ep-item:hover, .ep-item.active { background:var(--primary); border-color:var(--primary); color:#fff; }
 
-        .anime-info { margin-top:30px; }
-        .anime-title { font-family:'Bangers'; font-size:2.8rem; color:var(--primary); margin:0 0 10px 0; letter-spacing: 1px; }
-        .anime-desc { color:#aaa; line-height:1.7; font-size:0.95rem; max-width: 900px; }
+        .anime-details { margin-top:40px; }
+        .anime-title { font-family:'Bangers'; font-size:3rem; color:var(--primary); margin:0 0 10px 0; letter-spacing: 1px; }
+        .anime-meta { display:flex; gap:20px; color:var(--text-dim); font-size:0.85rem; font-weight:700; text-transform: uppercase; margin-bottom: 25px; }
+        .anime-desc { color:#aaa; line-height:1.8; font-size:1rem; max-width: 950px; border-left: 3px solid var(--primary); padding-left: 20px; }
 
-        /* Loader */
+        /* Status Loader */
         #loader { position:absolute; top:0; left:0; width:100%; height:100%; background:#000; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-        .spinner { width:40px; height:40px; border:3px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 1s infinite linear; margin-bottom:15px; }
+        .spinner { width:45px; height:45px; border:3px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s infinite linear; margin-bottom:20px; }
         @keyframes spin { to { transform:rotate(360deg); } }
+        .loader-text { font-size:0.75rem; letter-spacing:3px; color:var(--primary); font-weight:800; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Custom UI fixes */
+        .status-badge { background: #1a1a1a; padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; color: #4CAF50; border: 1px solid #2e7d32; display: inline-flex; align-items: center; gap: 5px; }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
@@ -79,37 +88,48 @@
 
     <div id="cinema-view">
         <div class="cinema-header">
-            <button class="back-btn" onclick="closeCinema()"><i class="fas fa-arrow-left"></i> BACK TO HUB</button>
-            <div style="margin-left:auto; color:#444; font-size:0.7rem; font-weight:800; letter-spacing: 2px;">DREAMING CINEMA V9</div>
+            <button class="back-btn" onclick="closeCinema()"><i class="fas fa-arrow-left"></i> RETURN TO HUB</button>
+            <div style="margin-left:auto; display:flex; align-items:center; gap:15px;">
+                <div class="status-badge"><i class="fas fa-circle" style="font-size:0.5rem"></i> STABLE CORE V10</div>
+                <div style="color:#333; font-size:0.7rem; font-weight:800; letter-spacing: 2px;">DREAMING CINEMA</div>
+            </div>
         </div>
 
         <div class="cinema-main">
             <div class="viewing-area">
                 <div class="player-wrapper">
                     <div class="aspect-ratio" id="player-container">
-                        <!-- IFRAME INJECTED HERE -->
+                        <!-- PLAYER INJECTED HERE -->
                     </div>
-                    <div class="player-controls">
-                        <div class="serv-list" id="serv-list">
-                            <button class="serv-btn active" onclick="setServ('vidsrc_to')">SERVER 1</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_me')">SERVER 2</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_xyz')">SERVER 3</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_pro')">SERVER 4</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_cc')">SERVER 5</button>
+                    <div class="player-footer">
+                        <div class="server-group">
+                            <span style="font-size:0.65rem; font-weight:800; color:#444; text-transform:uppercase;">Transmission Nodes:</span>
+                            <div class="serv-list" id="serv-list">
+                                <button class="serv-btn active" onclick="setServ('vidsrc_xyz')">NODE 1 (STABLE)</button>
+                                <button class="serv-btn" onclick="setServ('vidsrc_to')">NODE 2 (FAST)</button>
+                                <button class="serv-btn" onclick="setServ('vidsrc_me')">NODE 3 (LEGACY)</button>
+                                <button class="serv-btn" onclick="setServ('embed_su')">NODE 4 (MIRROR)</button>
+                            </div>
                         </div>
-                        <button class="back-btn" style="margin-left:auto;" onclick="refreshPlayer()"><i class="fas fa-sync"></i> REFRESH</button>
+                        <button class="back-btn" style="margin-left:auto; background:#111; border:1px solid #222;" onclick="refreshPlayer()"><i class="fas fa-sync-alt"></i> RE-ESTABLISH</button>
                     </div>
                 </div>
 
-                <div class="anime-info">
-                    <h1 class="anime-title" id="m-title">LOADING...</h1>
-                    <div id="m-meta" style="margin-bottom:20px; color:var(--primary); font-weight:800; font-size:0.9rem; text-transform: uppercase;">EPISODE 1</div>
-                    <p class="anime-desc" id="m-desc">Fetching latest transmission data...</p>
+                <div class="anime-details">
+                    <h1 class="anime-title" id="m-title">INITIALIZING...</h1>
+                    <div class="anime-meta">
+                        <span id="m-ep" style="color:var(--primary)">EPISODE 1</span>
+                        <span>•</span>
+                        <span id="m-status">AIRING</span>
+                        <span>•</span>
+                        <span id="m-id">MAL ID: --</span>
+                    </div>
+                    <p class="anime-desc" id="m-desc">Establishing a high-fidelity connection to the transmission source...</p>
                 </div>
             </div>
 
             <div class="episode-panel">
-                <h3 style="margin:0; font-size:1rem; letter-spacing:1px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">EPISODES</h3>
+                <h3 style="margin:0; font-size:0.9rem; letter-spacing:2px; border-bottom: 1px solid var(--border); padding-bottom: 20px; color:var(--text-dim)">EPISODE MATRIX</h3>
                 <div class="ep-grid" id="ep-grid"></div>
             </div>
         </div>
@@ -119,12 +139,12 @@
         const JIKAN = 'https://api.jikan.moe/v4';
         let curId = null;
         let curEp = 1;
-        let curServ = 'vidsrc_to';
+        let curServ = 'vidsrc_xyz';
         let totalEps = 0;
 
         async function init(){
             const g = document.getElementById('grid');
-            g.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:100px;"><div class="spinner" style="margin:auto"></div></div>';
+            g.innerHTML = Array(12).fill('<div class="card" style="opacity:0.05"></div>').join('');
             try {
                 const r = await fetch(`${JIKAN}/top/anime?filter=airing&limit=24`);
                 const d = await r.json();
@@ -138,7 +158,7 @@
 
         async function searchAnime(q){
             if(!q) return init();
-            document.getElementById('grid').innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:100px;">Searching...</div>';
+            document.getElementById('grid').innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:100px;">Searching Transmission...</div>';
             try {
                 const r = await fetch(`${JIKAN}/anime?q=${encodeURIComponent(q)}&limit=24`);
                 const d = await r.json();
@@ -149,7 +169,7 @@
         function renderGrid(data){
             const g = document.getElementById('grid');
             if(!data || data.length === 0) {
-                g.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:100px;">No results found.</div>';
+                g.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:100px;">No Transmissions Found.</div>';
                 return;
             }
             g.innerHTML = data.map(i => `
@@ -165,6 +185,7 @@
             curEp = ep;
             document.getElementById('cinema-view').style.display = 'block';
             document.getElementById('top-nav').style.display = 'none';
+            document.body.style.overflow = 'hidden';
             window.scrollTo(0,0);
 
             try {
@@ -173,6 +194,8 @@
                 const anime = d.data;
                 document.getElementById('m-title').innerText = anime.title;
                 document.getElementById('m-desc').innerText = anime.synopsis || 'Transmission summary unavailable.';
+                document.getElementById('m-id').innerText = `MAL ID: ${id}`;
+                document.getElementById('m-status').innerText = anime.status;
                 totalEps = anime.episodes || 24;
                 renderEpisodes(totalEps);
             } catch(e) {
@@ -193,18 +216,20 @@
 
         function loadPlayer(){
             const container = document.getElementById('player-container');
-            document.getElementById('m-meta').innerText = `EPISODE ${curEp}`;
+            document.getElementById('m-ep').innerText = `EPISODE ${curEp}`;
             
             let u;
-            // Updated Server Logic for 2026
-            if(curServ==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
+            // Stability Core Mapping
+            if(curServ==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
+            else if(curServ==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
             else if(curServ==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
-            else if(curServ==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
-            else if(curServ==='vidsrc_pro') u=`https://vidsrc.pro/embed/anime/${curId}/${curEp}`;
-            else if(curServ==='vidsrc_cc') u=`https://vidsrc.cc/v3/embed/anime/${curId}/${curEp}`;
+            else if(curServ==='embed_su') u=`https://embed.su/embed/anime/${curId}/${curEp}`;
             
             container.innerHTML = `
-                <div id="loader"><div class="spinner"></div><div style="font-size:0.7rem; letter-spacing:2px; color:var(--primary)">ESTABLISHING TRANSMISSION...</div></div>
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <div class="loader-text">ESTABLISHING STABLE HANDSHAKE...</div>
+                </div>
                 <iframe src="${u}" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>
             `;
         }
@@ -213,11 +238,10 @@
             curServ = s;
             const btns = document.querySelectorAll('.serv-btn');
             btns.forEach(btn => btn.classList.remove('active'));
-            if(s==='vidsrc_to') btns[0].classList.add('active');
-            if(s==='vidsrc_me') btns[1].classList.add('active');
-            if(s==='vidsrc_xyz') btns[2].classList.add('active');
-            if(s==='vidsrc_pro') btns[3].classList.add('active');
-            if(s==='vidsrc_cc') btns[4].classList.add('active');
+            if(s==='vidsrc_xyz') btns[0].classList.add('active');
+            if(s==='vidsrc_to') btns[1].classList.add('active');
+            if(s==='vidsrc_me') btns[2].classList.add('active');
+            if(s==='embed_su') btns[3].classList.add('active');
             loadPlayer();
         }
 
@@ -227,6 +251,7 @@
                 if(idx+1 === e) item.classList.add('active');
                 else item.classList.remove('active');
             });
+            window.scrollTo({top: 0, behavior: 'smooth'});
             loadPlayer();
         }
 
@@ -235,6 +260,7 @@
         function closeCinema(){
             document.getElementById('cinema-view').style.display = 'none';
             document.getElementById('top-nav').style.display = 'flex';
+            document.body.style.overflow = 'auto';
             document.getElementById('player-container').innerHTML = '';
         }
 
