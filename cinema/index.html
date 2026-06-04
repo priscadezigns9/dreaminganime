@@ -126,6 +126,7 @@
             { id: 'vidsrc_xyz', name: 'NODE 5 (FAST)', getUrl: (name, ep, malId) => `https://vidsrc.xyz/embed/anime/${malId}/${ep}` },
             { id: 'embed_su', name: 'NODE 6 (MIRROR)', getUrl: (name, ep, malId) => `https://embed.su/embed/anime/${malId}/${ep}` },
             { id: 'vidsrc_net', name: 'NODE 7 (EXTRA)', getUrl: (name, ep, malId) => `https://vidsrc.net/embed/anime/${malId}/${ep}` },
+            { id: 'vidsrc_title', name: 'NODE 8 (TITLE SEARCH)', getUrl: (name, ep, malId) => `https://vidsrc.me/embed/anime?title=${encodeURIComponent(name)}&episode=${ep}` },
             { id: 'youtube', name: 'YOUTUBE (SEARCH)', getUrl: (name, ep, malId) => `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(name + ' episode ' + ep)}` }
         ];
 
