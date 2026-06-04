@@ -5,49 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CINEMA | DREAMING ANIME</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #FF6B00; --bg: #050505; --panel: #0F0F0F; --border: #1F1F1F; }
-        body, html { margin:0; padding:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; overflow-x:hidden; }
+        :root { 
+            --primary: #FF6B00; 
+            --bg: #050505; 
+            --panel: #0F0F0F;
+            --border: #1F1F1F;
+        }
         
+        body, html { margin:0; padding:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; height: 100%; }
+        
+        /* Navigation */
         nav { background:#000; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
         .logo { font-family:'Bangers'; font-size:2.2rem; color:var(--primary); text-decoration:none; letter-spacing:1px; }
         .search-bar { background:#111; border:1px solid #333; padding:12px 25px; color:#fff; border-radius:8px; width:300px; font-family:inherit; outline: none; }
 
+        /* Grid */
         .anime-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:25px; padding:40px 5%; min-height: 80vh; }
-        .card { aspect-ratio:2/3; background:#111; border-radius:8px; overflow:hidden; cursor:pointer; border:1px solid #1a1a1a; position:relative; transition: 0.3s; }
+        .card { aspect-ratio:2/3; background:#111; border-radius:10px; overflow:hidden; cursor:pointer; position:relative; transition: 0.3s; border:1px solid #1a1a1a; }
         .card:hover { transform: translateY(-5px); border-color:var(--primary); }
         .card img { width:100%; height:100%; object-fit:cover; }
-        .card-title { position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(transparent, rgba(0,0,0,0.9)); font-size:0.8rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .card-title { position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(transparent, rgba(0,0,0,0.95)); font-size:0.85rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-        #cinema-view { display:none; min-height:100vh; background:var(--bg); position:absolute; top:0; left:0; width:100%; z-index:1000; padding-bottom:100px; }
-        .cinema-header { padding:20px 5%; background:#000; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:20px; position:sticky; top:0; z-index:1001; }
-        .back-btn { background:transparent; color:#fff; border:1px solid #333; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:10px; font-size:0.8rem; text-transform: uppercase; }
+        /* Full Page Cinema (V13) */
+        #cinema-view { display:none; min-height:100vh; background:var(--bg); width:100%; }
         
-        .cinema-main { max-width:1400px; margin:40px auto; padding:0 5%; display:grid; grid-template-columns: 1fr 350px; gap:30px; }
-        @media (max-width: 1100px) { .cinema-main { grid-template-columns: 1fr; } }
+        .cinema-header { padding:20px 5%; background:#000; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:20px; position:sticky; top:0; z-index:1001; }
+        .back-btn { background:transparent; color:#fff; border:1px solid #333; padding:12px 24px; border-radius:6px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:10px; font-size:0.85rem; text-transform: uppercase; transition: 0.3s; }
+        .back-btn:hover { background:#1a1a1a; border-color:var(--primary); }
 
-        .player-wrapper { width:100%; background:#000; border-radius:12px; overflow:hidden; border:1px solid var(--border); position:relative; }
-        .aspect-ratio { width:100%; aspect-ratio:16/9; position:relative; }
+        .cinema-main { max-width:1500px; margin:40px auto; padding:0 5%; display:grid; grid-template-columns: 1fr 380px; gap:40px; }
+        @media (max-width: 1200px) { .cinema-main { grid-template-columns: 1fr; } }
+
+        .player-outer { width:100%; background:#000; border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .aspect-ratio { width:100%; aspect-ratio:16/9; position:relative; background:#000; }
         iframe { width:100%; height:100%; border:none; position:absolute; top:0; left:0; }
 
-        .player-controls { background:var(--panel); padding:20px; display:flex; flex-wrap:wrap; gap:15px; border-top:1px solid var(--border); align-items:center; }
-        .serv-btn { background:#1a1a1a; border:1px solid #333; color:#aaa; padding:8px 15px; border-radius:4px; cursor:pointer; font-size:0.75rem; font-weight:700; }
-        .serv-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .player-footer { background:var(--panel); padding:25px; display:flex; flex-wrap:wrap; gap:20px; border-top:1px solid var(--border); align-items:center; }
+        .serv-list { display:flex; gap:10px; flex-wrap:wrap; }
+        .serv-btn { background:#1a1a1a; border:1px solid #333; color:#aaa; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700; transition: 0.3s; }
+        .serv-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); box-shadow: 0 0 20px rgba(255,107,0,0.2); }
 
-        .episode-panel { background:var(--panel); border-radius:12px; border:1px solid var(--border); padding:25px; height:fit-content; }
-        .ep-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap:10px; margin-top:20px; max-height:500px; overflow-y:auto; }
-        .ep-item { background:#1a1a1a; border: 1px solid #333; color:#fff; padding:12px 5px; border-radius:4px; text-align:center; cursor:pointer; font-size:0.85rem; font-weight:700; }
-        .ep-item:hover, .ep-item.active { background:var(--primary); border-color:var(--primary); }
+        .episode-matrix { background:var(--panel); border-radius:12px; border:1px solid var(--border); padding:30px; height:fit-content; }
+        .ep-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap:12px; margin-top:20px; max-height:600px; overflow-y:auto; padding-right:10px; }
+        .ep-btn { background:#1a1a1a; border: 1px solid #333; color:#fff; padding:15px 5px; border-radius:6px; text-align:center; cursor:pointer; font-size:0.9rem; font-weight:700; transition: 0.2s; }
+        .ep-btn:hover, .ep-btn.active { background:var(--primary); border-color:var(--primary); }
 
-        .anime-info { margin-top:30px; }
-        .anime-title { font-family:'Bangers'; font-size:2.8rem; color:var(--primary); margin:0 0 10px 0; }
-        .anime-desc { color:#aaa; line-height:1.7; font-size:0.95rem; }
+        .anime-content { margin-top:40px; }
+        .anime-name { font-family:'Bangers'; font-size:3rem; color:var(--primary); margin:0 0 15px 0; letter-spacing: 1px; }
+        .anime-meta { color:var(--primary); font-weight:800; font-size:0.9rem; text-transform: uppercase; margin-bottom: 20px; }
+        .anime-synopsis { color:#aaa; line-height:1.8; font-size:1rem; max-width: 900px; }
 
+        /* Loader */
         #loader { position:absolute; top:0; left:0; width:100%; height:100%; background:#000; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-        .spinner { width:40px; height:40px; border:3px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 1s infinite linear; }
+        .spinner { width:40px; height:40px; border:3px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 1s infinite linear; margin-bottom:15px; }
         @keyframes spin { to { transform:rotate(360deg); } }
 
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
@@ -55,41 +70,44 @@
     </style>
 </head>
 <body>
-    <nav id="top-nav">
-        <a href="/" class="logo">DREAMING ANIME</a>
-        <input type="text" class="search-bar" placeholder="Search shows..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
-    </nav>
-
-    <div id="grid" class="anime-grid"></div>
+    <div id="hub-view">
+        <nav>
+            <a href="/" class="logo">DREAMING ANIME</a>
+            <input type="text" class="search-bar" placeholder="Search transmissions..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
+        </nav>
+        <div id="grid" class="anime-grid"></div>
+    </div>
 
     <div id="cinema-view">
         <div class="cinema-header">
-            <button class="back-btn" onclick="closeCinema()"><i class="fas fa-arrow-left"></i> BACK TO EXPLORE</button>
-            <div style="margin-left:auto; color:var(--primary); font-size:0.75rem; font-weight:800; letter-spacing:2px;">STABILITY CORE V12 (ANI-API)</div>
+            <button class="back-btn" onclick="closeCinema()"><i class="fas fa-arrow-left"></i> BACK TO HUB</button>
+            <div style="margin-left:auto; color:var(--primary); font-size:0.8rem; font-weight:800; letter-spacing:2px;">DREAMING CINEMA V13</div>
         </div>
 
         <div class="cinema-main">
-            <div class="viewing-area">
-                <div class="player-wrapper">
+            <div class="player-section">
+                <div class="player-outer">
                     <div class="aspect-ratio" id="player-container"></div>
-                    <div class="player-controls">
+                    <div class="player-footer">
                         <div class="serv-list" id="serv-list">
-                            <button class="serv-btn active" onclick="setServ('vidsrc_xyz')">NODE 1 (STABLE)</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_to')">NODE 2 (FAST)</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_me')">NODE 3 (LEGACY)</button>
-                            <button class="serv-btn" onclick="setServ('embed_su')">NODE 4 (MIRROR)</button>
+                            <button class="serv-btn active" onclick="setNode('vidsrc_to')">NODE 1 (STABLE)</button>
+                            <button class="serv-btn" onclick="setNode('vidsrc_xyz')">NODE 2 (FAST)</button>
+                            <button class="serv-btn" onclick="setNode('vidsrc_me')">NODE 3 (LEGACY)</button>
+                            <button class="serv-btn" onclick="setNode('embed_su')">NODE 4 (MIRROR)</button>
                         </div>
-                        <button class="back-btn" style="margin-left:auto;" onclick="refreshPlayer()"><i class="fas fa-sync"></i> REFRESH</button>
+                        <button class="back-btn" style="margin-left:auto;" onclick="refreshNode()"><i class="fas fa-sync"></i> REFRESH</button>
                     </div>
                 </div>
-                <div class="anime-info">
-                    <h1 class="anime-title" id="m-title">LOADING...</h1>
-                    <div id="m-meta" style="margin-bottom:20px; color:var(--primary); font-weight:800; font-size:0.9rem;">EPISODE 1</div>
-                    <p class="anime-desc" id="m-desc">Establishing stable transmission handshake...</p>
+
+                <div class="anime-content">
+                    <h1 class="anime-name" id="m-title">INITIALIZING...</h1>
+                    <div class="anime-meta" id="m-meta">EPISODE 1</div>
+                    <p class="anime-synopsis" id="m-desc">Establishing a high-fidelity transmission handshake...</p>
                 </div>
             </div>
-            <div class="episode-panel">
-                <h3 style="margin:0; font-size:1rem; letter-spacing:1px;">SELECT EPISODE</h3>
+
+            <div class="episode-matrix">
+                <h3 style="margin:0; font-size:1rem; letter-spacing:1px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">EPISODE MATRIX</h3>
                 <div class="ep-grid" id="ep-grid"></div>
             </div>
         </div>
@@ -97,16 +115,16 @@
 
     <script>
         const ANILIST = 'https://graphql.anilist.co';
-        let curId = null; // MAL ID
-        let curAniId = null; 
+        let curMalId = null;
+        let curAniId = null;
         let curEp = 1;
-        let curServ = 'vidsrc_xyz';
+        let curServ = 'vidsrc_to';
         let totalEps = 0;
 
         async function init(){
-            const query = `query { Page(page: 1, perPage: 24) { media(status: RELEASING, type: ANIME, sort: TRENDING_DESC) { id idMal title { english romaji } coverImage { large } } } }`;
+            const q = `query { Page(page: 1, perPage: 24) { media(status: RELEASING, type: ANIME, sort: TRENDING_DESC) { id idMal title { english romaji } coverImage { large } } } }`;
             try {
-                const r = await fetch(ANILIST, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query}) });
+                const r = await fetch(ANILIST, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:q}) });
                 const d = await r.json();
                 renderGrid(d.data.Page.media);
             } catch(e) {}
@@ -114,6 +132,7 @@
 
         async function searchAnime(q){
             if(!q) return init();
+            document.getElementById('grid').innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:100px;">Searching...</div>';
             const query = `query ($q: String) { Page(page: 1, perPage: 24) { media(search: $q, type: ANIME) { id idMal title { english romaji } coverImage { large } } } }`;
             try {
                 const r = await fetch(ANILIST, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query, variables:{q}}) });
@@ -133,72 +152,69 @@
         }
 
         async function openCinema(malId, ep, aniId){
-            curId = malId; curAniId = aniId; curEp = ep;
+            curMalId = malId; curAniId = aniId; curEp = ep;
+            document.getElementById('hub-view').style.display = 'none';
             document.getElementById('cinema-view').style.display = 'block';
-            document.getElementById('top-nav').style.display = 'none';
-            document.body.style.overflow = 'hidden';
             window.scrollTo(0,0);
 
-            const query = `query ($id: Int) { Media(id: $id) { title { english romaji } description episodes } }`;
+            const q = `query ($id: Int) { Media(id: $id) { title { english romaji } description episodes } }`;
             try {
-                const r = await fetch(ANILIST, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query, variables:{id:aniId}}) });
+                const r = await fetch(ANILIST, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:q, variables:{id:aniId}}) });
                 const d = await r.json();
                 const a = d.data.Media;
                 document.getElementById('m-title').innerText = a.title.english || a.title.romaji;
                 document.getElementById('m-desc').innerHTML = a.description || 'Summary unavailable.';
                 totalEps = a.episodes || 24;
-                renderEpisodes(totalEps);
-            } catch(e) { renderEpisodes(24); }
-            loadPlayer();
+                renderMatrix(totalEps);
+            } catch(e) { renderMatrix(24); }
+            loadTransmission();
         }
 
-        function renderEpisodes(count){
+        function renderMatrix(count){
             const grid = document.getElementById('ep-grid');
             let html = '';
-            for(let i=1; i<=count; i++) html += `<div class="ep-item ${i===curEp?'active':''}" onclick="setEp(${i})">${i}</div>`;
+            for(let i=1; i<=count; i++) html += `<div class="ep-btn ${i===curEp?'active':''}" onclick="setEp(${i})">${i}</div>`;
             grid.innerHTML = html;
         }
 
-        function loadPlayer(){
+        function loadTransmission(){
             const container = document.getElementById('player-container');
-            document.getElementById('m-ep').innerText = `EPISODE ${curEp}`;
+            document.getElementById('m-meta').innerText = `EPISODE ${curEp}`;
             let u;
-            // ANI-API Core Logic
-            if(curServ==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
-            else if(curServ==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
-            else if(curServ==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
-            else if(curServ==='embed_su') u=`https://embed.su/embed/anime/${curId}/${curEp}`;
+            if(curServ==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curMalId}/${curEp}`;
+            else if(curServ==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curMalId}/${curEp}`;
+            else if(curServ==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curMalId}&episode=${curEp}`;
+            else if(curServ==='embed_su') u=`https://embed.su/embed/anime/${curMalId}/${curEp}`;
             
-            container.innerHTML = `<div id="loader"><div class="spinner"></div></div><iframe src="${u}" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>`;
-            // Failover timer: if loader still there after 8s, force hide
+            container.innerHTML = `<div id="loader"><div class="spinner"></div><div style="font-size:0.7rem;letter-spacing:2px;color:var(--primary)">HANDSHAKING...</div></div><iframe src="${u}" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>`;
             setTimeout(() => { if(document.getElementById('loader')) document.getElementById('loader').style.display='none'; }, 8000);
         }
 
-        function setServ(s){
+        function setNode(s){
             curServ = s;
             const btns = document.querySelectorAll('.serv-btn');
             btns.forEach(btn => btn.classList.remove('active'));
-            if(s==='vidsrc_xyz') btns[0].classList.add('active');
-            if(s==='vidsrc_to') btns[1].classList.add('active');
+            if(s==='vidsrc_to') btns[0].classList.add('active');
+            if(s==='vidsrc_xyz') btns[1].classList.add('active');
             if(s==='vidsrc_me') btns[2].classList.add('active');
             if(s==='embed_su') btns[3].classList.add('active');
-            loadPlayer();
+            loadTransmission();
         }
 
         function setEp(e){
             curEp = e;
-            document.querySelectorAll('.ep-item').forEach((item, idx) => {
-                if(idx+1 === e) item.classList.add('active');
-                else item.classList.remove('active');
+            document.querySelectorAll('.ep-btn').forEach((btn, idx) => {
+                if(idx+1 === e) btn.classList.add('active');
+                else btn.classList.remove('active');
             });
-            loadPlayer();
+            loadTransmission();
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function refreshPlayer(){ loadPlayer(); }
+        function refreshNode(){ loadTransmission(); }
         function closeCinema(){
             document.getElementById('cinema-view').style.display = 'none';
-            document.getElementById('top-nav').style.display = 'flex';
-            document.body.style.overflow = 'auto';
+            document.getElementById('hub-view').style.display = 'block';
             document.getElementById('player-container').innerHTML = '';
         }
         init();
