@@ -1,1 +1,264 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>THE VAULT | DREAMING ANIME</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet"> <style> :root { --primary: #FF6B00; --bg: #000; } body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; -webkit-tap-highlight-color: transparent; } nav { padding: 12px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 1000; backdrop-filter: blur(10px); } .logo { font-family:'Bangers'; font-size:1.5rem; color:var(--primary); text-decoration:none; } .header { text-align:center; padding:40px 5%; border-bottom: 1px solid #111; background: linear-gradient(to bottom, #050505, #000); } .header h1 { font-family:'Bangers'; font-size:clamp(3rem, 10vw, 5rem); margin:0; line-height:1; } .header p { color:var(--primary); font-family:'Space Mono'; letter-spacing:2px; font-size:0.7rem; margin-top:10px; } .search-wrap { padding: 20px 5%; max-width: 600px; margin: 0 auto; position: relative; } .search-wrap input { width: 100%; background: #111; border: 1px solid #333; padding: 12px 20px; border-radius: 30px; color: #fff; font-family: 'Space Mono'; outline: none; box-sizing: border-box; } .search-wrap i { position: absolute; right: 8%; top: 50%; transform: translateY(-50%); color: var(--primary); } .section-header { padding: 20px 5% 0; font-family:'Bangers'; color:var(--primary); font-size: 1.1rem; } .grid { display:flex; overflow-x: auto; gap:12px; padding:15px 5% 30px; scrollbar-width: none; -webkit-overflow-scrolling: touch; } .grid::-webkit-scrollbar { display: none; } .card { flex:0 0 140px; height:200px; background:#111; border-radius:6px; overflow:hidden; border:1px solid #222; transition:0.2s; cursor:pointer; position:relative; } @media (min-width: 768px) { .card { flex:0 0 180px; height:260px; } } .card:active { transform: scale(0.96); } .card img { width:100%; height:100%; object-fit:cover; } .tag { position:absolute; bottom:8px; right:8px; background:var(--primary); color:#000; padding:2px 8px; border-radius:4px; font-size:.6rem; font-weight:900; } .loader { width: 30px; height: 30px; border: 3px solid #111; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; } @keyframes spin { 0% { transform: translate(-50%,-50%) rotate(0deg); } 100% { transform: translate(-50%,-50%) rotate(360deg); } } #search-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; padding: 20px 5%; display: none; } </style> </head> <body> <nav><a href="/" class="logo">THE VAULT</a><a href="/index.html" style="color:#fff; text-decoration:none; font-weight:700; font-size:0.8rem;">HOME</a></nav> <div class="header"> <h1>Mimi's Collection</h1> <p>INTERNAL MANGA REPOSITORY</p> </div> <div class="search-wrap"> <input type="text" id="q" placeholder="SEARCH MANGA..." onkeypress="if(event.key==='Enter')search()"> <i class="fas fa-search" onclick="search()"></i> </div> <div id="search-results"></div> <div id="l"></div> <script> const API = "https://api.jikan.moe/v4"; const CATS = [ {n:"Trending Manga", q:"/top/manga?filter=bypopularity"}, {n:"Shonen Jump Hits", q:"/manga?producers=434"}, {n:"Must Read Classics", q:"/manga?order_by=rank&sort=asc"} ]; async function init(){ const l=document.getElementById('l'); for(let c of CATS){ try { const r=await fetch(API+c.q+"&limit=12"); const d=await r.json(); if(!d || !d.data) continue; const s=document.createElement('div'); s.innerHTML=`<div class="section-header"><h2>${c.n}</h2></div><div class="grid">${d.data.map(m=>`<div class="card" onclick="read('${m.title.replace(/'/g,"")}')"><img src="${m.images.jpg.large_image_url}" loading="lazy"><div class="tag">READ</div></div>`).join('')}</div>`; l.appendChild(s); await new Promise(r => setTimeout(r, 400)); } catch(e) { console.error(e); } } } async function search(){ const q = document.getElementById('q').value; if(!q) return; const res = document.getElementById('search-results'); const l = document.getElementById('l'); l.style.display = 'none'; res.style.display = 'grid'; res.innerHTML = '<div class="loader"></div>'; try { const r = await fetch(API+"/manga?q="+q+"&limit=24"); const d = await r.json(); if(!d || !d.data || d.data.length === 0) { res.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px;">No results found.</div>'; return; } res.innerHTML = d.data.map(m=>`<div class="card" onclick="read('${m.title.replace(/'/g,"")}')"><img src="${m.images.jpg.large_image_url}"><div class="tag">READ</div></div>`).join(''); } catch(e) { res.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px;">Error fetching data.</div>'; } } async function read(t){ const l = document.createElement("div"); l.className = "loader"; l.style.cssText = "position:fixed;top:50%;left:50%;z-index:2000;"; document.body.appendChild(l); try { const r = await fetch("https://api.mangadex.org/manga?title=" + encodeURIComponent(t) + "&limit=1&order[relevance]=desc"); const d = await r.json(); if(d.data && d.data.length > 0) { window.open("https://mangadex.org/title/" + d.data[0].id, "_blank"); } else { window.open("https://mangadex.org/search?q=" + encodeURIComponent(t), "_blank"); } } catch(e) { window.open("https://mangadex.org/search?q=" + encodeURIComponent(t), "_blank"); } finally { l.remove(); } } init(); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE VAULT | DREAMING ANIME</title>
+    <link rel="icon" type="image/png" href="/logos/dreaming-anime-logo-round.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #FF6B00; --bg: #0A0A0A; }
+        body { margin:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; overflow-x: hidden; }
+        nav { padding: 20px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 1000; backdrop-filter: blur(10px); }
+        .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; font-family:'Bangers', cursive; font-size:1.5rem; }
+        .logo img { height:35px; border-radius:50%; border: 1px solid var(--primary); }
+        .vault-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:30px; padding:60px 5%; }
+        .manga-card { background:#111; border-radius:12px; overflow:hidden; border:1px solid #222; text-decoration:none; transition:0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; cursor: pointer; }
+        .manga-card:hover { transform:translateY(-10px); border-color:var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .manga-img { width:100%; height:320px; object-fit:cover; transition: 0.5s; }
+        .manga-card:hover .manga-img { transform: scale(1.05); }
+        .card-body { padding:20px; }
+        .card-body h3 { font-family:'Bangers', cursive; font-size:1.4rem; margin-bottom:8px; color:#fff; line-height: 1.1; }
+        .card-body p { color: #888; font-size: 0.85rem; margin-bottom: 12px; }
+        .score { color:var(--primary); font-family:'Space Mono'; font-weight:700; font-size:0.9rem; border: 1px solid var(--primary); padding: 2px 6px; border-radius: 4px; display: inline-block; }
+        .live-tag { position: absolute; top: 15px; right: 15px; background: var(--primary); color: #000; padding: 4px 10px; font-family: 'Space Mono'; font-weight: 700; font-size: 0.65rem; border-radius: 4px; z-index: 10; }
+        
+        /* Reader Modal */
+        #reader-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            z-index: 2000;
+        }
+        #reader-modal.active { display: block; }
+        .reader-header {
+            height: 60px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #222;
+        }
+        .close-reader {
+            color: var(--primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: rgba(255,107,0,0.1);
+            border: 1px solid var(--primary);
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-family: 'Space Mono';
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .close-reader:hover { background: var(--primary); color: #000; }
+        .reader-frame {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+        .loader-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .loader { 
+            width: 50px; height: 50px; 
+            border: 4px solid #111; 
+            border-top: 4px solid var(--primary); 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+            margin: 0 auto; 
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        .search-container input {
+            width: 100%;
+            background: #111;
+            border: 1px solid #333;
+            padding: 15px 25px;
+            border-radius: 30px;
+            color: #fff;
+            font-family: 'Space Mono';
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-container input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255,107,0,0.2);
+        }
+        .search-container i {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo"><img src="/logos/dreaming-anime-logo-round.png"> DREAMING ANIME</a>
+        <a href="/" style="color:#888; text-decoration:none; font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px;">&larr; BACK TO HUB</a>
+    </nav>
+    <div style="text-align:center; padding:80px 20px 20px;">
+        <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_shop_header.webp" style="height:180px; filter:drop-shadow(0 0 30px rgba(255,107,0,0.3));" alt="Mimi Vault">
+        <h1 style="font-family:'Bangers',cursive; font-size:5rem; line-height: 1; margin: 10px 0;">THE MANGA VAULT</h1>
+        <p style="font-family:'Space Mono'; color:var(--primary); letter-spacing: 2px;">CHAPTER 05 &mdash; REAL-TIME DATA ARCHIVE</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="manga-search" placeholder="SEARCH ARCHIVE..." onkeypress="if(event.key==='Enter')searchManga()">
+        <i class="fas fa-search"></i>
+    </div>
+    
+    <div id="manga-grid" class="vault-grid">
+        <!-- API Data will load here -->
+    </div>
+
+    <!-- Reader Modal -->
+    <div id="reader-modal">
+        <div class="reader-header">
+            <span id="reader-title" style="font-family:'Bangers'; font-size:1.2rem; color: #fff; letter-spacing: 1px;">READING...</span>
+            <button class="close-reader" onclick="closeReader()">[ CLOSE ]</button>
+        </div>
+        <div id="reader-loader" class="loader-container">
+            <div class="loader"></div>
+            <p style="font-family:'Space Mono'; color:var(--primary); margin-top:20px; font-size: 0.8rem;">INITIATING DIRECT-READ PROTOCOL...</p>
+        </div>
+        <iframe id="reader-frame" class="reader-frame"></iframe>
+    </div>
+
+    <script>
+        const JIKAN_API = 'https://api.jikan.moe/v4';
+        const MD_API = 'https://api.mangadex.org';
+
+        async function loadMangaVault() {
+            const grid = document.getElementById('manga-grid');
+            try {
+                grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">Syncing with neural network...</p>';
+                const res = await fetch(`${JIKAN_API}/top/manga?limit=24&filter=bypopularity`);
+                const data = await res.json();
+                renderManga(data.data);
+            } catch (e) {
+                console.error("Manga API Sync Error:", e);
+                grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">Vault connection delayed...</p>';
+            }
+        }
+
+        async function searchManga() {
+            const q = document.getElementById('manga-search').value;
+            if(!q) return;
+            const grid = document.getElementById('manga-grid');
+            grid.innerHTML = '<div class="loader" style="grid-column: 1/-1; margin: 40px auto;"></div>';
+            
+            try {
+                const res = await fetch(`${JIKAN_API}/manga?q=${encodeURIComponent(q)}&limit=24`);
+                const data = await res.json();
+                if(data.data.length === 0) {
+                    grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">No records found for that query.</p>';
+                    return;
+                }
+                renderManga(data.data);
+            } catch (e) {
+                grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">Search failed. Try again.</p>';
+            }
+        }
+
+        function renderManga(mangas) {
+            const grid = document.getElementById('manga-grid');
+            grid.innerHTML = '';
+            mangas.forEach(manga => {
+                const card = document.createElement('div');
+                card.className = 'manga-card';
+                card.onclick = () => read(manga.title);
+                card.innerHTML = `
+                    <span class="live-tag">SYNCED</span>
+                    <img src="${manga.images.jpg.large_image_url}" class="manga-img" alt="${manga.title}">
+                    <div class="card-body">
+                        <h3>${manga.title}</h3>
+                        <p>${manga.type || 'Manga'} &mdash; ${manga.status}</p>
+                        <span class="score">RANK #${manga.rank || 'N/A'}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        async function read(title) {
+            const modal = document.getElementById('reader-modal');
+            const frame = document.getElementById('reader-frame');
+            const rTitle = document.getElementById('reader-title');
+            const loader = document.getElementById('reader-loader');
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            rTitle.innerText = `INITIALIZING: ${title.toUpperCase()}`;
+            frame.style.display = 'none';
+            loader.style.display = 'block';
+            frame.src = 'about:blank';
+
+            try {
+                // 1. Search MangaDex for ID
+                const searchRes = await fetch(`${MD_API}/manga?title=${encodeURIComponent(title)}&limit=1&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`);
+                const searchData = await searchRes.json();
+                
+                if (!searchData.data || searchData.data.length === 0) throw new Error("Manga not found");
+                
+                const mangaId = searchData.data[0].id;
+                
+                // 2. Find first English chapter
+                const feedRes = await fetch(`${MD_API}/manga/${mangaId}/feed?translatedLanguage[]=en&order[chapter]=asc&limit=1&includeExternalVol=0`);
+                const feedData = await feedRes.json();
+                
+                if (!feedData.data || feedData.data.length === 0) {
+                     // Fallback 1: Open the MangaDex title page in embed-like view if possible, or just normal
+                     console.log("Direct-read: No specific English chapters found. Falling back to MangaDex title page.");
+                     frame.src = `https://mangadex.org/title/${mangaId}`;
+                } else {
+                    const chapterId = feedData.data[0].id;
+                    console.log("Direct-read: ACTIVE. Chapter ID:", chapterId);
+                    frame.src = `https://mangadex.org/embed/${chapterId}`;
+                }
+                
+                frame.onload = () => {
+                    loader.style.display = 'none';
+                    frame.style.display = 'block';
+                    rTitle.innerText = `PLAYING: ${title.toUpperCase()}`;
+                };
+                
+            } catch (err) {
+                console.error("Reader Error:", err);
+                // Fallback 2: Search on MangaDex
+                frame.src = `https://mangadex.org/search?q=${encodeURIComponent(title)}`;
+                frame.onload = () => {
+                    loader.style.display = 'none';
+                    frame.style.display = 'block';
+                };
+            }
+        }
+
+        function closeReader() {
+            const modal = document.getElementById('reader-modal');
+            const frame = document.getElementById('reader-frame');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            frame.src = 'about:blank';
+        }
+
+        window.onload = loadMangaVault;
+    </script>
+</body>
+</html>
