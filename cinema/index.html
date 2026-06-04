@@ -89,13 +89,8 @@
                 <div class="player-outer">
                     <div class="aspect-ratio" id="player-container"></div>
                     <div class="player-footer">
-                        <div class="serv-list" id="serv-list">
-                            <button class="serv-btn active" onclick="setNode('vidsrc_to')">NODE 1 (STABLE)</button>
-                            <button class="serv-btn" onclick="setNode('vidsrc_xyz')">NODE 2 (FAST)</button>
-                            <button class="serv-btn" onclick="setNode('vidsrc_me')">NODE 3 (LEGACY)</button>
-                            <button class="serv-btn" onclick="setNode('embed_su')">NODE 4 (MIRROR)</button>
-                        </div>
-                        <button class="back-btn" style="margin-left:auto;" onclick="refreshNode()"><i class="fas fa-sync"></i> REFRESH</button>
+                        <div class="serv-list" id="serv-list"></div>
+                        <button class="back-btn" style="margin-left:auto;" onclick="loadTransmission()"><i class="fas fa-sync"></i> REFRESH</button>
                     </div>
                 </div>
 
@@ -118,8 +113,18 @@
         let curMalId = null;
         let curAniId = null;
         let curEp = 1;
-        let curServ = 'vidsrc_to';
+        let curServ = 'youtube';
         let totalEps = 0;
+        let attemptIndex = 0;
+        let fallbackTimer = null;
+
+        const SOURCES = [
+            { id: 'youtube', name: 'YOUTUBE (SEARCH)', getUrl: (name, ep, malId) => `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(name + ' episode ' + ep)}` },
+            { id: 'vidsrc_to', name: 'NODE 1 (STABLE)', getUrl: (name, ep, malId) => `https://vidsrc.to/embed/anime/${malId}/${ep}` },
+            { id: 'vidsrc_me', name: 'NODE 2 (LEGACY)', getUrl: (name, ep, malId) => `https://vidsrc.me/embed/anime?malid=${malId}&episode=${ep}` },
+            { id: 'vidsrc_xyz', name: 'NODE 3 (FAST)', getUrl: (name, ep, malId) => `https://vidsrc.xyz/embed/anime/${malId}/${ep}` },
+            { id: 'embed_su', name: 'NODE 4 (MIRROR)', getUrl: (name, ep, malId) => `https://embed.su/embed/anime/${malId}/${ep}` }
+        ];
 
         async function init(){
             const q = `query { Page(page: 1, perPage: 24) { media(status: RELEASING, type: ANIME, sort: TRENDING_DESC) { id idMal title { english romaji } coverImage { large } } } }`;
@@ -128,6 +133,14 @@
                 const d = await r.json();
                 renderGrid(d.data.Page.media);
             } catch(e) {}
+            renderServList();
+        }
+
+        function renderServList(){
+            const list = document.getElementById('serv-list');
+            list.innerHTML = SOURCES.map((s, idx) => `
+                <button class="serv-btn ${curServ===s.id?'active':''}" onclick="setNode('${s.id}')">${s.name}</button>
+            `).join('');
         }
 
         async function searchAnime(q){
@@ -177,28 +190,77 @@
             grid.innerHTML = html;
         }
 
-        function loadTransmission(){
+        function loadTransmission(forceSourceId = null){
             const container = document.getElementById('player-container');
             document.getElementById('m-meta').innerText = `EPISODE ${curEp}`;
-            let u;
-            if(curServ==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curMalId}/${curEp}`;
-            else if(curServ==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curMalId}/${curEp}`;
-            else if(curServ==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curMalId}&episode=${curEp}`;
-            else if(curServ==='embed_su') u=`https://embed.su/embed/anime/${curMalId}/${curEp}`;
             
-            container.innerHTML = `<div id="loader"><div class="spinner"></div><div style="font-size:0.7rem;letter-spacing:2px;color:var(--primary)">HANDSHAKING...</div></div><iframe src="${u}" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>`;
-            setTimeout(() => { if(document.getElementById('loader')) document.getElementById('loader').style.display='none'; }, 8000);
+            if(forceSourceId){
+                curServ = forceSourceId;
+                attemptIndex = SOURCES.findIndex(s => s.id === forceSourceId);
+            } else {
+                attemptIndex = 0;
+                curServ = SOURCES[attemptIndex].id;
+            }
+            
+            trySource();
+        }
+
+        function trySource(){
+            clearTimeout(fallbackTimer);
+            if(attemptIndex >= SOURCES.length){
+                document.getElementById('player-container').innerHTML = `
+                    <div id="loader" style="background:#111;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--primary);margin-bottom:15px;"></i>
+                        <div style="text-align:center;color:#fff;">NO SOURCES AVAILABLE</div>
+                        <div style="font-size:0.7rem;margin-top:10px;color:#666;">Try refreshing or another episode.</div>
+                    </div>`;
+                return;
+            }
+
+            const source = SOURCES[attemptIndex];
+            const container = document.getElementById('player-container');
+            const animeName = document.getElementById('m-title').innerText;
+            const url = source.getUrl(animeName, curEp, curMalId);
+
+            curServ = source.id;
+            updateNodeUI();
+
+            container.innerHTML = `
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <div style="font-size:0.7rem;letter-spacing:2px;color:var(--primary)">SEARCHING FOR AVAILABLE SOURCES...</div>
+                    <div style="font-size:0.6rem;color:#666;margin-top:10px;">TRYING ${source.name}</div>
+                </div>
+                <iframe src="${url}" allowfullscreen referrerpolicy="no-referrer" onload="onPlayerLoad()"></iframe>
+            `;
+
+            fallbackTimer = setTimeout(() => {
+                // If it's still loading (loader visible), try next
+                const loader = document.getElementById('loader');
+                if(loader && loader.style.display !== 'none'){
+                    console.log(`Source ${source.name} timed out, trying next...`);
+                    attemptIndex++;
+                    trySource();
+                }
+            }, 10000); 
+        }
+
+        function onPlayerLoad(){
+            clearTimeout(fallbackTimer);
+            const loader = document.getElementById('loader');
+            if(loader) loader.style.display = 'none';
+        }
+
+        function updateNodeUI(){
+            const btns = document.querySelectorAll('.serv-btn');
+            btns.forEach((btn, idx) => {
+                if(idx === attemptIndex) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
         }
 
         function setNode(s){
-            curServ = s;
-            const btns = document.querySelectorAll('.serv-btn');
-            btns.forEach(btn => btn.classList.remove('active'));
-            if(s==='vidsrc_to') btns[0].classList.add('active');
-            if(s==='vidsrc_xyz') btns[1].classList.add('active');
-            if(s==='vidsrc_me') btns[2].classList.add('active');
-            if(s==='embed_su') btns[3].classList.add('active');
-            loadTransmission();
+            loadTransmission(s);
         }
 
         function setEp(e){
@@ -211,13 +273,14 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function refreshNode(){ loadTransmission(); }
         function closeCinema(){
             document.getElementById('cinema-view').style.display = 'none';
             document.getElementById('hub-view').style.display = 'block';
             document.getElementById('player-container').innerHTML = '';
+            clearTimeout(fallbackTimer);
         }
         init();
     </script>
 </body>
 </html>
+
