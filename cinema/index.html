@@ -22,7 +22,7 @@
         .modal-content { width:95%; max-width:1200px; background:#000; border:1px solid #333; border-radius:16px; overflow:hidden; position:relative; box-shadow:0 0 100px rgba(0,0,0,1); }
         
         .player-container { width:100%; aspect-ratio:16/9; background:#000; position:relative; border-bottom: 1px solid #222; }
-        .player-loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--primary); font-size:2.5rem; display:none; }
+        .player-loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--primary); font-size:2.5rem; display:none; z-index: 5; }
         
         .controls { padding:20px 30px; display:flex; justify-content:space-between; align-items:center; background:#111; }
         .ep-list { padding:15px 30px; display:flex; gap:10px; overflow-x:auto; background:#0A0A0A; border-top:1px solid #222; max-height: 100px; }
@@ -36,7 +36,6 @@
         .close-btn { font-size:2rem; color:#aaa; cursor:pointer; position:absolute; top:20px; right:30px; z-index:10; }
         .fs-btn { background:none; border:none; color:#aaa; cursor:pointer; font-size:1.2rem; margin-left:15px; }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .search-bar { width: 100%; margin-top: 15px; }
             nav { flex-direction: column; padding: 20px; }
@@ -76,10 +75,10 @@
                 </div>
                 <div style="display:flex; align-items:center;">
                     <select id="serv" onchange="loadP(this.value)">
-                        <option value="vidsrc_me">Server 1 (High Reliability)</option>
+                        <option value="vidsrc_me">Server 1 (Highly Compatible)</option>
                         <option value="vidsrc_cc">Server 2 (Elite - Fast)</option>
                         <option value="vidsrc_to">Server 3 (Classic)</option>
-                        <option value="vidsrc_xyz">Server 4 (Direct)</option>
+                        <option value="vidsrc_xyz">Server 4 (Direct V2)</option>
                         <option value="embed_su">Server 5 (Mirror)</option>
                     </select>
                     <button class="fs-btn" onclick="toggleFS()" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -152,7 +151,7 @@
             curServ = s; 
             let u; 
             document.getElementById('loader').style.display = 'block'; 
-            // Most reliable patterns as of 2026
+            // Optimized Anime Embed Patterns
             if(s==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
             else if(s==='vidsrc_cc') u=`https://vidsrc.cc/v2/embed/anime/${curId}/${curEp}`;
             else if(s==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
