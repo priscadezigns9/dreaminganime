@@ -113,17 +113,17 @@
         let curMalId = null;
         let curAniId = null;
         let curEp = 1;
-        let curServ = 'youtube';
+        let curServ = 'vidsrc_to';
         let totalEps = 0;
         let attemptIndex = 0;
         let fallbackTimer = null;
 
         const SOURCES = [
-            { id: 'youtube', name: 'YOUTUBE (SEARCH)', getUrl: (name, ep, malId) => `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(name + ' episode ' + ep)}` },
             { id: 'vidsrc_to', name: 'NODE 1 (STABLE)', getUrl: (name, ep, malId) => `https://vidsrc.to/embed/anime/${malId}/${ep}` },
             { id: 'vidsrc_me', name: 'NODE 2 (LEGACY)', getUrl: (name, ep, malId) => `https://vidsrc.me/embed/anime?malid=${malId}&episode=${ep}` },
-            { id: 'vidsrc_xyz', name: 'NODE 3 (FAST)', getUrl: (name, ep, malId) => `https://vidsrc.xyz/embed/anime/${malId}/${ep}` },
-            { id: 'embed_su', name: 'NODE 4 (MIRROR)', getUrl: (name, ep, malId) => `https://embed.su/embed/anime/${malId}/${ep}` }
+            { id: 'vidsrc_cc', name: 'NODE 3 (ALT)', getUrl: (name, ep, malId) => `https://vidsrc.cc/v2/embed/anime/${malId}/${ep}` },
+            { id: 'vidsrc_xyz', name: 'NODE 4 (FAST)', getUrl: (name, ep, malId) => `https://vidsrc.xyz/embed/anime/${malId}/${ep}` },
+            { id: 'youtube', name: 'YOUTUBE (SEARCH)', getUrl: (name, ep, malId) => `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(name + ' episode ' + ep)}` }
         ];
 
         async function init(){
@@ -242,7 +242,7 @@
                     attemptIndex++;
                     trySource();
                 }
-            }, 10000); 
+            }, 8000); 
         }
 
         function onPlayerLoad(){
@@ -283,4 +283,5 @@
     </script>
 </body>
 </html>
+
 
