@@ -7,158 +7,203 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #FF6B00; --bg: #050505; }
+        :root { --primary: #FF6B00; --bg: #050505; --card-bg: #111; }
         body { margin:0; background:var(--bg); color:#fff; font-family:'Space Mono', monospace; overflow-x:hidden; }
+        
+        /* Navigation */
         nav { background:#000; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position:sticky; top:0; z-index:100; }
-        .logo { font-family:'Bangers'; font-size:1.8rem; color:var(--primary); text-decoration:none; letter-spacing:1px; }
-        .search-bar { background:#111; border:1px solid #333; padding:8px 20px; color:#fff; border-radius:30px; width:300px; font-family:inherit; }
+        .logo { font-family:'Bangers'; font-size:2rem; color:var(--primary); text-decoration:none; letter-spacing:1px; text-shadow: 0 0 10px rgba(255,107,0,0.5); }
+        .search-container { position: relative; }
+        .search-bar { background:#111; border:1px solid #333; padding:10px 20px; color:#fff; border-radius:30px; width:300px; font-family:inherit; outline: none; transition: 0.3s; }
+        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,107,0,0.2); }
+
+        /* Grid */
+        .anime-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:30px; padding:40px 5%; }
+        .card { aspect-ratio:2/3; background:var(--card-bg); border-radius:12px; overflow:hidden; cursor:pointer; position:relative; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border:1px solid #222; }
+        .card:hover { transform: translateY(-12px) scale(1.02); border-color:var(--primary); box-shadow:0 15px 35px rgba(255,107,0,0.3); }
+        .card img { width:100%; height:100%; object-fit:cover; transition: 0.5s; }
+        .card:hover img { filter: brightness(0.6); }
+        .card-info { position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(transparent, rgba(0,0,0,0.95)); transform: translateY(10px); transition: 0.3s; }
+        .card:hover .card-info { transform: translateY(0); }
+        .card-title { font-weight:bold; font-size:1rem; margin-bottom:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .card-ep { color:var(--primary); font-size:0.8rem; font-weight:bold; text-transform:uppercase; }
+
+        /* Modal / Player */
+        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:1000; justify-content:center; align-items:center; backdrop-filter: blur(10px); }
+        .modal-content { width:90%; max-width:1200px; position:relative; animation: slideUp 0.5s ease; background:#000; border:1px solid #333; border-radius:15px; overflow:hidden; }
+        @keyframes slideUp { from { opacity:0; transform:translateY(50px); } to { opacity:1; transform:translateY(0); } }
         
-        .anime-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:25px; padding:40px 5%; }
-        .card { aspect-ratio:2/3; background:#111; border-radius:12px; overflow:hidden; cursor:pointer; position:relative; transition: 0.3s; border:1px solid #222; }
-        .card:hover { transform: translateY(-10px); border-color:var(--primary); box-shadow:0 10px 30px rgba(255,107,0,0.2); }
-        .card img { width:100%; height:100%; object-fit:cover; }
+        #player_wrap { width:100%; aspect-ratio:16/9; background:#000; position:relative; }
+        .controls { background:#111; padding:20px; display:flex; flex-wrap:wrap; gap:15px; align-items:center; border-top:1px solid #222; }
+        .server-select { background:#222; color:#fff; border:1px solid #444; padding:10px 15px; border-radius:8px; font-family:inherit; outline:none; cursor:pointer; }
+        .btn { background:var(--primary); color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.3s; display:flex; align-items:center; gap:8px; }
+        .btn:hover { filter: brightness(1.2); transform: scale(1.05); }
+        .btn-secondary { background: #333; }
         
-        .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:2000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(15px); }
-        .modal-content { width:95%; max-width:1200px; background:#000; border:1px solid #333; border-radius:16px; overflow:hidden; position:relative; box-shadow:0 0 100px rgba(0,0,0,1); }
-        
-        .player-container { width:100%; aspect-ratio:16/9; background:#000; position:relative; border-bottom: 1px solid #222; }
-        .player-loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--primary); font-size:2.5rem; display:none; z-index: 5; }
-        
-        .controls { padding:20px 30px; display:flex; justify-content:space-between; align-items:center; background:#111; }
-        .ep-list { padding:15px 30px; display:flex; gap:10px; overflow-x:auto; background:#0A0A0A; border-top:1px solid #222; max-height: 100px; }
-        .btn-ep { background:#222; border:1px solid #444; color:#fff; padding:8px 16px; cursor:pointer; font-family:inherit; border-radius:4px; font-weight:700; }
-        .btn-ep.active { background:var(--primary); color:#000; border-color:var(--primary); }
-        
-        .back-btn { background: #222; color: #fff; border: 1px solid #444; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: 700; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
-        .back-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
-        
-        select { background:#222; color:#fff; border:1px solid #444; padding:10px 20px; border-radius:8px; font-family:inherit; cursor:pointer; outline:none; }
-        .close-btn { font-size:2rem; color:#aaa; cursor:pointer; position:absolute; top:20px; right:30px; z-index:10; }
-        .fs-btn { background:none; border:none; color:#aaa; cursor:pointer; font-size:1.2rem; margin-left:15px; }
+        .episode-selector { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+        .ep-input { background: #222; border: 1px solid #444; color: #fff; width: 60px; padding: 10px; border-radius: 8px; text-align: center; }
+
+        /* Loader */
+        #loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index: 10; }
+        .spinner { width:60px; height:60px; border:4px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 1s infinite linear; margin-bottom:15px; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        .close-btn { position:absolute; top:-50px; right:0; font-size:2rem; color:#fff; cursor:pointer; transition: 0.3s; }
+        .close-btn:hover { color: var(--primary); }
 
         @media (max-width: 768px) {
-            .search-bar { width: 100%; margin-top: 15px; }
-            nav { flex-direction: column; padding: 20px; }
-            .controls { flex-direction: column; gap: 20px; text-align: center; }
+            .search-bar { width: 150px; }
+            .controls { flex-direction: column; align-items: stretch; }
+            .episode-selector { margin-left: 0; justify-content: space-between; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div style="display:flex; align-items:center; gap:20px;">
-            <a href="/" class="logo">DREAMING CINEMA</a>
-        </div>
-        <input type="text" id="q" class="search-bar" placeholder="Search for anime..." onkeypress="if(event.key==='Enter')search()">
-        <div style="display:flex; gap:20px; align-items:center;">
-            <a href="/index.html" style="color:#aaa; text-decoration:none; font-weight:700; font-size:0.9rem;">EXIT</a>
+        <a href="/" class="logo">DREAMING ANIME</a>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search anime..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
         </div>
     </nav>
 
-    <div id="grid" class="anime-grid"></div>
+    <div id="grid" class="anime-grid">
+        <!-- Skeleton Loaders -->
+        <div class="card" style="opacity:0.1"></div>
+        <div class="card" style="opacity:0.1"></div>
+        <div class="card" style="opacity:0.1"></div>
+        <div class="card" style="opacity:0.1"></div>
+    </div>
 
-    <div id="modal" class="modal">
+    <div id="modal">
         <div class="modal-content">
             <i class="fas fa-times close-btn" onclick="closeP()"></i>
-            
-            <div class="player-container">
-                <div id="loader" class="player-loader"><i class="fas fa-circle-notch fa-spin"></i></div>
-                <div id="player_wrap" style="width:100%; height:100%;"></div>
+            <div id="player_wrap">
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <div style="font-size:0.9rem; letter-spacing:2px;">INITIALIZING SERVER...</div>
+                </div>
             </div>
-
             <div class="controls">
-                <div style="display:flex; align-items:center; gap:20px;">
-                    <button class="back-btn" onclick="closeP()"><i class="fas fa-arrow-left"></i> BACK TO GALLERY</button>
-                    <div style="text-align:left;">
-                        <h2 id="title" style="margin:0; font-family:'Bangers'; color:var(--primary); font-size:1.4rem; letter-spacing:1px; line-height:1.2;">WATCHING</h2>
-                        <span id="ep-title" style="font-size:0.8rem; color:#888; text-transform:uppercase; font-weight:700;">EPISODE 1</span>
-                    </div>
+                <select id="serv" class="server-select" onchange="loadP(this.value)">
+                    <option value="vidsrc_to">Server 1 (Elite - Recommended)</option>
+                    <option value="vidsrc_cc">Server 2 (High Performance)</option>
+                    <option value="vidsrc_xyz">Server 3 (Direct V2)</option>
+                    <option value="vidsrc_me">Server 4 (Classic)</option>
+                    <option value="embed_su">Server 5 (Mirror)</option>
+                </select>
+                
+                <div class="episode-selector">
+                    <span>EPISODE</span>
+                    <input type="number" id="ep_num" class="ep-input" value="1" min="1" onchange="changeEp(this.value)">
+                    <button class="btn btn-secondary" onclick="changeEp(parseInt(document.getElementById('ep_num').value) + 1)">NEXT <i class="fas fa-chevron-right"></i></button>
                 </div>
-                <div style="display:flex; align-items:center;">
-                    <select id="serv" onchange="loadP(this.value)">
-                        <option value="vidsrc_me">Server 1 (Highly Compatible)</option>
-                        <option value="vidsrc_cc">Server 2 (Elite - Fast)</option>
-                        <option value="vidsrc_to">Server 3 (Classic)</option>
-                        <option value="vidsrc_xyz">Server 4 (Direct V2)</option>
-                        <option value="embed_su">Server 5 (Mirror)</option>
-                    </select>
-                    <button class="fs-btn" onclick="toggleFS()" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
-                </div>
+
+                <button class="btn" onclick="toggleFS()"><i class="fas fa-expand"></i> FULLSCREEN</button>
             </div>
-            <div id="eps" class="ep-list"></div>
+            <div style="padding: 15px 20px; background: #080808; border-top: 1px solid #1a1a1a;">
+                <h3 id="m_title" style="margin:0; font-size: 1.2rem; color: #fff;">Show Title</h3>
+                <p id="m_meta" style="margin:5px 0 0; font-size: 0.8rem; color: #666;">Anime ID: -- | Current Server: --</p>
+            </div>
         </div>
     </div>
 
     <script>
         const API = 'https://api.jikan.moe/v4';
-        let curId, curEp=1, totalEps=12, curServ='vidsrc_me';
+        let curId = null;
+        let curEp = 1;
+        let curServ = 'vidsrc_to';
+        let curTitle = '';
 
         async function init(){ 
             try { 
-                const r = await fetch(API+'/top/anime?filter=airing&limit=24'); 
+                const r = await fetch(`${API}/top/anime?filter=airing&limit=24`); 
                 const d = await r.json(); 
-                render(d.data); 
-            } catch(e){ console.error(e); } 
-        }
-
-        function render(data){ 
-            const g = document.getElementById('grid'); 
-            if(!data) return; 
-            g.innerHTML = data.map(a => {
-                const t = a.title.replace(/'/g, "\\'");
-                return `
-                <div class='card' onclick='watch(${a.mal_id}, "${t}")'>
-                    <img src='${a.images.jpg.large_image_url}'>
-                    <div style='position:absolute; bottom:10px; left:10px; background:var(--primary); color:#000; padding:2px 8px; font-size:0.7rem; font-weight:800; border-radius:4px; text-transform:uppercase;'>${a.type}</div>
-                </div>`;
-            }).join(''); 
-        }
-
-        async function search(){ 
-            const q = document.getElementById('q').value; 
-            if(!q) return; 
-            const r = await fetch(API+'/anime?q='+q); 
-            const d = await r.json(); 
-            render(d.data); 
-        }
-
-        async function watch(id, t){ 
-            curId = id; curEp = 1; 
-            document.getElementById('modal').style.display = 'flex'; 
-            document.getElementById('title').innerText = t; 
-            document.body.style.overflow = 'hidden'; 
-            try { 
-                const r = await fetch(API+'/anime/'+id); 
-                const d = await r.json(); 
-                totalEps = d.data.episodes || 12; 
-                renderEps(); loadP(curServ); 
-            } catch(e){ renderEps(); loadP(curServ); } 
-        }
-
-        function renderEps(){ 
-            const e = document.getElementById('eps'); 
-            e.innerHTML = ''; 
-            document.getElementById('ep-title').innerText = 'EPISODE ' + curEp;
-            for(let i=1; i<=totalEps; i++){ 
-                const b = document.createElement('button'); 
-                b.className = 'btn-ep' + (i===curEp ? ' active':''); 
-                b.innerText = i; 
-                b.onclick = () => { curEp=i; renderEps(); loadP(curServ); }; 
-                e.appendChild(b); 
+                if(d.data) render(d.data); 
+            } catch(e){ 
+                console.error('Initial load failed:', e);
+                // Fallback to generic popular if airing fails
+                const r = await fetch(`${API}/top/anime?limit=24`);
+                const d = await r.json();
+                render(d.data);
             } 
+        }
+
+        async function searchAnime(q){
+            if(!q) return init();
+            document.getElementById('grid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:100px;">Searching...</div>';
+            try {
+                const r = await fetch(`${API}/anime?q=${encodeURIComponent(q)}&limit=24`);
+                const d = await r.json();
+                render(d.data);
+            } catch(e) {
+                console.error('Search failed:', e);
+            }
+        }
+
+        function render(data){
+            const g = document.getElementById('grid');
+            if(!data || data.length === 0) {
+                g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:100px;">No results found.</div>';
+                return;
+            }
+            g.innerHTML = data.map(i => `
+                <div class="card" onclick="openP(${i.mal_id}, 1, '${i.title.replace(/'/g,"\\'")}')">
+                    <img src="${i.images.webp.large_image_url || i.images.jpg.large_image_url}" loading="lazy">
+                    <div class="card-info">
+                        <div class="card-ep">${i.type || 'Anime'} • ${i.episodes || '?'} EPS</div>
+                        <div class="card-title">${i.title}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openP(id, ep, title){
+            curId = id;
+            curEp = ep;
+            curTitle = title;
+            document.getElementById('m_title').innerText = title;
+            document.getElementById('ep_num').value = ep;
+            document.getElementById('modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            loadP(curServ);
         }
 
         function loadP(s){ 
             curServ = s; 
+            const playerWrap = document.getElementById('player_wrap');
+            const loader = document.getElementById('loader');
+            const meta = document.getElementById('m_meta');
+            
+            loader.style.display = 'block'; 
+            meta.innerText = `Anime ID: ${curId} | Episode: ${curEp} | Server: ${s}`;
+            
             let u; 
-            document.getElementById('loader').style.display = 'block'; 
-            // Optimized Anime Embed Patterns
-            if(s==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
-            else if(s==='vidsrc_cc') u=`https://vidsrc.cc/v2/embed/anime/${curId}/${curEp}`;
-            else if(s==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
+            // Most up-to-date anime embed logic
+            if(s==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
+            else if(s==='vidsrc_cc') u=`https://vidsrc.cc/v3/embed/anime/${curId}/${curEp}`;
             else if(s==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
+            else if(s==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
             else if(s==='embed_su') u=`https://embed.su/embed/anime/${curId}/${curEp}`;
             
-            document.getElementById('player_wrap').innerHTML = `<iframe src="${u}" style="width:100%; height:100%; border:none;" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>`;
+            // Clean player logic with robust onload and failover
+            playerWrap.innerHTML = `
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <div style="font-size:0.9rem; letter-spacing:2px;">CONNECTING TO ${s.toUpperCase()}...</div>
+                </div>
+                <iframe src="${u}" 
+                    style="width:100%; height:100%; border:none; position:absolute; top:0; left:0;" 
+                    allowfullscreen 
+                    referrerpolicy="no-referrer" 
+                    onload="this.previousElementSibling.style.display='none'">
+                </iframe>`;
+        }
+
+        function changeEp(ep){
+            if(ep < 1) return;
+            curEp = ep;
+            document.getElementById('ep_num').value = ep;
+            loadP(curServ);
         }
 
         function closeP(){ 
@@ -168,11 +213,10 @@
         }
 
         function toggleFS(){ 
-            const el = document.querySelector('.modal-content'); 
+            const el = document.getElementById('player_wrap'); 
             if (!document.fullscreenElement) { 
                 if(el.requestFullscreen) el.requestFullscreen(); 
                 else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-                else if(el.msRequestFullscreen) el.msRequestFullscreen();
             } else { 
                 if(document.exitFullscreen) document.exitFullscreen(); 
             } 
