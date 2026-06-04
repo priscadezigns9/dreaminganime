@@ -9,7 +9,6 @@
     <style>
         :root { 
             --primary: #FF6B00; 
-            --primary-glow: rgba(255,107,0,0.4);
             --bg: #050505; 
             --panel: #0F0F0F;
             --border: #1F1F1F;
@@ -17,7 +16,7 @@
         
         body, html { margin:0; padding:0; background:var(--bg); color:#fff; font-family:'Inter', sans-serif; overflow-x:hidden; }
         
-        /* Navigation (HiAnime Style) */
+        /* Navigation */
         nav { background:#000; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
         .logo { font-family:'Bangers'; font-size:2.2rem; color:var(--primary); text-decoration:none; letter-spacing:1px; }
         .search-bar { background:#111; border:1px solid #333; padding:12px 25px; color:#fff; border-radius:8px; width:300px; font-family:inherit; outline: none; }
@@ -30,11 +29,11 @@
         .card img { width:100%; height:100%; object-fit:cover; }
         .card-title { position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(transparent, rgba(0,0,0,0.9)); font-size:0.85rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-        /* Full Page Cinema (V8) */
+        /* Full Page Cinema (V9) */
         #cinema-view { display:none; min-height:100vh; background:var(--bg); position:absolute; top:0; left:0; width:100%; z-index:1000; padding-bottom:100px; }
         
         .cinema-header { padding:20px 5%; background:#000; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:20px; position:sticky; top:0; z-index:1001; }
-        .back-btn { background:transparent; color:#fff; border:1px solid #333; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:10px; font-size:0.8rem; }
+        .back-btn { background:transparent; color:#fff; border:1px solid #333; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:10px; font-size:0.8rem; text-transform: uppercase; letter-spacing: 1px; }
         .back-btn:hover { background:#1a1a1a; border-color:var(--primary); }
 
         .cinema-main { max-width:1400px; margin:40px auto; padding:0 5%; display:grid; grid-template-columns: 1fr 350px; gap:30px; }
@@ -45,19 +44,18 @@
         iframe { width:100%; height:100%; border:none; position:absolute; top:0; left:0; }
 
         .player-controls { background:var(--panel); padding:20px; display:flex; flex-wrap:wrap; gap:15px; border-top:1px solid var(--border); align-items:center; }
-        .server-tag { font-size:0.7rem; font-weight:800; color:#666; margin-right:10px; text-transform:uppercase; }
         .serv-list { display:flex; gap:10px; flex-wrap:wrap; }
         .serv-btn { background:#1a1a1a; border:1px solid #333; color:#aaa; padding:8px 15px; border-radius:4px; cursor:pointer; font-size:0.75rem; font-weight:700; }
-        .serv-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        .serv-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
 
         .episode-panel { background:var(--panel); border-radius:12px; border:1px solid var(--border); padding:25px; height:fit-content; }
         .ep-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap:10px; margin-top:20px; max-height:500px; overflow-y:auto; padding-right:10px; }
-        .ep-item { background:#1a1a1a; border:1px solid #333; color:#fff; padding:10px 5px; border-radius:4px; text-align:center; cursor:pointer; font-size:0.8rem; font-weight:700; }
+        .ep-item { background:#1a1a1a; border: 1px solid #333; color:#fff; padding:12px 5px; border-radius:4px; text-align:center; cursor:pointer; font-size:0.85rem; font-weight:700; }
         .ep-item:hover, .ep-item.active { background:var(--primary); border-color:var(--primary); }
 
         .anime-info { margin-top:30px; }
-        .anime-title { font-family:'Bangers'; font-size:2.5rem; color:var(--primary); margin:0 0 15px 0; }
-        .anime-desc { color:#aaa; line-height:1.7; font-size:0.95rem; }
+        .anime-title { font-family:'Bangers'; font-size:2.8rem; color:var(--primary); margin:0 0 10px 0; letter-spacing: 1px; }
+        .anime-desc { color:#aaa; line-height:1.7; font-size:0.95rem; max-width: 900px; }
 
         /* Loader */
         #loader { position:absolute; top:0; left:0; width:100%; height:100%; background:#000; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:center; }
@@ -74,15 +72,15 @@
 <body>
     <nav id="top-nav">
         <a href="/" class="logo">DREAMING ANIME</a>
-        <input type="text" class="search-bar" placeholder="Search anime..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
+        <input type="text" class="search-bar" placeholder="Search shows..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
     </nav>
 
     <div id="grid" class="anime-grid"></div>
 
     <div id="cinema-view">
         <div class="cinema-header">
-            <button class="back-btn" onclick="closeCinema()"><i class="fas fa-arrow-left"></i> BACK TO EXPLORE</button>
-            <div style="margin-left:auto; color:#666; font-size:0.75rem; font-weight:800;">DREAMING CINEMA V8 (HI-ANIME CORE)</div>
+            <button class="back-btn" onclick="closeCinema()"><i class="fas fa-arrow-left"></i> BACK TO HUB</button>
+            <div style="margin-left:auto; color:#444; font-size:0.7rem; font-weight:800; letter-spacing: 2px;">DREAMING CINEMA V9</div>
         </div>
 
         <div class="cinema-main">
@@ -92,12 +90,12 @@
                         <!-- IFRAME INJECTED HERE -->
                     </div>
                     <div class="player-controls">
-                        <span class="server-tag">Servers:</span>
                         <div class="serv-list" id="serv-list">
-                            <button class="serv-btn active" onclick="setServ('vidsrc_to')">VIDSRC (TO)</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_cc')">VIDSRC (CC)</button>
-                            <button class="serv-btn" onclick="setServ('vidsrc_me')">VIDSRC (ME)</button>
-                            <button class="serv-btn" onclick="setServ('embed_su')">EMBED.SU</button>
+                            <button class="serv-btn active" onclick="setServ('vidsrc_to')">SERVER 1</button>
+                            <button class="serv-btn" onclick="setServ('vidsrc_me')">SERVER 2</button>
+                            <button class="serv-btn" onclick="setServ('vidsrc_xyz')">SERVER 3</button>
+                            <button class="serv-btn" onclick="setServ('vidsrc_pro')">SERVER 4</button>
+                            <button class="serv-btn" onclick="setServ('vidsrc_cc')">SERVER 5</button>
                         </div>
                         <button class="back-btn" style="margin-left:auto;" onclick="refreshPlayer()"><i class="fas fa-sync"></i> REFRESH</button>
                     </div>
@@ -105,13 +103,13 @@
 
                 <div class="anime-info">
                     <h1 class="anime-title" id="m-title">LOADING...</h1>
-                    <div id="m-meta" style="margin-bottom:20px; color:var(--primary); font-weight:800; font-size:0.8rem;">EPISODE 1</div>
+                    <div id="m-meta" style="margin-bottom:20px; color:var(--primary); font-weight:800; font-size:0.9rem; text-transform: uppercase;">EPISODE 1</div>
                     <p class="anime-desc" id="m-desc">Fetching latest transmission data...</p>
                 </div>
             </div>
 
             <div class="episode-panel">
-                <h3 style="margin:0; font-size:1rem; letter-spacing:1px;">SELECT EPISODE</h3>
+                <h3 style="margin:0; font-size:1rem; letter-spacing:1px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">EPISODES</h3>
                 <div class="ep-grid" id="ep-grid"></div>
             </div>
         </div>
@@ -198,31 +196,28 @@
             document.getElementById('m-meta').innerText = `EPISODE ${curEp}`;
             
             let u;
+            // Updated Server Logic for 2026
             if(curServ==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
-            else if(curServ==='vidsrc_cc') u=`https://vidsrc.cc/v3/embed/anime/${curId}/${curEp}`;
             else if(curServ==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
-            else if(curServ==='embed_su') u=`https://embed.su/embed/anime/${curId}/${curEp}`;
+            else if(curServ==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
+            else if(curServ==='vidsrc_pro') u=`https://vidsrc.pro/embed/anime/${curId}/${curEp}`;
+            else if(curServ==='vidsrc_cc') u=`https://vidsrc.cc/v3/embed/anime/${curId}/${curEp}`;
             
             container.innerHTML = `
-                <div id="loader"><div class="spinner"></div><div style="font-size:0.7rem; letter-spacing:2px; color:var(--primary)">ESTABLISHING CONNECTION...</div></div>
+                <div id="loader"><div class="spinner"></div><div style="font-size:0.7rem; letter-spacing:2px; color:var(--primary)">ESTABLISHING TRANSMISSION...</div></div>
                 <iframe src="${u}" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>
             `;
         }
 
         function setServ(s){
             curServ = s;
-            document.querySelectorAll('.serv-btn').forEach(b => {
-                if(b.innerText.toLowerCase().includes(s.split('_')[1] || s)) b.classList.add('active');
-                else b.classList.remove('active');
-            });
-            // Manual server active state fix
             const btns = document.querySelectorAll('.serv-btn');
             btns.forEach(btn => btn.classList.remove('active'));
             if(s==='vidsrc_to') btns[0].classList.add('active');
-            if(s==='vidsrc_cc') btns[1].classList.add('active');
-            if(s==='vidsrc_me') btns[2].classList.add('active');
-            if(s==='embed_su') btns[3].classList.add('active');
-
+            if(s==='vidsrc_me') btns[1].classList.add('active');
+            if(s==='vidsrc_xyz') btns[2].classList.add('active');
+            if(s==='vidsrc_pro') btns[3].classList.add('active');
+            if(s==='vidsrc_cc') btns[4].classList.add('active');
             loadPlayer();
         }
 
