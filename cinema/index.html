@@ -17,7 +17,7 @@
         .card:hover { transform: translateY(-10px); border-color:var(--primary); box-shadow:0 10px 30px rgba(255,107,0,0.2); }
         .card img { width:100%; height:100%; object-fit:cover; }
         .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:2000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(10px); }
-        .modal-content { width:90%; max-width:1100px; background:#000; border:1px solid #333; border-radius:16px; overflow:hidden; position:relative; box-shadow:0 0 100px rgba(0,0,0,1); }
+        .modal-content { width:95%; max-width:1200px; background:#000; border:1px solid #333; border-radius:16px; overflow:hidden; position:relative; box-shadow:0 0 100px rgba(0,0,0,1); }
         .player-container { width:100%; aspect-ratio:16/9; background:#000; position:relative; }
         .player-loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--primary); font-size:2rem; animation: spin 1s linear infinite; display:none; }
         @keyframes spin { 100% { transform:translate(-50%,-50%) rotate(360deg); } }
@@ -48,13 +48,17 @@
                 <div id="player_wrap" style="width:100%; height:100%;"></div>
             </div>
             <div class="controls">
-                <h2 id="title" style="margin:0; font-family:'Bangers'; color:var(--primary); font-size:1.5rem; letter-spacing:1px;">WATCHING</h2>
+                <div style="display:flex; flex-direction:column; gap:5px;">
+                    <h2 id="title" style="margin:0; font-family:'Bangers'; color:var(--primary); font-size:1.5rem; letter-spacing:1px;">WATCHING</h2>
+                    <span id="ep-title" style="font-size:0.8rem; color:#888;">EPISODE 1</span>
+                </div>
                 <div style="display:flex; align-items:center;">
                     <select id="serv" onchange="loadP(this.value)">
-                        <option value="vidsrc_to">Server 1 (Primary)</option>
-                        <option value="vidsrc_me">Server 2 (Fallback)</option>
-                        <option value="embed_su">Server 3 (Speed)</option>
-                        <option value="vidsrc_icu">Server 4 (Safety)</option>
+                        <option value="vidsrc_cc">Server 1 (Elite - Stable)</option>
+                        <option value="vidsrc_me">Server 2 (Legacy - Backup)</option>
+                        <option value="vidsrc_to">Server 3 (Classic)</option>
+                        <option value="embed_su">Server 4 (Direct)</option>
+                        <option value="vidsrc_xyz">Server 5 (Direct V2)</option>
                     </select>
                     <button class="fs-btn" onclick="toggleFS()" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
                 </div>
@@ -64,7 +68,7 @@
     </div>
     <script>
         const API = 'https://api.jikan.moe/v4';
-        let curId, curEp=1, totalEps=12, curServ='vidsrc_to';
+        let curId, curEp=1, totalEps=12, curServ='vidsrc_cc';
         async function init(){ try { const r = await fetch(API+'/top/anime?filter=airing&limit=24'); const d = await r.json(); render(d.data); } catch(e){ console.error(e); } }
         function render(data){ 
             const g = document.getElementById('grid'); 
@@ -75,11 +79,58 @@
             }).join(''); 
         }
         async function search(){ const q = document.getElementById('q').value; if(!q) return; const r = await fetch(API+'/anime?q='+q); const d = await r.json(); render(d.data); }
-        async function watch(id, t){ curId = id; curEp = 1; document.getElementById('modal').style.display = 'flex'; document.getElementById('title').innerText = t; document.body.style.overflow = 'hidden'; try { const r = await fetch(API+'/anime/'+id); const d = await r.json(); totalEps = d.data.episodes || 12; renderEps(); loadP(curServ); } catch(e){ renderEps(); loadP(curServ); } }
-        function renderEps(){ const e = document.getElementById('eps'); e.innerHTML = ''; for(let i=1; i<=totalEps; i++){ const b = document.createElement('button'); b.className = 'btn-ep' + (i===curEp ? ' active':''); b.innerText = i; b.onclick = () => { curEp=i; renderEps(); loadP(curServ); }; e.appendChild(b); } }
-        function loadP(s){ curServ = s; let u; document.getElementById('loader').style.display = 'block'; if(s==='vidsrc_to') u='https://vidsrc.to/embed/anime/'+curId+'/'+curEp; else if(s==='vidsrc_me') u='https://vidsrc.me/embed/anime?malid='+curId+'&episode='+curEp; else if(s==='embed_su') u='https://embed.su/embed/anime/'+curId+'/'+curEp; else if(s==='vidsrc_icu') u='https://vidsrc.icu/embed/anime/'+curId+'/'+curEp; document.getElementById('player_wrap').innerHTML = `<iframe src="${u}" style="width:100%; height:100%; border:none;" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>`; }
-        function closeP(){ document.getElementById('modal').style.display='none'; document.getElementById('player_wrap').innerHTML=''; document.body.style.overflow = 'auto'; }
-        function toggleFS(){ const el = document.querySelector('.modal-content'); if (!document.fullscreenElement) { if(el.requestFullscreen) el.requestFullscreen(); } else { if(document.exitFullscreen) document.exitFullscreen(); } }
+        async function watch(id, t){ 
+            curId = id; curEp = 1; 
+            document.getElementById('modal').style.display = 'flex'; 
+            document.getElementById('title').innerText = t; 
+            document.body.style.overflow = 'hidden'; 
+            try { 
+                const r = await fetch(API+'/anime/'+id); 
+                const d = await r.json(); 
+                totalEps = d.data.episodes || 12; 
+                renderEps(); loadP(curServ); 
+            } catch(e){ renderEps(); loadP(curServ); } 
+        }
+        function renderEps(){ 
+            const e = document.getElementById('eps'); 
+            e.innerHTML = ''; 
+            document.getElementById('ep-title').innerText = 'EPISODE ' + curEp;
+            for(let i=1; i<=totalEps; i++){ 
+                const b = document.createElement('button'); 
+                b.className = 'btn-ep' + (i===curEp ? ' active':''); 
+                b.innerText = i; 
+                b.onclick = () => { curEp=i; renderEps(); loadP(curServ); }; 
+                e.appendChild(b); 
+            } 
+        }
+        function loadP(s){ 
+            curServ = s; 
+            let u; 
+            document.getElementById('loader').style.display = 'block'; 
+            // Optimized Server URLs
+            if(s==='vidsrc_cc') u=`https://vidsrc.cc/v2/embed/anime/${curId}/${curEp}`;
+            else if(s==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
+            else if(s==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
+            else if(s==='embed_su') u=`https://embed.su/embed/anime/${curId}/${curEp}`;
+            else if(s==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
+            
+            document.getElementById('player_wrap').innerHTML = `<iframe src="${u}" style="width:100%; height:100%; border:none;" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>`;
+        }
+        function closeP(){ 
+            document.getElementById('modal').style.display='none'; 
+            document.getElementById('player_wrap').innerHTML=''; 
+            document.body.style.overflow = 'auto'; 
+        }
+        function toggleFS(){ 
+            const el = document.querySelector('.modal-content'); 
+            if (!document.fullscreenElement) { 
+                if(el.requestFullscreen) el.requestFullscreen(); 
+                else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+                else if(el.msRequestFullscreen) el.msRequestFullscreen();
+            } else { 
+                if(document.exitFullscreen) document.exitFullscreen(); 
+            } 
+        }
         init();
     </script>
 </body>
