@@ -7,102 +7,98 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #FF6B00; --bg: #050505; --card-bg: #111; }
+        :root { --primary: #FF6B00; --bg: #050505; --card-bg: #111; --panel-bg: #0A0A0A; }
         body { margin:0; background:var(--bg); color:#fff; font-family:'Space Mono', monospace; overflow-x:hidden; }
         
         /* Navigation */
         nav { background:#000; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; position:sticky; top:0; z-index:100; }
         .logo { font-family:'Bangers'; font-size:2rem; color:var(--primary); text-decoration:none; letter-spacing:1px; text-shadow: 0 0 10px rgba(255,107,0,0.5); }
-        .search-container { position: relative; }
-        .search-bar { background:#111; border:1px solid #333; padding:10px 20px; color:#fff; border-radius:30px; width:300px; font-family:inherit; outline: none; transition: 0.3s; }
-        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,107,0,0.2); }
+        .search-bar { background:#111; border:1px solid #333; padding:10px 20px; color:#fff; border-radius:30px; width:250px; font-family:inherit; outline: none; transition: 0.3s; }
+        .search-bar:focus { border-color: var(--primary); }
 
         /* Grid */
-        .anime-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:30px; padding:40px 5%; }
-        .card { aspect-ratio:2/3; background:var(--card-bg); border-radius:12px; overflow:hidden; cursor:pointer; position:relative; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border:1px solid #222; }
-        .card:hover { transform: translateY(-12px) scale(1.02); border-color:var(--primary); box-shadow:0 15px 35px rgba(255,107,0,0.3); }
-        .card img { width:100%; height:100%; object-fit:cover; transition: 0.5s; }
-        .card:hover img { filter: brightness(0.6); }
-        .card-info { position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(transparent, rgba(0,0,0,0.95)); transform: translateY(10px); transition: 0.3s; }
-        .card:hover .card-info { transform: translateY(0); }
-        .card-title { font-weight:bold; font-size:1rem; margin-bottom:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .card-ep { color:var(--primary); font-size:0.8rem; font-weight:bold; text-transform:uppercase; }
+        .anime-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:25px; padding:40px 5%; min-height: 80vh; }
+        .card { aspect-ratio:2/3; background:var(--card-bg); border-radius:12px; overflow:hidden; cursor:pointer; position:relative; transition: 0.3s ease; border:1px solid #222; }
+        .card:hover { transform: translateY(-8px); border-color:var(--primary); }
+        .card img { width:100%; height:100%; object-fit:cover; }
+        .card-info { position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(transparent, rgba(0,0,0,0.9)); }
+        .card-title { font-weight:bold; font-size:0.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-        /* Modal / Player */
-        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:1000; justify-content:center; align-items:center; backdrop-filter: blur(10px); }
-        .modal-content { width:90%; max-width:1200px; position:relative; animation: slideUp 0.5s ease; background:#000; border:1px solid #333; border-radius:15px; overflow:hidden; }
-        @keyframes slideUp { from { opacity:0; transform:translateY(50px); } to { opacity:1; transform:translateY(0); } }
+        /* Cinema Overlay (V7 - Scrollable Layer) */
+        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:1000; overflow-y: auto; padding-bottom: 50px; }
+        .cinema-header { padding: 20px 5%; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; background: var(--bg); z-index: 10; }
         
-        #player_wrap { width:100%; aspect-ratio:16/9; background:#000; position:relative; }
-        .controls { background:#111; padding:20px; display:flex; flex-wrap:wrap; gap:15px; align-items:center; border-top:1px solid #222; }
-        .server-select { background:#222; color:#fff; border:1px solid #444; padding:10px 15px; border-radius:8px; font-family:inherit; outline:none; cursor:pointer; }
-        .btn { background:var(--primary); color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.3s; display:flex; align-items:center; gap:8px; }
-        .btn:hover { filter: brightness(1.2); transform: scale(1.05); }
-        .btn-secondary { background: #333; }
+        .player-container { width: 90%; max-width: 1400px; margin: 30px auto; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+        #player_wrap { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
         
-        .episode-selector { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-        .ep-input { background: #222; border: 1px solid #444; color: #fff; width: 60px; padding: 10px; border-radius: 8px; text-align: center; }
+        .cinema-sidebar { width: 90%; max-width: 1400px; margin: 20px auto; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        @media (max-width: 1000px) { .cinema-sidebar { grid-template-columns: 1fr; } }
+
+        .info-panel { background: var(--panel-bg); padding: 25px; border-radius: 12px; border: 1px solid #1a1a1a; }
+        .ep-panel { background: var(--panel-bg); padding: 25px; border-radius: 12px; border: 1px solid #1a1a1a; max-height: 600px; overflow-y: auto; }
+        
+        .ep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 10px; margin-top: 15px; }
+        .ep-btn { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 6px; cursor: pointer; text-align: center; font-size: 0.8rem; transition: 0.2s; }
+        .ep-btn:hover, .ep-btn.active { background: var(--primary); border-color: var(--primary); }
+
+        .btn { background: #222; color: #fff; border: 1px solid #333; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; font-family: inherit; }
+        .btn-primary { background: var(--primary); border-color: var(--primary); }
+        .btn:hover { background: #333; }
+        .back-btn { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .server-tray { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .serv-btn { background: #111; border: 1px solid #222; color: #aaa; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+        .serv-btn.active { border-color: var(--primary); color: #fff; background: rgba(255,107,0,0.1); }
 
         /* Loader */
         #loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index: 10; }
-        .spinner { width:60px; height:60px; border:4px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 1s infinite linear; margin-bottom:15px; }
+        .spinner { width:50px; height:50px; border:3px solid rgba(255,107,0,0.1); border-top-color:var(--primary); border-radius:50%; animation:spin 1s infinite linear; }
         @keyframes spin { to { transform:rotate(360deg); } }
 
-        .close-btn { position:absolute; top:-50px; right:0; font-size:2rem; color:#fff; cursor:pointer; transition: 0.3s; }
-        .close-btn:hover { color: var(--primary); }
-
-        @media (max-width: 768px) {
-            .search-bar { width: 150px; }
-            .controls { flex-direction: column; align-items: stretch; }
-            .episode-selector { margin-left: 0; justify-content: space-between; }
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
     </style>
 </head>
 <body>
-    <nav>
+    <nav id="main-nav">
         <a href="/" class="logo">DREAMING ANIME</a>
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search anime..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
-        </div>
+        <input type="text" class="search-bar" placeholder="Search shows..." onkeyup="if(event.key==='Enter') searchAnime(this.value)">
     </nav>
 
-    <div id="grid" class="anime-grid">
-        <!-- Skeleton Loaders -->
-        <div class="card" style="opacity:0.1"></div>
-        <div class="card" style="opacity:0.1"></div>
-        <div class="card" style="opacity:0.1"></div>
-        <div class="card" style="opacity:0.1"></div>
-    </div>
+    <div id="grid" class="anime-grid"></div>
 
     <div id="modal">
-        <div class="modal-content">
-            <i class="fas fa-times close-btn" onclick="closeP()"></i>
-            <div id="player_wrap">
-                <div id="loader">
-                    <div class="spinner"></div>
-                    <div style="font-size:0.9rem; letter-spacing:2px;">INITIALIZING SERVER...</div>
-                </div>
-            </div>
-            <div class="controls">
-                <select id="serv" class="server-select" onchange="loadP(this.value)">
-                    <option value="vidsrc_to">Server 1 (Elite - Recommended)</option>
-                    <option value="vidsrc_cc">Server 2 (High Performance)</option>
-                    <option value="vidsrc_xyz">Server 3 (Direct V2)</option>
-                    <option value="vidsrc_me">Server 4 (Classic)</option>
-                    <option value="embed_su">Server 5 (Mirror)</option>
-                </select>
-                
-                <div class="episode-selector">
-                    <span>EPISODE</span>
-                    <input type="number" id="ep_num" class="ep-input" value="1" min="1" onchange="changeEp(this.value)">
-                    <button class="btn btn-secondary" onclick="changeEp(parseInt(document.getElementById('ep_num').value) + 1)">NEXT <i class="fas fa-chevron-right"></i></button>
-                </div>
+        <div class="cinema-header">
+            <button class="btn back-btn" onclick="closeP()"><i class="fas fa-arrow-left"></i> BACK TO HUB</button>
+            <h2 id="m_title" style="margin:0; font-family:'Bangers'; color:var(--primary); font-size:1.5rem;">LOADING...</h2>
+        </div>
 
-                <button class="btn" onclick="toggleFS()"><i class="fas fa-expand"></i> FULLSCREEN</button>
+        <div class="player-container">
+            <div id="player_wrap"></div>
+        </div>
+
+        <div class="cinema-sidebar">
+            <div class="info-panel">
+                <div class="server-tray" id="server-tray">
+                    <button class="serv-btn active" onclick="loadP('vidsrc_to')">SERVER 1</button>
+                    <button class="serv-btn" onclick="loadP('vidsrc_cc')">SERVER 2</button>
+                    <button class="serv-btn" onclick="loadP('vidsrc_me')">SERVER 3</button>
+                    <button class="serv-btn" onclick="loadP('embed_su')">SERVER 4</button>
+                    <button class="serv-btn" onclick="loadP('vidsrc_xyz')">SERVER 5</button>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3 id="cur_ep_label" style="margin:0;">EPISODE 1</h3>
+                    <button class="btn btn-primary" onclick="changeEp(curEp + 1)">NEXT EPISODE <i class="fas fa-forward"></i></button>
+                </div>
+                <p id="m_desc" style="color:#888; font-size:0.9rem; line-height:1.6; margin-top:20px;">Fetching metadata...</p>
             </div>
-            <div style="padding: 15px 20px; background: #080808; border-top: 1px solid #1a1a1a;">
-                <h3 id="m_title" style="margin:0; font-size: 1.2rem; color: #fff;">Show Title</h3>
-                <p id="m_meta" style="margin:5px 0 0; font-size: 0.8rem; color: #666;">Anime ID: -- | Current Server: --</p>
+
+            <div class="ep-panel">
+                <h4 style="margin:0 0 15px 0; border-bottom:1px solid #222; padding-bottom:10px;">EPISODES</h4>
+                <div class="ep-grid" id="ep-grid"></div>
             </div>
         </div>
     </div>
@@ -112,16 +108,16 @@
         let curId = null;
         let curEp = 1;
         let curServ = 'vidsrc_to';
-        let curTitle = '';
+        let totalEps = 0;
 
         async function init(){ 
+            const g = document.getElementById('grid');
+            g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:100px;"><div class="spinner" style="margin:auto"></div></div>';
             try { 
                 const r = await fetch(`${API}/top/anime?filter=airing&limit=24`); 
                 const d = await r.json(); 
-                if(d.data) render(d.data); 
+                render(d.data); 
             } catch(e){ 
-                console.error('Initial load failed:', e);
-                // Fallback to generic popular if airing fails
                 const r = await fetch(`${API}/top/anime?limit=24`);
                 const d = await r.json();
                 render(d.data);
@@ -135,9 +131,7 @@
                 const r = await fetch(`${API}/anime?q=${encodeURIComponent(q)}&limit=24`);
                 const d = await r.json();
                 render(d.data);
-            } catch(e) {
-                console.error('Search failed:', e);
-            }
+            } catch(e) {}
         }
 
         function render(data){
@@ -147,79 +141,84 @@
                 return;
             }
             g.innerHTML = data.map(i => `
-                <div class="card" onclick="openP(${i.mal_id}, 1, '${i.title.replace(/'/g,"\\'")}')">
+                <div class="card" onclick="openP(${i.mal_id}, 1)">
                     <img src="${i.images.webp.large_image_url || i.images.jpg.large_image_url}" loading="lazy">
                     <div class="card-info">
-                        <div class="card-ep">${i.type || 'Anime'} • ${i.episodes || '?'} EPS</div>
                         <div class="card-title">${i.title}</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function openP(id, ep, title){
+        async function openP(id, ep){
             curId = id;
             curEp = ep;
-            curTitle = title;
-            document.getElementById('m_title').innerText = title;
-            document.getElementById('ep_num').value = ep;
-            document.getElementById('modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('main-nav').style.display = 'none';
+            window.scrollTo(0,0);
+
+            // Fetch Detail
+            try {
+                const r = await fetch(`${API}/anime/${id}`);
+                const d = await r.json();
+                const anime = d.data;
+                document.getElementById('m_title').innerText = anime.title;
+                document.getElementById('m_desc').innerText = anime.synopsis || 'No description available.';
+                totalEps = anime.episodes || 24;
+                renderEpList(totalEps);
+            } catch(e) {
+                totalEps = 24;
+                renderEpList(24);
+            }
+
             loadP(curServ);
+        }
+
+        function renderEpList(count){
+            const grid = document.getElementById('ep-grid');
+            let html = '';
+            for(let i=1; i<=count; i++){
+                html += `<button class="ep-btn ${i===curEp?'active':''}" onclick="changeEp(${i})">${i}</button>`;
+            }
+            grid.innerHTML = html;
         }
 
         function loadP(s){ 
             curServ = s; 
-            const playerWrap = document.getElementById('player_wrap');
-            const loader = document.getElementById('loader');
-            const meta = document.getElementById('m_meta');
-            
-            loader.style.display = 'block'; 
-            meta.innerText = `Anime ID: ${curId} | Episode: ${curEp} | Server: ${s}`;
+            document.querySelectorAll('.serv-btn').forEach(b => b.classList.remove('active'));
+            const servMap = {vidsrc_to:0, vidsrc_cc:1, vidsrc_me:2, embed_su:3, vidsrc_xyz:4};
+            document.querySelectorAll('.serv-btn')[servMap[s]].classList.add('active');
+
+            const wrap = document.getElementById('player_wrap');
+            document.getElementById('cur_ep_label').innerText = `EPISODE ${curEp}`;
             
             let u; 
-            // Most up-to-date anime embed logic
             if(s==='vidsrc_to') u=`https://vidsrc.to/embed/anime/${curId}/${curEp}`;
             else if(s==='vidsrc_cc') u=`https://vidsrc.cc/v3/embed/anime/${curId}/${curEp}`;
-            else if(s==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
             else if(s==='vidsrc_me') u=`https://vidsrc.me/embed/anime?malid=${curId}&episode=${curEp}`;
+            else if(s==='vidsrc_xyz') u=`https://vidsrc.xyz/embed/anime/${curId}/${curEp}`;
             else if(s==='embed_su') u=`https://embed.su/embed/anime/${curId}/${curEp}`;
             
-            // Clean player logic with robust onload and failover
-            playerWrap.innerHTML = `
-                <div id="loader">
-                    <div class="spinner"></div>
-                    <div style="font-size:0.9rem; letter-spacing:2px;">CONNECTING TO ${s.toUpperCase()}...</div>
-                </div>
-                <iframe src="${u}" 
-                    style="width:100%; height:100%; border:none; position:absolute; top:0; left:0;" 
-                    allowfullscreen 
-                    referrerpolicy="no-referrer" 
-                    onload="this.previousElementSibling.style.display='none'">
-                </iframe>`;
+            wrap.innerHTML = `
+                <div id="loader"><div class="spinner"></div></div>
+                <iframe src="${u}" style="width:100%;height:100%;border:none;position:absolute;top:0;left:0;" allowfullscreen referrerpolicy="no-referrer" onload="document.getElementById('loader').style.display='none'"></iframe>
+            `;
         }
 
         function changeEp(ep){
-            if(ep < 1) return;
+            if(ep < 1 || ep > totalEps) return;
             curEp = ep;
-            document.getElementById('ep_num').value = ep;
+            document.querySelectorAll('.ep-btn').forEach((b, idx) => {
+                if(idx + 1 === ep) b.classList.add('active');
+                else b.classList.remove('active');
+            });
             loadP(curServ);
         }
 
         function closeP(){ 
             document.getElementById('modal').style.display='none'; 
+            document.getElementById('main-nav').style.display='flex';
             document.getElementById('player_wrap').innerHTML=''; 
-            document.body.style.overflow = 'auto'; 
-        }
-
-        function toggleFS(){ 
-            const el = document.getElementById('player_wrap'); 
-            if (!document.fullscreenElement) { 
-                if(el.requestFullscreen) el.requestFullscreen(); 
-                else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-            } else { 
-                if(document.exitFullscreen) document.exitFullscreen(); 
-            } 
         }
 
         init();
