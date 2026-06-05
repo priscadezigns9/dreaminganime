@@ -258,7 +258,7 @@
             mangas.forEach(manga => {
                 const card = document.createElement('div');
                 card.className = 'manga-card';
-                card.onclick = () => read(manga.title);
+                card.onclick = () => read(manga.title, manga.mal_id);
                 card.innerHTML = `
                     <span class="live-tag">SYNCED</span>
                     <img src="${manga.images.jpg.large_image_url}" class="manga-img" alt="${manga.title}">
@@ -272,45 +272,65 @@
             });
         }
 
-        async function read(title) {
+        async function read(title, malId) {
             const modal = document.getElementById('reader-modal');
             const rTitle = document.getElementById('reader-title');
             const loader = document.getElementById('reader-loader');
             const content = document.getElementById('reader-content');
             const controls = document.getElementById('reader-controls');
             
+            modal.classList.add('active');
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             rTitle.innerText = `INITIALIZING: ${title.toUpperCase()}`;
             content.querySelectorAll('.manga-page').forEach(img => img.remove());
             loader.style.display = 'block';
+            loader.innerHTML = `<div class="loader"></div><p style="font-family:'Space Mono'; color:var(--primary); margin-top:20px; font-size: 0.8rem;">INITIATING DIRECT-READ PROTOCOL...</p>`;
             controls.style.display = 'none';
 
             try {
-                // 1. Search MangaDex for ID
-                const searchRes = await fetch(`${MD_API}/manga?title=${encodeURIComponent(title)}&limit=1&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`);
-                const searchData = await searchRes.json();
+                let mangaDexData = null;
                 
-                if (!searchData.data || searchData.data.length === 0) throw new Error("Manga not found");
+                // 1. Precise MAL ID lookup
+                if (malId) {
+                    try {
+                        const malRes = await fetch(`${MD_API}/manga?links[mal]=${malId}&limit=1`);
+                        const malData = await malRes.json();
+                        if (malData.data && malData.data.length > 0) {
+                            mangaDexData = malData.data[0];
+                        }
+                    } catch (e) { console.error("MAL ID lookup failed", e); }
+                }
                 
-                currentMangaId = searchData.data[0].id;
+                // 2. Fallback to Title Search
+                if (!mangaDexData) {
+                    const searchRes = await fetch(`${MD_API}/manga?title=${encodeURIComponent(title)}&limit=1&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`);
+                    const searchData = await searchRes.json();
+                    if (searchData.data && searchData.data.length > 0) {
+                        mangaDexData = searchData.data[0];
+                    }
+                }
                 
-                // 2. Fetch all English chapters
+                if (!mangaDexData) throw new Error("Manga Not Found on MangaDex");
+                
+                currentMangaId = mangaDexData.id;
+                
+                // 3. Fetch all English chapters
                 await fetchChapters();
                 
                 if (chapters.length === 0) {
                     throw new Error("No English chapters found");
                 }
 
-                // 3. Load the first chapter
+                // 4. Load the first chapter
                 currentChapterIndex = 0;
                 loadChapter(chapters[0].id);
                 
             } catch (err) {
                 console.error("Reader Error:", err);
                 loader.innerHTML = `
-                    <p style="color: var(--primary); font-family: 'Space Mono';">ENCRYPTION ERROR: SOVEREIGN READ FAILED.</p>
-                    <button class="nav-btn" style="margin-top: 20px;" onclick="window.open('https://mangadex.org/search?q=${encodeURIComponent(title)}')">READ ON MANGADEX</button>
+                    <p style="color: var(--primary); font-family: 'Space Mono';">${err.message.toUpperCase()}</p>
+                    <button class="nav-btn" style="margin-top: 20px;" onclick="window.open('https://mangadex.org/search?q=${encodeURIComponent(title)}')">TRY ON MANGADEX</button>
                 `;
             }
         }
@@ -363,6 +383,7 @@
             updateChapterSelect();
             
             loader.style.display = 'block';
+            loader.innerHTML = `<div class="loader"></div><p style="font-family:'Space Mono'; color:var(--primary); margin-top:20px; font-size: 0.8rem;">FETCHING PAGES FROM MANGADEX...</p>`;
             controls.style.display = 'flex';
             content.querySelectorAll('.manga-page').forEach(img => img.remove());
             loadingBar.style.width = '0%';
@@ -371,19 +392,21 @@
             document.getElementById('next-ch').disabled = currentChapterIndex >= chapters.length - 1;
 
             try {
-                // Get At-Home server and images
                 const res = await fetch(`${MD_API}/at-home/server/${chapterId}`);
+                if (!res.ok) throw new Error("Chapter Fetch Error");
                 const data = await res.json();
                 const baseUrl = data.baseUrl;
                 const hash = data.chapter.hash;
-                const pages = data.chapter.data; // High quality
+                const pages = data.chapter.data;
+
+                if (!pages || pages.length === 0) throw new Error("No pages found in chapter");
 
                 let loadedCount = 0;
-                
                 pages.forEach((page, index) => {
                     const img = document.createElement('img');
                     img.className = 'manga-page';
                     img.src = `${baseUrl}/data/${hash}/${page}`;
+                    img.referrerPolicy = "no-referrer";
                     img.loading = 'lazy';
                     img.onload = () => {
                         loadedCount++;
@@ -400,7 +423,10 @@
 
             } catch (err) {
                 console.error("Chapter Load Error:", err);
-                loader.innerHTML = `<p style="color: var(--primary);">FAILED TO LOAD PAGES. RETRYING...</p>`;
+                loader.innerHTML = `
+                    <p style="color: var(--primary); font-family: 'Space Mono';">${err.message.toUpperCase()}</p>
+                    <button class="nav-btn" style="margin-top: 20px;" onclick="location.reload()">RELOAD SYSTEM</button>
+                `;
             }
         }
 
@@ -413,9 +439,12 @@
 
         function closeReader() {
             const modal = document.getElementById('reader-modal');
+            modal.classList.remove('active');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            document.getElementById('reader-content').querySelectorAll('.manga-page').forEach(img => img.remove());
+            const content = document.getElementById('reader-content');
+            content.querySelectorAll('.manga-page').forEach(img => img.remove());
+            document.getElementById('reader-loader').innerHTML = '';
         }
 
         window.onload = loadMangaVault;
