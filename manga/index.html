@@ -32,8 +32,10 @@
             width: 100%; height: 100%;
             background: #000;
             z-index: 2000;
+            flex-direction: column;
         }
-        #reader-modal.active { display: block; }
+        #reader-modal.active { display: flex; }
+        
         .reader-header {
             height: 60px;
             background: #111;
@@ -42,7 +44,40 @@
             justify-content: space-between;
             padding: 0 20px;
             border-bottom: 1px solid #222;
+            flex-shrink: 0;
         }
+        
+        .reader-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chapter-select {
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .nav-btn {
+            background: rgba(255,107,0,0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .nav-btn:hover:not(:disabled) { background: var(--primary); color: #000; }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
         .close-reader {
             color: var(--primary);
             font-size: 0.9rem;
@@ -56,11 +91,35 @@
             transition: 0.3s;
         }
         .close-reader:hover { background: var(--primary); color: #000; }
-        .reader-frame {
-            width: 100%;
-            height: calc(100% - 60px);
-            border: none;
+        
+        #reader-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            scroll-behavior: smooth;
         }
+        
+        .manga-page {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 0;
+            display: block;
+        }
+
+        .loading-progress {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
+            z-index: 2001;
+        }
+        
         .loader-container {
             position: absolute;
             top: 50%; left: 50%;
@@ -116,7 +175,7 @@
     <div style="text-align:center; padding:80px 20px 20px;">
         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_shop_header.webp" style="height:180px; filter:drop-shadow(0 0 30px rgba(255,107,0,0.3));" alt="Mimi Vault">
         <h1 style="font-family:'Bangers',cursive; font-size:5rem; line-height: 1; margin: 10px 0;">THE MANGA VAULT</h1>
-        <p style="font-family:'Space Mono'; color:var(--primary); letter-spacing: 2px;">CHAPTER 05 &mdash; REAL-TIME DATA ARCHIVE</p>
+        <p style="font-family:'Space Mono'; color:var(--primary); letter-spacing: 2px;">SOVEREIGN READ PROTOCOL &mdash; v2.0</p>
     </div>
 
     <div class="search-container">
@@ -130,20 +189,36 @@
 
     <!-- Reader Modal -->
     <div id="reader-modal">
+        <div id="loading-bar" class="loading-progress"></div>
         <div class="reader-header">
-            <span id="reader-title" style="font-family:'Bangers'; font-size:1.2rem; color: #fff; letter-spacing: 1px;">READING...</span>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <span id="reader-title" style="font-family:'Bangers'; font-size:1.2rem; color: #fff; letter-spacing: 1px;">READING...</span>
+                <div class="reader-controls" id="reader-controls" style="display: none;">
+                    <button class="nav-btn" id="prev-ch" onclick="changeChapter(-1)">PREV</button>
+                    <select class="chapter-select" id="chapter-select" onchange="loadChapter(this.value)"></select>
+                    <button class="nav-btn" id="next-ch" onclick="changeChapter(1)">NEXT</button>
+                </div>
+            </div>
             <button class="close-reader" onclick="closeReader()">[ CLOSE ]</button>
         </div>
-        <div id="reader-loader" class="loader-container">
-            <div class="loader"></div>
-            <p style="font-family:'Space Mono'; color:var(--primary); margin-top:20px; font-size: 0.8rem;">INITIATING DIRECT-READ PROTOCOL...</p>
+        
+        <div id="reader-content">
+            <div id="reader-loader" class="loader-container">
+                <div class="loader"></div>
+                <p style="font-family:'Space Mono'; color:var(--primary); margin-top:20px; font-size: 0.8rem;">INITIATING DIRECT-READ PROTOCOL...</p>
+            </div>
+            <!-- Images will be injected here -->
         </div>
-        <iframe id="reader-frame" class="reader-frame"></iframe>
     </div>
 
     <script>
         const JIKAN_API = 'https://api.jikan.moe/v4';
         const MD_API = 'https://api.mangadex.org';
+        const MD_IMAGE_SERVER = 'https://uploads.mangadex.org';
+
+        let currentMangaId = null;
+        let chapters = [];
+        let currentChapterIndex = -1;
 
         async function loadMangaVault() {
             const grid = document.getElementById('manga-grid');
@@ -199,16 +274,17 @@
 
         async function read(title) {
             const modal = document.getElementById('reader-modal');
-            const frame = document.getElementById('reader-frame');
             const rTitle = document.getElementById('reader-title');
             const loader = document.getElementById('reader-loader');
+            const content = document.getElementById('reader-content');
+            const controls = document.getElementById('reader-controls');
             
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             rTitle.innerText = `INITIALIZING: ${title.toUpperCase()}`;
-            frame.style.display = 'none';
+            content.querySelectorAll('.manga-page').forEach(img => img.remove());
             loader.style.display = 'block';
-            frame.src = 'about:blank';
+            controls.style.display = 'none';
 
             try {
                 // 1. Search MangaDex for ID
@@ -217,45 +293,129 @@
                 
                 if (!searchData.data || searchData.data.length === 0) throw new Error("Manga not found");
                 
-                const mangaId = searchData.data[0].id;
+                currentMangaId = searchData.data[0].id;
                 
-                // 2. Find first English chapter
-                const feedRes = await fetch(`${MD_API}/manga/${mangaId}/feed?translatedLanguage[]=en&order[chapter]=asc&limit=1&includeExternalVol=0`);
-                const feedData = await feedRes.json();
+                // 2. Fetch all English chapters
+                await fetchChapters();
                 
-                if (!feedData.data || feedData.data.length === 0) {
-                     // Fallback 1: Open the MangaDex title page in embed-like view if possible, or just normal
-                     console.log("Direct-read: No specific English chapters found. Falling back to MangaDex title page.");
-                     frame.src = `https://mangadex.org/title/${mangaId}`;
-                } else {
-                    const chapterId = feedData.data[0].id;
-                    console.log("Direct-read: ACTIVE. Chapter ID:", chapterId);
-                    frame.src = `https://mangadex.org/embed/${chapterId}`;
+                if (chapters.length === 0) {
+                    throw new Error("No English chapters found");
                 }
-                
-                frame.onload = () => {
-                    loader.style.display = 'none';
-                    frame.style.display = 'block';
-                    rTitle.innerText = `PLAYING: ${title.toUpperCase()}`;
-                };
+
+                // 3. Load the first chapter
+                currentChapterIndex = 0;
+                loadChapter(chapters[0].id);
                 
             } catch (err) {
                 console.error("Reader Error:", err);
-                // Fallback 2: Search on MangaDex
-                frame.src = `https://mangadex.org/search?q=${encodeURIComponent(title)}`;
-                frame.onload = () => {
-                    loader.style.display = 'none';
-                    frame.style.display = 'block';
-                };
+                loader.innerHTML = `
+                    <p style="color: var(--primary); font-family: 'Space Mono';">ENCRYPTION ERROR: SOVEREIGN READ FAILED.</p>
+                    <button class="nav-btn" style="margin-top: 20px;" onclick="window.open('https://mangadex.org/search?q=${encodeURIComponent(title)}')">READ ON MANGADEX</button>
+                `;
+            }
+        }
+
+        async function fetchChapters() {
+            let allChapters = [];
+            let offset = 0;
+            let total = 1;
+
+            while (offset < total) {
+                const res = await fetch(`${MD_API}/manga/${currentMangaId}/feed?translatedLanguage[]=en&order[chapter]=asc&limit=500&offset=${offset}&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&contentRating[]=pornographic`);
+                const data = await res.json();
+                allChapters = allChapters.concat(data.data);
+                total = data.total;
+                offset += 500;
+            }
+
+            // Filter out external chapters and duplicates, sort by chapter number
+            chapters = allChapters
+                .filter(ch => ch.attributes.pages > 0)
+                .map(ch => ({
+                    id: ch.id,
+                    chapter: ch.attributes.chapter,
+                    title: ch.attributes.title || `Chapter ${ch.attributes.chapter}`
+                }))
+                .filter((v, i, a) => a.findIndex(t => (t.chapter === v.chapter)) === i);
+
+            updateChapterSelect();
+        }
+
+        function updateChapterSelect() {
+            const select = document.getElementById('chapter-select');
+            select.innerHTML = '';
+            chapters.forEach((ch, index) => {
+                const opt = document.createElement('option');
+                opt.value = ch.id;
+                opt.innerText = `Ch. ${ch.chapter}: ${ch.title}`;
+                if (index === currentChapterIndex) opt.selected = true;
+                select.appendChild(opt);
+            });
+        }
+
+        async function loadChapter(chapterId) {
+            const loader = document.getElementById('reader-loader');
+            const content = document.getElementById('reader-content');
+            const controls = document.getElementById('reader-controls');
+            const loadingBar = document.getElementById('loading-bar');
+            
+            currentChapterIndex = chapters.findIndex(ch => ch.id === chapterId);
+            updateChapterSelect();
+            
+            loader.style.display = 'block';
+            controls.style.display = 'flex';
+            content.querySelectorAll('.manga-page').forEach(img => img.remove());
+            loadingBar.style.width = '0%';
+
+            document.getElementById('prev-ch').disabled = currentChapterIndex <= 0;
+            document.getElementById('next-ch').disabled = currentChapterIndex >= chapters.length - 1;
+
+            try {
+                // Get At-Home server and images
+                const res = await fetch(`${MD_API}/at-home/server/${chapterId}`);
+                const data = await res.json();
+                const baseUrl = data.baseUrl;
+                const hash = data.chapter.hash;
+                const pages = data.chapter.data; // High quality
+
+                let loadedCount = 0;
+                
+                pages.forEach((page, index) => {
+                    const img = document.createElement('img');
+                    img.className = 'manga-page';
+                    img.src = `${baseUrl}/data/${hash}/${page}`;
+                    img.loading = 'lazy';
+                    img.onload = () => {
+                        loadedCount++;
+                        loadingBar.style.width = `${(loadedCount / pages.length) * 100}%`;
+                        if (loadedCount === pages.length) {
+                            setTimeout(() => loadingBar.style.width = '0%', 500);
+                        }
+                    };
+                    content.appendChild(img);
+                });
+
+                loader.style.display = 'none';
+                content.scrollTop = 0;
+
+            } catch (err) {
+                console.error("Chapter Load Error:", err);
+                loader.innerHTML = `<p style="color: var(--primary);">FAILED TO LOAD PAGES. RETRYING...</p>`;
+            }
+        }
+
+        function changeChapter(delta) {
+            const newIndex = currentChapterIndex + delta;
+            if (newIndex >= 0 && newIndex < chapters.length) {
+                loadChapter(chapters[newIndex].id);
             }
         }
 
         function closeReader() {
             const modal = document.getElementById('reader-modal');
-            const frame = document.getElementById('reader-frame');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            frame.src = 'about:blank';
+            document.getElementById('reader-content').querySelectorAll('.manga-page').forEach(img => img.remove());
         }
 
         window.onload = loadMangaVault;
