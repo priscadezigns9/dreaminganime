@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DREAMING ANIME | STORY BLUEPRINT</title>
+    <style>
+        :root { --bg: #050508; --p: #7B35D4; --text: #EAECEF; --accent: #00FF88; }
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, system-ui; padding: 40px 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; background: #111118; padding: 30px; border-radius: 20px; border: 1px solid #222; }
+        h1 { color: var(--p); font-size: 1.8rem; margin-bottom: 10px; letter-spacing: 2px; }
+        .tag { background: var(--p); color: #fff; padding: 4px 12px; border-radius: 5px; font-size: 0.7rem; font-weight: 800; display: inline-block; margin-bottom: 20px; }
+        .content-box { background: #050508; border-radius: 12px; padding: 25px; border-left: 4px solid var(--p); margin-bottom: 30px; white-space: pre-wrap; font-size: 0.95rem; }
+        .copy-btn { background: var(--accent); border: none; padding: 15px 30px; border-radius: 12px; font-weight: 900; color: #000; cursor: pointer; transition: 0.3s; width: 100%; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tag">SOVEREIGN CREATIVE PROTOCOL</div>
+        <h1>THE SOVEREIGN VENDETTA: DATA GHOST</h1>
+        <div id="storyContent" class="content-box">
+TITLE: THE SOVEREIGN VENDETTA: DATA GHOST
+GENRE: Isekai (Reincarnation), Mystery, Shonen Action, Fantasy.
+
+THE PROLOGUE (The Betrayal):
+In the "Real World," she was the lead architect of a secret global data-hub. Just as she was about to activate the ultimate source code, she was betrayed. A close ally—someone she trusted—overrode her life-support and deleted her physical presence. But her consciousness didn't vanish. It was "pushed" into the very system she was building.
+
+THE REINCARNATION (The World of AETHERIA):
+She awakens in the world of AETHERIA—a hyper-realistic gaming realm that feels more real than Earth. Aetheria is divided into massive, isolated "Zones," each governed by different laws of physics.
+
+THE QUEST:
+She doesn't just want to "win" the game; she needs to survive it. As she levels up, she discovers "Corrupted Fragments"—data leaks from the real world that contain audio logs and visual clues of the moments leading up to her murder. Every boss she defeats in Aetheria reveals a piece of the identity of her killer.
+
+THE WORLD ZONES (Unique Names - Zero Brand Identifiers):
+1. THE SCARLET CANYON: A high-stakes combat zone where players must use tactical weaponry to survive a never-ending arena (Action/Shonen core).
+2. THE VERDANT LABYRINTH: A bio-luminescent forest where the air itself is toxic unless you find the right "DNA keys" to breathe.
+3. THE ECHO CHAMBER: A city built of glass and frequency where sound waves are used as physical blades.
+4. THE CITADEL OF SILENCE: A fortress protected by a neural-firewall that blocks all external signals.
+
+THE HOOK:
+If she dies in Aetheria, her data is purged forever. To find her killer, she must conquer the game that was meant to be her digital grave.
+        </div>
+        <button class="copy-btn" onclick="copyStory()">COPY SCRIPT TO CLIPBOARD</button>
+    </div>
+    <script>
+        function copyStory() {
+            const text = document.getElementById('storyContent').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to Clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>
