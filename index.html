@@ -60,36 +60,55 @@
 .dark-mode #trend-ticker { background: rgba(255,255,255,0.05); border-bottom: 1px solid #222; }
 </style> </head> <body>
 <style id='hf-darkmode-fix'>
-      .white-safety-wrap, .white-safety-wrap nav, .white-safety-wrap #hero { background: #fff; transition: background 0.3s ease; }
-      
-      /* In Dark Mode, we allow the background to be dark now that Mimi is a transparent PNG */
-      .dark-mode .white-safety-wrap, 
-      .dark-mode .white-safety-wrap nav, 
-      .dark-mode .white-safety-wrap #hero { 
-        background: #050505 !important; 
+      /* Ensure the wrap stays white for Mimi blending */
+      .white-safety-wrap, .white-safety-wrap nav, .white-safety-wrap #hero { 
+        background: #fff !important; 
       }
       
-      /* Text colors in Dark Mode */
-      .dark-mode .white-safety-wrap h1:not(.hero-headline-anime), 
-      .dark-mode .white-safety-wrap p, 
-      .dark-mode .white-safety-wrap span:not(.hero-headline-anime):not(.kanji) {
-        color: #fff !important;
-        -webkit-text-fill-color: #fff !important;
+      /* Force headline and tagline text to stay BLACK in the white wrap even in dark-mode */
+      .white-safety-wrap h1 span:not(.hero-headline-anime), 
+      .white-safety-wrap .hero-global-tagline,
+      .white-safety-wrap .hero-sfx,
+      .white-safety-wrap p {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
       }
       
-      .white-safety-wrap .hero-headline-anime { color: #FF6B00 !important; -webkit-text-fill-color: #FF6B00 !important; }
+      /* Mimi Headline stays Orange */
+      .white-safety-wrap .hero-headline-anime { 
+        color: #FF6B00 !important; 
+        -webkit-text-fill-color: #FF6B00 !important; 
+      }
+
+      /* Navigation Links and Buttons: Black in Light Mode, Orange in Dark Mode */
+      .white-safety-wrap nav .nav-links a,
+      .white-safety-wrap #theme-toggle {
+        color: #000;
+      }
       
-      /* Force buttons to Orange */
-      .btn-primary, .btn-secondary, nav .nav-links a, #theme-toggle {
+      .dark-mode .white-safety-wrap nav .nav-links a,
+      .dark-mode .white-safety-wrap #theme-toggle,
+      .dark-mode .white-safety-wrap .btn-primary,
+      .dark-mode .white-safety-wrap .btn-secondary {
         color: #FF6B00 !important;
         border-color: #FF6B00 !important;
         -webkit-text-fill-color: #FF6B00 !important;
       }
       
-      .dark-mode .nav-links a { color: #FF6B00 !important; }
-      .dark-mode .hamburger span { background: #FF6B00 !important; }
-      .white-safety-wrap .hamburger span { background: #000; }
-      .dark-mode .white-safety-wrap .hamburger span { background: #FF6B00 !important; }
+      /* Ensure the drawer/mobile buttons are also visible */
+      .dark-mode .white-safety-wrap .hamburger span {
+        background: #FF6B00 !important;
+      }
+      
+      /* Fix the Manga Section readability (which is outside the wrap) */
+      #dreaming-anime-manga h2, 
+      #dreaming-anime-manga h3, 
+      #dreaming-anime-manga span {
+        color: #fff !important;
+      }
+      #dreaming-anime-manga p {
+        color: #aaa !important;
+      }
     </style>
  <div class="white-safety-wrap" style="background: #fff !important; max-width: 1400px; margin: 0 auto; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5);">
 <nav style="background: transparent; border-bottom: 1px solid rgba(0,0,0,0.05); position: relative; top: 0;"> <a href="/" class="nav-brand"> <span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#FF6B00;">DREAMING</span><span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#0A0A0A;margin-left:6px;">ANIME</span> <div class="nav-logo-fallback" style="display:none;">DA</div> </a> <ul class="nav-links"> <li><a href="#genres" style="color: #000;">GENRES</a></li> <li><a href="cinema/" style="color: #000;">WATCH</a></li> <li><a href="manga/" style="color: #000;">MANGA</a></li> <li><a href="shop/" style="color: #000;">SHOP</a></li> <li><a href="#events" style="color: #000;">EVENTS</a></li> <li><a href="https://dreaminganime9.redbubble.com" style="color: #000;">MERCH</a></li> <li><a href="#newsletter" style="color: #000;">NEWSLETTER</a></li> <li><a href="#clip-of-the-week" style="color: #000;">CLIPS</a></li> </ul> <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span style="background: #000;"></span><span style="background: #000;"></span><span style="background: #000;"></span></button> <button id="theme-toggle" onclick="toggleTheme()" style="background:none;border:2px solid #FF6B00;border-radius:4px;padding:4px 12px;cursor:pointer;color:#FF6B00;font-size:0.8rem;font-family:'Inter',sans-serif;font-weight:600;margin-right:8px;">Light</button> </nav> <div id="trend-ticker" style="text-align:center;padding:10px 16px;background:rgba(0,0,0,0.03);font-size:0.76rem;font-weight:600;letter-spacing:0.06em;color:#000;border-bottom:1px solid rgba(0,0,0,0.05);">🎌 Trending Now: Solo Leveling 2026 Update · Demon Slayer Movie · Blue Lock S3</div> <div class="nav-drawer" id="navDrawer"> <button class="nav-drawer-close" id="drawerClose" aria-label="Close menu"></button> <a href="cinema/" >WATCH</a> <a href="manga/" >MANGA</a> <a href="shop/" >SHOP</a> <a href="https://dreaminganime9.redbubble.com" >MERCH</a> <a href="blog/">BLOG</a> <a href="#newsletter">ABOUT</a> </div> <section id="hero" style="background: transparent;"> <div class="hero-panel-wrap panel-slam visible" style="min-height: 80vh; display: flex; align-items: center; position: relative; overflow: hidden; background: transparent;">
@@ -99,9 +118,9 @@
         <div class="hero-content" style="position:relative; text-align: left; z-index: 10; flex: 0 0 50%; padding-left: 5%;">
             
             <h1 style="margin:0;padding:0; display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-                <span class="hero-headline-line1" style="display:block; color: #000;">LIVE THE</span>
+                <span class="hero-headline-line1" class="hero-headline-line1" style="display:block; color: #000;">LIVE THE</span>
                 <span class="hero-headline-anime" style="display:block; font-size: 5rem; color: #FF6B00;">ANIME</span>
-                <span class="hero-headline-line3" style="display:block; color: #000;">LIFE.</span>
+                <span class="hero-headline-line3" class="hero-headline-line3" style="display:block; color: #000;">LIFE.</span>
             </h1>
             <p class="hero-global-tagline" style="font-family:'Inter',sans-serif;font-size:1rem;color:rgba(10,10,10,0.75);max-width:520px;margin:1.5rem 0;line-height:1.7;letter-spacing:0.03em;">
                 For anime dreamers everywhere. Tokyo to London. London to Lagos. Wherever you are &mdash; the dream is the same.
@@ -111,7 +130,7 @@
                 <a href="#ai-recommender" class="btn-secondary">TAKE THE QUIZ</a>
             </div>
         </div>
-         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_hero_ultra_hf.png" alt="Mimi Hero" style="position: absolute; right: 0; bottom: 0; height: 95%; width: auto; max-width: 50%; z-index: 5; pointer-events: none; object-fit: contain; object-position: right bottom; ">
+         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_hero_gold_v1.jpg" alt="Mimi Hero" style="position: absolute; right: 0; bottom: 0; height: 95%; width: auto; max-width: 50%; z-index: 5; pointer-events: none; object-fit: contain; object-position: right bottom; ">
     </div>
 </section>
 </div>
