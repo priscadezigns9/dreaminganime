@@ -60,36 +60,32 @@
 .dark-mode #trend-ticker { background: rgba(255,255,255,0.05); border-bottom: 1px solid #222; }
 </style> </head> <body>
 <style id='hf-darkmode-fix'>
-      .white-safety-wrap, .white-safety-wrap nav, .white-safety-wrap #hero { background: #fff !important; transition: background 0.3s ease; }
-      
-      /* Target ONLY text elements for the black color in dark mode, excluding buttons/links */
-      .dark-mode .white-safety-wrap h1:not(.hero-headline-anime), 
+      .white-safety-wrap, .white-safety-wrap nav, .white-safety-wrap #hero { background: #fff !important; }
+      /* General text in the white section turns black in dark-mode to remain readable */
       .dark-mode .white-safety-wrap p, 
-      .dark-mode .white-safety-wrap span:not(.hero-headline-anime):not(.kanji) {
-        color: #000 !important;
+      .dark-mode .white-safety-wrap span:not(.hero-headline-anime):not(.kanji),
+      .dark-mode .white-safety-wrap h1:not(.hero-headline-anime) { 
+        color: #000 !important; 
         -webkit-text-fill-color: #000 !important;
       }
-      
-      /* FORCE ORANGE for Mimi Headline and all action buttons/nav links */
       .white-safety-wrap .hero-headline-anime { color: #FF6B00 !important; -webkit-text-fill-color: #FF6B00 !important; }
+      .white-safety-wrap .hamburger span { background: #000 !important; }
       
+      /* FORCE BUTTONS AND NAV LINKS TO ORANGE IN DARK MODE */
       .dark-mode .btn-primary, 
       .dark-mode .btn-secondary, 
-      .dark-mode nav .nav-links a, 
+      .dark-mode .nav-links a, 
       .dark-mode #theme-toggle {
         color: #FF6B00 !important;
         border-color: #FF6B00 !important;
         background: transparent !important;
         -webkit-text-fill-color: #FF6B00 !important;
       }
-      
       .dark-mode .btn-primary:hover {
         background: #FF6B00 !important;
         color: #000 !important;
         -webkit-text-fill-color: #000 !important;
       }
-      
-      .white-safety-wrap .hamburger span { background: #000 !important; }
     </style>
  <div class="white-safety-wrap" style="background: #fff !important; max-width: 1400px; margin: 0 auto; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5);">
 <nav style="background: transparent; border-bottom: 1px solid rgba(0,0,0,0.05); position: relative; top: 0;"> <a href="/" class="nav-brand"> <span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#FF6B00;">DREAMING</span><span style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:2px;color:#0A0A0A;margin-left:6px;">ANIME</span> <div class="nav-logo-fallback" style="display:none;">DA</div> </a> <ul class="nav-links"> <li><a href="#genres" style="color: #000;">GENRES</a></li> <li><a href="cinema/" style="color: #000;">WATCH</a></li> <li><a href="manga/" style="color: #000;">MANGA</a></li> <li><a href="shop/" style="color: #000;">SHOP</a></li> <li><a href="#events" style="color: #000;">EVENTS</a></li> <li><a href="https://dreaminganime9.redbubble.com" style="color: #000;">MERCH</a></li> <li><a href="#newsletter" style="color: #000;">NEWSLETTER</a></li> <li><a href="#clip-of-the-week" style="color: #000;">CLIPS</a></li> </ul> <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span style="background: #000;"></span><span style="background: #000;"></span><span style="background: #000;"></span></button> <button id="theme-toggle" onclick="toggleTheme()" style="background:none;border:2px solid #FF6B00;border-radius:4px;padding:4px 12px;cursor:pointer;color:#FF6B00;font-size:0.8rem;font-family:'Inter',sans-serif;font-weight:600;margin-right:8px;">Light</button> </nav> <div id="trend-ticker" style="text-align:center;padding:10px 16px;background:rgba(0,0,0,0.03);font-size:0.76rem;font-weight:600;letter-spacing:0.06em;color:#000;border-bottom:1px solid rgba(0,0,0,0.05);">🎌 Trending Now: Solo Leveling 2026 Update · Demon Slayer Movie · Blue Lock S3</div> <div class="nav-drawer" id="navDrawer"> <button class="nav-drawer-close" id="drawerClose" aria-label="Close menu"></button> <a href="cinema/" >WATCH</a> <a href="manga/" >MANGA</a> <a href="shop/" >SHOP</a> <a href="https://dreaminganime9.redbubble.com" >MERCH</a> <a href="blog/">BLOG</a> <a href="#newsletter">ABOUT</a> </div> <section id="hero" style="background: transparent;"> <div class="hero-panel-wrap panel-slam visible" style="min-height: 80vh; display: flex; align-items: center; position: relative; overflow: hidden; background: transparent;">
@@ -111,7 +107,7 @@
                 <a href="#ai-recommender" class="btn-secondary">TAKE THE QUIZ</a>
             </div>
         </div>
-         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_hero_ultra_hf.png" alt="Mimi Hero" style="position: absolute; right: 0; bottom: 0; height: 95%; width: auto; max-width: 50%; z-index: 5; pointer-events: none; object-fit: contain; object-position: right bottom; ">
+         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/assets/mimi/mimi_hero_gold_v1.jpg" alt="Mimi Hero" style="position: absolute; right: 0; bottom: 0; height: 95%; width: auto; max-width: 50%; z-index: 5; pointer-events: none; object-fit: contain; object-position: right bottom; ">
     </div>
 </section>
 </div>
@@ -125,7 +121,7 @@
         </div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px;">
             <div style="background:#111; border:1px solid rgba(255,107,0,0.2); border-radius:16px; overflow:hidden; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#FF6B00'" onmouseout="this.style.borderColor='rgba(255,107,0,0.2)'">
-                <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_ultra_hf.png" alt="The Sovereign Vendetta Cover" style="width:100%; height:400px; object-fit:cover;">
+                <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_gold_v1.jpg" alt="The Sovereign Vendetta Cover" style="width:100%; height:400px; object-fit:cover;">
                 <div style="padding:24px;">
                     <h3 style="font-family:'Space Grotesk',sans-serif; color:#fff; margin-bottom:8px;">THE SOVEREIGN VENDETTA: DATA GHOST</h3>
                     <p style="color:#aaa; font-size:0.85rem; margin-bottom:20px;">Volume 1: The Awakening. Mimi breaks the seal of the digital void to reclaim the lost signal.</p>
