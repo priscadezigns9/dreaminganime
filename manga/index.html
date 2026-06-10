@@ -184,28 +184,8 @@
     </div>
     
     
-    <section id="dreaming-anime-manga-section" style="padding:40px 5%; background:rgba(255,107,0,0.05); border-radius:12px; margin:20px 5%; border:1px solid rgba(255,107,0,0.2);">
-        <h2 style="font-family:'Bangers'; color:#FF6B00; font-size:2.5rem; text-align:center; margin-bottom:20px; letter-spacing:2px;">DREAMING ANIME MANGA</h2>
-        <div style="display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center;">
-            <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_gold_v1.jpg" style="width:200px; border-radius:8px; border:2px solid #FF6B00;" alt="Cover">
-            <div style="flex:1; min-width:300px;">
-                <h3 style="color:#fff; font-size:1.8rem; margin:0 0 10px 0; font-family:'Space Mono';">THE SOVEREIGN VENDETTA: DATA GHOST</h3>
-                <p style="color:#ccc; line-height:1.6; font-size:0.95rem;">Follow Mimi as she navigates the digital canyon in this high-fidelity original series. Volume 1 is now available for direct-read protocol.</p>
-                <button class="nav-btn" style="padding:12px 25px; font-size:1rem; margin-top:10px;" onclick="openReader('THE SOVEREIGN VENDETTA: DATA GHOST', 'mimi-sv-dg')">INITIATE READ</button>
-            </div>
-        </div>
-    </section>
-<div id="manga-grid" class="vault-grid">
-        <div class="manga-card" onclick="openReader('THE SOVEREIGN VENDETTA: DATA GHOST', 'mimi-sv-dg')">
-            <div class="live-tag">NEW RELEASE</div>
-            <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_hero_gold_v1.jpg" class="manga-img" alt="The Sovereign Vendetta">
-            <div class="card-body">
-                <h3>THE SOVEREIGN VENDETTA: DATA GHOST</h3>
-                <p>Mimi battles in the digital canyon arc.</p>
-                <span class="score">9.9</span>
-            </div>
-        </div>
-
+    
+<div id="manga-grid" class="vault-grid"></div>
         <!-- API Data will load here -->
     </div>
 
@@ -241,14 +221,6 @@
         let currentMangaId = null;
         let chapters = [];
         let currentChapterIndex = -1;
-            // Standard MangaDex reader trigger
-            const modal = document.getElementById('reader-modal');
-            if (modal) {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-                console.log("Opening reader for:", title);
-            }
-        }
 
         async function loadMangaVault() {
             const grid = document.getElementById('manga-grid');
