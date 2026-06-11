@@ -179,8 +179,21 @@
                 const r = await fetch(ANILIST, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:q, variables:{id:aniId}}) });
                 const d = await r.json();
                 const a = d.data.Media;
-                document.getElementById('m-title').innerText = a.title.english || a.title.romaji;
-                document.getElementById('m-desc').innerHTML = a.description || 'Summary unavailable.';
+                const title = a.title.english || a.title.romaji;
+                document.getElementById('m-title').innerText = title;
+                
+                // Construct legal streaming links
+                const cr = `https://www.crunchyroll.com/search?q=${encodeURIComponent(title)}`;
+                const nfx = `https://www.netflix.com/search?q=${encodeURIComponent(title)}`;
+                const legalLinks = `
+                    <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+                        <a href="${cr}" target="_blank" style="background:#f47521; color:#000; text-decoration:none; padding:8px 16px; border-radius:4px; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:8px;"><i class="fas fa-play"></i> CRUNCHYROLL</a>
+                        <a href="${nfx}" target="_blank" style="background:#e50914; color:#fff; text-decoration:none; padding:8px 16px; border-radius:4px; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:8px;"><i class="fas fa-play"></i> NETFLIX</a>
+                    </div>
+                    <p style="margin-top:20px; border-top:1px solid var(--border); padding-top:20px;">${a.description || 'Summary unavailable.'}</p>
+                `;
+                document.getElementById('m-desc').innerHTML = legalLinks;
+                
                 totalEps = a.episodes || 24;
                 renderMatrix(totalEps);
             } catch(e) { renderMatrix(24); }
