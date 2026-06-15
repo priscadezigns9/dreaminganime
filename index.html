@@ -58,7 +58,7 @@
 .dark-mode .nav-brand span:last-child { color: #fff !important; }
 .dark-mode nav { background: rgba(10,10,10,0.95); border-bottom: 1px solid #222; }
 .dark-mode #trend-ticker { background: rgba(255,255,255,0.05); border-bottom: 1px solid #222; }
-</style> </head> <body>
+</style> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head> <body>
 <style id='hf-darkmode-fix'>
       /* Ensure the wrap stays white for Mimi blending */
       .white-safety-wrap, .white-safety-wrap nav, .white-safety-wrap #hero { 
@@ -224,20 +224,32 @@ body { padding-bottom: 60px; } /* Space for footer */
     </div>
 </div>
 
+
 <script>
     (function() {
+        const SB_URL = 'https://sazhdnqzaqpqcralmthh.supabase.co';
+        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhemhkbnF6YXFwcWNyYWxtdGhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzE5NjYsImV4cCI6MjA5Mzc0Nzk2Nn0.uTyw31uWTNOTV5-HzNpm46vpAJABAsHLMzW-sYOkRhc';
+        let sb = null;
+        if (window.supabase) sb = window.supabase.createClient(SB_URL, SB_KEY);
+
         let animeClickCount = 0;
         
+        async function trackEvent(type, metadata = {}) {
+            if (!sb) return;
+            try {
+                await sb.from('dreaming_anime_telemetry').insert([{ event_type: type, metadata, created_at: new Date() }]);
+            } catch(e) {}
+        }
+
+        trackEvent('page_view', { path: window.location.pathname });
+
         function initGodMode() {
             const heroAnimeWord = document.querySelector('.hero-headline-anime');
-            console.log('God Mode Init:', heroAnimeWord);
-            
             if (heroAnimeWord) {
                 heroAnimeWord.style.cursor = 'pointer';
                 heroAnimeWord.addEventListener('click', (e) => {
                     e.preventDefault();
                     animeClickCount++;
-                    console.log('Anime Click:', animeClickCount);
                     if (animeClickCount === 5) {
                         document.getElementById('god-mode-modal').style.display = 'flex';
                         document.getElementById('god-pass').focus();
@@ -245,6 +257,10 @@ body { padding-bottom: 60px; } /* Space for footer */
                     }
                 });
             }
+
+            document.querySelectorAll('a[href*="amazon.com"]').forEach(link => {
+                link.addEventListener('click', () => trackEvent('affiliate_click', { url: link.href }));
+            });
         }
 
         window.verifyGod = function() {
@@ -258,29 +274,28 @@ body { padding-bottom: 60px; } /* Space for footer */
             }
         };
 
-        function updateGodStats() {
-            document.getElementById('stat-clicks').innerText = (Math.floor(Math.random() * 500) + 1240).toLocaleString();
-            document.getElementById('stat-subs').innerText = (Math.floor(Math.random() * 50) + 842).toLocaleString();
-            document.getElementById('stat-sales').innerText = '$' + (Math.floor(Math.random() * 200) + 457).toLocaleString();
+        async function updateGodStats() {
+            if (!sb) return;
             
-            const feed = document.getElementById('intel-feed');
-            const events = [
-                '> User signed up from Trinidad.',
-                '> Amazon affiliate click: Demon Slayer Figure.',
-                '> Cinema trailer playback detected.',
-                '> Quiz completion: "What anime soulmate?"',
-                '> Navigation: Manga Vault accessed.',
-                '> Affiliate conversion: 2.40 earned.',
-                '> Real-time traffic spike from r/anime.'
-            ];
-            setInterval(() => {
-                const p = document.createElement('div');
-                p.innerText = events[Math.floor(Math.random() * events.length)];
-                feed.prepend(p);
-            }, 4000);
+            try {
+                const { count: clicks } = await sb.from('dreaming_anime_telemetry').select('*', { count: 'exact', head: true }).eq('event_type', 'affiliate_click');
+                const { count: views } = await sb.from('dreaming_anime_telemetry').select('*', { count: 'exact', head: true }).eq('event_type', 'page_view');
+                
+                document.getElementById('stat-clicks').innerText = (clicks || 0).toLocaleString();
+                document.getElementById('stat-subs').innerText = 'SYNCING...'; 
+                document.getElementById('stat-sales').innerText = 'WAITING FOR API...'; 
+
+                const { data: recent } = await sb.from('dreaming_anime_telemetry').select('*').order('created_at', { ascending: false }).limit(5);
+                
+                if (recent) {
+                    const feed = document.getElementById('intel-feed');
+                    feed.innerHTML = recent.map(r => '> ' + r.event_type.toUpperCase() + ': ' + JSON.stringify(r.metadata) + '<br>').join('') + feed.innerHTML;
+                }
+            } catch (err) {
+                console.error('God Mode telemetry fail:', err);
+            }
         }
 
-        // Wait for DOM
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initGodMode);
         } else {
@@ -288,6 +303,7 @@ body { padding-bottom: 60px; } /* Space for footer */
         }
     })();
 </script>
+
 </body> </html>
 
 
