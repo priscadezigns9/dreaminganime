@@ -1,72 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Dreaming Anime Blog — High-Fidelity Intelligence
-  </title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
-  <style>
-   :root { --brand-color: #FF8C00; --bg: #000; --text: #fff; --border: rgba(255,255,255,0.1); }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
-        .container { max-width: 900px; margin: 0 auto; padding: 80px 6%; }
-        header { border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 60px; }
-        h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: -1px; }
-        .article-card { border-bottom: 1px solid var(--border); padding: 40px 0; transition: 0.3s; }
-        .article-card:hover { border-color: var(--brand-color); }
-        .article-card span { color: var(--brand-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
-        .article-card h2 { margin: 15px 0; font-size: 1.8rem; }
-        .article-card h2 a { color: #fff; text-decoration: none; }
-        .article-card p { color: rgba(255,255,255,0.6); font-size: 1.1rem; }
-        .mimi-note { background: rgba(255,140,0,0.03); border: 1px solid rgba(255,140,0,0.1); padding: 0; margin: 80px 0; border-radius: 12px; display: flex; align-items: stretch; min-height: 350px; position: relative; overflow: visible; }
-        .mimi-note img { width: 40%; height: auto; object-fit: contain; border-radius: 0; border: none; flex-shrink: 0;  margin-top: -40px; margin-bottom: -40px; margin-left: -15px; z-index: 2; }
-        .mimi-content { padding: 30px; display: flex; flex-direction: column; justify-content: center; z-index: 1; }
-        .mimi-note p { margin: 0; font-size: 1.3rem; color: #fff; font-style: italic; }
-        .mimi-note-title { font-weight: 700; color: var(--brand-color); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 12px; display: block; }
-        footer { margin-top: 100px; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
-  </style>
-  <style>
-   .mimi-mascot {
-  position: absolute;
-  pointer-events: none;
-  z-index: 10;
-  object-fit: contain;
-  image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: contrast(1.05);
-  
-  transition: all 0.5s ease;
-}
-@media (max-width: 900px) { .mimi-mascot { display: none !important; } }
-  </style>
- </head>
- <body>
-  <div class="container" style="; position: relative;">
-   <header>
-    <h1>
-     Dreaming Anime Blog
-    </h1>
-    <p>
-     Strategic Intelligence for the High-Fidelity Era
-    </p>
-   </header>
-   <div class="mimi-note">
-    <div class="mimi-content">
-     <span class="mimi-note-title">
-      Mimi Greetings // Mascot Log
-     </span>
-     <p>
-      "Hi everyone! I'm Mimi, your high-fidelity guide to the Dreaming Anime universe. I'll be sharing my field observations and production scans on all our latest intelligence reports. Stay tuned for the latest anime signals! (◕‿◕)♡"
-     </p>
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>The Proclamation | The Way Made Known</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
+    <style>
+        :root { --bg: #F8FBFF; --text: #2C3E50; --baby-blue: #89CFF0; --deep-blue: #4682B4; --border: rgba(137, 207, 240, 0.2); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+        .nav { padding: 25px 6%; display: flex; justify-content: space-between; align-items: center; background: #fff; border-bottom: 1px solid var(--border); position: relative; z-index: 10; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--deep-blue); text-decoration: none; }
+        .container { max-width: 900px; margin: 0 auto; padding: 80px 6%; position: relative; z-index: 5; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; text-align: center; color: var(--deep-blue); }
+        .blog-grid { display: grid; gap: 30px; }
+        .blog-card { background: #fff; padding: 40px; border-radius: 15px; border: 1px solid var(--border); text-decoration: none; color: inherit; transition: 0.3s; }
+        .blog-card:hover { transform: translateY(-5px); border-color: var(--baby-blue); }
+        .blog-card h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 10px; color: var(--text); }
+        .blog-card p { color: #666; font-size: 1rem; }
+        .blog-meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--baby-blue); margin-bottom: 5px; }
+
+        /* Animation Global */
+        .tree-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1; opacity: 0.5; }
+        .mustard-tree-svg { width: 100%; height: 100%; position: absolute; bottom: -20px; left: -50px; transform-origin: bottom left; }
+        .tree-path { stroke: var(--baby-blue); stroke-width: 1.5; fill: none; stroke-dasharray: 2500; stroke-dashoffset: 2500; animation: growTree 7s ease-out forwards; }
+        @keyframes growTree { to { stroke-dashoffset: 0; } }
+
+        footer { padding: 60px 6%; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; color: #888; position: relative; z-index: 10; background: #fff; }
+    </style>
+</head>
+<body>
+    <div class="tree-container">
+        <svg class="mustard-tree-svg" viewBox="0 0 500 500" preserveAspectRatio="xMinYMax meet">
+            <path class="tree-path" d="M20,480 C40,400 80,350 120,300 C160,250 200,200 250,150 M120,300 C180,280 250,290 300,240 M120,330 C80,280 50,220 70,150 M250,150 C300,120 350,150 400,100 M250,150 C220,100 180,50 150,80" />
+            <circle cx="20" cy="480" r="6" fill="var(--baby-blue)" /> <!-- The Seed -->
+        </svg>
     </div>
-   </div>
-   <div class="article-card"><span>2026.06.10</span><h2><a href="#">Ufotable Anime Expo 2026: The Next Frontier</a></h2><p>Exclusive reveals of the 'Genshin Impact' cinematic expansion and new projects.</p></div><div class="article-card"><span>2026.06.01</span><h2><a href="mushoku-tensei-s3-july-5-alpha-signal/">Mushoku Tensei Season 3: The July 5 Alpha Signal</a></h2><p>Studio Bind confirms the July 5 premiere.</p></div><div class="article-card"><span>2026.05.30</span><h2><a href="manga-to-metaverse-xr-dive-2026/">Manga to Metaverse: The 2026 Neural Bridge</a></h2><p>Shueisha XR’s MANGA DIVE evolves into a full spatial hub.</p></div><div class="article-card"><span>2026.05.29</span><h2><a href="ani-may-2026-week-5-tybw-analysis/">Bleach: TYBW Part 4 The Calamity — Final Signal</a></h2><p>Cinematic Fluidity reaches 40% higher frame density.</p></div><div class="article-card"><span>2026.05.23</span><h2><a href="crunchyroll-anime-awards-2026-the-tokyo-winners-circle.html">Crunchyroll Anime Awards 2026: The Tokyo Winners Circle</a></h2><p>The 10th Annual Awards conclude.</p></div><div class="article-card"><span>2026.05.22</span><h2><a href="the-return-of-the-v1-titans.html">The Return of the V1 Titans</a></h2><p>July 2026 marks the return of legacy titans.</p></div>
-   <footer>
-    <p>
-     © 2026 DREAMING ANIME | EMPIRE EDITORIAL
-    </p>
-   </footer>
-   <img alt="Mimi Mascot" class="mimi-mascot" src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_5.webp?v=hf3" style="position: absolute; bottom: 0; right: -150px; width: 400px; pointer-events: none; "/>
-  </div>
- </body>
+    <nav class="nav"><a href="../" class="logo">The Way Made Known</a></nav>
+    <div class="container">
+        <h1>The Proclamation</h1>
+        <div class="blog-grid">
+            <a href="./walking-in-eden-now/index.html" class="blog-card">
+                <div class="blog-meta">Revelations</div>
+                <h2>Walking in Eden Now</h2>
+                <p>Understanding our restoration through the Second Adam and the mandate to dominate the earth here and now.</p>
+            </a>
+            <a href="./testimony/index.html" class="blog-card">
+                <div class="blog-meta">Testimony</div>
+                <h2>When Scales Fall from the Eyes</h2>
+                <p>The journey from university questions to a life-changing encounter with Christ in 2015.</p>
+            </a>
+            <a href="./analytical-thinking/index.html" class="blog-card">
+                <div class="blog-meta">Visions & Dreams</div>
+                <h2>Analytical Thinking in a World of Emotion</h2>
+                <p>Why faith is a reasoned pursuit of Truth, not a blind leap into the dark.</p>
+            </a>
+            <a href="./mustard-seed-to-tree/index.html" class="blog-card">
+                <div class="blog-meta">Visions & Dreams</div>
+                <h2>From a Mustard Seed to a Mustard Tree</h2>
+                <p>Taking the cap off your faith and moving from a seed to a limitless foundation.</p>
+            </a>
+        </div>
+    </div>
+    <footer>© 2026 The Way Made Known</footer>
+</body>
 </html>
 
