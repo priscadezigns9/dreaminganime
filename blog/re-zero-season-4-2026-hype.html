@@ -7,87 +7,37 @@
     <link href='https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap' rel='stylesheet'>
     <style>
         :root { --primary: #FF6B00; --bg: #050505; --text: #fff; }
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            font-family: 'Space Grotesk', sans-serif; 
-            line-height: 1.8; 
-            margin: 0;
-            padding: 0;
-        }
-        .container { 
-            max-width: 1000px; 
-            margin: 0 auto; 
-            padding: 4rem 2rem; 
-            background: #000;
-            box-shadow: 0 0 100px rgba(0,0,0,1);
-        }
+        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; line-height: 1.8; margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; background: #000; box-shadow: 0 0 100px rgba(0,0,0,1); }
         header { margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
-        h1 { 
-            font-family: 'Bangers', cursive; 
-            font-size: clamp(2.5rem, 6vw, 4rem); 
-            color: var(--primary); 
-            margin-bottom: 1rem; 
-            line-height: 1.1;
-        }
+        h1 { font-family: 'Bangers', cursive; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--primary); margin-bottom: 1rem; line-height: 1.1; }
         .meta { font-family: 'Space Mono'; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
         .mimi-spotlight {
             width: 280px;
             height: auto;
             float: right;
-            margin-left: 2rem;
+            margin-left: 2.5rem;
             margin-bottom: 2rem;
             border-radius: 15px;
             border: 1px solid #222;
         }
-        article { font-size: 1.15rem; color: #ccc; }
-        .section-title { 
-            font-family: 'Bangers', cursive; 
-            font-size: 2rem; 
-            color: #fff; 
-            margin-top: 3rem; 
-            margin-bottom: 1rem; 
-            border-left: 5px solid var(--primary);
-            padding-left: 1rem;
-        }
+        article { font-size: 1.2rem; color: #ccc; }
+        .section-title { font-family: 'Bangers', cursive; font-size: 2.2rem; color: #fff; margin-top: 4rem; margin-bottom: 1.5rem; border-left: 6px solid var(--primary); padding-left: 1.5rem; }
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-            padding: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin: 5rem 0;
+            padding: 3rem;
             background: #0A0A0A;
             border-radius: 20px;
             border: 1px solid #111;
         }
-        .product-card {
-            text-align: center;
-            text-decoration: none;
-            color: #fff;
-        }
-        .product-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            background: #111;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-        .product-card h3 { font-family: 'Bangers', cursive; font-size: 1.2rem; margin: 0; color: var(--primary); }
-        .cta-button {
-            display: block;
-            background: var(--primary);
-            color: #000;
-            padding: 1.5rem;
-            text-align: center;
-            font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            text-decoration: none;
-            border-radius: 10px;
-            margin-top: 4rem;
-            transition: 0.3s;
-        }
-        footer { text-align: center; padding: 5rem; color: #333; font-family: 'Space Mono'; }
+        .product-card { text-align: center; text-decoration: none; color: #fff; }
+        .product-card img { width: 100%; height: 280px; object-fit: contain; background: #fff; border-radius: 12px; margin-bottom: 1.5rem; padding: 10px; }
+        .product-card h3 { font-family: 'Bangers', cursive; font-size: 1.4rem; margin: 0; color: var(--primary); }
+        .cta-button { display: block; background: var(--primary); color: #000; padding: 1.8rem; text-align: center; font-family: 'Bangers', cursive; font-size: 2rem; text-decoration: none; border-radius: 12px; margin-top: 5rem; transition: 0.4s; }
+        footer { text-align: center; padding: 6rem; color: #222; font-family: 'Space Mono'; }
         .clearfix::after { content: ''; clear: both; display: table; }
     </style>
 </head>
@@ -97,10 +47,10 @@
             <div class='meta'>JUNE 15, 2026 // NEWS</div>
             <h1>RE:ZERO SEASON 4: THE WHITE FOX AWAKENS</h1>
         </header>
-        <img src='https://dreaminganime.com/assets/mimi/mimi_1.png' class='mimi-spotlight' alt='Mimi'>
-        <article><p>The shadows of the Sanctuary have finally broken. <strong>Re:Zero Season 4</strong> is entering full production for a late 2026 release, and we are tracking every high-fidelity signal from White Fox. This upcoming arc, known to readers as Arc 6 (The Hall of Memories), is widely considered the psychological masterpiece of the entire series. It takes Subaru and the Emilia camp to the Pleiades Watchtower, where their very identities will be tested.</p><div class="section-title">UNRIVALED ANIMATION FIDELITY</div><p>Rumors from the Tokyo production circuit suggest that the studio is doubling its key animation staff to handle the intense combat and emotional sequences of the watchtower climb. This is more than just a continuation; it is an evolution of the series visual consistency. Mimi has analyzed the early storyboards, and the level of detail in character expression is hitting our 98% accuracy threshold. If you thought the Sanctuary was intense, prepare yourself—Arc 6 is a cinematic journey into the heart of madness and redemption.</p><p>We are keeping the Otaku Vault updated with every teaser, every voice actor confirmation, and every visual leak. The White Fox is back, and the Gutsy Spirit of Subaru Natsuki is about to face its greatest challenge yet. ARise, dreamers!</p></article>
+        <img src='https://dreaminganime.com/mascot/mimi/mimi_1.webp' class='mimi-spotlight' alt='Mimi Spotlight'>
+        <article><p>White Fox has finally broken the silence. After what felt like an eternity in the Sanctuary, <strong>Re:Zero Season 4</strong> is officially moving into production. This upcoming Arc 6—The Hall of Memories—is considered the most high-fidelity psychological thriller in the light novel series. Subaru and the Emilia camp venture to the Pleiades Watchtower, where their very identities will be tested.</p><div class="section-title">UNRIVALED ANIMATION FIDELITY</div><p>Rumors from Tokyo suggest White Fox is doubling staff to handle intense combat and emotional sequences. Mimi has analyzed the early storyboards; the detail in character expression is hitting our 98% accuracy threshold. If you thought the Sanctuary was intense, prepare yourself—Arc 6 is a cinematic journey into the heart of madness and redemption.</p></article>
         <div class='section-title'>CURATED FROM THE SHOP</div>
-        <div class='product-grid'><a href="https://www.amazon.com/s?k=Re+Zero+Rem+Figure&tag=priscadezigns-20" class="product-card"><img src="https://dreaminganime.com/assets/mimi/mimi_tiny.png"><h3>ELITE REM FIGURES</h3></a><a href="https://www.amazon.com/s?k=Re+Zero+Light+Novel&tag=priscadezigns-20" class="product-card"><img src="https://dreaminganime.com/assets/mimi/mimi_tiny.png"><h3>LIGHT NOVELS</h3></a></div>
+        <div class='product-grid'><a href="https://www.amazon.com/s?k=Re+Zero+Rem+Figure&tag=priscadezigns-20" class="product-card"><img src="https://m.media-amazon.com/images/I/51rP0iY9mYL._AC_SL1000_.jpg"><h3>ELITE REM FIGURES</h3></a><a href="https://www.amazon.com/s?k=Re+Zero+Light+Novel&tag=priscadezigns-20" class="product-card"><img src="https://m.media-amazon.com/images/I/81BvAovC4EL.jpg"><h3>LIGHT NOVELS</h3></a></div>
         <a href='https://dreaminganime.com/shop/' class='cta-button'>SHOP RE:ZERO COLLECTION</a>
         <footer>&copy; 2026 DREAMING ANIME</footer>
     </div>
