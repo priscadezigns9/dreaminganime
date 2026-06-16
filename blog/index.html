@@ -8,14 +8,31 @@
     <style>
         :root { --primary: #FF6B00; --bg: #000; --text: #fff; }
         body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-        .hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://dreaminganime.com/assets/mimi/mimi_hero_ultra_hf.png') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 2px solid var(--primary); }
+        .hero { height: 40vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://dreaminganime.com/assets/mimi/mimi_hero_ultra_hf.png') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 2px solid var(--primary); }
         .hero h1 { font-family: 'Bangers', cursive; font-size: clamp(3rem, 10vw, 6rem); color: var(--primary); text-shadow: 5px 5px 0 #000; margin: 0; }
         .container { max-width: 1200px; margin: -50px auto 0; padding: 0 2rem 5rem; position: relative; z-index: 10; }
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
-        .blog-card { background: #0A0A0A; border: 1px solid #222; border-radius: 15px; overflow: hidden; transition: 0.3s; text-decoration: none; color: inherit; }
+        .blog-card { background: #0A0A0A; border: 1px solid #222; border-radius: 15px; overflow: hidden; transition: 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
         .blog-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(255,107,0,0.1); }
-        .card-img { height: 250px; background-size: cover; background-position: center; border-bottom: 1px solid #222; }
-        .card-content { padding: 2rem; }
+        
+        /* FIXED: Tile image scaling */
+        .card-img-container {
+            height: 300px;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .card-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Mimi fits within the tile */
+            filter: drop-shadow(0 0 10px rgba(255,107,0,0.2));
+        }
+
+        .card-content { padding: 2rem; flex-grow: 1; }
         .card-meta { font-family: 'Space Mono'; color: var(--primary); font-size: 0.8rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
         .card-title { font-family: 'Bangers', cursive; font-size: 1.8rem; margin: 0 0 1rem; color: #fff; line-height: 1.2; }
         .card-excerpt { color: #888; font-size: 1rem; line-height: 1.6; }
@@ -32,7 +49,7 @@
     <div class='container'>
         <div class='blog-grid'>
             <a href='re-zero-season-4-2026-hype.html' class='blog-card'>
-                <div class='card-img' style='background-image: url("https://dreaminganime.com/assets/mimi/mimi_1.png")'></div>
+                <div class='card-img-container'><img src='https://dreaminganime.com/assets/mimi/mimi_1.png' class='card-img'></div>
                 <div class='card-content'>
                     <div class='card-meta'>JUNE 15, 2026 // NEWS</div>
                     <h2 class='card-title'>RE:ZERO SEASON 4: THE WHITE FOX AWAKENS</h2>
@@ -40,7 +57,7 @@
                 </div>
             </a>
             <a href='jiraya-sfc-statue-spotlight.html' class='blog-card'>
-                <div class='card-img' style='background-image: url("https://dreaminganime.com/assets/mimi/mimi_3.png")'></div>
+                <div class='card-img-container'><img src='https://dreaminganime.com/assets/mimi/mimi_3.png' class='card-img'></div>
                 <div class='card-content'>
                     <div class='card-meta'>JUNE 14, 2026 // VAULT</div>
                     <h2 class='card-title'>THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS</h2>
@@ -48,7 +65,7 @@
                 </div>
             </a>
             <a href='solo-leveling-season-2-hype.html' class='blog-card'>
-                <div class='card-img' style='background-image: url("https://dreaminganime.com/assets/mimi/mimi_2.png")'></div>
+                <div class='card-img-container'><img src='https://dreaminganime.com/assets/mimi/mimi_2.png' class='card-img'></div>
                 <div class='card-content'>
                     <div class='card-meta'>JUNE 13, 2026 // NEWS</div>
                     <h2 class='card-title'>SOLO LEVELING SEASON 2: ARISE!</h2>
@@ -56,7 +73,7 @@
                 </div>
             </a>
             <a href='meet-mimi-the-otaku-sage.html' class='blog-card'>
-                <div class='card-img' style='background-image: url("https://dreaminganime.com/assets/mimi/mimi_2d_ultra_clean.webp")'></div>
+                <div class='card-img-container'><img src='https://dreaminganime.com/assets/mimi/mimi_2d_ultra_clean.webp' class='card-img'></div>
                 <div class='card-content'>
                     <div class='card-meta'>JUNE 12, 2026 // BRAND</div>
                     <h2 class='card-title'>MEET MIMI: GUARDIAN OF THE VAULT</h2>
@@ -64,7 +81,7 @@
                 </div>
             </a>
             <a href='naruto-gama-chan-mug-review.html' class='blog-card'>
-                <div class='card-img' style='background-image: url("https://dreaminganime.com/assets/mimi/mimi_4.png")'></div>
+                <div class='card-img-container'><img src='https://dreaminganime.com/assets/mimi/mimi_4.png' class='card-img'></div>
                 <div class='card-content'>
                     <div class='card-meta'>JUNE 11, 2026 // PRODUCT</div>
                     <h2 class='card-title'>NINJA ESSENTIALS: THE GAMA CHAN MUG</h2>
