@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MERCH SPOTLIGHT: WHY THE JIRAYA SFC STATUE IS A MUST-HAVE FOR SENSEI FANS | Dreaming Anime</title>
+    <title>THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS | Dreaming Anime</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #FF6B00; --bg: #000; --text: #fff; }
@@ -17,12 +17,14 @@
         }
         .mimi-bg {
             position: fixed;
-            bottom: -50px;
-            right: -50px;
-            width: 500px;
-            opacity: 0.2;
+            bottom: -5%;
+            right: -5%;
+            width: clamp(400px, 50vw, 800px);
+            opacity: 0.6;
             pointer-events: none;
             z-index: 0;
+            filter: drop-shadow(0 0 50px rgba(255, 107, 0, 0.2));
+            transition: transform 0.5s ease-out;
         }
         .container { 
             max-width: 900px; 
@@ -30,34 +32,41 @@
             padding: 4rem 2rem; 
             position: relative;
             z-index: 1;
-            background: rgba(0,0,0,0.85);
-            border-left: 1px solid #222;
-            border-right: 1px solid #222;
-            box-shadow: 0 0 50px rgba(255, 107, 0, 0.05);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px);
+            border-left: 1px solid #333;
+            border-right: 1px solid #333;
+            box-shadow: 0 0 100px rgba(0,0,0,1);
         }
-        header { margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
+        header { margin-bottom: 3rem; border-bottom: 3px solid var(--primary); padding-bottom: 2rem; }
         h1 { 
             font-family: 'Bangers', cursive; 
-            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            font-size: clamp(2.5rem, 8vw, 5rem); 
             color: var(--primary); 
             margin-bottom: 1rem; 
             text-transform: uppercase;
-            line-height: 1.1;
-            letter-spacing: 2px;
+            line-height: 1;
+            letter-spacing: 3px;
         }
-        .meta { font-family: 'Space Mono'; font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem; }
+        .meta { font-family: 'Space Mono'; font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
+        .hero-img-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #222;
+            margin-bottom: 3rem;
+            background: #050505;
+            position: relative;
+        }
         .hero-img { 
             width: 100%; 
-            height: auto; 
-            max-height: 600px;
-            object-fit: cover; 
-            border-radius: 12px; 
-            margin-bottom: 3rem; 
-            border: 1px solid #333;
+            height: auto;
+            display: block;
+            object-fit: contain;
         }
-        article { font-size: 1.25rem; color: #eee; font-weight: 300; }
-        p { margin-bottom: 2rem; }
-        strong { color: var(--primary); font-weight: 700; }
+        article { font-size: 1.3rem; color: #eee; font-weight: 300; }
+        p { margin-bottom: 2.5rem; }
+        strong { color: var(--primary); font-weight: 800; }
         .back-btn { 
             display: inline-block; 
             margin-bottom: 3rem; 
@@ -65,48 +74,54 @@
             text-decoration: none; 
             font-family: 'Space Mono'; 
             font-weight: 700;
-            border: 1px solid var(--primary);
-            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary);
+            padding: 0.8rem 2rem;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .back-btn:hover { background: var(--primary); color: #000; }
+        .back-btn:hover { background: var(--primary); color: #000; transform: scale(1.1); }
         .product-link {
             background: var(--primary);
             color: #000;
-            padding: 1.5rem 3rem;
+            padding: 2rem 4rem;
             text-decoration: none;
             font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            display: inline-block;
-            border-radius: 8px;
-            margin-top: 2rem;
-            box-shadow: 0 5px 15px rgba(255,107,0,0.3);
-            transition: 0.3s;
+            font-size: 2.2rem;
+            display: block;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(255,107,0,0.4);
+            transition: 0.4s;
+            text-transform: uppercase;
         }
-        .product-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,107,0,0.5); }
-        footer { text-align: center; padding: 6rem 2rem 4rem; color: #444; font-size: 0.9rem; font-family: 'Space Mono'; }
+        .product-link:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(255,107,0,0.6); }
+        footer { text-align: center; padding: 6rem 2rem 4rem; color: #444; font-size: 1rem; font-family: 'Space Mono'; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
-    <img src="https://dreaminganime.com/mascot/mimi_reading_manga.png" class="mimi-bg" alt="Mimi Background">
+    <img src="https://dreaminganime.com/assets/mimi/mimi_3.png" class="mimi-bg" alt="Mimi Background">
     
     <div class="container">
-        <a href="/blog/" class="back-btn">&larr; BACK TO BLOG</a>
+        <a href="/blog/" class="back-btn">&larr; THE LOG</a>
         <header>
-            <div class="meta">JUNE 14, 2026 // PRODUCT</div>
-            <h1>MERCH SPOTLIGHT: WHY THE JIRAYA SFC STATUE IS A MUST-HAVE FOR SENSEI FANS</h1>
+            <div class="meta">JUNE 14, 2026 // VAULT</div>
+            <h1>THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS</h1>
         </header>
         
-        <img src="https://images.unsplash.com/photo-1578632738980-230c24fa44bc?auto=format&fit=crop&q=80&w=1000" class="hero-img" alt="MERCH SPOTLIGHT: WHY THE JIRAYA SFC STATUE IS A MUST-HAVE FOR SENSEI FANS">
+        <div class="hero-img-container">
+            <img src="https://dreaminganime.com/assets/mimi/mimi_reading_manga.png" class="hero-img" alt="THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS">
+        </div>
         
         <article>
-            <p>There are some characters that just stick with you forever. Jiraya, the Toad Sage, is one of them. When we decided to stock the <strong>Jiraya SFC Collector Statue</strong> in the Otaku Vault, it was a no-brainer. This isn't just a piece of plastic; it's a tribute to the legendary Pervy Sage.</p><p>The detail on the scroll and the dynamic pose of the toad summon is incredible. At 7.5 inches, it has a weight and presence that really stands out on a shelf. I love how the paint job captures the rugged texture of his hair and the vibrant colors of his outfit.</p><p>If you're a fan of the "Tale of the Utterly Gutsy Shinobi," this is the centerpiece your collection has been missing.</p>
+            <p>In the world of collectibles, presence is everything. The <strong>Jiraya SFC Collector Statue</strong> isn't just a shelf-filler; it's a piece of Shinobi history captured in 7.5 inches of high-grade PVC. From the rugged texture of his legendary white hair to the vibrant crimson of his Toad Sage vest, the fidelity here is what we call the "Gold Standard."</p><p>What makes this statue a must-have isn't just the character, but the dynamic summoning pose. It feels alive. When you place it in your workspace, it serves as a constant reminder of the gutsy spirit Jiraya instilled in Naruto. We've curated this specifically for the Otaku Vault because it meets our strict 98% accuracy threshold for character design.</p><p>Don't settle for generic figurines. This is the Sage of the Sannin, presented with the respect he deserves.</p>
         </article>
 
-        <a href="https://www.amazon.com/s?k=Jiraya+SFC+Collector+7.5'+Statue&tag=priscadezigns-20" class="product-link">GET THE SAGE ON AMAZON &rarr;</a>
+        <a href="https://www.amazon.com/s?k=Jiraya+SFC+Collector+7.5'+Statue&tag=priscadezigns-20" class="product-link">CLAIM THE SAGE FROM THE VAULT &rarr;</a>
         
         <footer>
-            &copy; 2026 DREAMING ANIME // LIVE THE ANIME LIFE // DESIGNED BY PRISCA DEZIGNS
+            &copy; 2026 DREAMING ANIME // LIVE THE ANIME LIFE // POWERED BY PRISCA DEZIGNS
         </footer>
     </div>
 </body>
