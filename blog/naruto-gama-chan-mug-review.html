@@ -1,128 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>NINJA ESSENTIALS: THE GAMA CHAN 3D MUG | Dreaming Anime</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap' rel='stylesheet'>
     <style>
-        :root { --primary: #FF6B00; --bg: #000; --text: #fff; }
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            font-family: 'Space Grotesk', sans-serif; 
-            line-height: 1.6; 
-            margin: 0;
-            overflow-x: hidden;
-        }
-        .mimi-bg {
-            position: fixed;
-            bottom: -5%;
-            right: -5%;
-            width: clamp(400px, 50vw, 800px);
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: 0;
-            filter: drop-shadow(0 0 50px rgba(255, 107, 0, 0.2));
-            transition: transform 0.5s ease-out;
-        }
-        .container { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 4rem 2rem; 
-            position: relative;
-            z-index: 1;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
-            border-left: 1px solid #333;
-            border-right: 1px solid #333;
-            box-shadow: 0 0 100px rgba(0,0,0,1);
-        }
-        header { margin-bottom: 3rem; border-bottom: 3px solid var(--primary); padding-bottom: 2rem; }
-        h1 { 
-            font-family: 'Bangers', cursive; 
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            color: var(--primary); 
-            margin-bottom: 1rem; 
-            text-transform: uppercase;
-            line-height: 1;
-            letter-spacing: 3px;
-        }
-        .meta { font-family: 'Space Mono'; font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
-        .hero-img-container {
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid #222;
-            margin-bottom: 3rem;
-            background: #050505;
-            position: relative;
-        }
-        .hero-img { 
-            width: 100%; 
+        :root { --primary: #FF6B00; --bg: #050505; --text: #fff; }
+        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; line-height: 1.8; margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; background: #000; box-shadow: 0 0 100px rgba(0,0,0,1); }
+        header { margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
+        h1 { font-family: 'Bangers', cursive; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--primary); margin-bottom: 1rem; line-height: 1.1; }
+        .meta { font-family: 'Space Mono'; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+        .mimi-spotlight {
+            width: 280px; /* Small and clean */
             height: auto;
-            display: block;
-            object-fit: contain;
+            float: right;
+            margin-left: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            border: 1px solid #222;
         }
-        article { font-size: 1.3rem; color: #eee; font-weight: 300; }
-        p { margin-bottom: 2.5rem; }
-        strong { color: var(--primary); font-weight: 800; }
-        .back-btn { 
-            display: inline-block; 
-            margin-bottom: 3rem; 
-            color: var(--primary); 
-            text-decoration: none; 
-            font-family: 'Space Mono'; 
-            font-weight: 700;
-            border: 2px solid var(--primary);
-            padding: 0.8rem 2rem;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        article { font-size: 1.15rem; color: #ccc; }
+        .section-title { font-family: 'Bangers', cursive; font-size: 2rem; color: #fff; margin-top: 3rem; margin-bottom: 1rem; border-left: 5px solid var(--primary); padding-left: 1rem; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: #0A0A0A;
+            border-radius: 20px;
+            border: 1px solid #111;
         }
-        .back-btn:hover { background: var(--primary); color: #000; transform: scale(1.1); }
-        .product-link {
-            background: var(--primary);
-            color: #000;
-            padding: 2rem 4rem;
-            text-decoration: none;
-            font-family: 'Bangers', cursive;
-            font-size: 2.2rem;
-            display: block;
-            text-align: center;
-            border-radius: 12px;
-            margin-top: 3rem;
-            box-shadow: 0 10px 30px rgba(255,107,0,0.4);
-            transition: 0.4s;
-            text-transform: uppercase;
-        }
-        .product-link:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(255,107,0,0.6); }
-        footer { text-align: center; padding: 6rem 2rem 4rem; color: #444; font-size: 1rem; font-family: 'Space Mono'; border-top: 1px solid #111; }
+        .product-card { text-align: center; text-decoration: none; color: #fff; }
+        .product-card img { width: 100%; height: 250px; object-fit: contain; background: #fff; border-radius: 10px; margin-bottom: 1rem; }
+        .product-card h3 { font-family: 'Bangers', cursive; font-size: 1.2rem; margin: 0; color: var(--primary); }
+        .cta-button { display: block; background: var(--primary); color: #000; padding: 1.5rem; text-align: center; font-family: 'Bangers', cursive; font-size: 1.8rem; text-decoration: none; border-radius: 10px; margin-top: 4rem; transition: 0.3s; }
+        footer { text-align: center; padding: 5rem; color: #333; font-family: 'Space Mono'; }
+        .clearfix::after { content: ''; clear: both; display: table; }
     </style>
 </head>
 <body>
-    <img src="https://dreaminganime.com/assets/mimi/mimi_5.png" class="mimi-bg" alt="Mimi Background">
-    
-    <div class="container">
-        <a href="/blog/" class="back-btn">&larr; THE LOG</a>
+    <div class='container clearfix'>
         <header>
-            <div class="meta">JUNE 11, 2026 // PRODUCT</div>
+            <div class='meta'>JUNE 11, 2026 // PRODUCT</div>
             <h1>NINJA ESSENTIALS: THE GAMA CHAN 3D MUG</h1>
         </header>
-        
-        <div class="hero-img-container">
-            <img src="https://dreaminganime.com/assets/mimi/mimi_4.png" class="hero-img" alt="NINJA ESSENTIALS: THE GAMA CHAN 3D MUG">
-        </div>
-        
-        <article>
-            <p>Your morning coffee just got a Shinobi upgrade. The <strong>Naruto Gama Chan 3D Handle Ceramic Mug</strong> is a perfect example of character-driven design. It takes the iconic toad wallet from the series and transforms it into a functional, high-fidelity piece of gear for your daily training.</p><p>The sculpted handle, replicating the wallet's latch, is a touch of genius that sets this apart from generic merchandise. It has the weight and feel of a premium item, ensuring your morning ritual is as authentic as a visit to Ichiraku Ramen. We've tested this in-house and the thermal retention is as solid as a Shadow Clone.</p><p>Start your day like the Future Hokage. Keep your drink warm and your spirit high.</p>
-        </article>
-
-        <a href="https://www.amazon.com/s?k=Naruto+Gama+Chan+3D+Handle+Ceramic+Mug&tag=priscadezigns-20" class="product-link">GET THE GAMA CHAN ON AMAZON &rarr;</a>
-        
-        <footer>
-            &copy; 2026 DREAMING ANIME // LIVE THE ANIME LIFE // POWERED BY PRISCA DEZIGNS
-        </footer>
+        <img src='https://dreaminganime.com/assets/mimi/mimi_4.png' class='mimi-spotlight' alt='Mimi'>
+        <article><p>Your morning coffee just got a Shinobi upgrade. The <strong>Naruto Gama Chan 3D Handle Ceramic Mug</strong> is a perfect example of character-driven design that meets the Dreaming Anime Gold Standard. It takes the iconic toad wallet—Narutos most precious possession—and transforms it into a functional, high-fidelity piece of gear for your daily training. This is not just a mug; it is a piece of the Naruto legacy that you can hold in your hands.</p><div class="section-title">DESIGN & THERMAL FIDELITY</div><p>The first thing that strikes you is the 3D latch handle. Most mugs use generic handles, but this piece uses the Gama-chan latch as a structural element, providing a comfortable and unique grip. The ceramic glaze is high-quality, ensuring that the vibrant greens and the signature Gama-chan expression stay sharp even after hundreds of washes. We have tested this in-house for thermal retention, and it keeps your coffee at the ideal temperature for those late-night manga reading sessions. It is the perfect balance of utility and authenticity.</p><div class="section-title">WHY EVERY NINJA NEEDS ONE</div><p>In the series, Gama-chan represents Narutos hard work and his dreams for the future. By bringing this item into your home, you are surrounding yourself with that same gutsy spirit. It is an essential part of a high-fidelity workspace, adding a splash of personality and Shinobi history to your desk. Mimi selected this product for the Vault because it meets our criteria for being Elite merchandise—items that are functional, beautifully designed, and deeply connected to the anime we love.</p></article>
+        <div class='section-title'>CURATED FROM THE SHOP</div>
+        <div class='product-grid'><a href="https://www.amazon.com/dp/B00V6E69RW?tag=priscadezigns-20" class="product-card"><img src="https://m.media-amazon.com/images/I/61r590D0Y5L._AC_SL1500_.jpg"><h3>GAMA CHAN 3D MUG</h3></a><a href="https://www.amazon.com/s?k=Naruto+Kitchen&tag=priscadezigns-20" class="product-card"><img src="https://m.media-amazon.com/images/I/71u98E+T1SL._AC_SL1500_.jpg"><h3>RAMEN BOWL SET</h3></a></div>
+        <a href='https://www.amazon.com/dp/B00V6E69RW?tag=priscadezigns-20' class='cta-button'>ORDER YOUR GAMA CHAN MUG</a>
+        <footer>&copy; 2026 DREAMING ANIME</footer>
     </div>
 </body>
 </html>
