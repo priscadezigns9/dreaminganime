@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE STORY OF MIMI: MEET OUR OTAKU SAGE | Dreaming Anime</title>
+    <title>MEET MIMI: THE GUARDIAN OF THE VAULT | Dreaming Anime</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #FF6B00; --bg: #000; --text: #fff; }
@@ -17,12 +17,14 @@
         }
         .mimi-bg {
             position: fixed;
-            bottom: -50px;
-            right: -50px;
-            width: 500px;
-            opacity: 0.2;
+            bottom: -5%;
+            right: -5%;
+            width: clamp(400px, 50vw, 800px);
+            opacity: 0.6;
             pointer-events: none;
             z-index: 0;
+            filter: drop-shadow(0 0 50px rgba(255, 107, 0, 0.2));
+            transition: transform 0.5s ease-out;
         }
         .container { 
             max-width: 900px; 
@@ -30,34 +32,41 @@
             padding: 4rem 2rem; 
             position: relative;
             z-index: 1;
-            background: rgba(0,0,0,0.85);
-            border-left: 1px solid #222;
-            border-right: 1px solid #222;
-            box-shadow: 0 0 50px rgba(255, 107, 0, 0.05);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px);
+            border-left: 1px solid #333;
+            border-right: 1px solid #333;
+            box-shadow: 0 0 100px rgba(0,0,0,1);
         }
-        header { margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
+        header { margin-bottom: 3rem; border-bottom: 3px solid var(--primary); padding-bottom: 2rem; }
         h1 { 
             font-family: 'Bangers', cursive; 
-            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            font-size: clamp(2.5rem, 8vw, 5rem); 
             color: var(--primary); 
             margin-bottom: 1rem; 
             text-transform: uppercase;
-            line-height: 1.1;
-            letter-spacing: 2px;
+            line-height: 1;
+            letter-spacing: 3px;
         }
-        .meta { font-family: 'Space Mono'; font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem; }
+        .meta { font-family: 'Space Mono'; font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
+        .hero-img-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #222;
+            margin-bottom: 3rem;
+            background: #050505;
+            position: relative;
+        }
         .hero-img { 
             width: 100%; 
-            height: auto; 
-            max-height: 600px;
-            object-fit: cover; 
-            border-radius: 12px; 
-            margin-bottom: 3rem; 
-            border: 1px solid #333;
+            height: auto;
+            display: block;
+            object-fit: contain;
         }
-        article { font-size: 1.25rem; color: #eee; font-weight: 300; }
-        p { margin-bottom: 2rem; }
-        strong { color: var(--primary); font-weight: 700; }
+        article { font-size: 1.3rem; color: #eee; font-weight: 300; }
+        p { margin-bottom: 2.5rem; }
+        strong { color: var(--primary); font-weight: 800; }
         .back-btn { 
             display: inline-block; 
             margin-bottom: 3rem; 
@@ -65,48 +74,54 @@
             text-decoration: none; 
             font-family: 'Space Mono'; 
             font-weight: 700;
-            border: 1px solid var(--primary);
-            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary);
+            padding: 0.8rem 2rem;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .back-btn:hover { background: var(--primary); color: #000; }
+        .back-btn:hover { background: var(--primary); color: #000; transform: scale(1.1); }
         .product-link {
             background: var(--primary);
             color: #000;
-            padding: 1.5rem 3rem;
+            padding: 2rem 4rem;
             text-decoration: none;
             font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            display: inline-block;
-            border-radius: 8px;
-            margin-top: 2rem;
-            box-shadow: 0 5px 15px rgba(255,107,0,0.3);
-            transition: 0.3s;
+            font-size: 2.2rem;
+            display: block;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(255,107,0,0.4);
+            transition: 0.4s;
+            text-transform: uppercase;
         }
-        .product-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,107,0,0.5); }
-        footer { text-align: center; padding: 6rem 2rem 4rem; color: #444; font-size: 0.9rem; font-family: 'Space Mono'; }
+        .product-link:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(255,107,0,0.6); }
+        footer { text-align: center; padding: 6rem 2rem 4rem; color: #444; font-size: 1rem; font-family: 'Space Mono'; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
     <img src="https://dreaminganime.com/assets/mimi/mimi_hero_ultra_hf.png" class="mimi-bg" alt="Mimi Background">
     
     <div class="container">
-        <a href="/blog/" class="back-btn">&larr; BACK TO BLOG</a>
+        <a href="/blog/" class="back-btn">&larr; THE LOG</a>
         <header>
             <div class="meta">JUNE 12, 2026 // BRAND</div>
-            <h1>THE STORY OF MIMI: MEET OUR OTAKU SAGE</h1>
+            <h1>MEET MIMI: THE GUARDIAN OF THE VAULT</h1>
         </header>
         
-        <img src="https://dreaminganime.com/assets/mimi/mimi_hero_ultra_hf.png" class="hero-img" alt="THE STORY OF MIMI: MEET OUR OTAKU SAGE">
+        <div class="hero-img-container">
+            <img src="https://dreaminganime.com/assets/mimi/mimi_2d_ultra_clean.webp" class="hero-img" alt="MEET MIMI: THE GUARDIAN OF THE VAULT">
+        </div>
         
         <article>
-            <p>Who is Mimi? You've seen her guiding you through the shop and analyzing the latest trailers in the Dreamer's Log, but there's a story behind the mascot. Mimi isn't just a character; she's the embodiment of the <strong>Anime Dreamer</strong> spirit. She represents the search for "High-Fidelity" experiences in a world of generic content.</p><p>Raised on a steady diet of vintage 90s mecha and modern Shonen, Mimi is an expert in frame rates, character development, and "Sovereign Design." She doesn't just watch anime—she lives it, just like we do. Her mission is to curate the best stories and the highest quality gear for our community.</p><p>When you see Mimi, know that you're getting the "Gold Standard" of otaku wisdom. She's here to make sure your anime journey is as legendary as a training arc!</p>
+            <p>Mimi is more than a mascot; she is the soul of Dreaming Anime. Born from the need for a truly "High-Fidelity" guide in the otaku community, Mimi represents the analytical eye and the passionate heart of every dreamer. She doesn't just curate the Vault; she lives within the stories we share.</p><p>Raised on the legendary mecha classics and refined by the modern masterpieces, Mimi’s mission is to filter out the noise and bring you only the "Gold Standard." Whether she's analyzing a new light novel or testing the latest figures, her goal is to ensure you never have to settle for less than elite quality.</p><p>When Mimi is on the page, you know you're in the presence of the Otaku Sage. She's here to guide your journey through the multiverse.</p>
         </article>
 
         
         
         <footer>
-            &copy; 2026 DREAMING ANIME // LIVE THE ANIME LIFE // DESIGNED BY PRISCA DEZIGNS
+            &copy; 2026 DREAMING ANIME // LIVE THE ANIME LIFE // POWERED BY PRISCA DEZIGNS
         </footer>
     </div>
 </body>
