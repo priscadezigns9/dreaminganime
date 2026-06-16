@@ -1,128 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS | Dreaming Anime</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@300;700;800&family=Space+Mono&display=swap' rel='stylesheet'>
     <style>
-        :root { --primary: #FF6B00; --bg: #000; --text: #fff; }
+        :root { --primary: #FF6B00; --bg: #050505; --text: #fff; }
         body { 
             background: var(--bg); 
             color: var(--text); 
             font-family: 'Space Grotesk', sans-serif; 
-            line-height: 1.6; 
+            line-height: 1.8; 
             margin: 0;
-            overflow-x: hidden;
-        }
-        .mimi-bg {
-            position: fixed;
-            bottom: -5%;
-            right: -5%;
-            width: clamp(400px, 50vw, 800px);
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: 0;
-            filter: drop-shadow(0 0 50px rgba(255, 107, 0, 0.2));
-            transition: transform 0.5s ease-out;
+            padding: 0;
         }
         .container { 
-            max-width: 900px; 
+            max-width: 1000px; 
             margin: 0 auto; 
             padding: 4rem 2rem; 
-            position: relative;
-            z-index: 1;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
-            border-left: 1px solid #333;
-            border-right: 1px solid #333;
+            background: #000;
             box-shadow: 0 0 100px rgba(0,0,0,1);
         }
-        header { margin-bottom: 3rem; border-bottom: 3px solid var(--primary); padding-bottom: 2rem; }
+        header { margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
         h1 { 
             font-family: 'Bangers', cursive; 
-            font-size: clamp(2.5rem, 8vw, 5rem); 
+            font-size: clamp(2.5rem, 6vw, 4rem); 
             color: var(--primary); 
             margin-bottom: 1rem; 
-            text-transform: uppercase;
-            line-height: 1;
-            letter-spacing: 3px;
+            line-height: 1.1;
         }
-        .meta { font-family: 'Space Mono'; font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
-        .hero-img-container {
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid #222;
-            margin-bottom: 3rem;
-            background: #050505;
-            position: relative;
-        }
-        .hero-img { 
-            width: 100%; 
+        .meta { font-family: 'Space Mono'; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+        .mimi-spotlight {
+            width: 280px;
             height: auto;
-            display: block;
+            float: right;
+            margin-left: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            border: 1px solid #222;
+        }
+        article { font-size: 1.15rem; color: #ccc; }
+        .section-title { 
+            font-family: 'Bangers', cursive; 
+            font-size: 2rem; 
+            color: #fff; 
+            margin-top: 3rem; 
+            margin-bottom: 1rem; 
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: #0A0A0A;
+            border-radius: 20px;
+            border: 1px solid #111;
+        }
+        .product-card {
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
             object-fit: contain;
+            background: #111;
+            border-radius: 10px;
+            margin-bottom: 1rem;
         }
-        article { font-size: 1.3rem; color: #eee; font-weight: 300; }
-        p { margin-bottom: 2.5rem; }
-        strong { color: var(--primary); font-weight: 800; }
-        .back-btn { 
-            display: inline-block; 
-            margin-bottom: 3rem; 
-            color: var(--primary); 
-            text-decoration: none; 
-            font-family: 'Space Mono'; 
-            font-weight: 700;
-            border: 2px solid var(--primary);
-            padding: 0.8rem 2rem;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .back-btn:hover { background: var(--primary); color: #000; transform: scale(1.1); }
-        .product-link {
+        .product-card h3 { font-family: 'Bangers', cursive; font-size: 1.2rem; margin: 0; color: var(--primary); }
+        .cta-button {
+            display: block;
             background: var(--primary);
             color: #000;
-            padding: 2rem 4rem;
-            text-decoration: none;
-            font-family: 'Bangers', cursive;
-            font-size: 2.2rem;
-            display: block;
+            padding: 1.5rem;
             text-align: center;
-            border-radius: 12px;
-            margin-top: 3rem;
-            box-shadow: 0 10px 30px rgba(255,107,0,0.4);
-            transition: 0.4s;
-            text-transform: uppercase;
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 4rem;
+            transition: 0.3s;
         }
-        .product-link:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(255,107,0,0.6); }
-        footer { text-align: center; padding: 6rem 2rem 4rem; color: #444; font-size: 1rem; font-family: 'Space Mono'; border-top: 1px solid #111; }
+        footer { text-align: center; padding: 5rem; color: #333; font-family: 'Space Mono'; }
+        .clearfix::after { content: ''; clear: both; display: table; }
     </style>
 </head>
 <body>
-    <img src="https://dreaminganime.com/assets/mimi/mimi_3.png" class="mimi-bg" alt="Mimi Background">
-    
-    <div class="container">
-        <a href="/blog/" class="back-btn">&larr; THE LOG</a>
+    <div class='container clearfix'>
         <header>
-            <div class="meta">JUNE 14, 2026 // VAULT</div>
+            <div class='meta'>JUNE 14, 2026 // VAULT</div>
             <h1>THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS</h1>
         </header>
-        
-        <div class="hero-img-container">
-            <img src="https://dreaminganime.com/assets/mimi/mimi_reading_manga.png" class="hero-img" alt="THE SAGE RETURNS: JIRAYA SFC STATUE ANALYSIS">
-        </div>
-        
-        <article>
-            <p>In the world of collectibles, presence is everything. The <strong>Jiraya SFC Collector Statue</strong> isn't just a shelf-filler; it's a piece of Shinobi history captured in 7.5 inches of high-grade PVC. From the rugged texture of his legendary white hair to the vibrant crimson of his Toad Sage vest, the fidelity here is what we call the "Gold Standard."</p><p>What makes this statue a must-have isn't just the character, but the dynamic summoning pose. It feels alive. When you place it in your workspace, it serves as a constant reminder of the gutsy spirit Jiraya instilled in Naruto. We've curated this specifically for the Otaku Vault because it meets our strict 98% accuracy threshold for character design.</p><p>Don't settle for generic figurines. This is the Sage of the Sannin, presented with the respect he deserves.</p>
-        </article>
-
-        <a href="https://www.amazon.com/s?k=Jiraya+SFC+Collector+7.5'+Statue&tag=priscadezigns-20" class="product-link">CLAIM THE SAGE FROM THE VAULT &rarr;</a>
-        
-        <footer>
-            &copy; 2026 DREAMING ANIME // LIVE THE ANIME LIFE // POWERED BY PRISCA DEZIGNS
-        </footer>
+        <img src='https://dreaminganime.com/assets/mimi/mimi_3.png' class='mimi-spotlight' alt='Mimi'>
+        <article><p>In the world of Naruto collectibles, presence is everything. The <strong>Jiraya SFC Collector Statue</strong> by ABYstyle Studio is a 7.5-inch masterpiece that captures the Sage of the Sannin in his prime. From the rugged texture of his legendary white hair to the vibrant crimson of his Toad Sage vest, the fidelity here is what we call the Gold Standard. This is not just a figure; it is a piece of shinobi history for your workspace.</p><div class="section-title">SCULPTING THE SANNIN SPIRIT</div><p>The first thing you notice is the dynamic summoning pose. Slamming his hand to the earth, Jiraya looks ready to summon Gamabunta at a moments notice. The painting accuracy matches our strict standards, ensuring that every color is authentic to the Shippuden cells. We have tested this piece in-house, and the structural integrity of the high-grade PVC is top-tier. It commands attention without overwhelming your display case—the perfect balance of size and detail.</p><p>Mimi selected this piece because it bridges the gap between high-end collectibles and everyday accessibility. It represents the gutsy spirit that Jiraiya passed on to Naruto, serving as a constant reminder to never give up on your ninja way.</p></article>
+        <div class='section-title'>CURATED FROM THE SHOP</div>
+        <div class='product-grid'><a href="https://www.amazon.com/dp/B0CCZ4HR75?tag=priscadezigns-20" class="product-card"><img src="https://dreaminganime.com/assets/mimi/mimi_tiny.png"><h3>JIRAYA SFC STATUE</h3></a><a href="https://www.amazon.com/s?k=Naruto+Statues&tag=priscadezigns-20" class="product-card"><img src="https://dreaminganime.com/assets/mimi/mimi_tiny.png"><h3>SHIPPUDEN VAULT</h3></a></div>
+        <a href='https://www.amazon.com/dp/B0CCZ4HR75?tag=priscadezigns-20' class='cta-button'>CLAIM THE SAGE ON AMAZON</a>
+        <footer>&copy; 2026 DREAMING ANIME</footer>
     </div>
 </body>
 </html>
