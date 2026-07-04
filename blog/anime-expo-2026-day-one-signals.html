@@ -8,50 +8,88 @@
     <style>
         :root { --primary: #FF6B00; --bg: #050505; --card: #0A0A0A; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; line-height: 1.6; }
-        .hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(5,5,5,1)), url('https://dreaminganime.com/assets/mimi/mimi_5.png') center/contain no-repeat; display: flex; align-items: flex-end; padding: 3rem 6%; }
-        .hero-content { max-width: 800px; }
-        .label { font-family: 'Space Mono'; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
-        h1 { font-family: 'Bangers'; font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0.5rem 0; line-height: 1; }
-        .container { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
-        .content p { font-size: 1.1rem; color: #ccc; margin-bottom: 2rem; }
-        .highlight { border-left: 4px solid var(--primary); padding-left: 1.5rem; margin: 3rem 0; }
-        h2 { font-family: 'Bangers'; color: var(--primary); font-size: 2.2rem; margin-top: 3rem; }
-        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-weight: 700; }
-        footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
+        .hero { height: 70vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(5,5,5,1)), url('https://dreaminganime.com/assets/mimi/mimi_5.png') center/contain no-repeat; display: flex; align-items: flex-end; padding: 3rem 6%; border-bottom: 1px solid #111; }
+        .hero-content { max-width: 800px; margin-bottom: 2rem; }
+        .label { font-family: 'Space Mono'; color: var(--primary); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        h1 { font-family: 'Bangers'; font-size: clamp(3rem, 8vw, 5.5rem); margin: 0.5rem 0; line-height: 0.9; color: var(--primary); text-shadow: 4px 4px 0 #000; }
+        .container { max-width: 900px; margin: 4rem auto; padding: 0 2rem; }
+        .content p { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; font-weight: 300; }
+        .image-block { margin: 4rem 0; background: var(--card); border: 1px solid #222; border-radius: 12px; overflow: hidden; }
+        .image-block img { width: 100%; height: auto; display: block; border-bottom: 1px solid #222; }
+        .image-caption { padding: 1rem; font-family: 'Space Mono'; font-size: 0.85rem; color: #666; text-align: center; }
+        .highlight { border-left: 5px solid var(--primary); padding-left: 2rem; margin: 4rem 0; background: rgba(255,107,0,0.03); padding-top: 1rem; padding-bottom: 1rem; }
+        h2 { font-family: 'Bangers'; color: #fff; font-size: 3rem; margin-top: 4rem; letter-spacing: 1px; }
+        .back-link { display: inline-block; margin-bottom: 3rem; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-weight: 700; font-size: 0.9rem; border: 1px solid var(--primary); padding: 0.5rem 1rem; border-radius: 4px; transition: 0.3s; }
+        .back-link:hover { background: var(--primary); color: #000; }
+        .grid-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 4rem 0; }
+        .visual-card { background: var(--card); padding: 2rem; border: 1px solid #222; border-radius: 12px; }
+        .visual-card h3 { font-family: 'Bangers'; font-size: 1.8rem; margin: 0 0 1rem; color: var(--primary); }
+        footer { padding: 6rem 2rem; text-align: center; border-top: 1px solid #111; color: #444; font-size: 0.9rem; letter-spacing: 2px; font-family: 'Space Mono'; }
+        @media (max-width: 768px) { .grid-visual { grid-template-columns: 1fr; } h1 { font-size: 3.5rem; } }
     </style>
 </head>
 <body>
     <div class="hero">
         <div class="hero-content">
-            <span class="label">JULY 03, 2026 // EVENT</span>
-            <h1>ANIME EXPO 2026: DAY ONE SIGNALS</h1>
+            <span class="label">JULY 03, 2026 // LIVE FROM L.A.</span>
+            <h1>ANIME EXPO 2026: THE DAY ONE SIGNALS</h1>
         </div>
     </div>
 
     <article class="container">
-        <a href="index.html" class="back-link">&larr; BACK TO LOG</a>
+        <a href="index.html" class="back-link">&larr; BACK TO THE LOG</a>
         
         <div class="content">
-            <p>The Los Angeles Convention Center has officially transformed into the epicenter of the anime multiverse. Anime Expo (AX) 2026 has kicked off, and the Day One signals are already redefining our expectations for the next two years of animation.</p>
+            <p>The Los Angeles Convention Center has officially buckled under the weight of 100,000 fans. As the doors swung open for Day One of Anime Expo (AX) 2026, the atmosphere wasn't just electric—it was seismic. We’re on the ground, filtering through the noise to bring you the high-fidelity signals that actually matter.</p>
 
-            <div class="highlight">
-                <h2>THE BIG REVEAL: KAGURABACHI ANIME</h2>
-                <p>It’s official. Takeru Hokazono’s manga phenomenon, <em>Kagurabachi</em>, is getting an anime adaptation. The announcement trailer, which debuted during the special Shonen Jump panel, confirmed that the series will be handled by a high-fidelity studio collaboration aimed at capturing the manga’s unique cinematic ink-style. The "Chihiro" hype is real, and the katana-action genre just found its next king.</p>
+            <div class="image-block">
+                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/10/kagurabachi-manga-promo-cropped.jpg" alt="Kagurabachi Announcement Visual">
+                <div class="image-caption">OFFICIAL SIGNAL: THE KAGURABACHI ANIME ADAPTATION HAS BEEN INITIALIZED.</div>
             </div>
 
-            <h2>SEQUEL SURGES</h2>
-            <p><strong>The Apothecary Diaries Season 3:</strong> Maomao returns. The announcement panel confirmed that production for Season 3 is well underway, with a target release window for late 2026. Fans were treated to a brief teaser showing Maomao investigating a new mystery within the Outer Court.</p>
-            <p><strong>Dragon Ball Xenoverse 2:</strong> Even years later, the legend lives on. A new trailer for the final DLC content was released today, showcasing high-fidelity combat updates and a narrative bridge to the next major Dragon Ball project.</p>
+            <div class="highlight">
+                <h2>THE ASCENSION OF KAGURABACHI</h2>
+                <p>The rumors were silenced today in the most explosive way possible. During the Shonen Jump panel, a 90-second teaser confirmed that <em>Kagurabachi</em> is moving from the page to the screen. Takeru Hokazono’s cinematic vision for Chihiro’s quest for vengeance is being handled by a powerhouse production committee that includes the best action animators from across the industry.</p>
+                <p>The teaser focused on the "Goldfish" sequence, showcasing a fluid, ink-wash aesthetic that stays true to the manga's high-contrast visuals. This isn't just an anime; it’s a direct response to the global demand for more mature, visually striking battle shonen. Expect a Late 2026 premiere.</p>
+            </div>
 
-            <h2>PRODUCT SPOTLIGHT: HUNTER X HUNTER VOL. 39</h2>
-            <p>For the collectors, today marks the official release of <em>Hunter x Hunter</em> Volume 39 in Japan. The volume includes chapters 401-410, and international fans are already scrambling for imports to see Yoshihiro Togashi's latest masterwork in physical form.</p>
+            <h2>MAOMAO'S RETURN: APOTHECARY DIARIES S3</h2>
+            <p>If <em>Kagurabachi</em> was the sword, Maomao was the soul of Day One. CloverWorks and TOHO Animation officially confirmed <em>The Apothecary Diaries</em> Season 3. The announcement panel revealed that the series will adapt the critical "Inner Court Conspiracy" arc, which fans have been dying to see animated.</p>
+            
+            <div class="image-block">
+                <img src="https://m.media-amazon.com/images/I/81h9iF9yOAL._AC_UF1000,1000_QL80_.jpg" alt="Apothecary Diaries Vol 10 Cover">
+                <div class="image-caption">DATA POINT: THE SOURCE MATERIAL FOR SEASON 3 HITS NEW SALES HIGHS IN TOKYO.</div>
+            </div>
 
-            <p>Stay locked into Dreaming Anime for our live coverage of Anime Expo Day Two. The signals are only getting stronger.</p>
+            <p>Maomao's clinical approach to the mysteries of the palace remains the show's biggest draw. The new season promises higher production values and a deeper look into Jinshi's past. The release schedule is set for a Fall 2026 launch, making that season one of the most crowded in history.</p>
+
+            <div class="grid-visual">
+                <div class="visual-card">
+                    <h3>SBR SIGNAL</h3>
+                    <p>Brief flashes of new production art were spotted at the Warner Bros. Japan booth, sending JoJo fans into a frenzy. Steel Ball Run news is imminent.</p>
+                </div>
+                <div class="visual-card">
+                    <h3>XENOVERSE FINALITY</h3>
+                    <p>Dragon Ball Xenoverse 2’s final trailer confirms a narrative link to the upcoming 2027 projects. The legacy continues.</p>
+                </div>
+            </div>
+
+            <h2>THE COLLECTOR'S GRAIL: HUNTER X HUNTER VOL. 39</h2>
+            <p>While the screens were flashing, the ink was drying on the most anticipated volume release of the decade. Today marks the official street date for <em>Hunter x Hunter</em> Volume 39. Containing chapters 401-410, this volume represents Togashi’s triumphant return to form.</p>
+            
+            <div class="image-block">
+                <img src="https://m.media-amazon.com/images/I/91rL09O8R2L._SL1500_.jpg" alt="Hunter x Hunter Volume 39">
+                <div class="image-caption">COLLECTOR ALERT: VOL. 39 IS NOW CIRCULATING. DATA INTEGRITY: 100%.</div>
+            </div>
+
+            <p>The complexity of the Succession Contest arc reaches a boiling point in this collection. For fans at Anime Expo, the Viz Media booth has been a battlefield for limited edition copies. It’s a reminder that even in the age of streaming, the physical page still holds the ultimate power.</p>
+
+            <p>Stay tuned to Dreaming Anime. We’re just getting started. Day Two is where the real secrets come out.</p>
         </div>
     </article>
 
     <footer>
-        &copy; 2026 DREAMING ANIME &mdash; HIGH FIDELITY ANIME INTELLIGENCE
+        &copy; 2026 DREAMING ANIME &mdash; THE ARCHITECT OF OTAKU CULTURE
     </footer>
 </body>
 </html>
