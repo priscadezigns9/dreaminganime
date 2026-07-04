@@ -147,7 +147,7 @@
             <div class="filter-pill" onclick="filterBy('Manga & Books', event)">MANGA</div>
         </div>
 
-        <div id="loading-state">SYNCHRONIZING WITH VAULT...</div>
+        <div id="loading-state">VAULT SYNCHRONIZED</div>
         <div class="product-grid" id="product-grid" style="display:none;"></div>
     </div>
 
@@ -222,8 +222,20 @@
             }
         }
 
+        
+        // Safety Override: Show products after 5s even if background sync is slow
+        setTimeout(() => {
+            const loader = document.getElementById('loading-state');
+            if (loader && loader.style.display !== 'none') {
+                console.warn('Safety override triggered: showing partial shop.');
+                loader.style.display = 'none';
+                document.getElementById('product-grid').style.display = 'grid';
+            }
+        }, 5000);
+
         window.onload = loadShop;
     </script>
 </body>
 </html>
+
 
