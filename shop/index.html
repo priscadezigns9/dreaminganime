@@ -159,6 +159,18 @@
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         let allProducts = [];
+        const addedProducts = [
+          {title:'Frieren Eaten by a Mimic Anime T-Shirt',category:'Hoodies & Apparel',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/A1MwpTbDJoL._CLa%7C2140%2C2000%7C81btCkoYfNL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_UL320_.png',affiliate_link:'https://www.amazon.com/dp/B0FR5FRG18?tag=priscadezigns-20'},
+          {title:'Frieren, Fern and Mimic Acrylic Keychain',category:'Keychains',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/71eudxE+U3L._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B0FGCWP2Y6?tag=priscadezigns-20'},
+          {title:'Frieren, Fern and Stark Wall Scroll',category:'Rugs & Mats',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/81j87K+Ww6L._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B0D6XKFHHK?tag=priscadezigns-20'},
+          {title:'Fern Sitting Pose Plush',category:'Figures',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/71MYb10bviL._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B0FRT2T7LX?tag=priscadezigns-20'},
+          {title:'Frieren, Fern and Stark Shopping Lanyard',category:'Bags & Wallets',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/61MJhe7GpGL._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B0D6X89QPB?tag=priscadezigns-20'},
+          {title:'War of Underworld Asuna & Alice Acrylic Stand',category:'Accessories',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/91enPQXe4-S._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B08KT6QYQ5?tag=priscadezigns-20'},
+          {title:'Alice Synthesis Thirty Integrity Knight Figma',category:'Figures',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/610qTUVjOXL._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B09GVTWXNP?tag=priscadezigns-20'},
+          {title:'Asuna Sword Art Online Cosplay Costume',category:'Cosplay & Wigs',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/51gobluRnsL._AC_UL320_.jpg',affiliate_link:'https://www.amazon.com/dp/B0F18S9QPP?tag=priscadezigns-20'},
+          {title:'Black Torch Complete Box Set Volumes 1–5',category:'Manga & Books',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/818-7hrIXGL._AC_UY218_.jpg',affiliate_link:'https://www.amazon.com/dp/1974769364?tag=priscadezigns-20'},
+          {title:'Black Torch Vol. 3',category:'Manga & Books',price:'See Amazon',image_url:'https://m.media-amazon.com/images/I/81kl5zg+hOL._AC_UY218_.jpg',affiliate_link:'https://www.amazon.com/dp/1974702227?tag=priscadezigns-20'}
+        ];
 
         async function loadShop() {
             try {
@@ -169,7 +181,7 @@
                     .range(0, 23);
 
                 if (error) throw error;
-                allProducts = data;
+                allProducts = [...data, ...addedProducts];
                 renderProducts(allProducts);
                 
                 document.getElementById('loading-state').style.display = 'none';
