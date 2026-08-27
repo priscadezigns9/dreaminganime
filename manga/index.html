@@ -313,7 +313,7 @@
             } catch (err) {
                 console.error("Reader Error:", err);
                 loader.innerHTML = `
-                    <p style="color: var(--primary); font-family: 'Space Mono';">ENCRYPTION ERROR: SOVEREIGN READ FAILED.</p>
+                    <p style="color: var(--primary); font-family: 'Space Mono';">READING ERROR: PLEASE TRY AGAIN.</p>
                     <button class="nav-btn" style="margin-top: 20px;" onclick="window.open('https://mangadex.org/search?q=${encodeURIComponent(title)}')">READ ON MANGADEX</button>
                 `;
             }
