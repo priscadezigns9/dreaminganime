@@ -175,7 +175,7 @@
     <div style="text-align:center; padding:80px 20px 20px;">
         <img src="https://raw.githubusercontent.com/priscadezigns9/dreaminganime/main/mascot/mimi/mimi_shop_header.webp" style="height:180px; filter:drop-shadow(0 0 30px rgba(255,107,0,0.3));" alt="Mimi Vault">
         <h1 style="font-family:'Bangers',cursive; font-size:5rem; line-height: 1; margin: 10px 0;">THE MANGA VAULT</h1>
-        <p style="font-family:'Space Mono'; color:var(--primary); letter-spacing: 2px;">SOVEREIGN READ PROTOCOL &mdash; v2.0</p>
+        <p style="font-family:'Space Mono'; color:var(--primary); letter-spacing: 2px;">MANGA DISCOVERY / READ &amp; EXPLORE</p>
     </div>
 
     <div class="search-container">
@@ -225,13 +225,15 @@
         async function loadMangaVault() {
             const grid = document.getElementById('manga-grid');
             try {
-                grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">Syncing with neural network...</p>';
-                const res = await fetch(`${JIKAN_API}/top/manga?limit=24&filter=bypopularity`);
+                grid.innerHTML = '<p style="text-align:center;color:#444;width:100%;">Loading manga…</p>';
+                const res = await fetch(`${MD_API}/manga?limit=24&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive`);
                 const data = await res.json();
-                renderManga(data.data);
+                const mapped = (data.data || []).map(m => { const rel=(m.relationships||[]).find(r=>r.type==='cover_art'); const file=rel&&rel.attributes&&rel.attributes.fileName; return {title:m.attributes.title?.en||Object.values(m.attributes.title||{})[0]||'Manga',type:'Manga',status:m.attributes.status||'published',rank:null,images:{jpg:{large_image_url:file?`${MD_IMAGE_SERVER}/covers/${m.id}/${file}.512.jpg`:''}}}; });
+                if (!mapped.length) throw new Error('empty');
+                renderManga(mapped);
             } catch (e) {
-                console.error("Manga API Sync Error:", e);
-                grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">Vault connection delayed...</p>';
+                console.error('Manga source unavailable:', e);
+                grid.innerHTML = '<p style="text-align:center;color:#aaa;width:100%;">Manga catalogue temporarily unavailable. Try searching again.</p>';
             }
         }
 
