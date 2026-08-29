@@ -49,8 +49,17 @@ var GENRE_PAGES = {
 
 var SITE_LINKS = {
   music:"/music/", shop:"/shop/", cinema:"/cinema/", manga:"/manga/",
-  collection:"/dreamers-collection/", whereToWatch:"/where-to-watch/", reviews:"/review/"
+  collection:"/dreamers-collection/", whereToWatch:"/where-to-watch/", reviews:"/review/",
+  merch:"https://www.redbubble.com/people/dreaminganime/shop"
 };
+
+var SOCIALS = [
+  { label:"Facebook", url:"https://www.facebook.com/dreaminganime9/" },
+  { label:"Instagram", url:"https://instagram.com/dreaminganime2026" },
+  { label:"Threads", url:"https://threads.net/@dreaminganime2026" },
+  { label:"TikTok", url:"https://www.tiktok.com/@dreaminganime9" },
+  { label:"YouTube", url:"https://www.youtube.com/@DreamingAnime9" }
+];
 
 window.__mimiCatalog = CATALOG; // exposed for debugging/testing only
 
@@ -59,7 +68,7 @@ window.__mimiCatalog = CATALOG; // exposed for debugging/testing only
    reinvented. Hard 3px black border + offset shadow matches .float-btn
    and .card treatment already used across the site. */
 var css = ''
-+ '#mimi-launcher{position:fixed;bottom:150px;right:24px;width:60px;height:60px;border-radius:50%;'
++ '#mimi-launcher{position:fixed;bottom:150px;right:24px;width:60px;height:60px;min-width:60px;min-height:60px;box-sizing:border-box;white-space:nowrap;border-radius:50%;'
 + 'background:var(--white,#FFF);border:3px solid var(--black,#0A0A0A);cursor:pointer;z-index:901;'
 + 'display:flex;align-items:center;justify-content:center;padding:0;'
 + 'box-shadow:3px 3px 0 var(--black,#0A0A0A);transition:transform .2s,box-shadow .2s;overflow:hidden;}'
@@ -68,7 +77,7 @@ var css = ''
 + '#mimi-launcher .mimi-badge{position:absolute;top:-4px;right:-4px;background:var(--orange,#FF6B00);color:#fff;'
 + 'font:800 .62rem "Space Mono",monospace;width:20px;height:20px;border-radius:50%;border:2px solid var(--black,#0A0A0A);'
 + 'display:flex;align-items:center;justify-content:center;}'
-+ '@media(max-width:600px){#mimi-launcher{bottom:206px;right:14px;width:52px;height:52px;box-shadow:2px 2px 0 var(--black,#0A0A0A);}}'
++ '@media(max-width:600px){#mimi-launcher{bottom:206px;right:14px;width:52px;height:52px;min-width:52px;min-height:52px;box-shadow:2px 2px 0 var(--black,#0A0A0A);}}'
 
 + '#mimi-panel{position:fixed;z-index:902;background:var(--white,#FFF);border:3px solid var(--black,#0A0A0A);'
 + 'display:flex;flex-direction:column;overflow:hidden;opacity:0;pointer-events:none;'
@@ -88,8 +97,8 @@ var css = ''
 + '#mimi-hdr img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--orange,#FF6B00);}'
 + '#mimi-hdr-name{font-family:Bangers,cursive;font-size:1.3rem;letter-spacing:.03em;line-height:1;}'
 + '#mimi-hdr-sub{font:700 .62rem "Space Mono",monospace;color:var(--orange,#FF6B00);letter-spacing:.08em;margin-top:3px;}'
-+ '#mimi-close{margin-left:auto;background:none;border:2px solid rgba(255,255,255,.25);color:#fff;width:32px;height:32px;'
-+ 'border-radius:50%;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;}'
++ '#mimi-close{margin-left:auto;background:none;border:2px solid rgba(255,255,255,.25);color:#fff;width:32px;height:32px;min-width:0;'
++ 'border-radius:50%;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;box-sizing:border-box;white-space:nowrap;}'
 + '#mimi-close:hover,#mimi-close:focus-visible{border-color:var(--orange,#FF6B00);color:var(--orange,#FF6B00);}'
 
 + '#mimi-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch;}'
@@ -100,7 +109,8 @@ var css = ''
 + 'padding:8px 10px;border-radius:8px;margin-top:8px;}'
 
 + '.mimi-opts{display:flex;flex-wrap:wrap;gap:8px;}'
-+ '.mimi-opt{font:700 .78rem Inter,Arial,sans-serif;padding:10px 14px;min-height:44px;border:2px solid var(--black,#0A0A0A);'
++ '.mimi-opt{font:700 .78rem Inter,Arial,sans-serif;padding:10px 14px;min-height:44px;min-width:0;width:auto;white-space:normal;'
++ 'box-sizing:border-box;text-align:center;border:2px solid var(--black,#0A0A0A);'
 + 'background:#fff;color:var(--black,#0A0A0A);border-radius:24px;cursor:pointer;transition:all .15s;}'
 + '.mimi-opt:hover,.mimi-opt:focus-visible{background:var(--orange,#FF6B00);color:#fff;border-color:var(--orange,#FF6B00);}'
 + '.mimi-opt:focus-visible{outline:3px solid var(--orange,#FF6B00);outline-offset:2px;}'
@@ -110,7 +120,8 @@ var css = ''
 + '.mimi-card p{font-size:.86rem;color:#444;margin:0 0 10px;line-height:1.5;}'
 + '.mimi-card .mimi-tags{font:700 .62rem "Space Mono",monospace;color:var(--orange,#FF6B00);letter-spacing:.06em;margin-bottom:10px;text-transform:uppercase;}'
 + '.mimi-card .mimi-actions{display:flex;flex-wrap:wrap;gap:8px;}'
-+ '.mimi-card .mimi-actions a,.mimi-card .mimi-actions button{font:700 .72rem "Space Mono",monospace;padding:9px 12px;min-height:40px;'
++ '.mimi-card .mimi-actions a,.mimi-card .mimi-actions button{font:700 .72rem "Space Mono",monospace;padding:9px 12px;min-height:40px;min-width:0;'
++ 'width:auto;white-space:normal;box-sizing:border-box;'
 + 'border:2px solid var(--black,#0A0A0A);background:#fff;color:var(--black,#0A0A0A);border-radius:20px;cursor:pointer;'
 + 'text-decoration:none;display:inline-flex;align-items:center;letter-spacing:.03em;}'
 + '.mimi-card .mimi-actions a:hover,.mimi-card .mimi-actions button:hover,'
@@ -155,7 +166,7 @@ panel.innerHTML =
   + '<input id="mimi-input" type="text" placeholder="Ask Mimi anything..." '
   + 'style="flex:1;min-width:0;border:2px solid var(--black,#0A0A0A);border-radius:22px;padding:10px 14px;font:0.88rem Inter,Arial,sans-serif;outline:none;">'
   + '<button id="mimi-send" type="button" aria-label="Send message" '
-  + 'style="width:44px;height:44px;flex-shrink:0;border-radius:50%;border:2px solid var(--black,#0A0A0A);background:var(--orange,#FF6B00);color:#fff;cursor:pointer;font-size:16px;">&#8593;</button>'
+  + 'style="width:44px;height:44px;min-width:44px;min-height:44px;flex-shrink:0;border-radius:50%;border:2px solid var(--black,#0A0A0A);background:var(--orange,#FF6B00);color:#fff;cursor:pointer;font-size:16px;box-sizing:border-box;white-space:nowrap;">&#8593;</button>'
   + '</div>';
 document.body.appendChild(panel);
 
@@ -245,8 +256,10 @@ var STEPS = {
       { label:'Find where to watch', action:function(){ go('whereToWatch'); } },
       { label:'Explore genres', action:function(){ go('genreMenu'); } },
       { label:'Discover anime music', action:function(){ go('music'); } },
-      { label:'Find anime merch', action:function(){ go('shop'); } },
-      { label:"Open Dreamer's Collection", action:function(){ go('collection'); } }
+      { label:'Find anime merch', action:function(){ go('merch'); } },
+      { label:'Visit the Shop', action:function(){ go('shop'); } },
+      { label:"Open Dreamer's Collection", action:function(){ go('collection'); } },
+      { label:'Follow us', action:function(){ go('socials'); } }
     ]);
   },
 
@@ -352,12 +365,29 @@ var STEPS = {
     ]);
   },
 
+  merch: function(){
+    addMsg("Official Dreaming Anime designs — apparel, prints, and lifestyle pieces — are available through our Redbubble store.", 'bot');
+    addOptions([
+      { label:'Open Merch Store', action:function(){ window.open(SITE_LINKS.merch, '_blank'); go('afterAction'); } },
+      { label:'Back to menu', action:function(){ go('start'); } }
+    ]);
+  },
+
   shop: function(){
-    addMsg('Figures, manga, posters, and Dreaming Anime merch all live in the Shop.', 'bot');
+    addMsg('Figures, manga, posters, and collectibles all live in the Shop.', 'bot');
     addOptions([
       { label:'Open Shop', action:function(){ window.open(SITE_LINKS.shop, '_blank'); go('afterAction'); } },
       { label:'Back to menu', action:function(){ go('start'); } }
     ]);
+  },
+
+  socials: function(){
+    addMsg("Follow Dreaming Anime for updates, drops, and community posts:", 'bot');
+    var opts = SOCIALS.map(function(s){
+      return { label:s.label, action:function(){ window.open(s.url, '_blank'); go('afterAction'); } };
+    });
+    opts.push({ label:'Back to menu', action:function(){ go('start'); } });
+    addOptions(opts);
   },
 
   collection: function(){
@@ -495,7 +525,9 @@ function handleFreeText(raw){
     }
     if (/watch|stream|where/.test(lower)) { go('whereToWatch'); return; }
     if (/music|opening|ending|soundtrack/.test(lower)) { go('music'); return; }
-    if (/merch|shop|figure|buy/.test(lower)) { go('shop'); return; }
+    if (/merch/.test(lower)) { go('merch'); return; }
+    if (/shop|figure|buy/.test(lower)) { go('shop'); return; }
+    if (/social|follow|facebook|instagram|tiktok|threads|youtube/.test(lower)) { go('socials'); return; }
     if (/collection|watchlist|shelf/.test(lower)) { go('collection'); return; }
     if (/recommend|suggest|quiz/.test(lower)) { quizAnswers = {}; go('q_mood'); return; }
     addMsg("I'm not sure I caught that \u2014 I'm best with guided questions rather than open chat. Let's find you something great.", 'bot');
