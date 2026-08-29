@@ -259,7 +259,8 @@ var STEPS = {
       { label:'Find anime merch', action:function(){ go('merch'); } },
       { label:'Visit the Shop', action:function(){ go('shop'); } },
       { label:"Open Dreamer's Collection", action:function(){ go('collection'); } },
-      { label:'Follow us', action:function(){ go('socials'); } }
+      { label:'Follow us', action:function(){ go('socials'); } },
+      { label:'Anime cons & comic cons', action:function(){ go('events'); } }
     ]);
   },
 
@@ -388,6 +389,15 @@ var STEPS = {
     });
     opts.push({ label:'Back to menu', action:function(){ go('start'); } });
     addOptions(opts);
+  },
+
+  events: function(){
+    addMsg("We've covered conventions on the ground — Anime Expo 2026 and FanimeCon 2026 are both in the Log. For the wider 2026 con calendar, here's what's confirmed as of our last update: Anime Boston (Apr 3\u20135), Anime Expo \u2014 the biggest in North America (Jul 2\u20135, LA), New York Comic Con (Oct 8\u201311), and LA Comic Con (Oct 30\u2013Nov 1). Dates can shift, so always confirm with the official con site before booking travel.", 'bot');
+    addOptions([
+      { label:'Read our con coverage', action:function(){ window.open('/blog/anime-expo-2026-day-one-signals.html', '_blank'); go('afterAction'); } },
+      { label:'Full 2026 con directory', action:function(){ window.open('https://animecons.com/events/schedule.php?year=2026&loc=us', '_blank'); go('afterAction'); } },
+      { label:'Back to menu', action:function(){ go('start'); } }
+    ]);
   },
 
   collection: function(){
@@ -528,6 +538,7 @@ function handleFreeText(raw){
     if (/merch/.test(lower)) { go('merch'); return; }
     if (/shop|figure|buy/.test(lower)) { go('shop'); return; }
     if (/social|follow|facebook|instagram|tiktok|threads|youtube/.test(lower)) { go('socials'); return; }
+    if (/\bcon\b|convention|comic con|anime expo|cosplay event/.test(lower)) { go('events'); return; }
     if (/collection|watchlist|shelf/.test(lower)) { go('collection'); return; }
     if (/recommend|suggest|quiz/.test(lower)) { quizAnswers = {}; go('q_mood'); return; }
     addMsg("I'm not sure I caught that \u2014 I'm best with guided questions rather than open chat. Let's find you something great.", 'bot');
