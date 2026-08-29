@@ -1,4 +1,4 @@
-/* Mimi's Anime Concierge — Dreaming Anime
+/* Mimi's Anime Mascot — Dreaming Anime
    Self-contained chatbot widget. Reuses the site's existing brand tokens
    (da-style.css: --black #0A0A0A, --white, --orange #FF6B00, Bangers/Inter/
    Space Mono) and the existing Dreamer's Collection localStorage format
@@ -133,7 +133,7 @@ var MIMI_AVATAR = '/logos/dreaming-anime-logo-round.png';
 var launcher = document.createElement('button');
 launcher.id = 'mimi-launcher';
 launcher.type = 'button';
-launcher.setAttribute('aria-label', "Open Mimi's Anime Concierge");
+launcher.setAttribute('aria-label', "Open Mimi, Dreaming Anime's Mascot");
 launcher.setAttribute('aria-expanded', 'false');
 launcher.innerHTML = '<img src="' + MIMI_AVATAR + '" alt="" onerror="this.style.display=\'none\'">'
   + '<span class="mimi-badge" aria-hidden="true">?</span>';
@@ -143,11 +143,11 @@ var panel = document.createElement('div');
 panel.id = 'mimi-panel';
 panel.setAttribute('role', 'dialog');
 panel.setAttribute('aria-modal', 'false');
-panel.setAttribute('aria-label', "Mimi's Anime Concierge");
+panel.setAttribute('aria-label', "Mimi, Dreaming Anime's Mascot");
 panel.innerHTML =
   '<div id="mimi-hdr">'
   + '<img src="' + MIMI_AVATAR + '" alt="" onerror="this.style.display=\'none\'">'
-  + '<div><div id="mimi-hdr-name">MIMI</div><div id="mimi-hdr-sub">ANIME CONCIERGE</div></div>'
+  + '<div><div id="mimi-hdr-name">MIMI</div><div id="mimi-hdr-sub">ANIME MASCOT</div></div>'
   + '<button id="mimi-close" type="button" aria-label="Close chat">&#10005;</button>'
   + '</div>'
   + '<div id="mimi-body" aria-live="polite"></div>'
@@ -238,7 +238,7 @@ function go(step){
 var STEPS = {
 
   start: function(){
-    addMsg("Welcome to Mimi's Anime Concierge. I can help you find your next anime, explore reviews, discover anime music, locate legal streaming options, find merch, or build your personal watchlist.", 'bot');
+    addMsg("Welcome to Dreaming Anime — I'm Mimi, your anime mascot. I can help you find your next anime, explore reviews, discover anime music, locate legal streaming options, find merch, or build your personal watchlist.", 'bot');
     addOptions([
       { label:'Recommend an anime', action:function(){ quizAnswers = {}; go('q_mood'); } },
       { label:'Take the Anime Quiz', action:function(){ quizAnswers = {}; go('q_mood'); } },
@@ -462,7 +462,7 @@ function getCollection(){
 }
 function addToCollection(title){
   var items = getCollection();
-  items.unshift({ title:title, status:'Want to watch', rating:'0', note:'Added via Mimi\'s Anime Concierge' });
+  items.unshift({ title:title, status:'Want to watch', rating:'0', note:'Added via Mimi, Dreaming Anime\'s Mascot' });
   try { localStorage.setItem(COLLECTION_KEY, JSON.stringify(items)); } catch(e){}
 }
 
