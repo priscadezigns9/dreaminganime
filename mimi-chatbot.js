@@ -100,6 +100,7 @@ var css = ''
 + '#mimi-close{margin-left:auto;background:none;border:2px solid rgba(255,255,255,.25);color:#fff;width:32px;height:32px;min-width:0;'
 + 'border-radius:50%;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;box-sizing:border-box;white-space:nowrap;}'
 + '#mimi-close:hover,#mimi-close:focus-visible{border-color:var(--orange,#FF6B00);color:var(--orange,#FF6B00);}'
++ '#mimi-back:hover,#mimi-back:focus-visible{border-color:var(--orange,#FF6B00);color:var(--orange,#FF6B00);}'
 
 + '#mimi-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch;}'
 + '.mimi-msg{max-width:86%;padding:12px 14px;border-radius:14px;font-size:.92rem;line-height:1.5;}'
@@ -157,6 +158,7 @@ panel.setAttribute('aria-modal', 'false');
 panel.setAttribute('aria-label', "Mimi, Dreaming Anime's Mascot");
 panel.innerHTML =
   '<div id="mimi-hdr">'
+  + '<button id="mimi-back" type="button" aria-label="Go back" style="display:none;background:none;border:2px solid rgba(255,255,255,.25);color:#fff;width:32px;height:32px;min-width:32px;min-height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;box-sizing:border-box;white-space:nowrap;flex-shrink:0;">&#8592;</button>'
   + '<img src="' + MIMI_AVATAR + '" alt="" onerror="this.style.display=\'none\'">'
   + '<div><div id="mimi-hdr-name">MIMI</div><div id="mimi-hdr-sub">ANIME MASCOT</div></div>'
   + '<button id="mimi-close" type="button" aria-label="Close chat">&#10005;</button>'
@@ -183,6 +185,7 @@ function toggleMimi(forceState){
 }
 launcher.addEventListener('click', function(){ toggleMimi(); });
 document.getElementById('mimi-close').addEventListener('click', function(){ toggleMimi(false); });
+document.getElementById('mimi-back').addEventListener('click', function(){ goBack(); });
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape' && mimiOpen) toggleMimi(false);
 });
@@ -240,8 +243,28 @@ function clearOptions(){
   opts.forEach(function(o){ o.remove(); });
 }
 
-function go(step){
+var mimiHist = [];
+var mimiCurrentStep = null;
+
+function go(step, isBack){
+  if (!isBack && mimiCurrentStep && mimiCurrentStep !== step) {
+    mimiHist.push(mimiCurrentStep);
+  }
+  if (step === 'start') mimiHist.length = 0;
+  mimiCurrentStep = step;
+  updateBackButton();
   STEPS[step]();
+}
+
+function goBack(){
+  if (!mimiHist.length) { go('start'); return; }
+  var prev = mimiHist.pop();
+  go(prev, true);
+}
+
+function updateBackButton(){
+  var backBtn = document.getElementById('mimi-back');
+  if (backBtn) backBtn.style.display = mimiHist.length ? 'flex' : 'none';
 }
 
 /* ---------- Steps -------------------------------------------------------
