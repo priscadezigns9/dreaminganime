@@ -128,7 +128,7 @@ styleTag.textContent = css;
 document.head.appendChild(styleTag);
 
 /* ---------- Markup ---------------------------------------------------- */
-var MIMI_AVATAR = '/mascot/mimi/mimi_1.webp';
+var MIMI_AVATAR = '/logos/dreaming-anime-logo-round.png';
 
 var launcher = document.createElement('button');
 launcher.id = 'mimi-launcher';
