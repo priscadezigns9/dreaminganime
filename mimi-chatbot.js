@@ -59,7 +59,7 @@ window.__mimiCatalog = CATALOG; // exposed for debugging/testing only
    reinvented. Hard 3px black border + offset shadow matches .float-btn
    and .card treatment already used across the site. */
 var css = ''
-+ '#mimi-launcher{position:fixed;bottom:96px;right:24px;width:60px;height:60px;border-radius:50%;'
++ '#mimi-launcher{position:fixed;bottom:150px;right:24px;width:60px;height:60px;border-radius:50%;'
 + 'background:var(--white,#FFF);border:3px solid var(--black,#0A0A0A);cursor:pointer;z-index:901;'
 + 'display:flex;align-items:center;justify-content:center;padding:0;'
 + 'box-shadow:3px 3px 0 var(--black,#0A0A0A);transition:transform .2s,box-shadow .2s;overflow:hidden;}'
@@ -68,7 +68,7 @@ var css = ''
 + '#mimi-launcher .mimi-badge{position:absolute;top:-4px;right:-4px;background:var(--orange,#FF6B00);color:#fff;'
 + 'font:800 .62rem "Space Mono",monospace;width:20px;height:20px;border-radius:50%;border:2px solid var(--black,#0A0A0A);'
 + 'display:flex;align-items:center;justify-content:center;}'
-+ '@media(max-width:600px){#mimi-launcher{bottom:152px;right:14px;width:52px;height:52px;box-shadow:2px 2px 0 var(--black,#0A0A0A);}}'
++ '@media(max-width:600px){#mimi-launcher{bottom:206px;right:14px;width:52px;height:52px;box-shadow:2px 2px 0 var(--black,#0A0A0A);}}'
 
 + '#mimi-panel{position:fixed;z-index:902;background:var(--white,#FFF);border:3px solid var(--black,#0A0A0A);'
 + 'display:flex;flex-direction:column;overflow:hidden;opacity:0;pointer-events:none;'
