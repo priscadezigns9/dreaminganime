@@ -41,10 +41,10 @@
         .mimi-side { top: 50%; right: 2%; transform: translateY(-50%) rotate(-5deg); width: 220px; }
 
         footer { padding: 80px 8%; text-align: center; border-top: 1px solid rgba(255,107,0,0.05); font-size: 0.9rem; color: var(--muted); letter-spacing: 1px; }
-        .back-link { position: absolute; top: 70px; left: 50px; color: var(--muted); text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; font-family: 'Space Mono', monospace; z-index: 10; display: flex; align-items: center; gap: 8px; }
+        .topbar { position: absolute; top: 42px; left: 0; right: 0; padding: 16px 50px; display:flex; align-items:center; justify-content:space-between; z-index:20; } .brand-lockup { display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none; font-family:'Bangers',cursive; font-size:1.4rem; letter-spacing:2px; } .brand-lockup img { width:44px; height:44px; border-radius:50%; object-fit:cover; border:2px solid var(--accent); } .social-links { display:flex; gap:14px; } .social-links a { color:var(--text); font-size:1.15rem; transition:color .2s, transform .2s; } .social-links a:hover { color:var(--accent); transform:translateY(-2px); } .back-link { position: absolute; top: 70px; left: 50px; color: var(--muted); text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; font-family: 'Space Mono', monospace; z-index: 10; display: flex; align-items: center; gap: 8px; }
         .back-link:hover { color: var(--accent); }
 
-        @media (max-width: 900px) {
+        @media (max-width: 900px) { .topbar { padding:12px 18px; } .brand-lockup { font-size:1.1rem; } .social-links { gap:10px; } .social-links a { font-size:1rem; }
             .hero-content h1 { font-size: 4rem; }
             .mimi-mascot { display: none; }
             .hero { height: 50vh; }
@@ -52,6 +52,7 @@
     </style>
 </head>
 <body><div class="jp-background" aria-hidden="true"><span>夢</span><span>音</span><span>炎</span><span>愛</span><span>力</span><span>空</span></div>
+    <div class="topbar"><a href="https://dreaminganime.com" class="brand-lockup"><img src="https://dreaminganime.com/logos/dreaming-anime-logo-round.png" alt="Dreaming Anime logo"><span>DREAMING ANIME</span></a><div class="social-links" aria-label="Dreaming Anime social links"><a href="https://facebook.com/dreaminganime" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a><a href="https://instagram.com/dreaminganime" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a><a href="https://threads.net/@dreaminganime" aria-label="Threads" target="_blank" rel="noopener"><i class="fab fa-threads"></i></a><a href="https://tiktok.com/@dreaminganime" aria-label="TikTok" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a></div></div>
     <a href="https://dreaminganime.com" class="back-link"><i class="fas fa-arrow-left"></i> BACK TO HOME</a>
 
     <section class="hero">
