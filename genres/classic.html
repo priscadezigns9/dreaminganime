@@ -87,9 +87,9 @@
     <section class="section" style="padding-top:40px;padding-bottom:40px;">
         <h2 class="section-title">THE CLASSIC ERA.</h2>
         <div class="grid">
-            <div class="card"><div class="tag" style="color:var(--accent);font-family:'Space Mono';font-size:.7rem;letter-spacing:2px;">1998</div><h3>Cowboy Bebop</h3><p>A genre-defining space western where jazz, noir, comedy, and melancholy move together.</p></div>
-            <div class="card"><div class="tag" style="color:var(--accent);font-family:'Space Mono';font-size:.7rem;letter-spacing:2px;">1998</div><h3>Trigun</h3><p>A beloved sci-fi western that balances wild action with a surprisingly human heart.</p></div>
-            <div class="card"><div class="tag" style="color:var(--accent);font-family:'Space Mono';font-size:.7rem;letter-spacing:2px;">2004</div><h3>Samurai Champloo</h3><p>A bold fusion of Edo-period adventure, modern rhythm, and unforgettable visual style.</p></div>
+            <div class="card"><div class="tag" style="color:var(--accent);font-family:'Space Mono';font-size:.7rem;letter-spacing:2px;">1998</div><img src="https://upload.wikimedia.org/wikipedia/en/a/a9/Cowboy_Bebop_key_visual.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled" alt="Cowboy Bebop key art" loading="lazy" style="width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:18px;"><h3>Cowboy Bebop</h3><p>A genre-defining space western where jazz, noir, comedy, and melancholy move together.</p></div>
+            <div class="card"><div class="tag" style="color:var(--accent);font-family:'Space Mono';font-size:.7rem;letter-spacing:2px;">1998</div><img src="https://upload.wikimedia.org/wikipedia/en/4/47/Trigun_01_%28Tokuma_Shoten%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled" alt="Trigun key art" loading="lazy" style="width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:18px;"><h3>Trigun</h3><p>A beloved sci-fi western that balances wild action with a surprisingly human heart.</p></div>
+            <div class="card"><div class="tag" style="color:var(--accent);font-family:'Space Mono';font-size:.7rem;letter-spacing:2px;">2004</div><img src="https://upload.wikimedia.org/wikipedia/en/4/48/Samurai_Champloo_key_art.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled" alt="Samurai Champloo key art" loading="lazy" style="width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:18px;"><h3>Samurai Champloo</h3><p>A bold fusion of Edo-period adventure, modern rhythm, and unforgettable visual style.</p></div>
         </div>
     </section>
 
@@ -245,7 +245,7 @@
     </footer>
 <!-- [Zapia] Shared translator and back-to-top controls -->
 <script src="/da-controls.js" defer></script>
-<script>(function(){var rail=document.querySelector('.classic-more-grid');if(!rail)return;var timer=null;function start(){if(timer)return;timer=setInterval(function(){rail.scrollLeft+=1;if(rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-1)rail.scrollLeft=0},20)}function stop(){clearInterval(timer);timer=null}rail.addEventListener('mouseenter',start);rail.addEventListener('mouseleave',stop);})();</script></body>
+<script>document.addEventListener('DOMContentLoaded',function(){var rail=document.querySelector('.classic-more-grid');if(!rail)return;var timer;function start(){if(timer)return;timer=setInterval(function(){rail.scrollLeft+=2;if(rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-2)rail.scrollLeft=0},16)}function stop(){clearInterval(timer);timer=null}rail.addEventListener('mouseenter',start);rail.addEventListener('mouseleave',stop);rail.addEventListener('touchstart',stop,{passive:true});});</script></body>
 </html>
 
 
