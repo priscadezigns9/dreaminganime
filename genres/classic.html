@@ -9,7 +9,7 @@
     <style>
         :root { --bg: #050505; --accent: #FF6B00; --text: #FFFFFF; --muted: rgba(255,255,255,0.6); --card-bg: rgba(255,255,255,0.02); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; } .jp-background { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; display: flex; justify-content: space-between; opacity: .055; } .jp-background span { color: var(--accent); font-family: 'Bangers', cursive; font-size: clamp(5rem, 13vw, 12rem); writing-mode: vertical-rl; padding: 15vh 2vw; transform: rotate(8deg); } .jp-background span:nth-child(even) { padding-top: 48vh; transform: rotate(-10deg); } body > *:not(.jp-background) { position: relative; z-index: 1; }
         
         /* Mandate */
         .mandate { background: #000; color: #FF6B00; padding: 8px 10px; text-align: center; font-size: 11px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,107,0,0.3); z-index: 10001; position: fixed; top: 0; left: 0; right: 0; height: 32px; box-sizing: border-box; }
@@ -51,7 +51,7 @@
         }
     </style>
 </head>
-<body>
+<body><div class="jp-background" aria-hidden="true"><span>夢</span><span>音</span><span>炎</span><span>愛</span><span>力</span><span>空</span></div>
     <a href="https://dreaminganime.com" class="back-link"><i class="fas fa-arrow-left"></i> BACK TO HOME</a>
 
     <section class="hero">
