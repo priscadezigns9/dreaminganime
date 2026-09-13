@@ -61,3 +61,5 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+(function(){function addWallet(){var nav=document.querySelector('nav');if(!nav||nav.querySelector('.da-connect-wallet'))return;var a=document.createElement('a');a.className='da-connect-wallet';a.href='/account/';a.textContent='CONNECT WALLET';a.setAttribute('aria-label','Connect Cardano wallet');var target=nav.querySelector('.nav-links')||nav.querySelector('.navlinks')||nav;target.appendChild(a)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addWallet);else addWallet();})();
