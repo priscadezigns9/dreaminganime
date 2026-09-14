@@ -30,7 +30,7 @@
     return pi;
   }
   async function buildTx(api, recipient) {
-    stage='checking wallet network'; if (Number(await api.getNetworkId()) !== 0) throw Error('Checkout blocked: switch your wallet to Cardano Preprod. No mainnet funds will be used.');
+    if (Number(await api.getNetworkId()) !== 0) throw Error('Checkout blocked: switch your wallet to Cardano Preprod. No mainnet funds will be used.');
     var target = CSL.Address.from_bech32(recipient); if (target.network_id() !== 0) throw Error('Checkout blocked: recipient is not Cardano Preprod.');
     var utxos = await api.getUtxos(); if (!utxos || !utxos.length) throw Error('No spendable Preprod ADA was found in this wallet.');
     var ep = await (await fetch('https://preprod.koios.rest/api/v1/epoch_params')).json(), p = ep[0] || ep;
