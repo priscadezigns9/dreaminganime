@@ -1,4 +1,190 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Where to Watch | Dreaming Anime</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../shared_style.css"></head><body><header class="topbar"><div class="shell nav"><a class="brand" href="../">DREAMING <b>ANIME</b></a><nav class="links"><a href="../release-radar/">Release Radar</a><a class="active" href="./">Where to Watch</a><a href="../title/">Title Guide</a><a href="../blog/">Dreamer’s Log</a></nav></div></header><main class="shell"><section class="hero"><div><span class="eyebrow">Utility layer / 02</span><h1>WATCH<br>THE RIGHT WAY.</h1><p>A legal navigation directory that points viewers to official services. Search a title, select a region, and follow the verified path to watch.</p></div><aside class="signal"><small>DIRECTORY PRINCIPLE</small><strong>LEGAL</strong><small>NO UNLICENSED EMBEDS<br>NO UNVERIFIED PLATFORM CLAIMS</small></aside></section><section class="section"><div class="toolbar"><input class="input" id="search" placeholder="Search title or platform…" aria-label="Search availability"><select class="select" id="region"><option>Trinidad & Tobago</option><option>United States</option><option>United Kingdom</option><option>Japan</option></select></div><div class="notice">This prototype intentionally marks availability as “verification required” rather than inventing regional licensing data. The production directory will store source, region, checked date, and expiry for every result.</div><div class="section-head"><h2>Availability records</h2><span>VERIFICATION QUEUE</span></div><div class="availability" id="table"></div></section></main><footer class="footer"><div class="shell">DREAMING ANIME / OFFICIAL PLATFORM NAVIGATION</div></footer><script>const rows=[['Mushoku Tensei: Jobless Reincarnation Season 3','Verification required','Trinidad & Tobago','Not yet verified'],['One Piece','Verification required','Trinidad & Tobago','Not yet verified'],['Demon Slayer: Infinity Castle','Official source pending','Trinidad & Tobago','Not yet verified'],['Jujutsu Kaisen','Verification required','United States','Not yet verified']];const box=document.querySelector('#table');function render(){let q=document.querySelector('#search').value.toLowerCase(),r=document.querySelector('#region').value;let a=rows.filter(x=>(x[0]+' '+x[1]).toLowerCase().includes(q)&&x[2]===r);box.innerHTML='<div class="row"><b>TITLE</b><b>PLATFORM</b><b>REGION</b><b>STATUS</b></div>'+a.map(x=>`<div class="row"><strong>${x[0]}</strong><span class="muted">${x[1]}</span><span class="muted">${x[2]}</span><span class="tag">${x[3]}</span></div>`).join('')+(a.length?'':'<div class="row muted">No records yet for this region.</div>')}document.querySelector('#search').oninput=render;document.querySelector('#region').onchange=render;render();</script><!-- [Zapia] Shared translator and back-to-top controls -->
-<script src="/da-controls.js" defer></script>
-<script src="/mimi-chatbot.js"></script>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where to Watch Anime | Dreaming Anime</title>
+  <meta name="description" content="Search anime by title and region, then check current provider listings through JustWatch. Dreaming Anime does not host streams or verify regional availability.">
+  <link rel="canonical" href="https://dreaminganime.com/where-to-watch/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dreaming Anime">
+  <meta property="og:title" content="Where to Watch Anime | Dreaming Anime">
+  <meta property="og:description" content="Find an anime title and check regional provider listings through an external streaming guide.">
+  <meta property="og:url" content="https://dreaminganime.com/where-to-watch/">
+  <meta property="og:image" content="https://dreaminganime.com/logos/dreaming-anime-logo-round.png">
+  <meta name="theme-color" content="#080808">
+  <link rel="icon" type="image/png" href="../logos/dreaming-anime-logo-round.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared_style.css">
+  <style>
+    :root { --ink:#080808; --panel:#111; --line:#2a2a2a; --orange:#ff6b00; --cream:#f4eee5; --muted:#aaa39a; --sans:Inter,Arial,sans-serif; --mono:'Space Mono',monospace; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; min-height:100vh; background:var(--ink); color:var(--cream); font-family:Inter,Arial,sans-serif; }
+    a { color:inherit; }
+    .shell { width:min(1180px,100%); margin:0 auto; padding:0 28px; }
+    .topbar { position:sticky; top:0; z-index:20; padding:12px 0; border-bottom:1px solid #292520; background:rgba(8,8,8,.94); backdrop-filter:blur(12px); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .brand-lockup { display:flex; align-items:center; gap:11px; flex:none; text-decoration:none; }
+    .brand-lockup img { width:48px; height:48px; object-fit:contain; }
+    .brand-name { font:400 1.04rem 'Bangers',Impact,cursive; letter-spacing:.07em; line-height:1; color:#fff; }
+    .brand-name b { color:var(--orange); font-weight:400; }
+    .links { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:clamp(12px,2vw,25px); font:700 .76rem Inter,Arial,sans-serif; color:#c0b9b1; }
+    .links a { text-decoration:none; padding:8px 0; border-bottom:2px solid transparent; transition:color .18s,border-color .18s; }
+    .links a:hover,.links a:focus-visible,.links a.active { color:#fff; border-color:var(--orange); }
+    .watch-main { overflow:hidden; }
+    .hero { position:relative; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr); gap:38px; align-items:center; padding:clamp(58px,8vw,104px) 0 62px; }
+    .hero:before { content:''; position:absolute; z-index:-1; top:26px; right:-140px; width:480px; height:480px; border:1px solid rgba(255,107,0,.14); border-radius:50%; box-shadow:0 0 0 38px rgba(255,107,0,.025),0 0 0 86px rgba(255,107,0,.018); }
+    .eyebrow { display:inline-flex; align-items:center; gap:10px; color:var(--orange); font:700 .68rem var(--mono); letter-spacing:.16em; text-transform:uppercase; }
+    .eyebrow:before { content:''; width:24px; height:2px; background:var(--orange); }
+    .hero h1 { max-width:760px; margin:17px 0 16px; color:#fff; font:400 clamp(3.4rem,8.5vw,7rem)/.86 'Bangers',Impact,cursive; letter-spacing:.015em; }
+    .hero h1 span { color:var(--orange); }
+    .hero p { max-width:650px; margin:0; color:#bbb4ac; font-size:1rem; line-height:1.75; }
+    .hero-note { position:relative; padding:23px; border:1px solid #38312b; border-left:4px solid var(--orange); background:linear-gradient(145deg,#17130f,#101010 70%); }
+    .hero-note small { display:block; margin-bottom:12px; color:var(--orange); font:700 .64rem var(--mono); letter-spacing:.13em; text-transform:uppercase; }
+    .hero-note strong { display:block; margin-bottom:8px; color:#fff; font:400 1.8rem/1 'Bangers',Impact,cursive; letter-spacing:.04em; }
+    .hero-note p { color:#a9a198; font-size:.81rem; line-height:1.6; }
+    .search-section { padding:0 0 90px; }
+    .search-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; padding:0 0 16px; border-bottom:1px solid var(--line); }
+    .search-heading h2 { margin:0; color:#fff; font:400 clamp(1.9rem,4vw,2.65rem)/1 'Bangers',Impact,cursive; letter-spacing:.04em; }
+    .search-heading p { max-width:380px; margin:0; color:var(--muted); text-align:right; font-size:.76rem; line-height:1.5; }
+    .search-panel { margin-top:20px; padding:clamp(20px,4vw,34px); border:1px solid #342d26; background:linear-gradient(135deg,#151311 0%,#101010 65%); box-shadow:8px 8px 0 rgba(255,107,0,.12); }
+    .form-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(210px,.42fr) auto; gap:12px; align-items:end; }
+    .field label { display:block; margin:0 0 8px; color:#d5cec6; font:700 .66rem var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+    .input,.select { width:100%; min-height:52px; padding:13px 15px; border:1px solid #45403a; border-radius:0; background:#090909; color:#fff; font:500 .95rem Inter,Arial,sans-serif; }
+    .input::placeholder { color:#817a72; }
+    .input:focus,.select:focus { outline:3px solid rgba(255,107,0,.42); outline-offset:2px; border-color:var(--orange); }
+    .button { min-height:52px; padding:0 22px; border:1px solid var(--orange); border-radius:0; background:var(--orange); color:#090909; font:800 .72rem var(--mono); letter-spacing:.045em; text-transform:uppercase; cursor:pointer; transition:background .18s,color .18s,transform .18s; }
+    .button:hover { background:#fff; border-color:#fff; transform:translateY(-2px); }
+    .button:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+    .search-hint { min-height:1.3em; margin:10px 0 0; color:#ffb57b; font-size:.78rem; }
+    .suggestions { display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin-top:23px; }
+    .suggestions-label { margin-right:4px; color:#8e877f; font:400 .62rem var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+    .suggestion { padding:8px 11px; border:1px solid #38322c; background:#0b0b0b; color:#e8e1d9; font:600 .75rem Inter,Arial,sans-serif; cursor:pointer; }
+    .suggestion:hover,.suggestion:focus-visible { border-color:var(--orange); color:#fff; outline:none; }
+    .notice { display:flex; align-items:flex-start; gap:13px; margin:20px 0 0; padding:15px 17px; border-left:3px solid var(--orange); background:#101010; color:#aaa39a; font-size:.8rem; line-height:1.65; }
+    .notice-mark { color:var(--orange); font:700 1rem var(--mono); }
+    .how-it-works { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:28px; }
+    .step { min-height:135px; padding:17px; border:1px solid #292521; background:#0d0d0d; }
+    .step-index { color:var(--orange); font:700 .64rem var(--mono); letter-spacing:.12em; }
+    .step h3 { margin:13px 0 6px; color:#fff; font:400 1.35rem/1 'Bangers',Impact,cursive; letter-spacing:.035em; }
+    .step p { margin:0; color:#aaa39a; font-size:.77rem; line-height:1.55; }
+    .footer { border-top:1px solid var(--line); padding:22px 0; color:#8d867e; font:400 .62rem var(--mono); letter-spacing:.04em; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+    .footer a { color:#c9c1b8; text-decoration:underline; text-decoration-color:#615448; text-underline-offset:3px; }
+    @media(max-width:800px) { .shell{padding:0 20px}.nav{align-items:flex-start;flex-direction:column;gap:9px}.links{justify-content:flex-start;gap:9px 19px}.hero{grid-template-columns:1fr;gap:25px;padding-top:52px}.hero-note{max-width:530px}.form-grid{grid-template-columns:1fr 1fr}.form-grid .field:first-child{grid-column:1/-1}.form-grid .button{grid-column:1/-1}.search-heading{align-items:flex-start;flex-direction:column}.search-heading p{text-align:left}.footer-inner{align-items:flex-start;flex-direction:column} }
+    @media(max-width:520px) { .shell{padding:0 17px}.brand-lockup img{width:42px;height:42px}.links{gap:7px 14px;font-size:.7rem}.hero{padding-top:43px}.hero h1{font-size:clamp(3.2rem,16vw,5.2rem)}.hero-note{padding:18px}.form-grid{grid-template-columns:1fr}.form-grid .field:first-child,.form-grid .button{grid-column:auto}.button{width:100%}.search-panel{padding:18px 15px;box-shadow:5px 5px 0 rgba(255,107,0,.12)}.how-it-works{grid-template-columns:1fr}.step{min-height:unset}.suggestions{gap:7px} }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important} }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand-lockup" href="../" aria-label="Dreaming Anime home">
+        <img src="../logos/dreaming-anime-logo-round.png" alt="Dreaming Anime round logo" width="48" height="48">
+        <span class="brand-name">DREAMING <b>ANIME</b></span>
+      </a>
+      <nav class="links" aria-label="Dreaming Anime navigation">
+        <a href="../release-radar/">Release Radar</a>
+        <a class="active" href="./" aria-current="page">Where to Watch</a>
+        <a href="../title/">Title Guide</a>
+        <a href="../blog/">Dreamer’s Log</a>
+      </nav>
+    </div>
+  </header>
+  <main class="shell watch-main">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">Find your next watch</span>
+        <h1 id="page-title">WHERE TO<br><span>WATCH</span> ANIME.</h1>
+        <p>Looking for a series or movie? Search by title and region to see current provider listings in an external streaming guide. Availability can change, so confirm details with the provider before you press play.</p>
+      </div>
+      <aside class="hero-note" aria-label="Our viewing promise">
+        <small>Watch it the right way</small>
+        <strong>Official listings. Your region.</strong>
+        <p>We help you find licensed viewing options. Dreaming Anime does not host streams, and provider listings are not independently verified by us.</p>
+      </aside>
+    </section>
+    <section class="search-section" aria-labelledby="search-title">
+      <div class="search-heading">
+        <h2 id="search-title">SEARCH STREAMING AVAILABILITY</h2>
+        <p>One title. One region. A quick route to current provider listings.</p>
+      </div>
+      <div class="search-panel">
+        <form id="availability-search" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="title-query">Anime title</label>
+              <input class="input" id="title-query" name="title" type="search" placeholder="e.g. One Piece" autocomplete="off" aria-describedby="search-hint">
+            </div>
+            <div class="field">
+              <label for="region">Your region</label>
+              <select class="select" id="region" name="region">
+                <option value="tt">Trinidad &amp; Tobago</option>
+                <option value="us">United States</option>
+                <option value="uk">United Kingdom</option>
+                <option value="jp">Japan</option>
+              </select>
+            </div>
+            <button class="button" type="submit">Check availability <span aria-hidden="true">↗</span></button>
+          </div>
+          <p class="search-hint" id="search-hint" role="status" aria-live="polite"></p>
+        </form>
+        <div class="suggestions" aria-label="Suggested title searches">
+          <span class="suggestions-label">Try a title</span>
+          <button class="suggestion" type="button" data-title="One Piece">One Piece</button>
+          <button class="suggestion" type="button" data-title="Demon Slayer">Demon Slayer</button>
+          <button class="suggestion" type="button" data-title="Jujutsu Kaisen">Jujutsu Kaisen</button>
+        </div>
+        <div class="notice"><span class="notice-mark" aria-hidden="true">↗</span><span>This opens <strong>JustWatch</strong>, an external availability guide that links to third-party services. Listings vary by country and may change. Dreaming Anime does not host streams or guarantee a title’s availability.</span></div>
+      </div>
+      <div class="how-it-works" aria-label="How to find a legal place to watch">
+        <article class="step"><span class="step-index">01 / SEARCH</span><h3>Choose a title</h3><p>Enter the anime name you want to find, then select your region.</p></article>
+        <article class="step"><span class="step-index">02 / COMPARE</span><h3>Check provider listings</h3><p>Review the services shown by JustWatch for your chosen country.</p></article>
+        <article class="step"><span class="step-index">03 / CONFIRM</span><h3>Watch with the provider</h3><p>Follow the provider link and confirm its current offer before watching.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell footer-inner"><span>DREAMING ANIME · FIND AN OFFICIAL WAY TO WATCH</span><a href="../">Back to Dreaming Anime</a></div></footer>
+  <script>
+    (function () {
+      'use strict';
+      var routes = {
+        tt: 'https://www.justwatch.com/tt/search',
+        us: 'https://www.justwatch.com/us/search',
+        uk: 'https://www.justwatch.com/uk/search',
+        jp: 'https://www.justwatch.com/jp/%E6%A4%9C%E7%B4%A2'
+      };
+      var form = document.getElementById('availability-search');
+      var titleInput = document.getElementById('title-query');
+      var regionSelect = document.getElementById('region');
+      var hint = document.getElementById('search-hint');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var title = titleInput.value.trim();
+        if (!title) {
+          hint.textContent = 'Enter an anime title to search.';
+          titleInput.focus();
+          return;
+        }
+        var url = new URL(routes[regionSelect.value]);
+        url.searchParams.set('q', title);
+        hint.textContent = 'Opening JustWatch search results for “' + title + '”.';
+        window.open(url.toString(), '_blank', 'noopener,noreferrer');
+      });
+      document.querySelectorAll('.suggestion').forEach(function (button) {
+        button.addEventListener('click', function () {
+          titleInput.value = button.getAttribute('data-title');
+          hint.textContent = '';
+          titleInput.focus();
+        });
+      });
+    }());
+  </script>
+  <!-- [Zapia] Shared translator and back-to-top controls -->
+  <script src="/da-controls.js" defer></script>
+  <script src="/mimi-chatbot.js"></script>
+</body>
+</html>
