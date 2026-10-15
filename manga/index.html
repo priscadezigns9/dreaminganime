@@ -217,61 +217,107 @@
         const JIKAN_API = 'https://api.jikan.moe/v4';
         const MD_API = 'https://api.mangadex.org';
         const MD_IMAGE_SERVER = 'https://uploads.mangadex.org';
+        const ANILIST_API = 'https://graphql.anilist.co';
+        const MANGA_FIELDS = `title { english romaji native } coverImage { large medium } format status averageScore siteUrl`;
 
         let currentMangaId = null;
         let chapters = [];
         let currentChapterIndex = -1;
 
+        async function fetchAniListManga(query, variables = {}) {
+            const response = await fetch(ANILIST_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ query, variables })
+            });
+            if (!response.ok) throw new Error(`AniList HTTP ${response.status}`);
+            const payload = await response.json();
+            if (payload.errors?.length) throw new Error(payload.errors[0].message || 'AniList query failed');
+            return payload.data?.Page?.media || [];
+        }
+
+        function normalizeAniListManga(items) {
+            return items.map(item => ({
+                title: item.title?.english || item.title?.romaji || item.title?.native || 'Untitled manga',
+                type: item.format || 'MANGA',
+                status: item.status || 'UNKNOWN',
+                rank: item.averageScore,
+                images: { jpg: { large_image_url: item.coverImage?.large || item.coverImage?.medium || '' } },
+                siteUrl: item.siteUrl
+            }));
+        }
+
         async function loadMangaVault() {
             const grid = document.getElementById('manga-grid');
+            grid.innerHTML = '<p style="text-align:center;color:#777;width:100%;">Loading manga…</p>';
+            const query = `query { Page(perPage: 24) { media(type: MANGA, sort: POPULARITY_DESC, isAdult: false) { ${MANGA_FIELDS} } } }`;
             try {
-                grid.innerHTML = '<p style="text-align:center;color:#444;width:100%;">Loading manga…</p>';
-                const res = await fetch(`${MD_API}/manga?limit=24&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive`);
-                const data = await res.json();
-                const mapped = (data.data || []).map(m => { const rel=(m.relationships||[]).find(r=>r.type==='cover_art'); const file=rel&&rel.attributes&&rel.attributes.fileName; return {title:m.attributes.title?.en||Object.values(m.attributes.title||{})[0]||'Manga',type:'Manga',status:m.attributes.status||'published',rank:null,images:{jpg:{large_image_url:file?`${MD_IMAGE_SERVER}/covers/${m.id}/${file}.512.jpg`:''}}}; });
-                if (!mapped.length) throw new Error('empty');
-                renderManga(mapped);
+                const items = await fetchAniListManga(query);
+                if (!items.length) throw new Error('No catalogue entries returned');
+                renderManga(normalizeAniListManga(items));
             } catch (e) {
-                console.error('Manga source unavailable:', e);
-                grid.innerHTML = '<p style="text-align:center;color:#aaa;width:100%;">Manga catalogue temporarily unavailable. Try searching again.</p>';
+                console.error('Manga catalogue unavailable:', e);
+                grid.innerHTML = '<p style="text-align:center;color:#aaa;width:100%;">Manga catalogue unavailable right now. Please try again later.</p>';
             }
         }
 
         async function searchManga() {
-            const q = document.getElementById('manga-search').value;
-            if(!q) return;
+            const q = document.getElementById('manga-search').value.trim();
+            if (!q) return loadMangaVault();
             const grid = document.getElementById('manga-grid');
             grid.innerHTML = '<div class="loader" style="grid-column: 1/-1; margin: 40px auto;"></div>';
-            
+            const query = `query ($search: String) { Page(perPage: 24) { media(type: MANGA, search: $search, sort: SEARCH_MATCH, isAdult: false) { ${MANGA_FIELDS} } } }`;
             try {
-                const res = await fetch(`${JIKAN_API}/manga?q=${encodeURIComponent(q)}&limit=24`);
-                const data = await res.json();
-                if(data.data.length === 0) {
-                    grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">No records found for that query.</p>';
+                const items = await fetchAniListManga(query, { search: q });
+                if (!items.length) {
+                    grid.innerHTML = '<p style="text-align:center;color:#777;width:100%;">No manga found for that search.</p>';
                     return;
                 }
-                renderManga(data.data);
+                renderManga(normalizeAniListManga(items));
             } catch (e) {
-                grid.innerHTML = '<p style="text-align:center; color:#444; width:100%;">Search failed. Try again.</p>';
+                console.error('Manga search unavailable:', e);
+                grid.innerHTML = '<p style="text-align:center;color:#aaa;width:100%;">Search is unavailable right now. Please try again later.</p>';
             }
         }
 
         function renderManga(mangas) {
             const grid = document.getElementById('manga-grid');
-            grid.innerHTML = '';
+            grid.replaceChildren();
             mangas.forEach(manga => {
                 const card = document.createElement('div');
                 card.className = 'manga-card';
-                card.onclick = () => read(manga.title);
-                card.innerHTML = `
-                    <span class="live-tag">SYNCED</span>
-                    <img src="${manga.images.jpg.large_image_url}" class="manga-img" alt="${manga.title}">
-                    <div class="card-body">
-                        <h3>${manga.title}</h3>
-                        <p>${manga.type || 'Manga'} &mdash; ${manga.status}</p>
-                        <span class="score">RANK #${manga.rank || 'N/A'}</span>
-                    </div>
-                `;
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('aria-label', `Open ${manga.title} in the reader`);
+                const openReader = () => read(manga.title);
+                card.addEventListener('click', openReader);
+                card.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openReader();
+                    }
+                });
+
+                const badge = document.createElement('span');
+                badge.className = 'live-tag';
+                badge.textContent = 'ANILIST';
+                const image = document.createElement('img');
+                image.className = 'manga-img';
+                image.src = manga.images.jpg.large_image_url;
+                image.alt = `Cover for ${manga.title}`;
+                image.loading = 'lazy';
+                image.decoding = 'async';
+                const body = document.createElement('div');
+                body.className = 'card-body';
+                const heading = document.createElement('h3');
+                heading.textContent = manga.title;
+                const info = document.createElement('p');
+                info.textContent = `${manga.type.replaceAll('_', ' ')} — ${manga.status.replaceAll('_', ' ')}`;
+                const score = document.createElement('span');
+                score.className = 'score';
+                score.textContent = manga.rank == null ? 'ANILIST SCORE N/A' : `ANILIST SCORE ${manga.rank}/100`;
+                body.append(heading, info, score);
+                card.append(badge, image, body);
                 grid.appendChild(card);
             });
         }
