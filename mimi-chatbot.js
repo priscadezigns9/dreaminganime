@@ -55,7 +55,7 @@ var SITE_LINKS = {
 
 var SOCIALS = [
   { label:"Facebook", url:"https://www.facebook.com/dreaminganime9/" },
-  { label:"Instagram", url:"https://instagram.com/dreaminganime2026" },
+  { label:"Instagram", url:"https://www.instagram.com/dreaminganime2026/" },
   { label:"Threads", url:"https://threads.net/@dreaminganime2026" },
   { label:"TikTok", url:"https://www.tiktok.com/@dreaminganime9" },
   { label:"YouTube", url:"https://www.youtube.com/@DreamingAnime9" }
