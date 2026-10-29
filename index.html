@@ -349,7 +349,11 @@ html body #hero.anime-slider .slider-track>a.slide>img{display:block!important;w
 #music .music-note{color:#bdbdc4!important;font:.9rem/1.6 Inter,Arial,sans-serif;margin:0}
 #music .music-watch{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.05rem;padding:.8rem 1rem;background:#ff6b00;color:#111!important;font:800 .68rem/1.2 "Space Mono",monospace;text-decoration:none}
 #music .music-watch:hover{background:#fff;color:#111!important}
-#music .music-recent{display:flex;flex-direction:column;min-width:0;background:#101014;border:1px solid #34343a;padding:1.05rem 1.1rem}
+#music .music-recent{display:flex;flex-direction:column;min-width:0;max-height:520px;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:#101014;border:1px solid #34343a;padding:1.05rem 1.1rem;scrollbar-color:#ff6b00 #202026;scrollbar-width:thin}
+#music .music-recent::-webkit-scrollbar{width:9px}
+#music .music-recent::-webkit-scrollbar-track{background:#202026}
+#music .music-recent::-webkit-scrollbar-thumb{background:#ff6b00;border:2px solid #202026}
+#music .music-recent:focus-visible{outline:2px solid #ff6b00;outline-offset:3px}
 #music .music-recent-heading{padding:0 0 .75rem;border-bottom:1px solid #34343a;margin-bottom:.1rem}
 #music .music-recent-heading .music-kicker{margin-bottom:.35rem}
 #music .music-recent-heading h3{margin:0;color:#fff!important;font:clamp(1.6rem,2.7vw,2rem)/1 Bangers,sans-serif}
@@ -365,7 +369,7 @@ html body #hero.anime-slider .slider-track>a.slide>img{display:block!important;w
 #music .music-footer{display:flex;justify-content:center;margin-top:1.25rem}
 #music .music-footer>a{display:inline-flex;gap:.5rem;align-items:center;border:1px solid #ff6b00;color:#fff!important;padding:.72rem 1rem;font:700 .68rem/1.2 "Space Mono",monospace;text-decoration:none}
 #music .music-footer>a:hover{background:#ff6b00;color:#111!important}
-@media(max-width:780px){#music .music-layout{grid-template-columns:minmax(0,1fr)}#music .music-feature-art{aspect-ratio:16/9}#music .music-recent{padding:.9rem}}
+@media(max-width:780px){#music .music-layout{grid-template-columns:minmax(0,1fr)}#music .music-feature-art{aspect-ratio:16/9}#music .music-recent{max-height:min(62vh,500px);padding:.9rem}}
 @media(max-width:420px){#music{padding-left:1rem!important;padding-right:1rem!important}#music .music-pick{grid-template-columns:92px minmax(0,1fr);gap:.7rem}#music .music-pick h4{font-size:1.25rem}#music .music-pick>div>p:not(.music-type){font-size:.68rem}#music .music-pick>div>a{font-size:.55rem}}
 @media(prefers-reduced-motion:reduce){#music *{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -395,7 +399,7 @@ html body #hero.anime-slider .slider-track>a.slide>img{display:block!important;w
           <a class="music-watch" href="https://www.youtube.com/watch?v=j4qxC7WSd4c" target="_blank" rel="noopener noreferrer">WATCH THE OFFICIAL VIDEO <span aria-hidden="true">→</span></a>
         </div>
       </article>
-      <aside class="music-recent" aria-labelledby="music-recent-title">
+      <aside class="music-recent" aria-labelledby="music-recent-title" tabindex="0" aria-label="Scrollable recent music picks">
         <div class="music-recent-heading"><p class="music-kicker">RECENT FEATURES</p><h3 id="music-recent-title">More from the vault</h3></div>
         <article class="music-pick">
           <a class="music-pick-art" href="https://www.youtube.com/watch?v=LZgSKhWu4so" target="_blank" rel="noopener noreferrer" aria-label="Listen to Yurari Yureru on YouTube"><img alt="NOMELON NOLEMON official video thumbnail for Yurari Yureru" loading="lazy" decoding="async" src="https://i.ytimg.com/vi/LZgSKhWu4so/hqdefault.jpg"></a>
@@ -408,6 +412,10 @@ html body #hero.anime-slider .slider-track>a.slide>img{display:block!important;w
         <article class="music-pick">
           <a class="music-pick-art" href="https://www.youtube.com/watch?v=2izyUmENljI" target="_blank" rel="noopener noreferrer" aria-label="Listen to BUTTERFLY on YouTube"><img alt="INUWASI official video thumbnail for BUTTERFLY" loading="lazy" decoding="async" src="https://i.ytimg.com/vi/2izyUmENljI/hqdefault.jpg"></a>
           <div><p class="music-type">ENDING</p><h4>BUTTERFLY</h4><p><strong>The Forsaken Saintess and Her Foodie Road Trip in Another World</strong><br>INUWASI</p><a href="https://www.youtube.com/watch?v=2izyUmENljI" target="_blank" rel="noopener noreferrer">LISTEN ON YOUTUBE <span aria-hidden="true">→</span></a></div>
+        </article>
+      <article class="music-pick">
+          <a class="music-pick-art" href="https://www.youtube.com/watch?v=TcMV9YeT9Sw" target="_blank" rel="noopener noreferrer" aria-label="Listen to SHOW DOWN on YouTube"><img alt="QWER official music video thumbnail for SHOW DOWN" loading="lazy" decoding="async" src="https://i.ytimg.com/vi/TcMV9YeT9Sw/hqdefault.jpg"></a>
+          <div><p class="music-type">OPENING</p><h4>SHOW DOWN</h4><p><strong>Tomb Raider King</strong><br>QWER</p><a href="https://www.youtube.com/watch?v=TcMV9YeT9Sw" target="_blank" rel="noopener noreferrer">LISTEN ON YOUTUBE <span aria-hidden="true">→</span></a></div>
         </article>
       </aside>
     </div>
