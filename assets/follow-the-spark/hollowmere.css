@@ -7,3 +7,7 @@
 .player-shell{height:auto;aspect-ratio:16/9;opacity:1;overflow:hidden;background:#111}.player-shell iframe{display:block;width:100%;height:100%;border:0}.market .side-right .actions{justify-content:flex-end}.stories .side-right .content-cluster{text-align:left;margin-left:auto}.hero-content{margin-left:max(0px,calc((100vw - 1350px)/2))}
 @media(max-width:900px){.market{display:block}.market .side-right .actions{justify-content:flex-start}.hero-content{margin-left:auto}.scene-bg{height:104%;min-height:104%}}
 @media(max-width:640px){.hero{display:block}.wallpaper-teaser{margin-top:31px}.hero-content{width:100%}.side-feature{width:100%}.scene-bg{object-position:55% center}.nav-menu{min-height:44px}.glass-button{min-height:44px}}
+/* Keep the heroine visible; put the hero text in the open right-side sky. */
+@media(min-width:901px){.hero .hero-content{width:min(47%,620px);max-width:620px;margin-left:47%;margin-right:0;transform:translateY(-12vh)}.hero .hero-content h1{font-size:clamp(4rem,7vw,7rem)}.hero .wallpaper-teaser{bottom:7vh;right:6vw}}
+@media(max-width:900px){.hero .hero-content{max-width:58%;margin-left:auto;margin-right:0}.hero .hero-content h1{font-size:clamp(3.25rem,9vw,5rem)}}
+@media(max-width:640px){.hero .hero-content{max-width:65%;margin-left:auto}.hero .hero-content h1{font-size:clamp(2.8rem,11vw,4.1rem)}.hero .hero-content .lede{font-size:.82rem}.hero .scene-bg{object-position:35% center}}
