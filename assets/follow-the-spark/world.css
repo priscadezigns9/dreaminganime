@@ -58,3 +58,7 @@ html body .white-safety-wrap :is(a,button):focus-visible{outline:3px solid #ff8a
  html body .white-safety-wrap :is(#shop-first,#featured-product,#genres,#music,#character-of-the-week,#read-manga,#community,#youtube-anime,#clip-of-the-week,#latest-videos){padding-left:5%!important;padding-right:5%!important}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}body .spark-world img{object-position:center 35%!important}}
+/* Override legacy white safety-wrap and headline effects only for this scene. */
+html body>.white-safety-wrap.white-safety-wrap {background:transparent!important}
+html body .white-safety-wrap #hero .hero-intro h1{animation:none!important}
+html body .white-safety-wrap #hero .hero-intro-copy{max-width:100%!important;text-wrap:balance!important}
