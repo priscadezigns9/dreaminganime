@@ -62,3 +62,13 @@ html body .white-safety-wrap :is(a,button):focus-visible{outline:3px solid #ff8a
 html body>.white-safety-wrap.white-safety-wrap {background:transparent!important}
 html body .white-safety-wrap #hero .hero-intro h1{animation:none!important}
 html body .white-safety-wrap #hero .hero-intro-copy{max-width:100%!important;text-wrap:balance!important}
+/* Existing editorial panels must allow the continuous world to be seen. */
+html body .white-safety-wrap section#genres .genres-inner,
+html body .white-safety-wrap section#featured-product>div>div,
+html body .white-safety-wrap section#clip-of-the-week>div>div,
+html body .white-safety-wrap section#latest-videos>div>div>div {background:rgba(14,14,15,.60)!important;border-color:rgba(255,255,255,.22)!important;box-shadow:0 12px 34px rgba(0,0,0,.25)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+html body .white-safety-wrap section#genres .genre-card {background:rgba(12,12,13,.55)!important;border:1px solid rgba(255,255,255,.30)!important;border-radius:12px!important;box-shadow:none!important}
+html body .white-safety-wrap section#genres .section-headline,
+html body .white-safety-wrap section#character-of-the-week h2,
+html body .white-safety-wrap section#community h2 {color:white!important;-webkit-text-fill-color:white!important;text-shadow:0 2px 12px #000!important}
+html body .white-safety-wrap #anime-music-player {background:rgba(13,13,14,.82)!important;border:1px solid rgba(255,255,255,.4)!important;box-shadow:0 12px 35px rgba(0,0,0,.55)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
