@@ -17,3 +17,40 @@
   function init(){var ncss=document.createElement('style');ncss.id='dreaming-anime-nav-font';ncss.textContent='nav a:not(:first-child),nav button,.nav a:not(.brand),.nav button,.navlinks a{font-family:Inter,Arial,sans-serif!important;font-weight:800!important}';document.head.appendChild(ncss);if(!document.documentElement || document.documentElement.dataset.daWalletTest !== "true")return;var s=document.createElement('style');s.id='da-wallet-style';s.textContent=css;document.head.appendChild(s);ensure();var b=document.querySelector('.da-connect-wallet');if(!b){var n=document.querySelector('nav');if(n){b=document.createElement('button');b.className='da-connect-wallet';b.type='button';b.textContent='CONNECT WALLET';n.appendChild(b)}}if(!b||b.dataset.bound)return;b.dataset.bound='1';var st=document.createElement('span');st.className='da-wallet-status';st.textContent='NOT CONNECTED';b.parentNode.insertBefore(st,b.nextSibling);b.removeAttribute('href');b.onclick=function(e){e.preventDefault();open()}}
   window.daNormalizeCip30=function(api){return api&&api.api&&typeof api.api==='object'?api.api:api};window.daOpenWallet=open;window.daCloseWallet=close;if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
+
+/* Dreaming Anime Lenis smooth scrolling — self-hosted Lenis 1.3.27. */
+(function(){
+  'use strict';
+  function startLenis(){
+    if(!window.Lenis || window.daLenis) return;
+    var useGsap=!!(window.gsap && window.gsap.ticker);
+    var options={
+      autoRaf: !useGsap,
+      autoToggle: true,
+      anchors: true,
+      allowNestedScroll: true,
+      stopInertiaOnNavigate: true,
+      lerp: 0.1,
+      respectReducedMotion: true
+    };
+    var lenis=new window.Lenis(options);
+    window.daLenis=lenis;
+    if(useGsap){
+      if(window.ScrollTrigger) lenis.on('scroll',window.ScrollTrigger.update);
+      window.gsap.ticker.add(function(time){lenis.raf(time*1000)});
+      window.gsap.ticker.lagSmoothing(0);
+    }
+  }
+  function loadLenis(){
+    if(!document.getElementById('da-lenis-css')){
+      var css=document.createElement('link');css.id='da-lenis-css';css.rel='stylesheet';css.href='/lenis.css';document.head.appendChild(css);
+    }
+    if(window.Lenis){startLenis();return;}
+    var script=document.createElement('script');script.src='/lenis.min.js';script.async=true;
+    script.onload=startLenis;
+    script.onerror=function(){console.warn('Dreaming Anime: Lenis did not load; native scrolling remains available.');};
+    document.head.appendChild(script);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadLenis,{once:true});
+  else loadLenis();
+})();
