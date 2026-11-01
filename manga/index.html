@@ -193,25 +193,42 @@
         @media(max-width:650px){.manga-nav{top:7px;margin-top:7px;min-height:54px;padding:7px 11px}.manga-nav .logo{font-size:.72rem}.manga-nav .logo img{width:34px;height:34px}.manga-hero{min-height:420px;width:92%;margin-top:18px;padding:28px 22px 64px;flex-direction:column;justify-content:center;gap:10px;text-align:center;border-radius:22px}.manga-hero>img{width:118px;max-height:145px}.manga-hero h1{font-size:clamp(3rem,13vw,5rem)}.manga-eyebrow{font-size:.58rem}.manga-subtitle{font-size:.86rem;margin-top:12px}.manga-scroll-link{right:0;left:0;bottom:21px}.search-container{margin:18px auto 6px;padding:0 6%}.vault-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding:28px 4% 72px}.manga-img{height:clamp(190px,60vw,300px)}.card-body{padding:13px}.card-body h3{font-size:1.2rem}.card-body p{font-size:.74rem}.score{font-size:.65rem}.live-tag{top:9px;right:9px;padding:4px 7px;font-size:.54rem}}
         @media(max-width:380px){.vault-grid{grid-template-columns:1fr}.manga-img{height:340px}}
         @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.manga-card,.manga-hero a{transition:none}.manga-card:hover{transform:none}}
+
+
+        /* Neutralize Manga's former global nav styling inside the shared component. */
+        .manga-world .manga-shared-nav nav{position:static;top:auto;left:auto;transform:none;width:auto;height:auto;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+        .manga-world .manga-shared-nav .menu{position:absolute;top:68px;right:0;left:auto}
+        /* Match the homepage nav exactly on desktop; glass hamburger is mobile only. */
+        .manga-world .manga-shared-nav{position:fixed;z-index:1100;top:15px;left:50%;transform:translateX(-50%);width:min(93%,1280px);height:60px;min-height:60px;margin:0;padding:0 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid #ffffff7a;border-radius:99px;background:rgba(12,12,15,.78);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);box-shadow:0 8px 25px #0008}
+        .manga-world .manga-shared-nav .brand{display:flex;align-items:center;flex:0 0 auto}.manga-world .manga-shared-nav .brand img{width:43px;height:43px;border:0;border-radius:0;object-fit:contain}
+        .manga-world .manga-shared-nav .navlinks{display:flex;align-items:center;gap:clamp(10px,1.5vw,23px);font:800 .74rem Inter,Arial,sans-serif;white-space:nowrap}.manga-world .manga-shared-nav .navlinks>a,.manga-world .manga-shared-nav .products-nav summary{position:relative;color:#fff;text-decoration:none;cursor:pointer}.manga-world .manga-shared-nav .navlinks>a:hover,.manga-world .manga-shared-nav .products-nav summary:hover{color:#ffad5b}.manga-world .manga-shared-nav .navlinks [aria-current=page]{color:#ffc56f}.manga-world .manga-shared-nav .products-nav{position:relative}.manga-world .manga-shared-nav .products-nav summary{list-style:none;font-weight:800}.manga-world .manga-shared-nav .products-nav summary::-webkit-details-marker{display:none}.manga-world .manga-shared-nav .products-dropdown{position:absolute;top:calc(100% + 13px);left:50%;transform:translateX(-50%);min-width:165px;padding:8px;border:1px solid #ffffff80;border-radius:13px;background:#171416f5;box-shadow:0 14px 30px #0009;backdrop-filter:blur(15px)}.manga-world .manga-shared-nav .products-dropdown a{display:block;padding:10px;border-radius:8px;color:#fff;text-decoration:none;font:800 .78rem Inter,Arial,sans-serif}.manga-world .manga-shared-nav .products-dropdown a:hover{background:#ff780030;color:#ffb46e}
+        .manga-world .manga-shared-nav .menu-toggle{display:none;border:1px solid #ffffff70;border-radius:99px;padding:8px 12px;background:#ffffff13;color:#fff;font:800 .7rem Inter,Arial,sans-serif}.manga-world .manga-shared-nav .menu{position:absolute;top:68px;right:0;left:auto;min-width:220px;max-height:min(75vh,560px);overflow:auto;padding:12px;border:1px solid #ffffff80;border-radius:16px;background:#101013ed;box-shadow:0 20px 50px #0008;backdrop-filter:blur(16px)}.manga-world .manga-shared-nav .menu[hidden]{display:none!important}.manga-world .manga-shared-nav .menu>a,.manga-world .manga-shared-nav .mobile-products summary{display:block;padding:10px;border-radius:8px;color:#fff;text-decoration:none;font:800 .78rem Inter,Arial,sans-serif;white-space:nowrap}.manga-world .manga-shared-nav .menu>a:hover,.manga-world .manga-shared-nav .mobile-products>a:hover{background:#ff780030;color:#ffb46e}.manga-world .manga-shared-nav .mobile-products summary{cursor:pointer;list-style:none}.manga-world .manga-shared-nav .mobile-products summary::-webkit-details-marker{display:none}.manga-world .manga-shared-nav .mobile-products>a{display:block;padding:9px 12px 9px 24px;color:white;text-decoration:none;font:700 .74rem Inter,Arial,sans-serif}
+        .manga-world .manga-shared-nav a:focus-visible,.manga-world .manga-shared-nav button:focus-visible,.manga-world .manga-shared-nav summary:focus-visible{outline:3px solid #ffbc69;outline-offset:3px}
+        @media(max-width:760px){.manga-world .manga-shared-nav{top:8px;width:calc(100% - 16px);height:54px;min-height:54px;padding:0 13px}.manga-world .manga-shared-nav .brand img{width:36px;height:36px}.manga-world .manga-shared-nav .navlinks{display:none}.manga-world .manga-shared-nav .menu-toggle{display:block}}
+        @media(min-width:761px) and (max-width:1050px){.manga-world .manga-shared-nav .navlinks{gap:9px;font-size:.66rem}}
     </style>
 </head>
 <body class="manga-world">
     <div class="manga-backdrop" aria-hidden="true"></div>
     <canvas class="manga-water" aria-hidden="true"></canvas>
-    <nav class="manga-nav" aria-label="Main navigation">
-        <a href="/" class="logo"><img src="/logos/dreaming-anime-logo-round.png" alt=""> <span>DREAMING <b>ANIME</b></span></a>
-        <div class="manga-nav-links">
-            <a href="/">HOME</a><a href="/review/">REVIEWS</a><a href="/blog/">BLOG</a>
-            <details class="manga-products"><summary>PRODUCTS <span aria-hidden="true">▾</span></summary><div class="manga-products-menu"><a href="/dreamers-collection/">COLLECTION</a><a href="/quiz/">QUIZ</a><a href="/wallpapers/">WALLPAPERS</a></div></details>
-            <a href="/shop/">SHOP</a><a href="/music/">MUSIC</a><a href="/manga/" aria-current="page">MANGA</a>
-        </div>
-        <button class="manga-menu-toggle" type="button" aria-expanded="false" aria-controls="manga-mobile-menu">MENU <span aria-hidden="true">☰</span></button>
-        <div class="manga-mobile-menu" id="manga-mobile-menu" hidden>
-            <a href="/">HOME</a><a href="/review/">REVIEWS</a><a href="/blog/">BLOG</a>
-            <details><summary>PRODUCTS ▾</summary><a href="/dreamers-collection/">COLLECTION</a><a href="/quiz/">QUIZ</a><a href="/wallpapers/">WALLPAPERS</a></details>
-            <a href="/shop/">SHOP</a><a href="/music/">MUSIC</a><a href="/manga/" aria-current="page">MANGA</a>
-        </div>
-    </nav>
+    <header class="nav manga-shared-nav">
+        <a class="brand" href="/" aria-label="Dreaming Anime home"><img src="/logos/dreaming-anime-logo-round.png" alt="Dreaming Anime"></a>
+        <nav class="navlinks" aria-label="Main navigation">
+            <a href="/">Home</a><a href="/review/">Reviews</a><a href="/blog/">Blog</a>
+            <details class="products-nav"><summary>Products <span aria-hidden="true">▾</span></summary><div class="products-dropdown"><a href="/dreamers-collection/">Collection</a><a href="/quiz/">Quiz</a><a href="/wallpapers/">Wallpapers</a></div></details>
+            <a href="/music/">Music</a><a href="/manga/" aria-current="page">Manga</a>
+            <a href="https://www.reddit.com/r/anime/" target="_blank" rel="noopener noreferrer">Community</a>
+            <a href="/discover/">Creators</a><a href="/discover/">Videos</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="manga-shared-menu" aria-label="Open navigation menu">Menu ☰</button>
+        <nav class="menu" id="manga-shared-menu" aria-label="Mobile navigation" hidden>
+            <a href="/">Home</a><a href="/review/">Reviews</a><a href="/blog/">Blog</a>
+            <details class="mobile-products"><summary>Products ▾</summary><a href="/dreamers-collection/">Collection</a><a href="/quiz/">Quiz</a><a href="/wallpapers/">Wallpapers</a></details>
+            <a href="/music/">Music</a><a href="/manga/" aria-current="page">Manga</a>
+            <a href="https://www.reddit.com/r/anime/" target="_blank" rel="noopener noreferrer">Community</a>
+            <a href="/discover/">Creators</a><a href="/discover/">Videos</a>
+        </nav>
+    </header>
     <header class="manga-hero">
         <img src="/mascot/mimi/mimi_shop_header.webp" alt="Mimi welcomes you to the manga vault">
         <div><p class="manga-eyebrow">MANGA / DISCOVER YOUR NEXT STORY</p><h1>THE MANGA VAULT</h1><p class="manga-subtitle">Find a new series, browse the catalogue, and explore official places to read.</p></div>
@@ -517,7 +534,7 @@
     </script>
 
     <script>
-    (()=>{const b=document.querySelector('.manga-menu-toggle'),m=document.querySelector('.manga-mobile-menu');if(!b||!m)return;b.addEventListener('click',()=>{m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))});document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.hidden=true;b.setAttribute('aria-expanded','false')}});m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.hidden=true;b.setAttribute('aria-expanded','false')}))})();
+    (()=>{const b=document.querySelector('.manga-shared-nav .menu-toggle'),m=document.querySelector('#manga-shared-menu');if(!b||!m)return;const close=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};b.addEventListener('click',()=>{m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});document.addEventListener('click',e=>{if(!m.hidden&&!e.target.closest('.manga-shared-nav'))close()});m.querySelectorAll('a').forEach(a=>a.addEventListener('click',close))})();
     </script>
 
 <!-- [Zapia] Shared translator and back-to-top controls -->
