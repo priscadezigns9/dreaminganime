@@ -33,7 +33,8 @@ for(const item of items){
    }
    // A gentle, low-cost breathing glow at warm points in the illustration.
    ctx.save();ctx.globalCompositeOperation='screen';const pulse=.5+.5*Math.sin(t*.001+phase);
-   for(const [x,y,r] of item.lamps){const px=x*384,py=y*216,rad=Math.max(10,r*384*(1.6+.25*pulse)),g=ctx.createRadialGradient(px,py,0,px,py,rad);g.addColorStop(0,`rgba(255,245,210,${.72+.18*pulse})`);g.addColorStop(.18,`rgba(255,205,130,${.58+.18*pulse})`);g.addColorStop(.48,`rgba(255,150,65,${.38+.14*pulse})`);g.addColorStop(1,'rgba(255,112,28,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill()}
+   const visibleCanvas=canvas.getBoundingClientRect(),box=image.getBoundingClientRect(),W=img.naturalWidth,H=img.naturalHeight,ratio=box.width/box.height;let sx=0,sy=0,sw=W,sh=H;if(W/H>ratio){sw=H*ratio;sx=(W-sw)*.5}else{sh=W/ratio;sy=(H-sh)*.5}
+   for(const [x,y,r] of item.lamps){const localX=(x*W-sx)/sw,localY=(y*H-sy)/sh;if(localX<0||localX>1||localY<0||localY>1)continue;const px=localX*384,py=localY*216,rad=Math.max(12,r*384*(1.8+.24*pulse)),g=ctx.createRadialGradient(px,py,0,px,py,rad);g.addColorStop(0,`rgba(255,250,224,${.92+.08*pulse})`);g.addColorStop(.16,`rgba(255,218,146,${.78+.16*pulse})`);g.addColorStop(.45,`rgba(255,157,68,${.48+.2*pulse})`);g.addColorStop(1,'rgba(255,112,28,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill()}
    ctx.restore();
   }raf=requestAnimationFrame(paint)
  }
