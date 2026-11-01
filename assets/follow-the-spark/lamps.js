@@ -8,7 +8,7 @@ const scenes=[
  {key:'five',id:5,points:[[.03,.42],[.20,.68],[.43,.84],[.60,.80],[.76,.75],[.95,.60]]}
 ];
 const style=document.createElement('style');style.textContent=`
-.lamp-light-layer{position:absolute;z-index:2;inset:0;pointer-events:none;overflow:hidden}
+.lamp-light-layer{position:absolute;z-index:2.5;inset:0;pointer-events:none;overflow:hidden}
 .lamp-breathe{position:absolute;width:clamp(22px,2.4vw,34px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,249,221,.48) 0 8%,rgba(255,218,148,.32) 18%,rgba(255,157,74,.12) 42%,transparent 72%);filter:drop-shadow(0 0 4px rgba(255,183,99,.27));animation:lamp-breath 3.8s ease-in-out infinite alternate}
 .lamp-breathe::after{content:"";position:absolute;inset:37%;border-radius:50%;background:rgba(255,240,202,.6);box-shadow:0 0 4px 1px rgba(255,196,113,.34)}
 @keyframes lamp-breath{from{opacity:.68;scale:.94}to{opacity:.92;scale:1.07}}
