@@ -10,6 +10,8 @@ const style=document.createElement('style');style.textContent=`
 /* This page's ambient motion is explicitly requested by the site owner; override its global reduced-motion blanket only for these layered effects. */
 html body .world .painted-water-flow{display:block!important}
 html body .world .da-lantern-glow{animation:daLanternFlicker 2.7s ease-in-out infinite alternate!important}
+html body .world .da-lantern-glow::after{animation:daLanternFlicker 2.7s ease-in-out infinite alternate!important}
+html body .world .da-lantern-glow::before{content:'';position:absolute;inset:25%;border-radius:50%;background:rgba(255,239,197,.2);box-shadow:0 0 10px 4px rgba(255,192,105,.2);pointer-events:none}
 .da-lantern-layer{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 .da-lantern-glow{position:absolute;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,204,122,.34) 0,rgba(255,161,57,.32) 19%,rgba(255,127,37,.14) 43%,rgba(255,100,35,0) 72%);mix-blend-mode:screen;animation:daLanternFlicker 2.7s ease-in-out infinite alternate}
 @keyframes daLanternFlicker{0%,100%{opacity:.46;transform:translate(-50%,-50%) scale(.95)}38%{opacity:.66}52%{opacity:.52}75%{opacity:.74}to{opacity:.62;transform:translate(-50%,-50%) scale(1.04)}}
