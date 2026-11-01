@@ -80,10 +80,6 @@
 .hero>.gallery{margin-top:35px}
 @media(max-width:650px){.hero>.gallery{margin-top:65px}}
 
-/* Enlarge the homepage wallpaper tiles while keeping a responsive gallery. */
-.gallery-track a{flex-basis:calc((100% - 7px)/2);aspect-ratio:16/10}
-@media(max-width:650px){.gallery-track a{flex-basis:calc((100% - 4px)/2)}}
-
 /* Give creator and community cards more room and keep their CTA labels on one line. */
 @media(min-width:651px){.people .creators,.people .community{width:48%;max-width:520px}}
 .people .orange-button{min-width:170px;min-height:48px;padding-inline:22px;white-space:nowrap}
@@ -91,3 +87,9 @@
 /* Make the creators and community cards feel like full-size homepage panels. */
 @media(min-width:651px){.people{gap:4%}.people .creators,.people .community{width:48%;max-width:none;min-height:220px}}
 .people .orange-button{width:230px;max-width:100%;min-height:52px;padding-inline:24px;white-space:nowrap}
+
+/* Enlarge the Featured Product panel, product artwork, and call to action. */
+.market .merch{width:min(58%,680px);min-height:230px;padding:24px;gap:28px}
+.market .merch img{width:150px;height:150px}
+.market .merch .orange-button{min-width:220px;min-height:48px;justify-content:center;white-space:nowrap}
+@media(max-width:650px){.market .merch{width:100%;min-height:205px;padding:18px;gap:18px}.market .merch img{width:108px;height:112px}.market .merch .orange-button{width:min(220px,100%)}}
