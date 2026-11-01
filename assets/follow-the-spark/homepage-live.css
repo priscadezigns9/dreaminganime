@@ -125,3 +125,6 @@
 .world::after{z-index:1!important}
 .world>.painted-water-flow{z-index:2!important;opacity:1!important;filter:brightness(1.3) saturate(1.35)!important}
 .world>.stage{z-index:3!important}
+
+/* Screenshot request: make only the creators and community cards transparent. */
+.people .creators,.people .community{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
