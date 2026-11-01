@@ -128,3 +128,6 @@
 
 /* Screenshot request: make only the creators and community cards transparent. */
 .people .creators,.people .community{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+/* Homepage request: transparent backgrounds on all remaining grid cards. */
+.world .glass{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
