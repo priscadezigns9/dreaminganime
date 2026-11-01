@@ -111,3 +111,7 @@
 .market .merch>div{flex:none}.market .merch img{width:160px;height:160px}.market .merch .orange-button{width:min(100%,260px);min-width:0;min-height:50px}
 @media(max-width:900px) and (min-width:651px){.market .merch{width:min(48%,420px);padding:24px}.market .merch img{width:140px;height:140px}}
 @media(max-width:650px){.market .merch{width:min(100%,390px);min-height:0;aspect-ratio:1/1;margin-inline:auto;padding:24px;gap:14px}.market .merch img{width:132px;height:132px}.market .merch>div{flex:none}}
+
+/* Let the scenic artwork show through the larger, square Featured Product card. */
+@media(min-width:651px){.market .merch{width:min(46%,540px);max-width:540px;padding:34px;background:linear-gradient(135deg,rgba(54,54,60,.16),rgba(16,16,20,.22));backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border-color:rgba(255,255,255,.62)}}
+@media(max-width:650px){.market .merch{width:min(100%,420px);padding:26px;background:linear-gradient(135deg,rgba(54,54,60,.18),rgba(16,16,20,.24));backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border-color:rgba(255,255,255,.62)}}
