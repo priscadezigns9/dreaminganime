@@ -1,55 +1,44 @@
 (()=>{'use strict';
-const world=document.querySelector('.world'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
-document.querySelectorAll('.painted-water-flow').forEach(el=>el.remove());
-if(!world||reduced.matches)return;
-const scenes=[
- {key:'one',id:1,pos:.5,lamps:[[.055,.18,.075],[.47,.86,.060],[.18,.43,.025],[.29,.55,.022],[.68,.71,.018],[.79,.69,.018]]},
- {key:'two',id:2,pos:.5,lamps:[[.095,.54,.035],[.17,.61,.028],[.28,.66,.025],[.42,.68,.023],[.53,.73,.023],[.70,.63,.025],[.89,.61,.030]]},
- {key:'three',id:3,pos:.5,lamps:[[.025,.55,.035],[.14,.60,.03],[.23,.67,.03],[.39,.70,.025],[.54,.68,.025],[.73,.63,.025],[.91,.69,.03]]},
- {key:'four',id:4,pos:.5,lamps:[[.04,.57,.035],[.12,.58,.03],[.24,.60,.03],[.36,.68,.025],[.50,.68,.025],[.65,.63,.025],[.80,.53,.025],[.93,.49,.03]]},
- {key:'five',id:5,pos:.5,lamps:[[.035,.45,.035],[.13,.54,.025],[.24,.62,.025],[.34,.65,.025],[.45,.68,.025],[.58,.72,.025],[.72,.75,.03],[.88,.72,.035]]}
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');if(reduced.matches)return;
+const items=[
+ {name:'one',id:1,lamps:[[.84,.31,.035],[.84,.62,.035],[.28,.22,.025],[.27,.39,.024]]},
+ {name:'two',id:2,lamps:[[.63,.36,.03],[.75,.60,.035],[.91,.44,.03]]},
+ {name:'three',id:3,lamps:[[.78,.27,.03],[.87,.62,.035],[.93,.45,.03]]},
+ {name:'four',id:4,lamps:[[.16,.40,.03],[.35,.68,.03],[.77,.44,.035]]},
+ {name:'five',id:5,lamps:[[.48,.55,.03],[.72,.62,.035],[.83,.52,.03]]}
 ];
-const cache=new Map();function image(src){if(!cache.has(src)){const x=new Image();x.src=src;cache.set(src,x)}return cache.get(src)}
-for(const spec of scenes){
- const scene=document.querySelector('.art-'+spec.key);if(!scene)continue;
- const source=image(`/assets/follow-the-spark/anime-scene-0${spec.id}.webp`),mask=image(`/assets/follow-the-spark/water-mask-0${spec.id}.png`);
- const canvas=document.createElement('canvas');canvas.className='painted-water-flow';canvas.setAttribute('aria-hidden','true');scene.insertAdjacentElement('afterend',canvas);
- let ctx=canvas.getContext('2d',{alpha:true}),frame=document.createElement('canvas'),fc=frame.getContext('2d',{willReadFrequently:true}),maskCanvas=document.createElement('canvas'),mc=maskCanvas.getContext('2d',{willReadFrequently:true});
- let sx=0,sy=0,sw=0,sh=0,W=0,H=0,maskReady=false,inView=false,raf=0,last=0,seenVisible=!document.hidden, lampData=[];
- const measure=()=>{
-  const rect=scene.getBoundingClientRect(),ratio=source.naturalWidth/source.naturalHeight;
-  if(!rect.width||!rect.height||!source.naturalWidth)return;
-  const scale=Math.min(1.25,1200/rect.width);W=Math.max(2,Math.round(rect.width*scale));H=Math.max(2,Math.round(rect.height*scale));
-  for(const c of [canvas,frame,maskCanvas]){c.width=W;c.height=H}
-  const boxRatio=rect.width/rect.height,iw=source.naturalWidth,ih=source.naturalHeight;
-  if(boxRatio>ratio){sw=iw;sh=iw/boxRatio;sx=0;sy=(ih-sh)*spec.pos}
-  else{sh=ih;sw=ih*boxRatio;sx=(iw-sw)*spec.pos;sy=0}
-  mc.clearRect(0,0,W,H);mc.drawImage(mask,sx,sy,sw,sh,0,0,W,H);
-  const im=mc.getImageData(0,0,W,H),d=im.data;for(let p=0;p<d.length;p+=4){const gray=d[p];d[p]=255;d[p+1]=255;d[p+2]=255;d[p+3]=Math.round(Math.min(1,gray/215)*255)}mc.putImageData(im,0,0);maskReady=true;
-  lampData=spec.lamps.map(([x,y,r])=>({x:(x*iw-sx)/sw*W,y:(y*ih-sy)/sh*H,r:r*iw/sw*W,phase:Math.random()*6.28})).filter(p=>p.x>=0&&p.x<=W&&p.y>=0&&p.y<=H);
- };
- const resize=new ResizeObserver(()=>{maskReady=false;measure();if(inView)start()});resize.observe(scene);
- function measureIfReady(){if(source.complete&&source.naturalWidth&&mask.complete&&mask.naturalWidth){if(!maskReady)measure();if(inView)start()}}
- source.addEventListener('load',measureIfReady);mask.addEventListener('load',measureIfReady);measureIfReady();
- function draw(now){raf=0;if(!seenVisible||!inView||reduced.matches)return;measureIfReady();if(!maskReady){raf=requestAnimationFrame(draw);return}
-  if(now-last>45){last=now;const t=now*.001,dy=(t*12+spec.id*17)%H;fc.clearRect(0,0,W,H);
-   // Scroll the matching scene texture down inside the crop used by background-size:cover.
-   fc.drawImage(source,sx,sy,sw,sh,0,dy,W,H);fc.drawImage(source,sx,sy,sw,sh,0,dy-H,W,H);
-   fc.globalCompositeOperation='destination-in';fc.drawImage(maskCanvas,0,0,W,H);fc.globalCompositeOperation='source-over';ctx.clearRect(0,0,W,H);ctx.drawImage(frame,0,0);
-   // Moving, water-coloured caustic ribbons stay clipped to the waterfall mask.
-   ctx.save();ctx.globalCompositeOperation='source-atop';
-   for(let y=-100+dy%108;y<H+100;y+=108){const grad=ctx.createLinearGradient(0,y-8,0,y+9);grad.addColorStop(0,'rgba(168,235,255,0)');grad.addColorStop(.48,'rgba(184,238,255,.36)');grad.addColorStop(.55,'rgba(255,255,255,.25)');grad.addColorStop(1,'rgba(168,235,255,0)');ctx.fillStyle=grad;ctx.fillRect(0,y-9,W,18)}
+let active=false,visible=!document.hidden;
+for(const item of items){
+ const art=document.querySelector('.art-'+item.name);if(!art)continue;
+ const canvas=document.createElement('canvas');canvas.className='painted-water-flow';canvas.setAttribute('aria-hidden','true');canvas.width=384;canvas.height=216;art.insertAdjacentElement('afterend',canvas);
+ const ctx=canvas.getContext('2d',{alpha:true}),frame=document.createElement('canvas');frame.width=384;frame.height=216;const fc=frame.getContext('2d');
+ const mask=new Image();mask.src=`/assets/follow-the-spark/water-mask-0${item.id}.png`;
+ let maskCanvas=document.createElement('canvas');maskCanvas.width=384;maskCanvas.height=216;const mc=maskCanvas.getContext('2d',{willReadFrequently:true});let ready=false,shown=false,raf=0,last=0,phase=Math.random()*6.28;
+ function onMask(){if(ready||!mask.complete||!mask.naturalWidth)return;mc.drawImage(mask,0,0,384,216);const im=mc.getImageData(0,0,384,216),d=im.data;for(let i=0;i<d.length;i+=4){const a=d[i];d[i]=d[i+1]=d[i+2]=255;d[i+3]=a}mc.putImageData(im,0,0);ready=true;if(shown)start()}
+ mask.addEventListener('load',onMask);onMask();
+ const sectionObserver=new IntersectionObserver(entries=>{shown=entries[0].isIntersecting;if(shown)start();else if(raf){cancelAnimationFrame(raf);raf=0}},{rootMargin:'100px'});sectionObserver.observe(art);
+ function paint(t){raf=0;if(!shown||!visible||reduced.matches)return;onMask();if(!ready){raf=requestAnimationFrame(paint);return}
+  if(t-last>=110){last=t;ctx.clearRect(0,0,384,216);fc.clearRect(0,0,384,216);
+   // Shift two low-resolution image tiles; the once-converted gray map clips the flow.
+   const shift=(t*.009+item.id*23)%216;
+   const image=document.querySelector('.art-'+item.name);
+   const style=getComputedStyle(image).backgroundImage;const match=style.match(/url\(["']?(.*?)["']?\)/);if(match){
+    const source=window.__daSceneImages||(window.__daSceneImages=[]);let img=source[item.id];if(!img){img=new Image();img.src=`/assets/follow-the-spark/anime-scene-0${item.id}.webp`;source[item.id]=img}
+    if(img.complete&&img.naturalWidth){
+     const W=img.naturalWidth,H=img.naturalHeight,box=image.getBoundingClientRect(),ratio=box.width/box.height;let sx=0,sy=0,sw=W,sh=H;
+     if(W/H>ratio){sw=H*ratio;sx=(W-sw)*.5}else{sh=W/ratio;sy=(H-sh)*.5}
+     fc.drawImage(img,sx,sy,sw,sh,0,shift,384,216);fc.drawImage(img,sx,sy,sw,sh,0,shift-216,384,216);
+     fc.globalCompositeOperation='destination-in';fc.drawImage(maskCanvas,0,0);fc.globalCompositeOperation='source-over';ctx.drawImage(frame,0,0);
+    }
+   }
+   // A gentle, low-cost breathing glow at warm points in the illustration.
+   ctx.save();ctx.globalCompositeOperation='screen';const pulse=.5+.5*Math.sin(t*.001+phase);
+   for(const [x,y,r] of item.lamps){const px=x*384,py=y*216,rad=r*384*(.8+.18*pulse),g=ctx.createRadialGradient(px,py,0,px,py,rad);g.addColorStop(0,`rgba(255,197,120,${.18+.12*pulse})`);g.addColorStop(.35,`rgba(255,151,65,${.08+.07*pulse})`);g.addColorStop(1,'rgba(255,120,35,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill()}
    ctx.restore();
-   // Soft local amber breathing around the lamps already painted into each scene.
-   ctx.save();ctx.globalCompositeOperation='screen';
-   for(const l of lampData){const pulse=.5+.5*Math.sin(t*.9+l.phase),r=l.r*(.72+.22*pulse);const g=ctx.createRadialGradient(l.x,l.y,0,l.x,l.y,r);g.addColorStop(0,`rgba(255,203,125,${.28+.12*pulse})`);g.addColorStop(.25,`rgba(255,153,68,${.15+.08*pulse})`);g.addColorStop(1,'rgba(255,130,35,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(l.x,l.y,r,0,Math.PI*2);ctx.fill()}
-   ctx.restore();
-  }
-  raf=requestAnimationFrame(draw)
+  }raf=requestAnimationFrame(paint)
  }
- function start(){if(!raf&&inView&&seenVisible&&!reduced.matches)raf=requestAnimationFrame(draw)}
- const observer=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;if(inView)start();else if(raf){cancelAnimationFrame(raf);raf=0}},{rootMargin:'120px'});observer.observe(scene);
- document.addEventListener('visibilitychange',()=>{seenVisible=!document.hidden;if(seenVisible)start();else if(raf){cancelAnimationFrame(raf);raf=0}});
- reduced.addEventListener?.('change',()=>{if(reduced.matches){observer.disconnect();resize.disconnect();if(raf)cancelAnimationFrame(raf);canvas.remove()}});
+ function start(){if(shown&&visible&&!raf&&!reduced.matches)raf=requestAnimationFrame(paint)}
 }
+document.addEventListener('visibilitychange',()=>{visible=!document.hidden});
+reduced.addEventListener?.('change',()=>{if(reduced.matches)document.querySelectorAll('.painted-water-flow').forEach(x=>x.remove())});
 })();
