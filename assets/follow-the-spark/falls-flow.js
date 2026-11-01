@@ -1,11 +1,11 @@
 (()=>{'use strict';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');if(reduced.matches)return;
 const items=[
- {name:'one',id:1,lamps:[[.84,.31,.035],[.84,.62,.035],[.28,.22,.025],[.27,.39,.024]]},
- {name:'two',id:2,lamps:[[.63,.36,.03],[.75,.60,.035],[.91,.44,.03]]},
- {name:'three',id:3,lamps:[[.78,.27,.03],[.87,.62,.035],[.93,.45,.03]]},
- {name:'four',id:4,lamps:[[.16,.40,.03],[.35,.68,.03],[.77,.44,.035]]},
- {name:'five',id:5,lamps:[[.48,.55,.03],[.72,.62,.035],[.83,.52,.03]]}
+ {name:'one',id:1},
+ {name:'two',id:2},
+ {name:'three',id:3},
+ {name:'four',id:4},
+ {name:'five',id:5}
 ];
 let active=false,visible=!document.hidden;
 for(const item of items){
@@ -31,10 +31,7 @@ for(const item of items){
      fc.globalCompositeOperation='destination-in';fc.drawImage(maskCanvas,0,0);fc.globalCompositeOperation='source-over';ctx.drawImage(frame,0,0);
     }
    }
-   // A gentle, low-cost breathing glow at warm points in the illustration.
-   ctx.save();ctx.globalCompositeOperation='screen';const pulse=.5+.5*Math.sin(t*.001+phase);
-   for(const [x,y,r] of item.lamps){const px=x*384,py=y*216,rad=r*384*(.8+.18*pulse),g=ctx.createRadialGradient(px,py,0,px,py,rad);g.addColorStop(0,`rgba(255,197,120,${.18+.12*pulse})`);g.addColorStop(.35,`rgba(255,151,65,${.08+.07*pulse})`);g.addColorStop(1,'rgba(255,120,35,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill()}
-   ctx.restore();
+
   }raf=requestAnimationFrame(paint)
  }
  function start(){if(shown&&visible&&!raf&&!reduced.matches)raf=requestAnimationFrame(paint)}
