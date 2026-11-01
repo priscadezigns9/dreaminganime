@@ -115,3 +115,6 @@
 /* Let the scenic artwork show through the larger, square Featured Product card. */
 @media(min-width:651px){.market .merch{width:min(46%,540px);max-width:540px;padding:34px;background:linear-gradient(135deg,rgba(54,54,60,.16),rgba(16,16,20,.22));backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border-color:rgba(255,255,255,.62)}}
 @media(max-width:650px){.market .merch{width:min(100%,420px);padding:26px;background:linear-gradient(135deg,rgba(54,54,60,.18),rgba(16,16,20,.24));backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border-color:rgba(255,255,255,.62)}}
+
+/* Keep animated water and lantern light above all scene backgrounds, below content. */
+.world>.painted-water-flow{z-index:-1!important;opacity:.98!important;filter:brightness(1.22) saturate(1.25)!important}
