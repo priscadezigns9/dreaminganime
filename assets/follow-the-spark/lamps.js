@@ -8,11 +8,11 @@ const scenes=[
 ];
 const style=document.createElement('style');style.textContent=`
 .lamp-light-layer{position:absolute;z-index:2;pointer-events:none;overflow:hidden}
-.lamp-breathe{position:absolute;width:clamp(20px,2.3vw,32px);height:clamp(20px,2.3vw,32px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,247,216,.42) 0 8%,rgba(255,215,141,.28) 18%,rgba(255,157,74,.10) 42%,transparent 72%);filter:drop-shadow(0 0 3px rgba(255,178,92,.22));animation:lamp-breath 3.8s ease-in-out infinite alternate}
+.lamp-breathe{position:absolute;width:clamp(20px,2.3vw,32px);height:clamp(20px,2.3vw,32px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,247,216,.42) 0 8%,rgba(255,215,141,.28) 18%,rgba(255,157,74,.10) 42%,transparent 72%);filter:drop-shadow(0 0 3px rgba(255,178,92,.22));animation:lamp-breath 3.8s ease-in-out infinite alternate!important}
 .lamp-breathe::after{content:"";position:absolute;inset:38%;border-radius:50%;background:rgba(255,239,197,.5);box-shadow:0 0 3px 1px rgba(255,192,105,.28)}
 @keyframes lamp-breath{from{opacity:.66;scale:.94}to{opacity:.88;scale:1.06}}
 @media(max-width:650px){.lamp-breathe{width:22px;height:22px}}
-@media(prefers-reduced-motion:reduce){.lamp-breathe{animation:none;opacity:.78;scale:1}}
+
 `;document.head.append(style);
 const images=new Map();
 function imageFor(id){if(!images.has(id)){const image=new Image();image.src=`/assets/follow-the-spark/anime-scene-0${id}.webp`;images.set(id,image)}return images.get(id)}
