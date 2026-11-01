@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const reduced=matchMedia('(prefers-reduced-motion: reduce)');if(reduced.matches)return;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const items=[
  {name:'one',id:1},
  {name:'two',id:2},
@@ -17,7 +17,7 @@ for(const item of items){
  function onMask(){if(ready||!mask.complete||!mask.naturalWidth)return;mc.drawImage(mask,0,0,384,216);const im=mc.getImageData(0,0,384,216),d=im.data;for(let i=0;i<d.length;i+=4){const a=d[i];d[i]=d[i+1]=d[i+2]=255;d[i+3]=a}mc.putImageData(im,0,0);ready=true;if(shown)start()}
  mask.addEventListener('load',onMask);onMask();
  const sectionObserver=new IntersectionObserver(entries=>{shown=entries[0].isIntersecting;if(shown)start();else if(raf){cancelAnimationFrame(raf);raf=0}},{rootMargin:'100px'});sectionObserver.observe(art);
- function paint(t){raf=0;if(!shown||!visible||reduced.matches)return;onMask();if(!ready){raf=requestAnimationFrame(paint);return}
+ function paint(t){raf=0;if(!shown||!visible)return;onMask();if(!ready){raf=requestAnimationFrame(paint);return}
   if(t-last>=110){last=t;ctx.clearRect(0,0,384,216);fc.clearRect(0,0,384,216);
    // Shift two low-resolution image tiles; the once-converted gray map clips the flow.
    const shift=(t*.009+item.id*23)%216;
@@ -34,8 +34,8 @@ for(const item of items){
 
   }raf=requestAnimationFrame(paint)
  }
- function start(){if(shown&&visible&&!raf&&!reduced.matches)raf=requestAnimationFrame(paint)}
+ function start(){if(shown&&visible&&!raf)raf=requestAnimationFrame(paint)}
 }
 document.addEventListener('visibilitychange',()=>{visible=!document.hidden});
-reduced.addEventListener?.('change',()=>{if(reduced.matches)document.querySelectorAll('.painted-water-flow').forEach(x=>x.remove())});
+
 })();
