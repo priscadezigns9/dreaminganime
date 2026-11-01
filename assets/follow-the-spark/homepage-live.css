@@ -79,3 +79,7 @@
 /* Lift the homepage wallpaper panel slightly closer to the hero copy. */
 .hero>.gallery{margin-top:35px}
 @media(max-width:650px){.hero>.gallery{margin-top:65px}}
+
+/* Enlarge the homepage wallpaper tiles while keeping a responsive gallery. */
+.gallery-track a{flex-basis:calc((100% - 7px)/2);aspect-ratio:16/10}
+@media(max-width:650px){.gallery-track a{flex-basis:calc((100% - 4px)/2)}}
