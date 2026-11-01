@@ -118,3 +118,10 @@
 
 /* Keep animated water and lantern light above all scene backgrounds, below content. */
 .world>.painted-water-flow{z-index:-1!important;opacity:.98!important;filter:brightness(1.22) saturate(1.25)!important}
+
+/* Correct scenic stack: artwork, scene shade, visible motion overlays, then readable content. */
+.world{isolation:isolate;position:relative}
+.world>.world-art{z-index:0!important}
+.world::after{z-index:1!important}
+.world>.painted-water-flow{z-index:2!important;opacity:1!important;filter:brightness(1.3) saturate(1.35)!important}
+.world>.stage{z-index:3!important}
