@@ -105,3 +105,9 @@
 /* Enlarge only the closing Explore the world call to action. */
 .ending .orange-button{min-width:260px;min-height:60px;padding:16px 32px;font-size:1rem}
 @media(max-width:650px){.ending .orange-button{min-width:250px;min-height:58px;font-size:.98rem}}
+
+/* Square, larger, translucent Featured Product card. */
+.market .merch{width:min(42%,470px);aspect-ratio:1/1;min-height:0;flex-direction:column;justify-content:center;align-items:center;gap:18px;padding:30px;text-align:center;background:linear-gradient(135deg,rgba(54,54,60,.28),rgba(16,16,20,.38));border-color:rgba(255,255,255,.52);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.market .merch>div{flex:none}.market .merch img{width:160px;height:160px}.market .merch .orange-button{width:min(100%,260px);min-width:0;min-height:50px}
+@media(max-width:900px) and (min-width:651px){.market .merch{width:min(48%,420px);padding:24px}.market .merch img{width:140px;height:140px}}
+@media(max-width:650px){.market .merch{width:min(100%,390px);min-height:0;aspect-ratio:1/1;margin-inline:auto;padding:24px;gap:14px}.market .merch img{width:132px;height:132px}.market .merch>div{flex:none}}
