@@ -31,7 +31,7 @@ for(const item of items){
      fc.globalCompositeOperation='destination-in';fc.drawImage(maskCanvas,0,0);fc.globalCompositeOperation='source-over';ctx.drawImage(frame,0,0);
     }
    }
-    }raf=requestAnimationFrame(paint)
+  }raf=requestAnimationFrame(paint)
  }
  function start(){if(shown&&visible&&!raf&&!reduced.matches)raf=requestAnimationFrame(paint)}
 }
