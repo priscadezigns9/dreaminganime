@@ -75,3 +75,7 @@
 
 /* Match the other full-width homepage panels on phones. */
 @media(max-width:650px){.market .merch{width:100%;max-width:none}}
+
+/* Lift the homepage wallpaper panel slightly closer to the hero copy. */
+.hero>.gallery{margin-top:35px}
+@media(max-width:650px){.hero>.gallery{margin-top:65px}}
