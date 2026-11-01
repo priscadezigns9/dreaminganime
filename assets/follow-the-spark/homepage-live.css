@@ -52,3 +52,23 @@
 @media(max-width:760px){.navlinks{display:none}.menu-toggle{display:block;padding:8px 12px;color:#fff;background:rgba(255,255,255,.08);border:1px solid #ffffff80;border-radius:99px;font-size:.72rem;font-weight:800;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.nav{width:calc(100% - 16px);top:8px;height:54px;padding:0 13px}.brand img{width:36px;height:36px}.menu{top:62px;right:0;max-height:calc(100vh - 80px);overflow-y:auto;background:rgba(14,14,18,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:#ffffff80}}
 @media(min-width:761px) and (max-width:1050px){.navlinks{display:flex;gap:clamp(6px,1vw,12px);font-size:clamp(.58rem,.72vw,.7rem)}.nav{width:96%;padding:0 12px}.brand img{width:39px;height:39px}.nav .menu-toggle{display:none}}
 @media(min-width:1051px){.navlinks{display:flex}.menu-toggle{display:none}}
+
+/* Water textures use the same artwork dimensions, background crop and scene fades. */
+.painted-water-flow{position:absolute;z-index:-3;left:0;right:0;pointer-events:none;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.72;filter:brightness(.85)}
+.art-one + .painted-water-flow{top:0;height:24%;mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
+.art-two + .painted-water-flow{top:19%;height:23%;mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 85%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 85%,transparent)}
+.art-three + .painted-water-flow{top:38%;height:23%;mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 85%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 85%,transparent)}
+.art-four + .painted-water-flow{top:57%;height:23%;mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 85%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 85%,transparent)}
+.art-five + .painted-water-flow{top:76%;height:24%;mask-image:linear-gradient(to bottom,transparent,#000 16%);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 16%)}
+/* Full-size, sequential feature panels on phones only. */
+@media(max-width:650px){
+ .painted-water-flow{object-position:35% center!important}.art-one + .painted-water-flow{object-position:25% center!important}
+ .row{min-height:0;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:18px;padding-top:24px;padding-bottom:24px}
+ .row .genres,.row .music,.row .creators,.row .community,.row .feature,.row .trailer,.row .latest,.stories .character,.stories .manga{width:100%;max-width:none}
+ .genres{min-height:180px}.music{min-height:0;flex-direction:row;align-items:center;gap:16px}.music .music-preview{width:45%;flex:0 0 45%}
+ .stories .character{min-height:200px;flex-direction:row;align-items:center;gap:16px}.stories .character img{width:45%;height:190px;object-fit:cover}.stories .character h2{font-size:clamp(1.35rem,5.4vw,2rem)}
+ .stories .manga{flex-direction:row;min-height:175px;padding:14px;gap:12px}.manga .manga-book{width:48%;max-height:155px}
+ .people .creators,.people .community{max-width:none;min-height:150px}.videos .trailer{flex-direction:row;align-items:center;gap:14px}.videos .video-thumb{width:52%;flex:0 0 52%}
+ .videos .latest{top:0}.latest .video-list{flex-direction:row}.video-list a{width:auto;max-height:none;flex:1}
+}
+@media(prefers-reduced-motion:reduce){.painted-water-flow{display:none!important}}
