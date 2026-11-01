@@ -101,3 +101,7 @@
 /* Make the final More videos call-to-action easy to spot and tap. */
 .videos .video-more{display:inline-flex;align-items:center;justify-content:center;min-width:170px;min-height:46px;padding:12px 22px;border:1px solid #ffb061;border-radius:999px;background:linear-gradient(180deg,#ff9c20,#fb5f00);color:#fff;font-size:.9rem;font-weight:900;text-shadow:0 1px 3px #0008;box-shadow:0 3px 12px #ff720050}
 @media(max-width:650px){.videos .video-more{width:100%;min-height:48px;margin-top:12px;font-size:.92rem}}
+
+/* Enlarge only the closing Explore the world call to action. */
+.ending .orange-button{min-width:260px;min-height:60px;padding:16px 32px;font-size:1rem}
+@media(max-width:650px){.ending .orange-button{min-width:250px;min-height:58px;font-size:.98rem}}
