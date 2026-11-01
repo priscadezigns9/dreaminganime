@@ -93,3 +93,7 @@
 .market .merch img{width:150px;height:150px}
 .market .merch .orange-button{min-width:220px;min-height:48px;justify-content:center;white-space:nowrap}
 @media(max-width:650px){.market .merch{width:100%;min-height:205px;padding:18px;gap:18px}.market .merch img{width:108px;height:112px}.market .merch .orange-button{width:min(220px,100%)}}
+
+/* Enlarge and lighten the two homepage video panels. */
+@media(min-width:651px){.videos{gap:3%}.videos .trailer,.videos .latest{width:48.5%;min-height:250px;padding:22px;background:linear-gradient(125deg,rgba(26,25,27,.30),rgba(12,12,16,.38));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.videos .trailer{gap:20px}.videos .video-thumb{width:56%}.videos .latest .video-list{gap:10px}}
+@media(max-width:650px){.videos .trailer,.videos .latest{min-height:190px;padding:18px;background:linear-gradient(125deg,rgba(26,25,27,.34),rgba(12,12,16,.42));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.videos .video-thumb{width:54%;flex-basis:54%}.videos .latest .video-list{gap:9px}}
