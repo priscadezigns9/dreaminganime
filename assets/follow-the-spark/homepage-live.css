@@ -87,3 +87,7 @@
 /* Give creator and community cards more room and keep their CTA labels on one line. */
 @media(min-width:651px){.people .creators,.people .community{width:48%;max-width:520px}}
 .people .orange-button{min-width:170px;min-height:48px;padding-inline:22px;white-space:nowrap}
+
+/* Make the creators and community cards feel like full-size homepage panels. */
+@media(min-width:651px){.people{gap:4%}.people .creators,.people .community{width:48%;max-width:none;min-height:220px}}
+.people .orange-button{width:230px;max-width:100%;min-height:52px;padding-inline:24px;white-space:nowrap}
