@@ -44,3 +44,7 @@
 .genres nav a:focus-visible::after,.music-copy a:focus-visible::after,.video-more:focus-visible::after,.video-thumb:focus-visible::after,.video-list a:focus-visible::after{animation:gold-dash .52s cubic-bezier(.2,.75,.2,1) both}
 @media(max-width:650px){.genres{min-height:185px}.genres .genre-art{width:55%;border-radius:18px}.genres nav{max-width:100%;gap:5px}.genres nav a,.genres nav button{font-size:.6rem;padding:7px 9px;min-height:36px}.music{flex-direction:column;align-items:stretch;gap:8px;min-height:185px}.music .music-preview{width:100%;flex:auto}.music-preview span{width:34px;height:34px}.stories{gap:8px}.stories .character{width:54%;min-height:185px}.stories .character img{width:50%;height:168px}.stories .character h2{font-size:clamp(1rem,4.7vw,1.4rem)}.stories .manga{width:44%}.creators,.community{min-height:160px;padding-right:35%}.panel-art{width:38%;height:88%}}
 @media(prefers-reduced-motion:reduce){.genres nav a:focus-visible::after,.music-copy a:focus-visible::after,.video-more:focus-visible::after,.video-thumb:focus-visible::after,.video-list a:focus-visible::after{animation:none}}
+
+/* Stagger the video panel below the weekly trailer. */
+.videos .latest{top:78px}
+@media(max-width:650px){.videos .latest{top:46px}}
