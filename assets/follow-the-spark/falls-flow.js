@@ -1,11 +1,11 @@
 (()=>{'use strict';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');if(reduced.matches)return;
 const items=[
- {name:'one',id:1,lamps:[[.84,.31,.035],[.84,.62,.035],[.28,.22,.025],[.27,.39,.024]]},
- {name:'two',id:2,lamps:[[.63,.36,.03],[.75,.60,.035],[.91,.44,.03]]},
- {name:'three',id:3,lamps:[[.78,.27,.03],[.87,.62,.035],[.93,.45,.03]]},
- {name:'four',id:4,lamps:[[.16,.40,.03],[.35,.68,.03],[.77,.44,.035]]},
- {name:'five',id:5,lamps:[[.48,.55,.03],[.72,.62,.035],[.83,.52,.03]]}
+ {name:'one',id:1,lamps:[[.055,.18,.065],[.95,.32,.045],[.93,.57,.045],[.48,.93,.065],[.84,.63,.035],[.70,.35,.025]]},
+ {name:'two',id:2,lamps:[[.08,.30,.045],[.20,.47,.04],[.36,.69,.04],[.56,.62,.04],[.70,.67,.04],[.89,.62,.05],[.95,.76,.04]]},
+ {name:'three',id:3,lamps:[[.02,.44,.05],[.11,.50,.04],[.30,.61,.04],[.40,.54,.035],[.69,.70,.05],[.95,.59,.05]]},
+ {name:'four',id:4,lamps:[[.23,.59,.04],[.38,.78,.04],[.53,.70,.04],[.60,.72,.04],[.81,.92,.05],[.88,.29,.04]]},
+ {name:'five',id:5,lamps:[[.22,.63,.05],[.42,.33,.045],[.62,.82,.05],[.98,.72,.045],[.94,.65,.04],[.10,.36,.04]]}
 ];
 let active=false,visible=!document.hidden;
 for(const item of items){
@@ -39,6 +39,6 @@ for(const item of items){
  }
  function start(){if(shown&&visible&&!raf&&!reduced.matches)raf=requestAnimationFrame(paint)}
 }
-document.addEventListener('visibilitychange',()=>{visible=!document.hidden});
+document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(visible){for(const item of items){const art=document.querySelector('.art-'+item.name);if(art&&art.isConnected)art.dispatchEvent(new Event('lamp-resume'))}}});
 reduced.addEventListener?.('change',()=>{if(reduced.matches)document.querySelectorAll('.painted-water-flow').forEach(x=>x.remove())});
 })();
