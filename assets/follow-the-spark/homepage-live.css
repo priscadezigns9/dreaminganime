@@ -97,3 +97,7 @@
 /* Enlarge and lighten the two homepage video panels. */
 @media(min-width:651px){.videos{gap:3%}.videos .trailer,.videos .latest{width:48.5%;min-height:250px;padding:22px;background:linear-gradient(125deg,rgba(26,25,27,.30),rgba(12,12,16,.38));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.videos .trailer{gap:20px}.videos .video-thumb{width:56%}.videos .latest .video-list{gap:10px}}
 @media(max-width:650px){.videos .trailer,.videos .latest{min-height:190px;padding:18px;background:linear-gradient(125deg,rgba(26,25,27,.34),rgba(12,12,16,.42));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.videos .video-thumb{width:54%;flex-basis:54%}.videos .latest .video-list{gap:9px}}
+
+/* Make the final More videos call-to-action easy to spot and tap. */
+.videos .video-more{display:inline-flex;align-items:center;justify-content:center;min-width:170px;min-height:46px;padding:12px 22px;border:1px solid #ffb061;border-radius:999px;background:linear-gradient(180deg,#ff9c20,#fb5f00);color:#fff;font-size:.9rem;font-weight:900;text-shadow:0 1px 3px #0008;box-shadow:0 3px 12px #ff720050}
+@media(max-width:650px){.videos .video-more{width:100%;min-height:48px;margin-top:12px;font-size:.92rem}}
