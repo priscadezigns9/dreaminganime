@@ -1,11 +1,11 @@
 (()=>{'use strict';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');if(reduced.matches)return;
 const items=[
- {name:'one',id:1,lamps:[[.055,.18,.07],[.95,.32,.05],[.93,.57,.05],[.48,.93,.07],[.84,.63,.04],[.70,.35,.03]]},
- {name:'two',id:2,lamps:[[.08,.30,.05],[.20,.47,.045],[.36,.69,.045],[.56,.62,.045],[.70,.67,.045],[.89,.62,.055],[.95,.76,.04]]},
- {name:'three',id:3,lamps:[[.02,.44,.06],[.11,.50,.05],[.30,.61,.05],[.40,.54,.04],[.69,.70,.055],[.95,.59,.06]]},
- {name:'four',id:4,lamps:[[.23,.59,.05],[.38,.78,.05],[.53,.70,.05],[.60,.72,.05],[.81,.92,.06],[.88,.29,.045]]},
- {name:'five',id:5,lamps:[[.22,.63,.06],[.42,.33,.05],[.62,.82,.06],[.98,.72,.05],[.94,.65,.05],[.10,.36,.05]]}
+ {name:'one',id:1,lamps:[[.05,.42,.035],[.07,.78,.04],[.18,.16,.04],[.45,.89,.05],[.93,.57,.05],[.95,.32,.04]]},
+ {name:'two',id:2,lamps:[[.09,.41,.04],[.08,.60,.04],[.20,.91,.04],[.56,.54,.05],[.83,.66,.05],[.96,.59,.05]]},
+ {name:'three',id:3,lamps:[[.21,.40,.04],[.21,.53,.04],[.33,.65,.04],[.87,.58,.05],[.89,.80,.05]]},
+ {name:'four',id:4,lamps:[[.23,.59,.04],[.41,.64,.04],[.64,.86,.045],[.89,.87,.05],[.94,.73,.05]]},
+ {name:'five',id:5,lamps:[[.22,.63,.05],[.42,.33,.045],[.62,.82,.05],[.94,.65,.05],[.98,.72,.05]]}
 ];
 let active=false,visible=!document.hidden;
 for(const item of items){
@@ -33,8 +33,8 @@ for(const item of items){
    }
    // A gentle, low-cost breathing glow at warm points in the illustration.
    ctx.save();ctx.globalCompositeOperation='screen';const pulse=.5+.5*Math.sin(t*.001+phase);
-   const visibleCanvas=canvas.getBoundingClientRect(),box=image.getBoundingClientRect(),W=img.naturalWidth,H=img.naturalHeight,ratio=box.width/box.height;let sx=0,sy=0,sw=W,sh=H;if(W/H>ratio){sw=H*ratio;sx=(W-sw)*.5}else{sh=W/ratio;sy=(H-sh)*.5}
-   for(const [x,y,r] of item.lamps){const localX=(x*W-sx)/sw,localY=(y*H-sy)/sh;if(localX<0||localX>1||localY<0||localY>1)continue;const px=localX*384,py=localY*216,rad=Math.max(12,r*384*(1.8+.24*pulse)),g=ctx.createRadialGradient(px,py,0,px,py,rad);g.addColorStop(0,`rgba(255,250,224,${.92+.08*pulse})`);g.addColorStop(.16,`rgba(255,218,146,${.78+.16*pulse})`);g.addColorStop(.45,`rgba(255,157,68,${.48+.2*pulse})`);g.addColorStop(1,'rgba(255,112,28,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill()}
+   const sceneRect=image.getBoundingClientRect(),W=img.naturalWidth,H=img.naturalHeight,ratio=sceneRect.width/sceneRect.height;let sx=0,sy=0,sw=W,sh=H;if(W/H>ratio){sw=H*ratio;sx=(W-sw)*.5}else{sh=W/ratio;sy=(H-sh)*.5}
+   for(const [x,y,r] of item.lamps){const lx=(x*W-sx)/sw,ly=(y*H-sy)/sh;if(lx<0||lx>1||ly<0||ly>1)continue;const px=lx*384,py=ly*216,rad=Math.max(12,r*384*(2.3+.35*pulse)),g=ctx.createRadialGradient(px,py,0,px,py,rad);g.addColorStop(0,`rgba(255,255,230,${.98})`);g.addColorStop(.11,`rgba(255,227,154,${.95})`);g.addColorStop(.3,`rgba(255,164,72,${.68+.25*pulse})`);g.addColorStop(.65,`rgba(255,116,34,${.3+.18*pulse})`);g.addColorStop(1,'rgba(255,104,24,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill()}
    ctx.restore();
   }raf=requestAnimationFrame(paint)
  }
