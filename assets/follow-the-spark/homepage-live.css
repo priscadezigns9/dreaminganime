@@ -153,3 +153,8 @@
 @media(min-width:901px){.market{min-height:660px}.market .merch{width:min(52%,620px);max-width:620px;min-height:620px;padding:42px;gap:22px}.market .merch img{width:190px;height:190px}.market .merch .orange-button{width:min(100%,320px);min-height:64px;font-size:.88rem}}
 @media(min-width:651px) and (max-width:900px){.market{min-height:560px}.market .merch{width:min(52%,500px);max-width:500px;padding:30px}.market .merch img{width:170px;height:170px}.market .merch .orange-button{width:min(100%,300px);min-height:60px;font-size:.84rem}}
 @media(max-width:650px){.market{min-height:510px}.market .merch{width:min(100%,460px);max-width:460px;min-height:0;aspect-ratio:1/1;padding:28px;gap:16px}.market .merch img{width:150px;height:150px}.market .merch .orange-button{width:min(100%,300px);min-height:58px;font-size:.82rem}}
+
+/* Make the featured product the most prominent buying panel. */
+@media(min-width:901px){.market{min-height:790px}.market .merch{width:min(65%,760px);max-width:760px;min-height:740px;padding:48px;gap:24px}.market .merch img{width:225px;height:225px}.market .merch .orange-button{width:min(100%,360px);min-height:70px;font-size:.94rem}}
+@media(min-width:651px) and (max-width:900px){.market{min-height:640px}.market .merch{width:min(62%,560px);max-width:560px;min-height:560px;padding:34px}.market .merch img{width:185px;height:185px}.market .merch .orange-button{width:min(100%,330px);min-height:64px;font-size:.88rem}}
+@media(max-width:650px){.market{min-height:570px}.market .merch{width:min(100%,500px);max-width:500px;min-height:0;aspect-ratio:1/1;padding:30px;gap:18px}.market .merch img{width:168px;height:168px}.market .merch .orange-button{width:min(100%,340px);min-height:64px;font-size:.88rem}}
