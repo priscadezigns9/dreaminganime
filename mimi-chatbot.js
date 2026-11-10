@@ -71,7 +71,9 @@ var css = ''
 + '#mimi-launcher{position:fixed;bottom:150px;right:24px;width:60px;height:60px;min-width:60px;min-height:60px;box-sizing:border-box;white-space:nowrap;border-radius:50%;'
 + 'background:var(--white,#FFF);border:3px solid var(--black,#0A0A0A);cursor:pointer;z-index:901;'
 + 'display:flex;align-items:center;justify-content:center;padding:0;'
-+ 'box-shadow:3px 3px 0 var(--black,#0A0A0A);transition:transform .2s,box-shadow .2s;overflow:hidden;}'
++ 'box-shadow:3px 3px 0 var(--black,#0A0A0A);transition:transform .2s,box-shadow .2s,opacity .2s;overflow:hidden;}'
++ '#mimi-launcher.mimi-entering{opacity:0;transform:translateY(5px) scale(.92);animation:mimiLauncherEnter .42s cubic-bezier(.2,.75,.2,1) forwards;}'
++ '@keyframes mimiLauncherEnter{to{opacity:1;transform:translateY(0) scale(1);}}'
 + '#mimi-launcher:hover,#mimi-launcher:focus-visible{transform:translateY(-3px);box-shadow:5px 5px 0 var(--black,#0A0A0A);}'
 + '#mimi-launcher img{width:100%;height:100%;object-fit:cover;}'
 + '#mimi-launcher .mimi-badge{position:absolute;top:-4px;right:-4px;background:var(--orange,#FF6B00);color:#fff;'
@@ -91,7 +93,7 @@ var css = ''
 + '@media(max-width:600px){#mimi-panel{left:0;right:0;bottom:0;width:100%;height:min(82vh,640px);'
 + 'border-radius:20px 20px 0 0;border-width:3px 0 0 0;transform:translateY(100%);}'
 + '#mimi-panel.open{transform:translateY(0);}}'
-+ '@media(prefers-reduced-motion:reduce){#mimi-panel,#mimi-launcher{transition:none!important;}}'
++ '@media(prefers-reduced-motion:reduce){#mimi-panel,#mimi-launcher{transition:none!important}#mimi-launcher.mimi-entering{animation:none!important;opacity:1;transform:none;}}'
 
 + '#mimi-hdr{background:var(--black,#0A0A0A);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0;}'
 + '#mimi-hdr img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--orange,#FF6B00);}'
@@ -147,6 +149,8 @@ launcher.id = 'mimi-launcher';
 launcher.type = 'button';
 launcher.setAttribute('aria-label', "Open Mimi, Dreaming Anime's Mascot");
 launcher.setAttribute('aria-expanded', 'false');
+launcher.classList.add('mimi-entering');
+launcher.addEventListener('animationend', function(){ launcher.classList.remove('mimi-entering'); }, { once:true });
 launcher.innerHTML = '<img src="' + MIMI_AVATAR + '" alt="" onerror="this.style.display=\'none\'">'
   + '<span class="mimi-badge" aria-hidden="true">?</span>';
 document.body.appendChild(launcher);
