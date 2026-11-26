@@ -47,7 +47,9 @@ body>footer{position:relative;margin-top:0!important;padding:25px max(5vw,calc((
 @media(max-width:760px){*,*::before,*::after{box-sizing:border-box}body>main{min-width:0;box-sizing:border-box!important;width:calc(100% - 24px)!important;max-width:calc(100% - 24px)!important}body>main .cover,body>main figure,body>main img,body>main iframe,body>main video{max-width:100%!important;box-sizing:border-box!important}body>main .cover{width:100%!important;min-width:0!important;height:auto!important;aspect-ratio:auto!important;margin:1.2rem 0!important;display:flex;align-items:center;justify-content:center}body>main .cover img{display:block;width:100%!important;height:auto!important;max-height:320px;object-fit:contain!important}body>main .cover figure,body>main figure.cover{margin-left:0;margin-right:0}body>main .shop,body>main .grid,body>main .faq-list{min-width:0!important;max-width:100%!important;grid-template-columns:minmax(0,1fr)!important}body>main h1,body>main h2,body>main h3,body>main p,body>main a{overflow-wrap:anywhere}header.hero h1{overflow-wrap:anywhere}}
 
 /* Keep the existing scenic image visible and use the live homepage navigation. */
-body{background:transparent!important}
+body{background:transparent!important;isolation:isolate}
+body::before{z-index:0!important}
+main.wrap,body>footer{z-index:1}
 header.nav{--edge:#ffffff75;line-height:normal!important}header.nav a{color:inherit!important;text-decoration:none!important}header.nav button{font:inherit;cursor:pointer}
 header.nav{position:fixed !important;z-index:30 !important;top:15px !important;left:50% !important;transform:translateX(-50%) !important;width:min(93%,1280px) !important;height:60px !important;padding:0 20px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;gap:16px !important;border:1px solid #ffffff7a !important;border-radius:99px !important;background:rgba(12,12,15,.78) !important;backdrop-filter:blur(15px) !important;-webkit-backdrop-filter:blur(15px) !important;box-shadow:0 8px 25px #0008 !important;}
 header.nav .brand{display:flex !important;align-items:center !important;}
